@@ -9,12 +9,12 @@ public sealed class EngineComponent : Component
 	[Property] Rigidbody rigid;
 	[Property] IngameUI gameUI;
 
-	readonly Vector3 maxSpeed = new Vector3( 10, 10, 10 );
-	[Property, Range(0,500f)] readonly float bodyOffsetZ = 15f;
+	[Property, Range( 0, 500f ), DefaultValue( 15f )] readonly float bodyOffsetZ;
 	[Property, Range(0,2000f),DefaultValue(1400f)] readonly float turnSpeed;
 	[Property, Range(0, 20000f),DefaultValue(6000f)] readonly float gravity;
-	[Property, Range( 0, 2000f )] readonly float gainStep = 100f;
-	[Property, Range( 0, 500f )] readonly float settleStep = 100f;
+	[Property, Range( 0, 2000f ), DefaultValue( 100f )] readonly float gainStep;
+	[Property, Range( 0, 500f ), DefaultValue( 100f )] readonly float settleStep;
+	[Property, Range( 0, 50000f ), DefaultValue( 500f )] readonly float maxSpeed;
 	float gain = 0f;
 	int invertVert = -1;
 	float maxGain;

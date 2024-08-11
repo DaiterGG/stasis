@@ -45,8 +45,6 @@ public sealed class FreeCam : Component
 		if( Input.Down( "Crouch"))
 		{
 			Transform.Position += new Vector3( 0, 0,force * mult * -1);
-			
-			
 		}
 		if(Input.Down( "Sprint")) {
 			mult = 3f;

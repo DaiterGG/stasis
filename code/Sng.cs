@@ -1,4 +1,4 @@
-using Sandbox.Player;
+using Sandbox;
 using System;
 
 public sealed class Sng : Component
@@ -8,7 +8,6 @@ public sealed class Sng : Component
 	[Property] IngameUI gameUI; 
 	public static Sng Inst {  get { return _sng; } }
 	public GameObject SpawnPoint;
-	public PlayerComp Player;
 	public MainTimer Timer;
 	
 	protected override void OnAwake()
@@ -16,16 +15,16 @@ public sealed class Sng : Component
 		base.OnAwake();
 		_sng = this;
 		MapInit();
-		SpawnPlayer();
 	}
 	protected override void OnStart()
 	{
 		base.OnStart();
+
+		SpawnPlayer();
 	}
 	private void MapInit()
 	{
 		Timer = new MainTimer();
-		Player = null;
 		SpawnPoint = null;
 		var heap = Scene.GetAllObjects( true );
 		foreach ( var obj in heap )
@@ -35,14 +34,8 @@ public sealed class Sng : Component
 			{
 				SpawnPoint = obj;
 			}
-			if ( obj.Name == "Player" )
-			{
-				if ( Player != null ) Log.Info( "second player found" );
-				Player = new PlayerComp( obj );
-			}
 		}
 		if ( SpawnPoint == null ) Log.Info( "Spawn not found" );
-		if ( Player == null ) Log.Error( "Player not found!" );
 	}
 	protected override void OnFixedUpdate()
 	{
@@ -67,16 +60,17 @@ public sealed class Sng : Component
 	}
 private void SpawnPlayer()
 	{
-		Player.self.Transform.Position = SpawnPoint.Transform.Position;
-		Player.self.Transform.Rotation = SpawnPoint.Transform.Rotation;
-		Player.engine.ResetPos(true);
+		PlayerSng.Player.Self.Transform.Position =
+			SpawnPoint.Transform.Position;
+		PlayerSng.Player.Self.Transform.Rotation = SpawnPoint.Transform.Rotation;
+		PlayerSng.Player.Engine.ResetPos(true);
 		Log.Info( "Player Spawned" );
 	}
 	public void TeleportPlayer(GameTransform pos )
 	{
-		Player.self.Transform.Position = pos.Position;
-		Player.self.Transform.Rotation = pos.Rotation;
-		Player.engine.ResetPos(false);
+		PlayerSng.Player.Self.Transform.Position = pos.Position;
+		PlayerSng.Player.Self.Transform.Rotation = pos.Rotation;
+		PlayerSng.Player.Engine.ResetPos(false);
 		Log.Info( "Player Teleported" );
 	}
 	public void EndZoneEnter(GameObject go,Collider cof )
