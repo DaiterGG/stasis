@@ -1,0 +1,81 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+<style>
+.ui {
+	font-family: Signika Negative;
+	background-color: transparent;
+	display:flex;
+	align-content:flex-end;
+	flex-direction:column;
+   }
+.speedVert {
+	position:absolute;
+	bottom: 70px;
+	text-align:center;
+	font-size:30px;
+    color: #1e1e1e;
+}
+.timer {
+	font-size:40px;
+	position:absolute;
+	top: 30px;
+	left: 30px;
+	text-align:left;
+    color: #1e1e1e;
+}
+.test {
+	font-size:40px;
+	position:absolute;
+	bottom: 30px;
+	left: 0;
+	text-align:left;
+    color: #1e1e1e;
+}
+.speed {
+	font-size:40px;
+	position:absolute;
+	bottom: 30px;
+	text-align:center;
+    color: #1e1e1e;
+}
+.bot{
+	width: 170px;
+	text-align:center;
+	bottom: 30px;
+	left:50%;
+	position:absolute;
+}
+.speedHor {
+	padding-bottom:2px;
+	width:100px;
+	position:absolute;
+    color: #1e1e1e;
+	font-size:30px;
+	right: 0;
+	bottom:0;
+}
+
+</style>
+<root class="ui">
+	<div class="test">@Test</div>
+		<div class="timer">@Timer</div>
+		<div class="speedVert">@SpeedVert</div>
+		<div class="speed">@SpeedMain</div>
+		<div class="bot">
+			<div class="speedHor">@SpeedHor</div>
+		</div>
+</root>
+
+@code
+{
+	public string SpeedMain { get; set; } = "0";
+	public string SpeedHor { get; set; } = "0";
+	public string SpeedVert { get; set; } = "0";
+	public string Test { get; set; } = "";
+	public string Timer { get; set; } = "";
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine( SpeedMain, Timer );}

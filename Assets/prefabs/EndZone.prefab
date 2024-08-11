@@ -1,0 +1,41 @@
+{
+  "RootObject": {
+    "__guid": "ac669ae9-49f3-4201-9226-05ec977c00a2",
+    "Flags": 0,
+    "Name": "EndZone",
+    "Position": "-0.0001525879,533.693,-157.5392",
+    "Scale": "6.7,11.8,8.000001",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "6033900e-1fc3-4c2f-84a0-32a1e67ee22f",
+        "BodyGroups": 18446744073709551615,
+        "MaterialOverride": "materials/transform/transparent_green.vmat",
+        "Model": "models/dev/box.vmdl",
+        "RenderType": "Off",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "f88456f9-8a3f-4dd7-b26d-f34748957b53",
+        "Center": "0,0,0",
+        "IsTrigger": true,
+        "Scale": "50,50,50",
+        "Static": true
+      },
+      {
+        "__type": "EndZone",
+        "__guid": "37f045c7-55c8-435b-b6ed-7640667239c5"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [
+    "pitocueva.transparent_green"
+  ],
+  "__version": 1
+}

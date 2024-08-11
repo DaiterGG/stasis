@@ -1,0 +1,22 @@
+{
+  "publish": {
+    "Enabled": false,
+    "ProjectConfig": {
+      "Title": "untitled_4",
+      "Type": "map",
+      "Org": "local",
+      "Ident": "untitled_4",
+      "Schema": 0,
+      "IncludeSourceFiles": false,
+      "Resources": null,
+      "PackageReferences": [],
+      "EditorReferences": [
+        "tridge.plaster_white#31727",
+        "magikarp.light3#34262"
+      ],
+      "Metadata": {
+        "SingleAssetSource": "maps/untitled_4.vmap"
+      }
+    }
+  }
+}
