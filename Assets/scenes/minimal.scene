@@ -94,7 +94,7 @@
               "__guid": "54e58dc7-eef4-489e-8305-9eedc4239093",
               "AngularDamping": 1,
               "Gravity": false,
-              "LinearDamping": 0,
+              "LinearDamping": 3,
               "Locking": {},
               "MassCenterOverride": "0,0,0",
               "MassOverride": 1,
@@ -231,7 +231,6 @@
               "Flags": 0,
               "Name": "Free cam",
               "Position": "-204.1,0,37.79999",
-              "Enabled": true,
               "Components": [
                 {
                   "__type": "Sandbox.CameraComponent",
@@ -317,10 +316,95 @@
       ]
     },
     {
+      "__guid": "138ff680-c485-4250-9018-21dfe7b269b5",
+      "Flags": 0,
+      "Name": "Zones",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ZoneCreate",
+          "__guid": "e81f93ce-e5b4-41d3-8aed-703f6dd0c6b0",
+          "EndZonePrefab": {
+            "_type": "gameobject",
+            "go": "4a8d7747-0225-4371-9bca-a5a3f8919134"
+          },
+          "LinePrefab": {
+            "_type": "gameobject",
+            "go": "38aa241a-3042-49c1-b050-af126a31941b"
+          }
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "4a8d7747-0225-4371-9bca-a5a3f8919134",
+          "Flags": 0,
+          "Name": "End zone prefab",
+          "Components": [
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "12b14629-f101-49d1-b320-89edba3f6e80",
+              "Center": "0,0,0",
+              "IsTrigger": true,
+              "Scale": "50,50,50",
+              "Static": true
+            },
+            {
+              "__type": "EndZone",
+              "__guid": "368acaa1-c8b7-4dfe-9e8b-7adbfd43c32b"
+            }
+          ]
+        },
+        {
+          "__guid": "38aa241a-3042-49c1-b050-af126a31941b",
+          "Flags": 0,
+          "Name": "Line prefab",
+          "Components": [
+            {
+              "__type": "Sandbox.LineRenderer",
+              "__guid": "853d9b93-46dc-478c-8c6f-b87443de2b7d",
+              "CastShadows": false,
+              "Color": {
+                "color": [
+                  {
+                    "c": "1,1,1,1"
+                  }
+                ],
+                "alpha": []
+              },
+              "EndCap": "Rounded",
+              "Opaque": false,
+              "Points": [
+                null,
+                null
+              ],
+              "SplineBias": 0,
+              "SplineContinuity": 0,
+              "SplineInterpolation": 1,
+              "SplineTension": 0,
+              "StartCap": "Rounded",
+              "UseVectorPoints": true,
+              "VectorPoints": [
+                "0,0,0",
+                "0,0,0"
+              ],
+              "Width": {
+                "rangey": "0,4",
+                "frames": [
+                  {
+                    "y": 1
+                  }
+                ]
+              },
+              "Wireframe": false
+            }
+          ]
+        }
+      ]
+    },
+    {
       "__guid": "1d84eddb-9d21-43a5-9e36-5438a211d03e",
       "Flags": 0,
       "Name": "map",
-      "Position": "-27.91804,5.34903,-30.56471",
       "Enabled": true,
       "Components": [
         {
@@ -334,6 +418,14 @@
         }
       ],
       "Children": []
+    },
+    {
+      "__guid": "d3badf1e-cbd8-43e7-8094-c6cad62544c5",
+      "Flags": 0,
+      "Name": "info_player_spawn",
+      "Position": "-127.271,5.043406,64.43455",
+      "Rotation": "-0,0,-0.9952274,-0.09758277",
+      "Enabled": true
     }
   ],
   "SceneProperties": {

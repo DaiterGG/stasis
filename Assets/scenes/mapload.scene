@@ -4,7 +4,7 @@
     {
       "__guid": "100cbc03-5b4c-4ad4-8723-5e08ae4261b8",
       "Flags": 0,
-      "Name": "Object",
+      "Name": "Map",
       "Position": "137.3263,137.3264,-194.2088",
       "Enabled": true,
       "Components": [
@@ -13,12 +13,10 @@
           "__guid": "f4eeed96-251a-447f-b4d7-1770361c9200",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "maps/playground.vmap",
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ],
-      "Children": []
+      ]
     }
   ],
   "SceneProperties": {

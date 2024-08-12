@@ -2,14 +2,13 @@ using Sandbox;
 
 public sealed class EndZone : Component, Component.ITriggerListener
 {
-	private Sng _sng;
-	protected override void OnAwake()
+	protected override void OnEnabled()
 	{
-		base.OnAwake();
-		_sng = Sng.Inst;
+		base.OnEnabled();
+
 	}
 	public void OnTriggerEnter(Collider col )
 	{
-		_sng.EndZoneEnter(GameObject, col);
+		Sng.Inst.EndZoneEnter(GameObject, col);
 	}
 }

@@ -14,7 +14,7 @@ public sealed class EngineComponent : Component
 	[Property, Range(0, 20000f),DefaultValue(6000f)] readonly float gravity;
 	[Property, Range( 0, 2000f ), DefaultValue( 100f )] readonly float gainStep;
 	[Property, Range( 0, 500f ), DefaultValue( 100f )] readonly float settleStep;
-	[Property, Range( 0, 50000f ), DefaultValue( 500f )] readonly float maxSpeed;
+	//[Property, Range( 0, 50000f ), DefaultValue( 1000f )] readonly float maxSpeed;
 	float gain = 0f;
 	int invertVert = -1;
 	float maxGain;
@@ -66,8 +66,16 @@ public sealed class EngineComponent : Component
 		}
 		if ( gain > maxGain ) gain = maxGain;
 		if ( gain < maxGain * -1 ) gain = maxGain * -1;
-
-		rigid.ApplyForce( new Vector3( 0, 0, gain ) * Transform.Rotation );
+		
+		Vector3 gainAng = new Vector3( 0, 0, gain ) * Transform.Rotation;
+		//if horizontal velocity is too high
+		//if (new Vector3(rigid.Velocity.x,rigid.Velocity.y, 0).Length > maxSpeed)
+		//{
+			//if same direction
+			//if (gainAng.x * rigid.Velocity.x >0) gainAng *= new Vector3(0, 1, 1);
+			//if (gainAng.y * rigid.Velocity.y >0) gainAng *= new Vector3(1, 0, 1);
+		//}
+		rigid.ApplyForce( gainAng );
 		rigid.ApplyTorque( new Vector3( dx, dy * invertVert, dz ) * Transform.Rotation );
 		rigid.ApplyForce( new Vector3( 0, 0, gravity * -1 ) );
 		//experimental

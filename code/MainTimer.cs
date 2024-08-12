@@ -18,7 +18,7 @@ namespace Sandbox
 		public bool IsAirborne { get; set; } = false;
 		public void UpdateTimer()
 		{
-			if(IsRunning) timerSeconds += Time.Delta;
+			if (IsAirborne && !IsFinished) IsRunning = true;
 			if ( IsFinished )
 			{
 				TimerStr = GetStringFromTime() + $" - Press '{Input.GetButtonOrigin("Restart").ToUpper()} to start over";
@@ -30,6 +30,7 @@ namespace Sandbox
 				TimerStr = $"Press '{Input.GetButtonOrigin("Restart").ToUpper()}' to restart timer";
 			} else
 			{
+				timerSeconds += Time.Delta;
 				TimerStr = GetStringFromTime();
 			}
 		}
