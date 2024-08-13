@@ -109,7 +109,7 @@ private void SpawnPlayer()
 	{
 		Timer.IsFinished = true;
 	}
-	public void StopStimer()
+	public void StopTimer()
 	{
 		Timer.IsRunning = false;
 		Timer.IsRequareReset = true;

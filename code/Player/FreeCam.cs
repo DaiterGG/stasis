@@ -1,27 +1,29 @@
 using Sandbox;
-
+using System;
 public sealed class FreeCam : Component
 {
 	[Property] GameObject thirdCam;
 	[Property] EngineComponent engine;
-	readonly float force = 8f;
+	readonly float force = 20f;
 	float mult = 1f;
 	protected override void OnEnabled()
 	{
+		base.OnEnabled();
 
 		Transform.Position = thirdCam.Transform.Position + new Vector3(0,0,10);
 		Transform.Rotation = thirdCam.Transform.Rotation;
-		engine.inputActive = false;
-		base.OnEnabled();
+		engine.inputActive = false; 
 	}
 	protected override void OnDisabled()
 	{
-		engine.inputActive = true;
 		base.OnDisabled();
+		engine.inputActive = true;
 	}
-	protected override void OnFixedUpdate()
+	protected override void OnUpdate()
 	{
+
 		if ( !GameObject.Enabled ) return;
+		Sng.Inst.StopTimer();
 		if ( Input.Down( "Up" ) )
 		{ //W or forward		
 			Transform.Position += new Vector3( force * mult, 0, 0 ) * Transform.Rotation;
@@ -55,8 +57,10 @@ public sealed class FreeCam : Component
 		}
 
 		var ee = Transform.Rotation.Angles();
-		ee += Input.AnalogLook * 0.5f;
+		ee += Input.AnalogLook * Time.Delta * 3f;
+		if (Math.Abs(ee.pitch)> 90) ee.pitch = 90 * Math.Sign(ee.pitch);
 		ee.roll = 0;
+
 		Transform.Rotation = ee.ToRotation();
 	}
 }

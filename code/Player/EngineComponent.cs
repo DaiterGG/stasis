@@ -10,8 +10,8 @@ public sealed class EngineComponent : Component
 	[Property] IngameUI gameUI;
 
 	[Property, Range( 0, 500f ), DefaultValue( 15f )] readonly float bodyOffsetZ;
-	[Property, Range(0,2000f),DefaultValue(1400f)] readonly float turnSpeed;
-	[Property, Range(0, 20000f),DefaultValue(6000f)] readonly float gravity;
+	[Property, Range( 0, 2000f ), DefaultValue( 1400f )] readonly float turnSpeed;
+	[Property, Range( 0, 20000f ), DefaultValue( 6000f )] readonly float gravity;
 	[Property, Range( 0, 2000f ), DefaultValue( 100f )] readonly float gainStep;
 	[Property, Range( 0, 500f ), DefaultValue( 100f )] readonly float settleStep;
 	//[Property, Range( 0, 50000f ), DefaultValue( 1000f )] readonly float maxSpeed;
@@ -20,45 +20,43 @@ public sealed class EngineComponent : Component
 	float maxGain;
 	int engineDelay = 1000;
 	//exp
-	[Property, Range( 1f, 300f, 1f ),DefaultValue(1f)] readonly float boost = 1.1f;
-	 float deltaZ = 0;
+	[Property, Range( 1f, 300f, 1f ), DefaultValue( 1f )] readonly float boost = 1.1f;
+	float deltaZ = 0;
 	protected override void OnStart()
 	{
 		base.OnStart();
 		maxGain = gravity * 1.08f;
-		ResetPos(true);
+		ResetPos( true );
 	}
 
 	protected override void OnFixedUpdate()
 	{
 
+		if ( !inputActive ) return;
 		var dx = Mouse.Delta.x == 0 ? 0 : Mouse.Delta.x / Math.Abs( Mouse.Delta.x ) * 1200 * .5f;
 		var dy = Mouse.Delta.y == 0 ? 0 : Mouse.Delta.y / Math.Abs( Mouse.Delta.y ) * 1200;
 		var dz = 0f;
 
-		if ( inputActive )
+		if ( Input.Down( "Left" ) )
 		{
-			if ( Input.Down( "Left" ) )
-			{
-				dz += turnSpeed;
-			}
-			if ( Input.Down( "Right" ) )
-			{
-				dz -= turnSpeed;
-			}
-			if ( Input.Down( "Down" ) )
-			{
-				gain -= gravity / gainStep;
-			}
-			if ( Input.Down( "Up" ) )
-			{
-				if ( !isRunning) engStart();
-				else gain += gravity / gainStep;
-			}
-			if ( !Input.Down( "Up" ) && !Input.Down( "Down" ) )
-			{
-				gain -= (gain - gravity) / settleStep;
-			}
+			dz += turnSpeed;
+		}
+		if ( Input.Down( "Right" ) )
+		{
+			dz -= turnSpeed;
+		}
+		if ( Input.Down( "Down" ) )
+		{
+			gain -= gravity / gainStep;
+		}
+		if ( Input.Down( "Up" ) )
+		{
+			if ( !isRunning ) engStart();
+			else gain += gravity / gainStep;
+		}
+		if ( !Input.Down( "Up" ) && !Input.Down( "Down" ) )
+		{
+			gain -= (gain - gravity) / settleStep;
 		}
 		if ( !isRunning )
 		{
@@ -66,28 +64,29 @@ public sealed class EngineComponent : Component
 		}
 		if ( gain > maxGain ) gain = maxGain;
 		if ( gain < maxGain * -1 ) gain = maxGain * -1;
-		
+
 		Vector3 gainAng = new Vector3( 0, 0, gain ) * Transform.Rotation;
 		//if horizontal velocity is too high
 		//if (new Vector3(rigid.Velocity.x,rigid.Velocity.y, 0).Length > maxSpeed)
 		//{
-			//if same direction
-			//if (gainAng.x * rigid.Velocity.x >0) gainAng *= new Vector3(0, 1, 1);
-			//if (gainAng.y * rigid.Velocity.y >0) gainAng *= new Vector3(1, 0, 1);
+		//if same direction
+		//if (gainAng.x * rigid.Velocity.x >0) gainAng *= new Vector3(0, 1, 1);
+		//if (gainAng.y * rigid.Velocity.y >0) gainAng *= new Vector3(1, 0, 1);
 		//}
 		rigid.ApplyForce( gainAng );
 		rigid.ApplyTorque( new Vector3( dx, dy * invertVert, dz ) * Transform.Rotation );
-		rigid.ApplyForce( new Vector3( 0, 0, gravity * -1 ) );
+		if (!isRunning) rigid.ApplyForce( new Vector3( 0, 0, gravity * -1 * .05f ) );
+		else rigid.ApplyForce( new Vector3( 0, 0, gravity * -1  ) );
 		//experimental
 		//rigid.ApplyForce( new Vector3(rigid.Velocity.x * boost, rigid.Velocity.y * boost, 0 ) * Transform.Rotation);
 
 		deltaZ -= Transform.Position.z;
 		if ( deltaZ < 0 ) deltaZ = 0;
-		else deltaZ = Math.Abs(deltaZ) * boost;
+		else deltaZ = Math.Abs( deltaZ ) * boost;
 		rigid.ApplyForce( new Vector3(
-			rigid.Velocity.x / Math.Abs(rigid.Velocity.x) * deltaZ
-			, rigid.Velocity.y / Math.Abs(rigid.Velocity.y) * deltaZ
-			, 0 ) * Transform.Rotation);
+			Math.Sign( rigid.Velocity.x ) * deltaZ
+			, Math.Sign( rigid.Velocity.y ) * deltaZ
+			, 0 ) * Transform.Rotation );
 		deltaZ = Transform.Position.z;
 
 		gameUI.SpeedMain = ((int)rigid.Velocity.Length).ToString();
@@ -103,16 +102,17 @@ public sealed class EngineComponent : Component
 		throw new NotImplementedException();
 	}
 
-	public void ResetPos(bool engineRestart)
+	public void ResetPos( bool engineRestart )
 	{
-		GameObject.Transform.Position = GameObject.Parent.Transform.Position + new Vector3(0,0,bodyOffsetZ);
+		GameObject.Transform.Position = GameObject.Parent.Transform.Position + new Vector3( 0, 0, bodyOffsetZ );
 		GameObject.Transform.Rotation = GameObject.Parent.Transform.Rotation;
 		rigid.Velocity = new Vector3( 0 );
 		rigid.AngularVelocity = new Vector3( 0 );
-		if ( engineRestart ) {
+		if ( engineRestart )
+		{
 			engOff();
 		}
-		else if(isRunning) gain = gravity;
+		else if ( isRunning ) gain = gravity;
 	}
 	public void engOff()
 	{
@@ -124,7 +124,7 @@ public sealed class EngineComponent : Component
 	public void engStart()
 	{
 		isStarting += 1;
-		if( isStarting > 100)
+		if ( isStarting > 100 )
 		{
 			isStarting = 0;
 			isRunning = true;
