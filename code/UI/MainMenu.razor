@@ -4,7 +4,7 @@
 
 <root class="ui">
     <div class="buttons">
-        <div class="play" onclick="">
+        <div class="play" onclick="controller.Play()">
             <div class="bg"></div>
             <div class="text">Play</div>
         </div>
@@ -24,6 +24,8 @@
 </root>
 @code
 {
-    //[Property] MenuController controller { get; set; }
-
+    MenuController controller;
+    protected override void OnAwake(){
+        controller = GameObject.Parent.Components.Get<MenuController>();
+    }
 }

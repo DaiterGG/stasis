@@ -9,7 +9,11 @@ public sealed class ZoneCreate : Component
     [Property] public GameObject EndZonePrefab;
     [Property] public GameObject LinePrefab;
     public List<GameObject> EndZones = new List<GameObject>();
-	Sng SNG = Sng.Inst;
+	Sng SNG;
+	protected override void OnAwake()
+	{
+		SNG = Sng.Inst;
+	}
 	protected override void OnStart()
 	{
 		base.OnStart();

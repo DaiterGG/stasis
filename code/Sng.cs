@@ -12,6 +12,18 @@ public sealed class Sng : Component
 	public GameObject StartPoint;
 
 	private GameObject _spawnPoint;
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		_sng = this;
+		FindMaps();
+		MapInit();
+	}
+	protected override void OnStart()
+	{
+		base.OnStart();
+		SpawnPlayer();
+	}
 
 
 	public GameObject SpawnPoint { get
@@ -25,18 +37,6 @@ public sealed class Sng : Component
 
 	public MainTimer Timer;
 	
-	protected override void OnAwake()
-	{
-		base.OnAwake();
-		_sng = this;
-		FindMaps();
-		MapInit();
-	}
-	protected override void OnStart()
-	{
-		base.OnStart();
-		SpawnPlayer();
-	}
 	private void FindMaps()
 	{
 		var maps = FileSystem.Mounted.FindFile( "/maps", "*.vpk" );
@@ -91,7 +91,7 @@ public sealed class Sng : Component
 		Scene.LoadFromFile( mapPath );
 		MapInit();
 		SpawnPlayer();
-		menuUI.SetCameraLook();
+		//menuUI.SetCameraLook();
 	}
 private void SpawnPlayer()
 	{

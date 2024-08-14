@@ -3,13 +3,13 @@ using System;
 using System.Numerics;
 public sealed class EngineComponent : Component
 {
-	MainTimer TIMER = Sng.Inst.Timer;
+	MainTimer TIMER;
+	IngameUI GAMEUI;
 
 	public bool inputActive = true;
 	public bool isRunning;
 	public int isStarting = 0;
 	[Property] Rigidbody rigid;
-	IngameUI GAMEUI = Sng.Inst.gameUI;
 
 	[Property, Range( 0, 500f ), DefaultValue( 15f )] readonly float bodyOffsetZ;
 	[Property, Range( 0, 2000f ), DefaultValue( 1400f )] readonly float turnSpeed;
@@ -24,6 +24,13 @@ public sealed class EngineComponent : Component
 	//exp
 	[Property, Range( 1f, 300f, 1f ), DefaultValue( 1f )] readonly float boost = 1.1f;
 	float deltaZ = 0;
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		TIMER = Sng.Inst.Timer;
+		GAMEUI = Sng.Inst.gameUI;
+
+	}
 	protected override void OnStart()
 	{
 		base.OnStart();
@@ -34,7 +41,11 @@ public sealed class EngineComponent : Component
 	protected override void OnFixedUpdate()
 	{
 
+		if (!isRunning) rigid.ApplyForce( new Vector3( 0, 0, gravity * -1 * .05f ) );
+		else rigid.ApplyForce( new Vector3( 0, 0, gravity * -1  ) );
+
 		if ( !inputActive ) return;
+
 		var dx = Mouse.Delta.x == 0 ? 0 : Mouse.Delta.x / Math.Abs( Mouse.Delta.x ) * 1200 * .5f;
 		var dy = Mouse.Delta.y == 0 ? 0 : Mouse.Delta.y / Math.Abs( Mouse.Delta.y ) * 1200;
 		var dz = 0f;
@@ -77,8 +88,6 @@ public sealed class EngineComponent : Component
 		//}
 		rigid.ApplyForce( gainAng );
 		rigid.ApplyTorque( new Vector3( dx, dy * invertVert, dz ) * Transform.Rotation );
-		if (!isRunning) rigid.ApplyForce( new Vector3( 0, 0, gravity * -1 * .05f ) );
-		else rigid.ApplyForce( new Vector3( 0, 0, gravity * -1  ) );
 		//experimental
 		//rigid.ApplyForce( new Vector3(rigid.Velocity.x * boost, rigid.Velocity.y * boost, 0 ) * Transform.Rotation);
 

@@ -3,7 +3,7 @@ using System;
 namespace Sandbox;
 
 public sealed class MenuController : Component
-{ 
+{
     [Property] public MainMenu Menu { get; set; }
     [Property] public GameObject Camera { get; set; }
 	public float pitchOffset = -11.3f;
@@ -11,16 +11,24 @@ public sealed class MenuController : Component
 	public float speed = 0;
 	public Vector3 CameraPos;
 	public bool IsGaming = false;
+	GameObject BODY; 
+	EngineComponent ENGINE;
+	IngameUI GAMEUI;
 	
-	IngameUI GAMEUI = Sng.Inst.gameUI;
-	GameObject BODY = Sng.Inst.Player.Body;
-	EngineComponent ENGINE = Sng.Inst.Player.Engine;
+	
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		BODY = Sng.Inst.Player.Body;
+		GAMEUI = Sng.Inst.gameUI;
+		ENGINE = Sng.Inst.Player.Engine;
+	}
     protected override void OnStart()
     {
 		base.OnStart();
-		//CameraPos = Camera.Transform.Position - BODY.Transform.Position;
-		//CameraInit();
-		//OpenMenu();
+		CameraPos = Camera.Transform.Position - BODY.Transform.Position;
+		CameraInit();
+		OpenMenu();
     }
     protected override void OnUpdate()
     {

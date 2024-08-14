@@ -17,9 +17,15 @@
             "go": "5f893dae-6a0c-4a91-9271-47742568167f",
             "component_type": "IngameUI"
           },
+          "menuUI": {
+            "_type": "component",
+            "component_id": "e535a0d9-b6da-4e83-9382-76dfb6f69301",
+            "go": "6c506e2a-4776-4955-8734-9de87f444cb6",
+            "component_type": "MenuController"
+          },
           "Player": {
             "_type": "component",
-            "component_id": "1d6a6082-b23c-426d-9e26-452173d6aaef",
+            "component_id": "744885b3-c930-4a06-a8f0-853db36a995a",
             "go": "75eb26c9-d9fc-4205-91a2-bebac64f876d",
             "component_type": "PlayerComp"
           }
@@ -31,6 +37,22 @@
       "Flags": 0,
       "Name": "UI",
       "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MenuController",
+          "__guid": "e535a0d9-b6da-4e83-9382-76dfb6f69301",
+          "Camera": {
+            "_type": "gameobject",
+            "go": "24ef250d-05e0-4222-af3e-daea8e553089"
+          },
+          "Menu": {
+            "_type": "component",
+            "component_id": "a61628c9-9937-4337-b49f-9de2ce3e194b",
+            "go": "c2b2e3f1-e13b-4bc4-88d9-ee970a9f89aa",
+            "component_type": "MainMenu"
+          }
+        }
+      ],
       "Children": [
         {
           "__guid": "24ef250d-05e0-4222-af3e-daea8e553089",
@@ -129,6 +151,7 @@
           "__guid": "c2b2e3f1-e13b-4bc4-88d9-ee970a9f89aa",
           "Flags": 0,
           "Name": "Main menu",
+          "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.ScreenPanel",
@@ -137,6 +160,10 @@
               "Opacity": 1,
               "Scale": 1,
               "ZIndex": 100
+            },
+            {
+              "__type": "MainMenu",
+              "__guid": "a61628c9-9937-4337-b49f-9de2ce3e194b"
             }
           ]
         }
@@ -152,10 +179,16 @@
       "Components": [
         {
           "__type": "Sandbox.PlayerComp",
-          "__guid": "1d6a6082-b23c-426d-9e26-452173d6aaef",
+          "__guid": "744885b3-c930-4a06-a8f0-853db36a995a",
           "Body": {
             "_type": "gameobject",
             "go": "3c2490ef-54a0-49bb-8f13-490e40aa51d1"
+          },
+          "Engine": {
+            "_type": "component",
+            "component_id": "140f62ae-903c-464f-a94b-cebc521c6659",
+            "go": "3c2490ef-54a0-49bb-8f13-490e40aa51d1",
+            "component_type": "EngineComponent"
           }
         }
       ],
@@ -198,6 +231,22 @@
               "OverrideMassCenter": false,
               "RigidbodyFlags": 0,
               "StartAsleep": false
+            },
+            {
+              "__type": "EngineComponent",
+              "__guid": "140f62ae-903c-464f-a94b-cebc521c6659",
+              "bodyOffsetZ": 15,
+              "boost": 1,
+              "gainStep": 100,
+              "gravity": 6000,
+              "rigid": {
+                "_type": "component",
+                "component_id": "54e58dc7-eef4-489e-8305-9eedc4239093",
+                "go": "3c2490ef-54a0-49bb-8f13-490e40aa51d1",
+                "component_type": "Rigidbody"
+              },
+              "settleStep": 100,
+              "turnSpeed": 1400
             }
           ],
           "Children": [

@@ -8,7 +8,6 @@ namespace Sandbox
 {
 	public class MainTimer
 	{
-
 		public string TimerStr {  get; private set; } = "Nan";
 		private float timerSeconds = 0;
 
