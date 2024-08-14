@@ -3,56 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\MainMenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:UI\\MainMenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\ui\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:ui\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\ui\\ingameui.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:ui\\ingameui.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\assetzones\\zonecreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:assetzones\\zonecreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\player\\enginecomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:player\\enginecomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\player\\freecam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:player\\freecam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\player\\playersng.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:player\\playersng.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\player\\cameracontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:player\\cameracontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\sng.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:sng.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\ui\\mainmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:ui\\mainmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\maintimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:maintimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\sng.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:sng.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\player\\playercomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:player\\playercomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\player\\enginecomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:player\\enginecomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\assetzones\\zonecreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:assetzones\\zonecreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\assetzones\\endzone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:assetzones\\endzone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\assembly.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:assembly.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\dontdestroy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:dontdestroy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\sceneobjectflagsfixer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:sceneobjectflagsfixer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\player\\freecam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:player\\freecam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\GameUI.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:UI\\GameUI.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\ui\\mainmenu.razor.scss||{181FE41B-5A5D-479F-9F8F-BF665F4EBC2A}",
+      "RelativeMoniker": "D:0:0:{513133DE-793E-4F21-8400-C1FC4D7F0ED9}|stasis.csproj|solutionrelative:ui\\mainmenu.razor.scss||{181FE41B-5A5D-479F-9F8F-BF665F4EBC2A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,164 +58,148 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
+              "Title": "MainMenu.razor",
+              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\MainMenu.razor",
+              "RelativeDocumentMoniker": "UI\\MainMenu.razor",
+              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\MainMenu.razor",
+              "RelativeToolTip": "UI\\MainMenu.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-13T22:28:35.654Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Sng.cs",
               "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Sng.cs",
               "RelativeDocumentMoniker": "Sng.cs",
               "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Sng.cs",
               "RelativeToolTip": "Sng.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHMAAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-09T10:14:45.846Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IngameUI.razor",
-              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\IngameUI.razor",
-              "RelativeDocumentMoniker": "UI\\IngameUI.razor",
-              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\IngameUI.razor",
-              "RelativeToolTip": "UI\\IngameUI.razor",
-              "ViewState": "AQIAAEIAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-11T20:50:21.055Z",
+              "WhenOpened": "2024-08-14T14:03:39.964Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainMenu.razor",
-              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\MainMenu.razor",
-              "RelativeDocumentMoniker": "UI\\MainMenu.razor",
-              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\MainMenu.razor",
-              "RelativeToolTip": "UI\\MainMenu.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T00:27:13.112Z",
-              "IsPinned": true,
+              "Title": "MenuController.cs",
+              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\MenuController.cs",
+              "RelativeDocumentMoniker": "UI\\MenuController.cs",
+              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\MenuController.cs",
+              "RelativeToolTip": "UI\\MenuController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-14T20:45:52.128Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "EndZone.cs",
-              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\AssetZones\\EndZone.cs",
-              "RelativeDocumentMoniker": "AssetZones\\EndZone.cs",
-              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\AssetZones\\EndZone.cs",
-              "RelativeToolTip": "AssetZones\\EndZone.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-09T09:48:30.472Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FreeCam.cs",
-              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\FreeCam.cs",
-              "RelativeDocumentMoniker": "Player\\FreeCam.cs",
-              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\FreeCam.cs",
-              "RelativeToolTip": "Player\\FreeCam.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAuwDUAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T20:20:00.412Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CameraControl.cs",
-              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\CameraControl.cs",
-              "RelativeDocumentMoniker": "Player\\CameraControl.cs",
-              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\CameraControl.cs",
-              "RelativeToolTip": "Player\\CameraControl.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAwwCAAAAA/AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-08T11:32:07.487Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "EngineComponent.cs",
               "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\EngineComponent.cs",
               "RelativeDocumentMoniker": "Player\\EngineComponent.cs",
               "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\EngineComponent.cs",
               "RelativeToolTip": "Player\\EngineComponent.cs",
-              "ViewState": "AQIAAEcAAAAAAAAAAAAuwE0AAABJAAAA",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAowH0AAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-08T11:36:39.991Z"
+              "WhenOpened": "2024-08-14T19:40:57.056Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PlayerSng.cs",
-              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\PlayerSng.cs",
-              "RelativeDocumentMoniker": "Player\\PlayerSng.cs",
-              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\PlayerSng.cs",
-              "RelativeToolTip": "Player\\PlayerSng.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T18:53:47.542Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "ZoneCreate.cs",
               "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\AssetZones\\ZoneCreate.cs",
               "RelativeDocumentMoniker": "AssetZones\\ZoneCreate.cs",
               "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\AssetZones\\ZoneCreate.cs",
               "RelativeToolTip": "AssetZones\\ZoneCreate.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAqAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-12T11:19:27.466Z"
+              "WhenOpened": "2024-08-14T19:40:25.93Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
+              "Title": "EndZone.cs",
+              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\AssetZones\\EndZone.cs",
+              "RelativeDocumentMoniker": "AssetZones\\EndZone.cs",
+              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\AssetZones\\EndZone.cs",
+              "RelativeToolTip": "AssetZones\\EndZone.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-14T19:39:37.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlayerComp.cs",
+              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\PlayerComp.cs",
+              "RelativeDocumentMoniker": "Player\\PlayerComp.cs",
+              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\PlayerComp.cs",
+              "RelativeToolTip": "Player\\PlayerComp.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-14T19:28:29.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "FreeCam.cs",
+              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\FreeCam.cs",
+              "RelativeDocumentMoniker": "Player\\FreeCam.cs",
+              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Player\\FreeCam.cs",
+              "RelativeToolTip": "Player\\FreeCam.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAwwCwAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-14T19:20:52.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MainTimer.cs",
               "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\MainTimer.cs",
               "RelativeDocumentMoniker": "MainTimer.cs",
               "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\MainTimer.cs",
               "RelativeToolTip": "MainTimer.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAwwBQAAAAsAAAA",
+              "ViewState": "AQIAACAAAAAAAAAAAAAmwDMAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T22:52:04.296Z"
+              "WhenOpened": "2024-08-14T19:19:51.095Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "Assembly.cs",
-              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Assembly.cs",
-              "RelativeDocumentMoniker": "Assembly.cs",
-              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Assembly.cs",
-              "RelativeToolTip": "Assembly.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T20:50:20.232Z"
+              "Title": "MainMenu.razor.scss",
+              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\MainMenu.razor.scss",
+              "RelativeDocumentMoniker": "UI\\MainMenu.razor.scss",
+              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\MainMenu.razor.scss",
+              "RelativeToolTip": "UI\\MainMenu.razor.scss",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABIAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002663|",
+              "WhenOpened": "2024-08-14T17:36:09.207Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "SceneObjectFlagsFixer.cs",
-              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\SceneObjectFlagsFixer.cs",
-              "RelativeDocumentMoniker": "SceneObjectFlagsFixer.cs",
-              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\SceneObjectFlagsFixer.cs",
-              "RelativeToolTip": "SceneObjectFlagsFixer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAXAAAA",
+              "DocumentIndex": 8,
+              "Title": "DontDestroy.cs",
+              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\DontDestroy.cs",
+              "RelativeDocumentMoniker": "DontDestroy.cs",
+              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\DontDestroy.cs",
+              "RelativeToolTip": "DontDestroy.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-09T10:01:23.342Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "GameUI.razor",
-              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\GameUI.razor",
-              "RelativeDocumentMoniker": "UI\\GameUI.razor",
-              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\UI\\GameUI.razor",
-              "RelativeToolTip": "UI\\GameUI.razor",
-              "ViewState": "AQIAADQAAAAAAAAAAAAqwDoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-08T11:21:40.541Z"
+              "WhenOpened": "2024-08-14T14:17:35.603Z",
+              "EditorCaption": ""
             }
           ]
         }

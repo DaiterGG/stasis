@@ -3,11 +3,13 @@ using System;
 using System.Numerics;
 public sealed class EngineComponent : Component
 {
+	MainTimer TIMER = Sng.Inst.Timer;
+
 	public bool inputActive = true;
 	public bool isRunning;
 	public int isStarting = 0;
 	[Property] Rigidbody rigid;
-	[Property] IngameUI gameUI;
+	IngameUI GAMEUI = Sng.Inst.gameUI;
 
 	[Property, Range( 0, 500f ), DefaultValue( 15f )] readonly float bodyOffsetZ;
 	[Property, Range( 0, 2000f ), DefaultValue( 1400f )] readonly float turnSpeed;
@@ -89,9 +91,9 @@ public sealed class EngineComponent : Component
 			, 0 ) * Transform.Rotation );
 		deltaZ = Transform.Position.z;
 
-		gameUI.SpeedMain = ((int)rigid.Velocity.Length).ToString();
-		gameUI.SpeedVert = ((int)rigid.Velocity.z).ToString();
-		gameUI.SpeedHor = ((int)Math.Sqrt(
+		GAMEUI.SpeedMain = ((int)rigid.Velocity.Length).ToString();
+		GAMEUI.SpeedVert = ((int)rigid.Velocity.z).ToString();
+		GAMEUI.SpeedHor = ((int)Math.Sqrt(
 			rigid.Velocity.x * rigid.Velocity.x +
 			rigid.Velocity.y * rigid.Velocity.y
 			)).ToString();
@@ -118,7 +120,7 @@ public sealed class EngineComponent : Component
 	{
 		isStarting = 0;
 		isRunning = false;
-		Sng.Inst.Timer.IsAirborne = false;
+		TIMER.IsAirborne = false;
 		gain = 0f;
 	}
 	public void engStart()
@@ -128,7 +130,7 @@ public sealed class EngineComponent : Component
 		{
 			isStarting = 0;
 			isRunning = true;
-			Sng.Inst.Timer.IsAirborne = true;
+			TIMER.IsAirborne = true;
 			gain = gravity;
 		}
 	}

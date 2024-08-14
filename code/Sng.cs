@@ -5,11 +5,15 @@ public sealed class Sng : Component
 {
 	private static Sng _sng;
 
-	[Property] IngameUI gameUI; 
+	[Property] public IngameUI gameUI;
+	[Property] public MenuController menuUI;
+	[Property] public PlayerComp Player;
 	public static Sng Inst {  get { return _sng; } }
 	public GameObject StartPoint;
 
 	private GameObject _spawnPoint;
+
+
 	public GameObject SpawnPoint { get
 		{
 			if ( _spawnPoint == null ) return StartPoint;
@@ -65,7 +69,7 @@ public sealed class Sng : Component
 		}
 		if ( SpawnPoint == null ) Log.Info( "Spawn not found" );
 		if ( StartPoint == null ) Log.Info( "Start not found" );
-		if ( EndZones.Count == 0 ) Log.Info( "Start not found" );
+		if ( EndZones.Count == 0 ) Log.Info( "End zone not found" );
 	}
 	protected override void OnFixedUpdate()
 	{
@@ -87,33 +91,26 @@ public sealed class Sng : Component
 		Scene.LoadFromFile( mapPath );
 		MapInit();
 		SpawnPlayer();
+		menuUI.SetCameraLook();
 	}
 private void SpawnPlayer()
 	{
-		Log.Info(SpawnPoint);
-		Log.Info(StartPoint);
-		PlayerSng.Player.Self.Transform.Position =
+		Player.GameObject.Transform.Position =
 			SpawnPoint.Transform.Position;
-		PlayerSng.Player.Self.Transform.Rotation = SpawnPoint.Transform.Rotation;
-		PlayerSng.Player.Engine.ResetPos(true);
+		Player.GameObject.Transform.Rotation = SpawnPoint.Transform.Rotation;
+		Player.Engine.ResetPos(true);
 		Log.Info( "Player Spawned" );
 	}
 	public void TeleportPlayer(GameTransform pos )
 	{
-		PlayerSng.Player.Self.Transform.Position = pos.Position;
-		PlayerSng.Player.Self.Transform.Rotation = pos.Rotation;
-		PlayerSng.Player.Engine.ResetPos(false);
+		Player.GameObject.Transform.Position = pos.Position;
+		Player.GameObject.Transform.Rotation = pos.Rotation;
+		Player.Engine.ResetPos(false);
 		Log.Info( "Player Teleported" );
 	}
 	public void EndZoneEnter(GameObject go,Collider cof )
 	{
 		Timer.IsFinished = true;
 	}
-	public void StopTimer()
-	{
-		Timer.IsRunning = false;
-		Timer.IsRequareReset = true;
-	}
-
 }
 

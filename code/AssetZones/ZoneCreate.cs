@@ -1,6 +1,7 @@
 using System;
 namespace Sandbox;
 
+
 public sealed class ZoneCreate : Component
 {
 	private Color endZoneColor = new Color( 1f, 0, 0);
@@ -8,10 +9,11 @@ public sealed class ZoneCreate : Component
     [Property] public GameObject EndZonePrefab;
     [Property] public GameObject LinePrefab;
     public List<GameObject> EndZones = new List<GameObject>();
+	Sng SNG = Sng.Inst;
 	protected override void OnStart()
 	{
 		base.OnStart();
-        foreach ( var zone in Sng.Inst.EndZones )
+        foreach ( var zone in SNG.EndZones )
         {
             EndZones.Add( EndZonePrefab.Clone( GameObject, zone.Transform.Position, zone.Transform.Rotation, zone.Transform.Scale ) );
             EndZones.Last().Enabled = true;

@@ -6,6 +6,7 @@ public sealed class FreeCam : Component
 	[Property] EngineComponent engine;
 	readonly float force = 20f;
 	float mult = 1f;
+	MainTimer TIMER = Sng.Inst.Timer;
 	protected override void OnEnabled()
 	{
 		base.OnEnabled();
@@ -23,7 +24,7 @@ public sealed class FreeCam : Component
 	{
 
 		if ( !GameObject.Enabled ) return;
-		Sng.Inst.StopTimer();
+		TIMER.StopTimer();
 		if ( Input.Down( "Up" ) )
 		{ //W or forward		
 			Transform.Position += new Vector3( force * mult, 0, 0 ) * Transform.Rotation;

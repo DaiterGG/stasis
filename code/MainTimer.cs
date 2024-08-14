@@ -45,5 +45,11 @@ namespace Sandbox
 			timerSeconds = 0;
 			IsFinished = false;
 		}
+
+		public void StopTimer()
+		{
+			IsRunning = false;
+			IsRequareReset = true;
+		}
 	}
 }
