@@ -22,15 +22,18 @@ public sealed class CameraControl : Component
 		if ( Input.Pressed( "FreeCam" ) )
 		{
 			FreeCam.Enabled = !FreeCam.Enabled;
-			IsFreeCam = FreeCam.Enabled;
 			EnableCam();
 		}
-
+		if (Input.Pressed( "Restart" ) )
+		{
+			FreeCam.Enabled = false;
+			EnableCam();
+		}
 
 	}
 	void EnableCam() {
 		var active = iEnabled;
-		if (IsFreeCam) //not nessary because of cameras priority queue
+		if (FreeCam.Enabled) //not necessary because of cameras priority queue
 		{
 			active = -1;
 		}

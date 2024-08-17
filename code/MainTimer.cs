@@ -43,6 +43,7 @@ namespace Sandbox
 		{
 			timerSeconds = 0;
 			IsFinished = false;
+			IsRequareReset = false;
 		}
 
 		public void StopTimer()

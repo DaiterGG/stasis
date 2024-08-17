@@ -1,7 +1,5 @@
 using System;
 namespace Sandbox;
-
-
 public sealed class ZoneCreate : Component
 {
 	private Color endZoneColor = new Color( 1f, 0, 0);

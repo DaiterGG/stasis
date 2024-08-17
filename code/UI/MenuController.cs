@@ -12,13 +12,14 @@ public sealed class MenuController : Component
 	public Vector3 CameraPos;
 	public bool IsGaming = false;
 	GameObject BODY; 
-	EngineComponent ENGINE;
 	IngameUI GAMEUI;
-	
+	EngineComponent ENGINE;
+	Sng SNG;
 	
 	protected override void OnAwake()
 	{
 		base.OnAwake();
+		SNG = Sng.Inst;
 		BODY = Sng.Inst.Player.Body;
 		GAMEUI = Sng.Inst.gameUI;
 		ENGINE = Sng.Inst.Player.Engine;
@@ -63,15 +64,16 @@ public sealed class MenuController : Component
 	{
 		Camera.Enabled = false;
 		ENGINE.inputActive = true;
-		GAMEUI.Enabled = true;
+		GAMEUI.GameObject.Enabled = true;
 		Menu.Enabled = false;
 		IsGaming = true;
+		SNG.ResetPlayer();
 	}
 	public void OpenMenu()
 	{
 		Camera.Enabled = true;
 		ENGINE.inputActive = false;
-		GAMEUI.Enabled = false;
+		GAMEUI.GameObject.Enabled = false;
 		Menu.Enabled = true;
 		IsGaming = false;
 
@@ -82,6 +84,6 @@ public sealed class MenuController : Component
 	}
 	public void OpenMapSelect()
 	{
-		
+			
 	}
 }

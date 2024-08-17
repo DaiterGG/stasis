@@ -3,22 +3,28 @@ using System;
 public sealed class FreeCam : Component
 {
 	[Property] GameObject thirdCam;
-	[Property] EngineComponent engine;
 	readonly float force = 20f;
 	float mult = 1f;
-	MainTimer TIMER = Sng.Inst.Timer;
+	MainTimer TIMER;
+	EngineComponent ENGINE;
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		ENGINE = Sng.Inst.Player.Engine;
+		TIMER = Sng.Inst.Timer;
+	}
 	protected override void OnEnabled()
 	{
 		base.OnEnabled();
 
 		Transform.Position = thirdCam.Transform.Position + new Vector3(0,0,10);
 		Transform.Rotation = thirdCam.Transform.Rotation;
-		engine.inputActive = false; 
+		ENGINE.inputActive = false; 
 	}
 	protected override void OnDisabled()
 	{
 		base.OnDisabled();
-		engine.inputActive = true;
+		ENGINE.inputActive = true;
 	}
 	protected override void OnUpdate()
 	{
