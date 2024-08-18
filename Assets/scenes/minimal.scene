@@ -225,7 +225,8 @@
           "__guid": "3c2490ef-54a0-49bb-8f13-490e40aa51d1",
           "Flags": 0,
           "Name": "Body",
-          "Position": "0.00003918023,-0.000001477921,15.17014",
+          "Position": "0.0001330646,-0.00000427652,-0.02441406",
+          "Scale": "0.5,0.5,0.5",
           "Enabled": true,
           "Components": [
             {
@@ -233,22 +234,38 @@
               "__guid": "54e58dc7-eef4-489e-8305-9eedc4239093",
               "AngularDamping": 1,
               "Gravity": false,
-              "LinearDamping": 3,
+              "LinearDamping": 0,
               "Locking": {},
               "MassCenterOverride": "0,0,0",
-              "MassOverride": 1,
+              "MassOverride": 2,
               "MotionEnabled": true,
               "OverrideMassCenter": false,
               "RigidbodyFlags": 0,
               "StartAsleep": false
             },
             {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "9b38da0a-f2f4-46f2-8c02-e568bb9541f1",
+              "IsTrigger": false,
+              "Model": "models/heli_final.vmdl",
+              "Static": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "a1c9c764-1bf2-4487-bda7-3967701d72ab",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/heli_final.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
               "__type": "EngineComponent",
               "__guid": "140f62ae-903c-464f-a94b-cebc521c6659",
-              "bodyOffsetZ": 15,
+              "bodyOffsetZ": 0,
               "boost": 1,
               "gainStep": 100,
-              "gravity": 6000,
+              "gravity": 60,
+              "horizontalDumping": 0.985,
               "rigid": {
                 "_type": "component",
                 "component_id": "54e58dc7-eef4-489e-8305-9eedc4239093",
@@ -257,21 +274,6 @@
               },
               "settleStep": 100,
               "turnSpeed": 1400
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "9b38da0a-f2f4-46f2-8c02-e568bb9541f1",
-              "IsTrigger": false,
-              "Model": "models/heli1.vmdl",
-              "Static": false
-            },
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "a1c9c764-1bf2-4487-bda7-3967701d72ab",
-              "BodyGroups": 18446744073709551615,
-              "Model": "models/heli1.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
             }
           ],
           "Children": [
@@ -285,7 +287,7 @@
                   "__type": "Sandbox.ModelRenderer",
                   "__guid": "fd74e77e-854a-4a2a-a432-010ad6aad99c",
                   "BodyGroups": 18446744073709551615,
-                  "Model": "models/heli1.vmdl",
+                  "Model": "models/dev/error.vmdl",
                   "RenderType": "On",
                   "Tint": "1,1,1,1"
                 },
@@ -293,7 +295,7 @@
                   "__type": "Sandbox.ModelCollider",
                   "__guid": "348fc713-739c-4b2e-9692-57bd442cccfe",
                   "IsTrigger": false,
-                  "Model": "models/heli1.vmdl",
+                  "Model": "models/dev/error.vmdl",
                   "Static": false
                 },
                 {
@@ -316,7 +318,8 @@
               "__guid": "0066e55b-2a26-478d-9087-bc7a47e2c030",
               "Flags": 0,
               "Name": "First person",
-              "Position": "18.01675,-7.00787,-1.670129",
+              "Position": "35.45,0,37.43193",
+              "Rotation": "0,-0.01483476,0,0.99989",
               "Scale": "0.639677,1.31012,1.775288",
               "Components": [
                 {
@@ -334,7 +337,7 @@
                   "TargetEye": "None",
                   "Viewport": "0,0,1,1",
                   "ZFar": 10000,
-                  "ZNear": 10
+                  "ZNear": 1
                 },
                 {
                   "__type": "Sandbox.Bloom",
@@ -388,8 +391,8 @@
               "__guid": "d6d47027-a884-4a1d-b8fd-b0feabe121bd",
               "Flags": 0,
               "Name": "Third person",
-              "Position": "-125.5618,-0.000004516136,102.5247",
-              "Rotation": "0,0.1521234,0,0.9883615",
+              "Position": "-175.7618,-0.000004516136,79.72442",
+              "Rotation": "0,0.03315518,0,0.9994502",
               "Scale": "0.639677,1.31012,1.775288",
               "Components": [
                 {
@@ -461,7 +464,7 @@
               "__guid": "869c7782-052d-42ad-af0b-0fea8a7e3cf2",
               "Flags": 0,
               "Name": "Propeller",
-              "Position": "0.00003667954,0.00001115149,31.23179",
+              "Position": "-1.229185,0.00001077354,46.73469",
               "Enabled": true,
               "Components": [
                 {
@@ -481,12 +484,57 @@
               ],
               "Children": [
                 {
+                  "__guid": "a2c520ad-e018-43a4-b4c1-ca4333f42ebb",
+                  "Flags": 0,
+                  "Name": "prop2",
+                  "Position": "2.200025,-3.099998,0",
+                  "Tags": "particle",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.ModelRenderer",
+                      "__guid": "27f365c7-77c6-45a9-982c-a80f8514e330",
+                      "BodyGroups": 18446744073709551615,
+                      "MaterialOverride": "materials/black_marble.vmat",
+                      "Model": "models/tail_final.vmdl",
+                      "RenderType": "On",
+                      "Tint": "0,0,0,1"
+                    },
+                    {
+                      "__type": "Sandbox.Rigidbody",
+                      "__guid": "37021e78-9a66-4387-bc4a-da6f9bf9c310",
+                      "AngularDamping": 0,
+                      "Gravity": false,
+                      "LinearDamping": 0,
+                      "Locking": {},
+                      "MassCenterOverride": "0,0,0",
+                      "MassOverride": 1,
+                      "MotionEnabled": true,
+                      "OverrideMassCenter": false,
+                      "RigidbodyFlags": 0,
+                      "StartAsleep": false
+                    },
+                    {
+                      "__type": "Sandbox.ModelCollider",
+                      "__guid": "09baa785-2637-4aaf-a25a-8065365b2ab7",
+                      "IsTrigger": false,
+                      "Model": "models/tail_final.vmdl",
+                      "Static": false
+                    },
+                    {
+                      "__type": "Sandbox.SpinTrigger",
+                      "__guid": "2384fad3-3a98-4397-b270-aead01535bc9",
+                      "rotationOffset": 0
+                    }
+                  ]
+                },
+                {
                   "__guid": "d6cba7a9-bb48-4b0a-b36a-5c8e93202589",
                   "Flags": 0,
                   "Name": "prop1",
                   "Position": "0,0,0",
                   "Scale": "2,0.09999992,0.01",
-                  "Enabled": true,
+                  "Tags": "particle",
                   "Components": [
                     {
                       "__type": "Sandbox.ModelRenderer",
@@ -527,13 +575,58 @@
                   ]
                 },
                 {
+                  "__guid": "0ff41899-9cc9-4a6d-8065-2b8a03025822",
+                  "Flags": 0,
+                  "Name": "prop1",
+                  "Position": "2.199999,-3.100001,0",
+                  "Tags": "particle",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.ModelRenderer",
+                      "__guid": "80d87dc1-f515-4c9d-9c97-7737b684837f",
+                      "BodyGroups": 18446744073709551615,
+                      "MaterialOverride": "materials/black_marble.vmat",
+                      "Model": "models/tail_final.vmdl",
+                      "RenderType": "On",
+                      "Tint": "0,0,0,1"
+                    },
+                    {
+                      "__type": "Sandbox.Rigidbody",
+                      "__guid": "9057fea3-947f-49ba-854d-8ef05afd1f0a",
+                      "AngularDamping": 0,
+                      "Gravity": false,
+                      "LinearDamping": 0,
+                      "Locking": {},
+                      "MassCenterOverride": "0,0,0",
+                      "MassOverride": 1,
+                      "MotionEnabled": true,
+                      "OverrideMassCenter": false,
+                      "RigidbodyFlags": 0,
+                      "StartAsleep": false
+                    },
+                    {
+                      "__type": "Sandbox.ModelCollider",
+                      "__guid": "7cbe3cb9-d713-4706-aff6-13029183c4c8",
+                      "IsTrigger": false,
+                      "Model": "models/tail_final.vmdl",
+                      "Static": false
+                    },
+                    {
+                      "__type": "Sandbox.SpinTrigger",
+                      "__guid": "bfc552e6-a5b4-497f-b840-384c8c083e6d",
+                      "rotationOffset": 120
+                    }
+                  ]
+                },
+                {
                   "__guid": "deeaf9dd-bcaf-488b-8479-ab5bb34fb111",
                   "Flags": 0,
                   "Name": "prop2",
                   "Position": "0,0,0",
                   "Rotation": "0,0,0.7071068,0.7071068",
                   "Scale": "2,0.09999992,0.01",
-                  "Enabled": true,
+                  "Tags": "particle",
                   "Components": [
                     {
                       "__type": "Sandbox.ModelRenderer",
@@ -570,6 +663,51 @@
                       "__type": "Sandbox.SpinTrigger",
                       "__guid": "adbe0b20-21ee-4e04-a45a-af41670c0b8f",
                       "rotationOffset": 90
+                    }
+                  ]
+                },
+                {
+                  "__guid": "74ed9c96-21af-4ffe-a8d9-639aff0620bf",
+                  "Flags": 0,
+                  "Name": "prop3",
+                  "Position": "2.200025,-3.1,0",
+                  "Tags": "particle",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.ModelRenderer",
+                      "__guid": "b7222cb0-371a-45fe-a072-49aadf42ab60",
+                      "BodyGroups": 18446744073709551615,
+                      "MaterialOverride": "materials/black_marble.vmat",
+                      "Model": "models/tail_final.vmdl",
+                      "RenderType": "On",
+                      "Tint": "0,0,0,1"
+                    },
+                    {
+                      "__type": "Sandbox.Rigidbody",
+                      "__guid": "e45bb88d-526e-434b-8108-754b5d573faf",
+                      "AngularDamping": 0,
+                      "Gravity": false,
+                      "LinearDamping": 0,
+                      "Locking": {},
+                      "MassCenterOverride": "0,0,0",
+                      "MassOverride": 1,
+                      "MotionEnabled": true,
+                      "OverrideMassCenter": false,
+                      "RigidbodyFlags": 0,
+                      "StartAsleep": false
+                    },
+                    {
+                      "__type": "Sandbox.ModelCollider",
+                      "__guid": "ce15587e-faab-40fd-8231-56cad80e96b7",
+                      "IsTrigger": false,
+                      "Model": "models/tail_final.vmdl",
+                      "Static": false
+                    },
+                    {
+                      "__type": "Sandbox.SpinTrigger",
+                      "__guid": "25582e99-4ccb-43d6-a91e-2a82f03f2ec9",
+                      "rotationOffset": 240
                     }
                   ]
                 }
@@ -812,7 +950,7 @@
           "__guid": "79ed2d5e-8b04-4ddb-a582-f259f0afbbc3",
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "base/materials/blacksteel.vmat",
-          "Model": "models/heli1.vmdl",
+          "Model": "models/dev/error.vmdl",
           "RenderType": "On",
           "Tint": "0,0,0,1"
         },
@@ -820,7 +958,7 @@
           "__type": "Sandbox.ModelCollider",
           "__guid": "b147cd01-4f2f-44e2-9c9c-e44d23c9fdb7",
           "IsTrigger": false,
-          "Model": "models/testcube.vmdl",
+          "Model": "models/dev/error.vmdl",
           "Static": false,
           "Surface": "maps/mf_city/props/metal/firehydrant/metal_firehydrant.surface"
         },

@@ -4,7 +4,7 @@
   "Org": "move",
   "Ident": "stasis",
   "Schema": 1,
-  "IncludeSourceFiles": false,
+  "IncludeSourceFiles": true,
   "Resources": "fonts/*",
   "PackageReferences": [],
   "EditorReferences": null,
@@ -143,7 +143,7 @@
         },
         {
           "Name": "CameraCycle",
-          "KeyboardCode": "M",
+          "KeyboardCode": "tab",
           "GamepadCode": "RightJoystickButton",
           "GroupName": "Other"
         },
@@ -197,7 +197,7 @@
         },
         {
           "Name": "FreeCam",
-          "KeyboardCode": "B",
+          "KeyboardCode": "v",
           "GamepadCode": "None",
           "GroupName": "Other"
         },
