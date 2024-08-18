@@ -58,8 +58,8 @@
           "__guid": "24ef250d-05e0-4222-af3e-daea8e553089",
           "Flags": 0,
           "Name": "Menu cam",
-          "Position": "-221.3963,65.98355,69.46698",
-          "Rotation": "-0.01692668,-0.09698536,-0.1710941,0.9803235",
+          "Position": "-183.6963,40.68348,67.06693",
+          "Rotation": "-0.03123501,-0.1391667,-0.216756,0.9657505",
           "Enabled": true,
           "Components": [
             {
@@ -67,7 +67,7 @@
               "__guid": "c1fa1549-4a93-42d5-9d6c-19d6e77b1d68",
               "BackgroundColor": "0.33333,0.46275,0.52157,1",
               "ClearFlags": "All",
-              "FieldOfView": 90,
+              "FieldOfView": 86.85,
               "IsMainCamera": true,
               "Orthographic": false,
               "OrthographicHeight": 1204,
@@ -256,7 +256,7 @@
               "BodyGroups": 18446744073709551615,
               "Model": "models/heli_final.vmdl",
               "RenderType": "On",
-              "Tint": "1,1,1,1"
+              "Tint": "0,0,0,1"
             },
             {
               "__type": "EngineComponent",
@@ -318,7 +318,7 @@
               "__guid": "0066e55b-2a26-478d-9087-bc7a47e2c030",
               "Flags": 0,
               "Name": "First person",
-              "Position": "35.45,0,37.43193",
+              "Position": "34.64998,0,36.93194",
               "Rotation": "0,-0.01483476,0,0.99989",
               "Scale": "0.639677,1.31012,1.775288",
               "Components": [
@@ -941,40 +941,17 @@
       "__guid": "ee087548-0d64-46ac-9bb6-4bb77281b854",
       "Flags": 0,
       "Name": "Object",
-      "Position": "-138.5344,73.52833,131.0726",
+      "Position": "-206.7726,-14.84681,95.71573",
       "Rotation": "0,0,-0.7071067,0.7071068",
       "Scale": "0.9416823,0.9416823,0.9416823",
       "Components": [
         {
           "__type": "Sandbox.ModelRenderer",
-          "__guid": "79ed2d5e-8b04-4ddb-a582-f259f0afbbc3",
+          "__guid": "013b2a17-cbf2-4ca7-8f62-cd01cdd6d11d",
           "BodyGroups": 18446744073709551615,
-          "MaterialOverride": "base/materials/blacksteel.vmat",
-          "Model": "models/dev/error.vmdl",
+          "Model": "models/heli_final.vmdl",
           "RenderType": "On",
-          "Tint": "0,0,0,1"
-        },
-        {
-          "__type": "Sandbox.ModelCollider",
-          "__guid": "b147cd01-4f2f-44e2-9c9c-e44d23c9fdb7",
-          "IsTrigger": false,
-          "Model": "models/dev/error.vmdl",
-          "Static": false,
-          "Surface": "maps/mf_city/props/metal/firehydrant/metal_firehydrant.surface"
-        },
-        {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "c1aa9172-58da-4ce4-b682-c5038c85b951",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {},
-          "MassCenterOverride": "0,0,0",
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "OverrideMassCenter": false,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
+          "Tint": "1,1,1,1"
         }
       ]
     }
@@ -1003,8 +980,6 @@
   "Title": "minimal",
   "Description": "",
   "ResourceVersion": 1,
-  "__references": [
-    "degg.base_mat_bsteel"
-  ],
+  "__references": [],
   "__version": 1
 }
