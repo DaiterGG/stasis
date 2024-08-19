@@ -1,3 +1,4 @@
+namespace Sandbox;
 public sealed class Sng : Component
 {
 	private static Sng _sng;
@@ -37,10 +38,10 @@ public sealed class Sng : Component
 
 	private void FindMaps()
 	{
-		var maps = FileSystem.Mounted.FindFile( "/maps", "*.vpk" );
+		var maps = FileSystem.Mounted.FindFile( "/", "*.vpk" );
 		foreach ( var map in maps )
 		{
-			Log.Info( map );
+			//	Log.Info( map );
 		}
 
 	}
@@ -77,7 +78,6 @@ public sealed class Sng : Component
 		if ( nextFrame ) //player transform is not updating correctly on teleport 
 		{
 			nextFrame = false;
-
 			Player.SpinC.RestartSpin();
 		}
 		base.OnFixedUpdate();
@@ -86,6 +86,10 @@ public sealed class Sng : Component
 			ResetPlayer();
 			Player.SpinC.RestartSpin();
 			nextFrame = true;
+		}
+		if ( Input.Pressed( "Jump" ) && menuUI.IsGaming )
+		{
+			Player.SpinC.SpinCollision();
 		}
 		if ( Input.Pressed( "Test" ) )
 		{

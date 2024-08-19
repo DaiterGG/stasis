@@ -1,12 +1,12 @@
 MainMenu {
     background-color: transparent;
     position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	justify-content: center;
-	align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
 
     .buttons {
         position: absolute;
@@ -21,11 +21,16 @@ MainMenu {
         align-items: flex-start;
         gap: 20px;
 
+
+        > div:hover {
+            margin-left: 67px; /* Example of margin adjustment */
+        }
+
         > div {
             width: 500px;
             height: 100px;
-            background-color: transparent;
 
+         transition: margin-left 0.1s ease;
             > .text {
                 position: absolute;
                 align-self: center;
@@ -36,11 +41,12 @@ MainMenu {
                 font-size: 50px;
             }
 
+
             > .bg {
                 transform: skew(-60deg, 0deg);
                 border-radius: 10px 0 10px 0;
-                background-color: rgba(0,0,0,0.1);
-                backdrop-filter: blur(5px);
+                background-color: rgba(0,0,0,0.3);
+                backdrop-filter: blur(0px);
                 width: 100%;
                 height: 100%;
             }

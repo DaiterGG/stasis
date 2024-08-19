@@ -9,7 +9,7 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sng",
+          "__type": "Sandbox.Sng",
           "__guid": "b61062db-fe84-4099-b23c-7960ed71c12e",
           "gameUI": {
             "_type": "component",
@@ -58,7 +58,7 @@
           "__guid": "24ef250d-05e0-4222-af3e-daea8e553089",
           "Flags": 0,
           "Name": "Menu cam",
-          "Position": "-183.6963,40.68348,67.06693",
+          "Position": "-183.6963,40.68348,68.06692",
           "Rotation": "-0.03123501,-0.1391667,-0.216756,0.9657505",
           "Enabled": true,
           "Components": [
@@ -256,15 +256,15 @@
               "BodyGroups": 18446744073709551615,
               "Model": "models/heli_final.vmdl",
               "RenderType": "On",
-              "Tint": "0,0,0,1"
+              "Tint": "1,1,1,1"
             },
             {
-              "__type": "EngineComponent",
+              "__type": "Sandbox.EngineComponent",
               "__guid": "140f62ae-903c-464f-a94b-cebc521c6659",
               "bodyOffsetZ": 0,
               "boost": 1,
               "gainStep": 100,
-              "gravity": 60,
+              "gravity": 40,
               "horizontalDumping": 0.985,
               "rigid": {
                 "_type": "component",
@@ -273,7 +273,24 @@
                 "component_type": "Rigidbody"
               },
               "settleStep": 100,
-              "turnSpeed": 1400
+              "turnSpeed": 16000,
+              "turnVector": {
+                "UniformScale": 1,
+                "IsValid": true,
+                "ForwardRay": {
+                  "Forward": "1,0,0"
+                },
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "abe659c8-cc6f-4615-ae75-acdc5c95b6f9",
+              "Center": "0,0,0",
+              "IsTrigger": true,
+              "Scale": "250,250,250",
+              "Static": false
             }
           ],
           "Children": [
@@ -498,7 +515,7 @@
                       "MaterialOverride": "materials/black_marble.vmat",
                       "Model": "models/tail_final.vmdl",
                       "RenderType": "On",
-                      "Tint": "0,0,0,1"
+                      "Tint": "1,1,1,1"
                     },
                     {
                       "__type": "Sandbox.Rigidbody",
@@ -589,7 +606,7 @@
                       "MaterialOverride": "materials/black_marble.vmat",
                       "Model": "models/tail_final.vmdl",
                       "RenderType": "On",
-                      "Tint": "0,0,0,1"
+                      "Tint": "1,1,1,1"
                     },
                     {
                       "__type": "Sandbox.Rigidbody",
@@ -681,7 +698,7 @@
                       "MaterialOverride": "materials/black_marble.vmat",
                       "Model": "models/tail_final.vmdl",
                       "RenderType": "On",
-                      "Tint": "0,0,0,1"
+                      "Tint": "1,1,1,1"
                     },
                     {
                       "__type": "Sandbox.Rigidbody",
@@ -723,7 +740,7 @@
           "Enabled": true,
           "Components": [
             {
-              "__type": "CameraControl",
+              "__type": "Sandbox.CameraControl",
               "__guid": "b2d4e933-6ed4-4ed1-93ed-281ad94b95a7",
               "cameras": [
                 {
@@ -812,7 +829,7 @@
                   "Scale": 0.2
                 },
                 {
-                  "__type": "FreeCam",
+                  "__type": "Sandbox.FreeCam",
                   "__guid": "744c29db-a478-442c-adef-510c0e498f6f",
                   "thirdCam": {
                     "_type": "gameobject",

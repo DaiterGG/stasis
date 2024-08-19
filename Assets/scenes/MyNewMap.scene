@@ -1,0 +1,121 @@
+{
+  "__guid": "f8a848c1-b5a5-43c1-af48-6fb4359a423d",
+  "GameObjects": [
+    {
+      "__guid": "4843632c-7c58-4e19-a9dd-5dadc3fa6d86",
+      "Flags": 0,
+      "Name": "Map Info",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Info",
+          "__guid": "96e7bdcc-f006-4cb9-b2da-517526d5a43c",
+          "Author": {},
+          "BronzeTime": 25,
+          "Description": "Enjoy my new map\nAnd thanks for playing",
+          "DisplayName": "My Cool Map",
+          "GoldTime": 12.3,
+          "SilverTime": 15.5,
+          "SpeerunMap": true,
+          "Version": "1.0"
+        }
+      ]
+    },
+    {
+      "__guid": "100cbc03-5b4c-4ad4-8723-5e08ae4261b8",
+      "Flags": 0,
+      "Name": "Map",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "f4eeed96-251a-447f-b4d7-1770361c9200",
+          "__version": 1,
+          "EnableCollision": true,
+          "NoOrigin": false,
+          "UseMapFromLaunch": false
+        }
+      ]
+    },
+    {
+      "__guid": "7eef7fc7-5f87-4094-9a6e-4e9f5de0284e",
+      "Flags": 0,
+      "Name": "info_player_start",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "c616ea77-fdae-4742-a212-e0106b600829",
+          "WhatIsThat": "Player will respawn here to play the map"
+        }
+      ]
+    },
+    {
+      "__guid": "5b2c9cf0-9ab2-4b9d-b14e-8417580f5127",
+      "Flags": 0,
+      "Name": "info_player_spawn",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "56b2f144-2de9-4a5e-b84a-50b6af2fa69f",
+          "WhatIsThat": "Player will spawn here to pose for the menu\nIt is optional"
+        }
+      ]
+    },
+    {
+      "__guid": "2923d760-d87a-4360-b92e-0727ec5eb156",
+      "Flags": 0,
+      "Name": "end_zone",
+      "Position": "-98.89951,0,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "cff7d52e-9066-4b58-a92d-b1965a667cd6",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": true
+        },
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "a52d426a-7e60-4a29-b08e-759b2618c4c5",
+          "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027 and put trigger collider on it\nAdd Auto Decor for the box collider\nfor the classic color line appeal"
+        },
+        {
+          "__type": "Sandbox.AutoDecor",
+          "__guid": "eb59e676-bf5d-4c70-84fe-239bf052e748",
+          "AutoDecorate": true,
+          "ColorOfTheLines": "0.80465,0,0,1"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "mapload",
+  "Description": "",
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

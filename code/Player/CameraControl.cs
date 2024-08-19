@@ -1,5 +1,4 @@
-using Sandbox;
-
+namespace Sandbox;
 public sealed class CameraControl : Component
 {
 	[Property] GameObject FreeCam;
@@ -13,7 +12,7 @@ public sealed class CameraControl : Component
 	}
 	protected override void OnFixedUpdate()
 	{
-		if( Input.Pressed( "CameraCycle" ) )
+		if ( Input.Pressed( "CameraCycle" ) )
 		{
 			iEnabled += 1;
 			if ( iEnabled >= cameras.Count ) iEnabled = 0;
@@ -24,16 +23,17 @@ public sealed class CameraControl : Component
 			FreeCam.Enabled = !FreeCam.Enabled;
 			EnableCam();
 		}
-		if (Input.Pressed( "Restart" ) )
+		if ( Input.Pressed( "Restart" ) )
 		{
 			FreeCam.Enabled = false;
 			EnableCam();
 		}
 
 	}
-	void EnableCam() {
+	void EnableCam()
+	{
 		var active = iEnabled;
-		if (FreeCam.Enabled) //not necessary because of cameras priority queue
+		if ( FreeCam.Enabled ) //not necessary because of cameras priority queue
 		{
 			active = -1;
 		}

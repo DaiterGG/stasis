@@ -1,20 +1,67 @@
-IngameUI
-{
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: #444;
-	justify-content: center;
-	align-items: center;
-	font-weight: bold;
-	border-radius: 20px;
+IngameUI {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-family: Signika Negative;
+    background-color: transparent;
+    display: flex;
+    align-content: flex-end;
+    flex-direction: column;
 
-	.title
-	{
-		font-size: 25px;
-		font-family: Poppins;
-		color: #fff;
-	}
+    .speedVert {
+        position: absolute;
+        bottom: 70px;
+        text-align: center;
+        font-size: 30px;
+        color: #1e1e1e;
+    }
+
+    .timer {
+        font-size: 40px;
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        text-align: left;
+        color: #1e1e1e;
+    }
+
+    .test {
+        font-size: 40px;
+        position: absolute;
+        bottom: 30px;
+        left: 0;
+        text-align: left;
+        color: #1e1e1e;
+    }
+
+    .speed {
+        font-size: 40px;
+        position: absolute;
+        bottom: 30px;
+        text-align: center;
+        color: #1e1e1e;
+    }
+
+    .bot {
+        width: 170px;
+        text-align: center;
+        bottom: 30px;
+        left: 50%;
+        position: absolute;
+    }
+
+    .speedHor {
+        padding-bottom: 2px;
+        width: 100px;
+        position: absolute;
+        color: #1e1e1e;
+        font-size: 30px;
+        right: 0;
+        bottom: 0;
+    }
 }

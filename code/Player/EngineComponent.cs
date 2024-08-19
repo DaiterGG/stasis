@@ -1,4 +1,7 @@
 using System;
+
+
+namespace Sandbox;
 public sealed class EngineComponent : Component
 {
 	MainTimer TIMER;
@@ -10,14 +13,15 @@ public sealed class EngineComponent : Component
 	[Property] Rigidbody rigid;
 	[Property, Range( 0.9f, 1f, 0.001f ), DefaultValue( 0.985f )] public float horizontalDumping;
 	[Property, Range( 0, 500f ), DefaultValue( 0f )] public float bodyOffsetZ;
-	[Property, Range( 0, 2000f ), DefaultValue( 1400f )] public float turnSpeed;
-	[Property, Range( 0, 20000f ), DefaultValue( 60f )] public float gravity;
+	[Property, Range( 0, 20000f ), DefaultValue( 16000f )] public float turnSpeed;
+	[Property, Range( 0, 20000f ), DefaultValue( 40f )] public float gravity;
 	[Property, Range( 0, 2000f ), DefaultValue( 100f )] public float gainStep;
 	[Property, Range( 0, 500f ), DefaultValue( 100f )] public float settleStep;
+	[Property] public Transform turnVector;
 	//[Property, Range( 0, 50000f ), DefaultValue( 1000f )] readonly float maxSpeed;
 	public float gain { get; private set; } = 0f;
 	int invertVert = -1;
-	float maxGainGravityScale = 1.08f;
+	float maxGainGravityScale = 1.06f;
 	float maxGain { get { return gravity * maxGainGravityScale; } }
 	//exp
 	[Property, Range( 1f, 300f, 1f ), DefaultValue( 1f )] readonly float boost = 1.1f;
@@ -45,8 +49,8 @@ public sealed class EngineComponent : Component
 		{
 
 
-			var dx = Mouse.Delta.x == 0 ? 0 : Mouse.Delta.x / Math.Abs( Mouse.Delta.x ) * 1400f * 0.1f;
-			var dy = Mouse.Delta.y == 0 ? 0 : Mouse.Delta.y / Math.Abs( Mouse.Delta.y ) * 1400f;
+			var dx = Mouse.Delta.x == 0 ? 0 : Mouse.Delta.x / Math.Abs( Mouse.Delta.x ) * 17000f;
+			var dy = Mouse.Delta.y == 0 ? 0 : Mouse.Delta.y / Math.Abs( Mouse.Delta.y ) * 17000f;
 			var dz = 0f;
 
 			if ( Input.Down( "Left" ) )
@@ -72,7 +76,7 @@ public sealed class EngineComponent : Component
 			}
 			if ( !Input.Down( "Up" ) && !Input.Down( "Down" ) )
 			{
-				gain -= (gain - gravity) / settleStep;
+				//gain -= (gain - gravity) / settleStep;
 			}
 			if ( !isRunning )
 			{
@@ -90,13 +94,14 @@ public sealed class EngineComponent : Component
 			//if (gainAng.y * rigid.Velocity.y >0) gainAng *= new Vector3(1, 0, 1);
 			//}
 			rigid.ApplyImpulse( gainAng );
+
+			//There is a giant trigger collider box that fix force applied to model 
 			rigid.ApplyTorque( new Vector3( dx, dy * invertVert, dz ) * Transform.Rotation );
 			//experimental
 			//rigid.ApplyForce( new Vector3(rigid.Velocity.x * boost, rigid.Velocity.y * boost, 0 ) * Transform.Rotation);
-
 		}
 
-		//*
+		/*
 		deltaZ -= Transform.Position.z;
 		if ( deltaZ < 0 ) deltaZ = 0;
 		else deltaZ = Math.Abs( deltaZ ) * boost;
@@ -105,7 +110,7 @@ public sealed class EngineComponent : Component
 			, Math.Sign( rigid.Velocity.y ) * deltaZ
 			, 0 ) * Transform.Rotation );
 		deltaZ = Transform.Position.z;
-		//*/
+		*/
 
 		GAMEUI.SpeedMain = ((int)rigid.Velocity.Length).ToString();
 		GAMEUI.SpeedVert = ((int)rigid.Velocity.z).ToString();

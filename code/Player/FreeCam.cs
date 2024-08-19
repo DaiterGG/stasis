@@ -1,5 +1,6 @@
-using Sandbox;
 using System;
+
+namespace Sandbox;
 public sealed class FreeCam : Component
 {
 	[Property] GameObject thirdCam;
@@ -17,9 +18,9 @@ public sealed class FreeCam : Component
 	{
 		base.OnEnabled();
 
-		Transform.Position = thirdCam.Transform.Position + new Vector3(0,0,10);
+		Transform.Position = thirdCam.Transform.Position + new Vector3( 0, 0, 10 );
 		Transform.Rotation = thirdCam.Transform.Rotation;
-		ENGINE.inputActive = false; 
+		ENGINE.inputActive = false;
 	}
 	protected override void OnDisabled()
 	{
@@ -35,11 +36,11 @@ public sealed class FreeCam : Component
 		{ //W or forward		
 			Transform.Position += new Vector3( force * mult, 0, 0 ) * Transform.Rotation;
 		}
-		if (Input.Down ( "Down" ) )
+		if ( Input.Down( "Down" ) )
 		{
 			Transform.Position += new Vector3( force * mult * -1, 0, 0 ) * Transform.Rotation;
 		}
-		if ( Input.Down ( "Left"))
+		if ( Input.Down( "Left" ) )
 		{
 			Transform.Position += new Vector3( 0, force * mult, 0 ) * Transform.Rotation;
 		}
@@ -47,15 +48,16 @@ public sealed class FreeCam : Component
 		{
 			Transform.Position += new Vector3( 0, force * mult * -1, 0 ) * Transform.Rotation;
 		}
-		if( Input.Down( "Jump" ) )
+		if ( Input.Down( "Jump" ) )
 		{
-			Transform.Position += new Vector3( 0, 0,force * mult);
+			Transform.Position += new Vector3( 0, 0, force * mult );
 		}
-		if( Input.Down( "Crouch"))
+		if ( Input.Down( "Crouch" ) )
 		{
-			Transform.Position += new Vector3( 0, 0,force * mult * -1);
+			Transform.Position += new Vector3( 0, 0, force * mult * -1 );
 		}
-		if(Input.Down( "Sprint")) {
+		if ( Input.Down( "Sprint" ) )
+		{
 			mult = 3f;
 		}
 		else
@@ -65,7 +67,7 @@ public sealed class FreeCam : Component
 
 		var ee = Transform.Rotation.Angles();
 		ee += Input.AnalogLook * Time.Delta * 3f;
-		if (Math.Abs(ee.pitch)> 90) ee.pitch = 90 * Math.Sign(ee.pitch);
+		if ( Math.Abs( ee.pitch ) > 90 ) ee.pitch = 90 * Math.Sign( ee.pitch );
 		ee.roll = 0;
 
 		Transform.Rotation = ee.ToRotation();

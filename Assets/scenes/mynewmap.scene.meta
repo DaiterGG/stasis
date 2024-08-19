@@ -1,0 +1,19 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "Stasis Map Template",
+      "Type": "asset",
+      "Org": "move",
+      "Ident": "mynewmap",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "Metadata": {
+        "SingleAssetSource": "scenes/mynewmap.scene"
+      }
+    }
+  }
+}
