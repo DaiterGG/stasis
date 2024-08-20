@@ -3,29 +3,38 @@
 namespace Sandbox.Data;
 public class FileController
 {
-	public FileController()
-	{
-	}
+	public Settings set { get; set; }
+	public List<MapData> maps { get; set; }
+	string s = "Settings.json";
+	string m = "Maps.json";
 	public void ReadFiles()
 	{
-		if ( FileSystem.Data.FileExists( "Settings.json" ) )
+		if ( FileSystem.Data.FileExists( s ) )
 		{
-
+			set = FileSystem.Data.ReadJson<Settings>( s );
 		}
 		else
 		{
 			set = new Settings();
-			FileSystem.Data.WriteAllText( "Settings.json", ObjToJson( set ) );
+			FileSystem.Data.WriteAllText( s, ObjToJson( set ) );
 		}
-		if ( FileSystem.Data.FileExists( "Maps.json" ) )
+		if ( FileSystem.Data.FileExists( m ) )
 		{
-
+			maps = JsonSerializer.Deserialize<List<MapData>>( FileSystem.Data.ReadAllText( m ) );
 		}
 		else
 		{
-			maps = new List<Map>();
-			FileSystem.Data.WriteAllText( "Maps.json", ObjToJson( maps ) );
+			maps = new List<MapData>();
+			FileSystem.Data.WriteAllText( m, ObjToJson( maps ) );
 		}
+	}
+	public void SaveMaps()
+	{
+		FileSystem.Data.WriteAllText( s, ObjToJson( maps ) );
+	}
+	public void SaveSettings()
+	{
+		FileSystem.Data.WriteAllText( s, ObjToJson( set ) );
 	}
 	private string ObjToJson( object o )
 	{
@@ -34,6 +43,11 @@ public class FileController
 			WriteIndented = true
 		} );
 	}
-	public Settings set { get; set; }
-	public List<Map> maps { get; set; }
+	public void MapInfoSerialize( Info info )
+	{
+		foreach ( var item in maps )
+		{
+
+		}
+	}
 }

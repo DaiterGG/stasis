@@ -10,7 +10,6 @@ public sealed class SpinController : Component
 	GameObject PLAYEROBJ;
 	MainTimer TIMER;
 	float speedMult = 0.2f;
-	float speed;
 	public bool isAttached;
 	List<GameObject> blades = new List<GameObject>();
 	protected override void OnAwake()

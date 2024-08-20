@@ -6,6 +6,6 @@ public class Settings
 		MouseInvertX = false;
 		MouseInvertY = false;
 	}
-	public bool MouseInvertX { get; set; } = false;
-	public bool MouseInvertY { get; set; } = false;
+	public bool MouseInvertX { get; set; }
+	public bool MouseInvertY { get; set; }
 }

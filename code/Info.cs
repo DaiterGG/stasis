@@ -14,6 +14,11 @@ public sealed class Info : Component
 	public Dictionary<string, string> Author { get; set; }
 
 	[Group( "General" ),
+			Property,
+			Description( "Check out discord for more info" )]
+	public int DifficultyTier { get; set; } = 1;
+
+	[Group( "General" ),
 		Property,
 		Description( "Version of the map, keep it in the format of x.y" )]
 	public string Version { get; set; } = "1.0";

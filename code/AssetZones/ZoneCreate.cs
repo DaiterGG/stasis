@@ -11,16 +11,11 @@ public sealed class ZoneCreate : Component
 	{
 		SNG = Sng.Inst;
 	}
-	protected override void OnStart()
-	{
-		base.OnStart();
-		MapInit();
-	}
 	public void MapInit()
 	{
-		base.OnStart();
 		foreach ( var zone in SNG.EndZones )
 		{
+			//TODO
 			DecorateBox( zone );
 		}
 	}
@@ -32,9 +27,6 @@ public sealed class ZoneCreate : Component
 		var decor = box.Components.Get<AutoDecor>();
 		if ( decor == null ) return;
 		if ( !decor.AutoDecorate ) return;
-
-
-
 	}
 	/*public void LegacyZoneCreate()
             EndZones.Add( EndZonePrefab.Clone( GameObject, zone.Transform.Position, zone.Transform.Rotation, zone.Transform.Scale ) );

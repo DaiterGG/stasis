@@ -98,6 +98,12 @@
           "KeyboardCode": "G",
           "GamepadCode": "None",
           "GroupName": "Other"
+        },
+        {
+          "Name": "attack1",
+          "KeyboardCode": "MOUSE1",
+          "GamepadCode": "None",
+          "GroupName": "Other"
         }
       ],
       "__guid": "59de6fb9-5bc2-4da4-9a0c-4f98496b6e70"

@@ -3,7 +3,7 @@ using System;
 namespace Sandbox;
 public sealed class FreeCam : Component
 {
-	[Property] GameObject thirdCam;
+	[Property] readonly GameObject thirdCam;
 	readonly float force = 20f;
 	float mult = 1f;
 	MainTimer TIMER;

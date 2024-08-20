@@ -22,6 +22,12 @@
             "component_id": "744885b3-c930-4a06-a8f0-853db36a995a",
             "go": "75eb26c9-d9fc-4205-91a2-bebac64f876d",
             "component_type": "PlayerComp"
+          },
+          "ZoneC": {
+            "_type": "component",
+            "component_id": "e81f93ce-e5b4-41d3-8aed-703f6dd0c6b0",
+            "go": "138ff680-c485-4250-9018-21dfe7b269b5",
+            "component_type": "ZoneCreate"
           }
         },
         {

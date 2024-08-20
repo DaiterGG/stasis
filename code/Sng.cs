@@ -8,6 +8,7 @@ public sealed class Sng : Component
 	public MainTimer Timer;
 	[Property] public MenuController MenuC;
 	[Property] public PlayerComp Player;
+	[Property] public ZoneCreate ZoneC;
 	public static Sng Inst { get { return _sng; } }
 	public GameObject StartPoint;
 
@@ -22,44 +23,33 @@ public sealed class Sng : Component
 		set { _spawnPoint = value; }
 	}
 	public List<GameObject> EndZones;
+	public Info MapInfo;
 
 	public FileController File;
 	protected override void OnAwake()
 	{
-		base.OnAwake();
 		_sng = this;
-		//LoadNewMap( "move/stasis_playground_scene" );
-		MapInit();
+		base.OnAwake();
 		File = new FileController();
 		File.ReadFiles();
-
+		//LoadNewMap( "move/stasis_playground_scene" );
+		MapInit();
 	}
 	protected override void OnStart()
 	{
 		base.OnStart();
-		SpawnPlayer();
 	}
 
-	//unused
-	private void FindMaps()
-	{
-		var maps = FileSystem.Mounted.FindFile( "/", "*.vpk" );
-		foreach ( var map in maps )
-		{
-			//	Log.Info( map );
-		}
-
-	}
 	private void MapInit()
 	{
 		Timer = new MainTimer();
 		StartPoint = null;
+		MapInfo = null;
 		SpawnPoint = null;
 		EndZones = new List<GameObject>();
 		var heap = Scene.GetAllObjects( true );
 		foreach ( var obj in heap )
 		{
-			//Log.Info( obj.Name );
 			if ( obj.Name == "info_player_spawn" )
 			{
 				SpawnPoint = obj;
@@ -72,10 +62,23 @@ public sealed class Sng : Component
 			{
 				EndZones.Add( obj );
 			}
+			else if ( obj.Name == "Map Info" )
+			{
+				MapInfo = obj.Components.Get<Info>();
+			}
 		}
-		if ( SpawnPoint == null ) Log.Warning( "Spawn not found" );
-		if ( StartPoint == null ) Log.Warning( "Start not found" );
+		if ( MapInfo == null ) Log.Warning( "Info not found" );
+		else File.MapInfoSerialize( MapInfo );
+
 		if ( EndZones.Count == 0 ) Log.Warning( "End zone not found" );
+		else ZoneC.MapInit();
+
+		if ( StartPoint == null ) Log.Warning( "Start not found" );
+		else
+		{
+			MenuC.SetCameraLook();
+			SpawnPlayer();
+		}
 	}
 	protected override void OnFixedUpdate()
 	{
@@ -103,8 +106,6 @@ public sealed class Sng : Component
 	{
 		Scene.LoadFromFile( mapPath );
 		MapInit();
-		SpawnPlayer();
-		MenuC.SetCameraLook();
 	}
 	public void SpawnPlayer()
 	{
@@ -117,6 +118,7 @@ public sealed class Sng : Component
 	{
 		Player.Transform.Position = pos.Position;
 		Player.Transform.Rotation = pos.Rotation;
+		Player.Transform.ClearInterpolation();
 		Player.Engine.ResetPos( false );
 	}
 	public void EndZoneEnter( GameObject go, Collider cof )
@@ -131,6 +133,16 @@ public sealed class Sng : Component
 		Player.CameraC.FreeCam.Enabled = false;
 		Player.CameraC.UpdateCam();
 		Player.SpinC.RestartSpin();
+	}
+	//unused
+	private void FindMaps()
+	{
+		var maps = FileSystem.Mounted.FindFile( "/", "*.vpk" );
+		foreach ( var map in maps )
+		{
+			//	Log.Info( map );
+		}
+
 	}
 
 }

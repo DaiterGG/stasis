@@ -1,6 +1,4 @@
-using Sandbox.Data;
 using System;
-using System.Text.Json;
 namespace Sandbox;
 
 public sealed class MenuController : Component
@@ -96,18 +94,6 @@ public sealed class MenuController : Component
 
 	public void MapSelect()
 	{
-
-		//FileSystem.Data.WriteAllText( "userdata.txt", "" );
-		var contr = new FileController();
-
-		Log.Info( JsonSerializer.Serialize( contr, new JsonSerializerOptions
-		{
-			WriteIndented = true
-		} ) );
-		FileSystem.Data.WriteJson( "userdata.txt", contr );
-		//Log.Info( contr.set.MouseInvertX.ToString() );
-		//	Log.Info( FileSystem.Data.GetFullPath( "userdata" ) );
-
 		Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis_map", delegate ( Package p )
 		{
 			Scene.LoadFromFile( p.FullIdent );
