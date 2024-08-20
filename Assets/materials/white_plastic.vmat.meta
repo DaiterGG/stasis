@@ -2,17 +2,17 @@
   "publish": {
     "Enabled": true,
     "ProjectConfig": {
-      "Title": "Stasis Map Template",
-      "Type": "asset",
+      "Title": "white_plastic1",
+      "Type": "material",
       "Org": "move",
-      "Ident": "mynewmap",
+      "Ident": "white_plastic1",
       "Schema": 0,
       "IncludeSourceFiles": true,
       "Resources": null,
       "PackageReferences": null,
       "EditorReferences": null,
       "Metadata": {
-        "SingleAssetSource": "scenes/mynewmap.scene"
+        "SingleAssetSource": "materials/white_plastic.vmat"
       }
     }
   }

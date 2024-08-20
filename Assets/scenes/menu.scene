@@ -11,13 +11,7 @@
         {
           "__type": "Sandbox.Sng",
           "__guid": "b61062db-fe84-4099-b23c-7960ed71c12e",
-          "gameUI": {
-            "_type": "component",
-            "component_id": "bb7b5cbc-7216-42ad-863d-df3cb5af6e4d",
-            "go": "5f893dae-6a0c-4a91-9271-47742568167f",
-            "component_type": "IngameUI"
-          },
-          "menuUI": {
+          "MenuC": {
             "_type": "component",
             "component_id": "e535a0d9-b6da-4e83-9382-76dfb6f69301",
             "go": "6c506e2a-4776-4955-8734-9de87f444cb6",
@@ -29,6 +23,10 @@
             "go": "75eb26c9-d9fc-4205-91a2-bebac64f876d",
             "component_type": "PlayerComp"
           }
+        },
+        {
+          "__type": "Sandbox.DontDestroy",
+          "__guid": "9fb01cf6-11d0-4a7b-9151-d44a0bc6650c"
         }
       ]
     },
@@ -45,12 +43,22 @@
             "_type": "gameobject",
             "go": "24ef250d-05e0-4222-af3e-daea8e553089"
           },
-          "Menu": {
+          "IngameUI": {
+            "_type": "component",
+            "component_id": "bb7b5cbc-7216-42ad-863d-df3cb5af6e4d",
+            "go": "5f893dae-6a0c-4a91-9271-47742568167f",
+            "component_type": "IngameUI"
+          },
+          "MenuUI": {
             "_type": "component",
             "component_id": "a61628c9-9937-4337-b49f-9de2ce3e194b",
             "go": "c2b2e3f1-e13b-4bc4-88d9-ee970a9f89aa",
             "component_type": "MainMenu"
           }
+        },
+        {
+          "__type": "Sandbox.DontDestroy",
+          "__guid": "82815329-4038-4225-9f6b-493b6cf71183"
         }
       ],
       "Children": [
@@ -185,6 +193,12 @@
             "_type": "gameobject",
             "go": "3c2490ef-54a0-49bb-8f13-490e40aa51d1"
           },
+          "CameraC": {
+            "_type": "component",
+            "component_id": "b2d4e933-6ed4-4ed1-93ed-281ad94b95a7",
+            "go": "b85abaea-5c3e-427c-953a-7d73b892723a",
+            "component_type": "CameraControl"
+          },
           "Engine": {
             "_type": "component",
             "component_id": "140f62ae-903c-464f-a94b-cebc521c6659",
@@ -197,6 +211,10 @@
             "go": "b5c79e64-4919-4ff2-b640-e07aec2985bf",
             "component_type": "SpinController"
           }
+        },
+        {
+          "__type": "Sandbox.DontDestroy",
+          "__guid": "c740b5dc-e6a6-4dd9-818c-83b27d32ab6c"
         }
       ],
       "Children": [
@@ -859,6 +877,10 @@
             "_type": "gameobject",
             "go": "38aa241a-3042-49c1-b050-af126a31941b"
           }
+        },
+        {
+          "__type": "Sandbox.DontDestroy",
+          "__guid": "db4f7d1a-6f70-41ff-8f69-3c6852440f07"
         }
       ],
       "Children": [
@@ -866,6 +888,7 @@
           "__guid": "4a8d7747-0225-4371-9bca-a5a3f8919134",
           "Flags": 0,
           "Name": "End zone prefab",
+          "Position": "0,0,128.186",
           "Components": [
             {
               "__type": "Sandbox.BoxCollider",

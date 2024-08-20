@@ -1,14 +1,19 @@
 namespace Sandbox;
 public sealed class CameraControl : Component
 {
-	[Property] GameObject FreeCam;
+	EngineComponent ENGINE;
+	[Property] public GameObject FreeCam;
 	[Property] List<GameObject> cameras;
 	int iEnabled = 0;
 	bool IsFreeCam = false;
+	protected override void OnAwake()
+	{
+		ENGINE = Sng.Inst.Player.Engine;
+	}
 	protected override void OnStart()
 	{
-		EnableCam();
 		base.OnStart();
+		UpdateCam();
 	}
 	protected override void OnFixedUpdate()
 	{
@@ -16,24 +21,20 @@ public sealed class CameraControl : Component
 		{
 			iEnabled += 1;
 			if ( iEnabled >= cameras.Count ) iEnabled = 0;
-			EnableCam();
+			UpdateCam();
 		}
-		if ( Input.Pressed( "FreeCam" ) )
+		if ( Input.Pressed( "FreeCamera" ) )
 		{
 			FreeCam.Enabled = !FreeCam.Enabled;
-			EnableCam();
-		}
-		if ( Input.Pressed( "Restart" ) )
-		{
-			FreeCam.Enabled = false;
-			EnableCam();
+			UpdateCam();
+			ENGINE.UpdateInput();
 		}
 
 	}
-	void EnableCam()
+	public void UpdateCam()
 	{
 		var active = iEnabled;
-		if ( FreeCam.Enabled ) //not necessary because of cameras priority queue
+		if ( FreeCam.Enabled )
 		{
 			active = -1;
 		}

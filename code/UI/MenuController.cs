@@ -1,9 +1,12 @@
+using Sandbox.Data;
 using System;
+using System.Text.Json;
 namespace Sandbox;
 
 public sealed class MenuController : Component
 {
-	[Property] public MainMenu Menu { get; set; }
+	[Property] public MainMenu MenuUI { get; set; }
+	[Property] public IngameUI IngameUI { get; set; }
 	[Property] public GameObject Camera { get; set; }
 	public float pitchOffset = -11.3f;
 	public float yawOffset = 13.111f;
@@ -11,7 +14,7 @@ public sealed class MenuController : Component
 	public Vector3 CameraPos;
 	public bool IsGaming = false;
 	GameObject BODY;
-	IngameUI GAMEUI;
+	SpinController SPINC;
 	EngineComponent ENGINE;
 	Sng SNG;
 
@@ -19,9 +22,9 @@ public sealed class MenuController : Component
 	{
 		base.OnAwake();
 		SNG = Sng.Inst;
-		BODY = Sng.Inst.Player.Body;
-		GAMEUI = Sng.Inst.gameUI;
-		ENGINE = Sng.Inst.Player.Engine;
+		SPINC = SNG.Player.SpinC;
+		BODY = SNG.Player.Body;
+		ENGINE = SNG.Player.Engine;
 	}
 	protected override void OnStart()
 	{
@@ -62,20 +65,25 @@ public sealed class MenuController : Component
 	public void Play()
 	{
 		Camera.Enabled = false;
-		ENGINE.inputActive = true;
-		GAMEUI.GameObject.Enabled = true;
-		Menu.Enabled = false;
+		IngameUI.GameObject.Enabled = true;
+		MenuUI.Enabled = false;
 		IsGaming = true;
+		ShowInfo();
 		SNG.ResetPlayer();
 	}
 	public void OpenMenu()
 	{
-		Camera.Enabled = true;
-		ENGINE.inputActive = false;
-		GAMEUI.GameObject.Enabled = false;
-		Menu.Enabled = true;
+		SNG.SpawnPlayer();
+		SPINC.RestartSpin();
+		IngameUI.GameObject.Enabled = false;
+		MenuUI.Enabled = true;
 		IsGaming = false;
-
+		ENGINE.UpdateInput();
+		Camera.Enabled = true;
+	}
+	public void Controls()
+	{
+		Game.Overlay.ShowBinds();
 	}
 	public void Options()
 	{
@@ -83,26 +91,52 @@ public sealed class MenuController : Component
 		Game.Overlay.ShowPackageSelector( "options", delegate ( Package p )
 		{
 			Log.Info( $"Package selected: {p.Url}" );
-
-			Log.Info( "gf" );
 		} );
-
-		var maps = FileSystem.Mounted.FindFile( "maps", "*.vpk" );
-		foreach ( var map in maps )
-		{
-			Log.Info( map );
-		}
-		var str = Cloud.Asset( "move.play" );
-		Log.Info( str );
-		Scene.LoadFromFile( str );
 	}
 
 	public void MapSelect()
 	{
 
+		//FileSystem.Data.WriteAllText( "userdata.txt", "" );
+		var contr = new FileController();
+
+		Log.Info( JsonSerializer.Serialize( contr, new JsonSerializerOptions
+		{
+			WriteIndented = true
+		} ) );
+		FileSystem.Data.WriteJson( "userdata.txt", contr );
+		//Log.Info( contr.set.MouseInvertX.ToString() );
+		//	Log.Info( FileSystem.Data.GetFullPath( "userdata" ) );
+
+		Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis_map", delegate ( Package p )
+		{
+			Scene.LoadFromFile( p.FullIdent );
+
+		} );
 	}
 	public void Quit()
 	{
 		Game.Close();
+	}
+	public void ShowInfo()
+	{
+		IngameUI.ShowInfo( ControlsInfo() );
+	}
+	private string ControlsInfo()
+	{
+		var w = Input.GetButtonOrigin( "Up" ).ToUpper();
+		var s = Input.GetButtonOrigin( "Down" ).ToUpper();
+		var a = Input.GetButtonOrigin( "Left" ).ToUpper();
+		var d = Input.GetButtonOrigin( "Right" ).ToUpper();
+		var p = Input.GetButtonOrigin( "SelfDestruct" ).ToUpper();
+		var g = Input.GetButtonOrigin( "Back" ).ToUpper();
+		var c = Input.GetButtonOrigin( "FreeCamera" ).ToUpper();
+		return $"{g} - Back to menu\n" +
+			$"{w} {a} {s} {d} - To move\n" +
+			$"{g} - Reset\n" +
+			$"{p} - Self destruct\n" +
+			$"1-3 - Change view\n" +
+			$"{c} - Free camera\n";
+
 	}
 }

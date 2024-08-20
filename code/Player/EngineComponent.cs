@@ -4,10 +4,12 @@ using System;
 namespace Sandbox;
 public sealed class EngineComponent : Component
 {
-	MainTimer TIMER;
 	IngameUI GAMEUI;
+	MenuController MENUC;
+	GameObject FREECAM;
+	SpinController SPINC;
 
-	public bool inputActive;
+	public bool inputActive { get; private set; }
 	public bool isRunning;
 	public int progress;
 	[Property] Rigidbody rigid;
@@ -29,22 +31,35 @@ public sealed class EngineComponent : Component
 	protected override void OnAwake()
 	{
 		base.OnAwake();
-		TIMER = Sng.Inst.Timer;
-		GAMEUI = Sng.Inst.gameUI;
-
+		FREECAM = Sng.Inst.Player.CameraC.FreeCam;
+		SPINC = Sng.Inst.Player.SpinC;
+		MENUC = Sng.Inst.MenuC;
+		GAMEUI = MENUC.IngameUI;
 	}
 	protected override void OnStart()
 	{
 		base.OnStart();
 		ResetPos( true );
 	}
-
+	public void UpdateInput()
+	{
+		//Log.Info( FREECAM.Enabled + " " + !SPINC.isAttached + " " + !MENUC.IsGaming );
+		if ( FREECAM.Enabled || !SPINC.isAttached || !MENUC.IsGaming )
+		{
+			inputActive = false;
+		}
+		else
+			inputActive = true;
+	}
 	protected override void OnFixedUpdate()
 	{
-
+		//gravity
 		if ( !isRunning ) rigid.ApplyImpulse( new Vector3( 0, 0, gravity * -1 * .05f ) );
 		else rigid.ApplyImpulse( new Vector3( 0, 0, gravity * -1 ) );
+
 		rigid.Velocity *= horizontalDumping;
+
+		//input
 		if ( inputActive )
 		{
 
@@ -70,10 +85,8 @@ public sealed class EngineComponent : Component
 				if ( !isRunning ) engStart();
 				else gain += gravity / gainStep;
 			}
-			else
-			{
-				if ( !isRunning ) engStart( false );
-			}
+			else if ( !isRunning ) engStart( false );
+
 			if ( !Input.Down( "Up" ) && !Input.Down( "Down" ) )
 			{
 				//gain -= (gain - gravity) / settleStep;
@@ -86,6 +99,7 @@ public sealed class EngineComponent : Component
 			if ( gain < maxGain * -1 ) gain = maxGain * -1;
 
 			Vector3 gainAng = new Vector3( 0, 0, gain ) * Transform.Rotation;
+			rigid.ApplyImpulse( gainAng );
 			//if horizontal velocity is too high
 			//if (new Vector3(rigid.Velocity.x,rigid.Velocity.y, 0).Length > maxSpeed)
 			//{
@@ -93,7 +107,6 @@ public sealed class EngineComponent : Component
 			//if (gainAng.x * rigid.Velocity.x >0) gainAng *= new Vector3(0, 1, 1);
 			//if (gainAng.y * rigid.Velocity.y >0) gainAng *= new Vector3(1, 0, 1);
 			//}
-			rigid.ApplyImpulse( gainAng );
 
 			//There is a giant trigger collider box that fix force applied to model 
 			rigid.ApplyTorque( new Vector3( dx, dy * invertVert, dz ) * Transform.Rotation );
@@ -111,7 +124,14 @@ public sealed class EngineComponent : Component
 			, 0 ) * Transform.Rotation );
 		deltaZ = Transform.Position.z;
 		*/
-
+		if ( !isRunning )
+		{
+			GAMEUI.Gain = ((int)(progress / maxGainGravityScale)).ToString();
+		}
+		else
+		{
+			GAMEUI.Gain = ((int)(gain / maxGain * 100f)).ToString();
+		}
 		GAMEUI.SpeedMain = ((int)rigid.Velocity.Length).ToString();
 		GAMEUI.SpeedVert = ((int)rigid.Velocity.z).ToString();
 		GAMEUI.SpeedHor = ((int)Math.Sqrt(
@@ -131,6 +151,7 @@ public sealed class EngineComponent : Component
 		GameObject.Transform.Rotation = GameObject.Parent.Transform.Rotation;
 		rigid.Velocity = new Vector3( 0 );
 		rigid.AngularVelocity = new Vector3( 0 );
+		GameObject.Transform.ClearInterpolation();
 		if ( engineRestart )
 		{
 			engOff();
@@ -141,7 +162,6 @@ public sealed class EngineComponent : Component
 	{
 		progress = 0;
 		isRunning = false;
-		TIMER.IsAirborne = false;
 		gain = 0f;
 	}
 	public void engStart( bool increase = true )
@@ -152,7 +172,6 @@ public sealed class EngineComponent : Component
 		{
 			progress = 100;
 			isRunning = true;
-			TIMER.IsAirborne = true;
 			gain = gravity;
 		}
 	}

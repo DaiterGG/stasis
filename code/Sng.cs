@@ -1,28 +1,17 @@
+using Sandbox.Data;
+
 namespace Sandbox;
 public sealed class Sng : Component
 {
 	private static Sng _sng;
 
-	[Property] public IngameUI gameUI;
-	[Property] public MenuController menuUI;
+	public MainTimer Timer;
+	[Property] public MenuController MenuC;
 	[Property] public PlayerComp Player;
 	public static Sng Inst { get { return _sng; } }
 	public GameObject StartPoint;
 
 	private GameObject _spawnPoint;
-	protected override void OnAwake()
-	{
-		base.OnAwake();
-		_sng = this;
-		FindMaps();
-		MapInit();
-	}
-	protected override void OnStart()
-	{
-		base.OnStart();
-		SpawnPlayer();
-	}
-
 	public GameObject SpawnPoint
 	{
 		get
@@ -34,8 +23,24 @@ public sealed class Sng : Component
 	}
 	public List<GameObject> EndZones;
 
-	public MainTimer Timer;
+	public FileController File;
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		_sng = this;
+		//LoadNewMap( "move/stasis_playground_scene" );
+		MapInit();
+		File = new FileController();
+		File.ReadFiles();
 
+	}
+	protected override void OnStart()
+	{
+		base.OnStart();
+		SpawnPlayer();
+	}
+
+	//unused
 	private void FindMaps()
 	{
 		var maps = FileSystem.Mounted.FindFile( "/", "*.vpk" );
@@ -68,57 +73,51 @@ public sealed class Sng : Component
 				EndZones.Add( obj );
 			}
 		}
-		if ( SpawnPoint == null ) Log.Info( "Spawn not found" );
-		if ( StartPoint == null ) Log.Info( "Start not found" );
-		if ( EndZones.Count == 0 ) Log.Info( "End zone not found" );
+		if ( SpawnPoint == null ) Log.Warning( "Spawn not found" );
+		if ( StartPoint == null ) Log.Warning( "Start not found" );
+		if ( EndZones.Count == 0 ) Log.Warning( "End zone not found" );
 	}
-	bool nextFrame = false;
 	protected override void OnFixedUpdate()
 	{
-		if ( nextFrame ) //player transform is not updating correctly on teleport 
-		{
-			nextFrame = false;
-			Player.SpinC.RestartSpin();
-		}
 		base.OnFixedUpdate();
-		if ( Input.Pressed( "Restart" ) && menuUI.IsGaming )
+		if ( MenuC.IsGaming )
 		{
-			ResetPlayer();
-			Player.SpinC.RestartSpin();
-			nextFrame = true;
+
+			if ( Input.Pressed( "Restart" ) )
+			{
+				ResetPlayer();
+			}
+			if ( Input.Pressed( "SelfDestruct" ) )
+			{
+				Player.SpinC.SpinCollision();
+			}
+			if ( Input.Pressed( "Back" ) )
+			{
+				MenuC.OpenMenu();
+			}
+			Timer.UpdateTimer();
+			MenuC.IngameUI.Timer = Timer.TimerStr;
 		}
-		if ( Input.Pressed( "Jump" ) && menuUI.IsGaming )
-		{
-			Player.SpinC.SpinCollision();
-		}
-		if ( Input.Pressed( "Test" ) )
-		{
-			LoadNewMap( "scenes/mapload.scene" );
-		}
-		Timer.UpdateTimer();
-		gameUI.Timer = Timer.TimerStr;
 	}
 	public void LoadNewMap( string mapPath )
 	{
 		Scene.LoadFromFile( mapPath );
 		MapInit();
 		SpawnPlayer();
-		//menuUI.SetCameraLook();
+		MenuC.SetCameraLook();
 	}
-	private void SpawnPlayer()
+	public void SpawnPlayer()
 	{
-		Player.GameObject.Transform.Position =
-			SpawnPoint.Transform.Position;
-		Player.GameObject.Transform.Rotation = SpawnPoint.Transform.Rotation;
+		Player.Transform.Position = SpawnPoint.Transform.Position;
+		Player.Transform.Rotation = SpawnPoint.Transform.Rotation;
+		Player.Transform.ClearInterpolation();
 		Player.Engine.ResetPos( true );
-		Log.Info( "Player Spawned" );
 	}
 	public void TeleportPlayer( GameTransform pos )
 	{
-		Player.GameObject.Transform.Position = pos.Position;
-		Player.GameObject.Transform.Rotation = pos.Rotation;
+		Player.Transform.Position = pos.Position;
+		Player.Transform.Rotation = pos.Rotation;
 		Player.Engine.ResetPos( false );
-		Log.Info( "Player Teleported" );
 	}
 	public void EndZoneEnter( GameObject go, Collider cof )
 	{
@@ -126,10 +125,12 @@ public sealed class Sng : Component
 	}
 	public void ResetPlayer()
 	{
+		Player.Engine.UpdateInput();
 		TeleportPlayer( StartPoint.Transform );
 		Timer.TimerReset();
-		Player.Engine.inputActive = true;
-
+		Player.CameraC.FreeCam.Enabled = false;
+		Player.CameraC.UpdateCam();
+		Player.SpinC.RestartSpin();
 	}
 
 }

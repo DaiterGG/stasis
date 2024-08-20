@@ -20,12 +20,11 @@ public sealed class FreeCam : Component
 
 		Transform.Position = thirdCam.Transform.Position + new Vector3( 0, 0, 10 );
 		Transform.Rotation = thirdCam.Transform.Rotation;
-		ENGINE.inputActive = false;
+		Transform.ClearInterpolation();
 	}
 	protected override void OnDisabled()
 	{
 		base.OnDisabled();
-		ENGINE.inputActive = true;
 	}
 	protected override void OnUpdate()
 	{
@@ -71,5 +70,6 @@ public sealed class FreeCam : Component
 		ee.roll = 0;
 
 		Transform.Rotation = ee.ToRotation();
+		Transform.ClearInterpolation();
 	}
 }

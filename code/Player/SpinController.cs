@@ -4,7 +4,7 @@ namespace Sandbox;
 
 public sealed class SpinController : Component
 {
-	[Property] Rigidbody PropRig;
+	[Property] public Rigidbody PropRig;
 	[Property, Range( 0, 10000f, 100f ), DefaultValue( 1000f )] public float BladeGravity;
 	EngineComponent ENGINE;
 	GameObject PLAYEROBJ;
@@ -44,23 +44,14 @@ public sealed class SpinController : Component
 			var rig = x.Components.Get<Rigidbody>();
 			rig.ApplyImpulse( new Vector3( 0, 800f * (ENGINE.progress + 5f) / 100f, 100f ) * x.Transform.Rotation );
 			rig.ApplyTorque( new Vector3( 4000f ) );
+			x.Transform.ClearInterpolation();
 		} );
 		isAttached = false;
-		ENGINE.inputActive = false;
+		ENGINE.UpdateInput();
 	}
 	public void RestartSpin()
 	{
 		isAttached = true;
-		blades.ForEach( x =>
-		{
-			x.Parent = PropRig.GameObject;
-			var rig = x.Components.Get<Rigidbody>();
-			rig.Velocity = 0;
-			rig.AngularVelocity = 0;
-			x.Transform.Position = PropRig.Transform.Position;
-			x.Transform.Rotation = PropRig.Transform.Rotation
-				* Rotation.From( 0, x.Components.Get<SpinTrigger>().rotationOffset, 0 );
-			x.Transform.Position += new Vector3( 0, -1f, 0 ) * x.Transform.Rotation;
-		} );
+		ENGINE.UpdateInput();
 	}
 }

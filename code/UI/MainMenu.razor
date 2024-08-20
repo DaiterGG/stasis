@@ -4,28 +4,52 @@
 
 <root class="ui">
     <div class="buttons">
-        <div class="play" onclick=@controller.Play>
-            <div class="bg"></div>
-            <div class="text">Play</div>
-        </div>
-        <div class="choose">
-            <div class="bg"></div>
-            <div class="text">Choose Map</div>
-        </div>
-        <div class="options" onclick=@controller.Options>
-            <div class="bg"></div>
-            <div class="text">Options</div>
-        </div>
-        <div class="quit" onclick=@controller.Quit>
-            <div class="bg"></div>
-            <div class="text">Quit</div>
-        </div>
+        @{
+            if(menus == 0)
+            {
+
+                <div class="play" onclick=@controller.Play>
+                    <div class="bg"></div>
+                    <div class="text">Play</div>
+                </div>
+                <div class="change" onclick=@controller.MapSelect>
+                    <div class="bg"></div>
+                    <div class="text">Change Map</div>
+                </div>
+                <div class="options" onclick="@(x => {menus = 1;})">
+                    <div class="bg"></div>
+                    <div class="text">Options</div>
+                </div>
+                <div class="quit" onclick=@controller.Quit>
+                    <div class="bg"></div>
+                    <div class="text">Quit</div>
+                </div>
+            }
+            else if (menus == 1)
+            {
+                
+                <div class="settings" onclick=@menus = 0>
+                    <div class="bg"></div>
+                    <div class="text">Settings</div>
+                </div>
+                <div class="controls" onclick=@controller.Controls>
+                    <div class="bg"></div>
+                    <div class="text">Controls (broken)</div>
+                </div>
+                <div class="back" onclick="@(x => {menus = 0;})">
+                    <div class="bg"></div>
+                    <div class="text">Back</div>
+                </div>
+            }
+        }
     </div>
 </root>
 @code
 {
+    int menus = 0;
     MenuController controller;
-    protected override void OnAwake(){
+    protected override void OnAwake()
+    {
         controller = GameObject.Parent.Components.Get<MenuController>();
     }
 }

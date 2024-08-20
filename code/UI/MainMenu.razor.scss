@@ -14,29 +14,30 @@ MainMenu {
         flex-direction: column;
         top: 0;
         left: 0;
-        margin-top: 400px;
-        margin-left: 50px;
+        margin-top: 30%;
+        margin-left: 3%;
         pointer-events: all;
-        background-color: transparent;
         align-items: flex-start;
         gap: 20px;
 
 
         > div:hover {
-            margin-left: 67px; /* Example of margin adjustment */
+            /*margin-left: 67px; */
+            > .bg{
+                background-color: rgba(0,0,0,0.4);
+            }
         }
 
         > div {
             width: 500px;
             height: 100px;
 
-         transition: margin-left 0.1s ease;
+            transition: all 0.02s ease;
             > .text {
                 position: absolute;
                 align-self: center;
                 margin-left: 80px;
                 font-family: Signika Negative;
-                font-weight: 900;
                 color: #d9d7e0;
                 font-size: 50px;
             }

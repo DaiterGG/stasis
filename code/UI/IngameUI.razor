@@ -2,13 +2,19 @@
 @using Sandbox.UI;
 @inherits PanelComponent
 <root>
-    <div class="test">@Gain</div>
-        <div class="timer">@Timer</div>
-        <div class="speedVert">@SpeedVert</div>
-        <div class="speed">@SpeedMain</div>
-        <div class="bot">
-            <div class="speedHor">@SpeedHor</div>
-        </div>
+    <div class="gain">@Gain%</div>
+    <div class="info @(Time.Now - infotime < 20f ? "active" : "")">
+        @foreach (var line in Info.Split('\n'))
+        {
+            <div>@line</div>
+        } 
+    </div>
+    <div class="timer">@Timer</div>
+    <div class="speedVert">@SpeedVert</div>
+    <div class="speed">@SpeedMain</div>
+    <div class="bot">
+        <div class="speedHor">@SpeedHor</div>
+    </div>
 </root>
 
 @code
@@ -18,8 +24,16 @@
     public string SpeedVert { get; set; } = "0";
     public string Gain { get; set; } = "";
     public string Timer { get; set; } = "";
+    private string Info =  "";
+    public float infotime { get; set; }
+    public void ShowInfo( string info)
+    {
+        infotime = Time.Now;  
+        Info = info;
+    }
 
     /// <summary>
     /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
     /// </summary>
-    protected override int BuildHash() => System.HashCode.Combine( SpeedMain, Timer );}
+    protected override int BuildHash() => System.HashCode.Combine( SpeedMain, Timer, Gain );
+}

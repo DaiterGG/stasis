@@ -1,12 +1,11 @@
-using System;
 namespace Sandbox;
 public sealed class ZoneCreate : Component
 {
-	private Color endZoneColor = new Color( 1f, 0, 0);
+	private Color endZoneColor = new Color( 1f, 0, 0 );
 	private Color CurrentColor;
-    [Property] public GameObject EndZonePrefab;
-    [Property] public GameObject LinePrefab;
-    public List<GameObject> EndZones = new List<GameObject>();
+	[Property] public GameObject EndZonePrefab;
+	[Property] public GameObject LinePrefab;
+	public List<GameObject> EndZones = new List<GameObject>();
 	Sng SNG;
 	protected override void OnAwake()
 	{
@@ -15,8 +14,29 @@ public sealed class ZoneCreate : Component
 	protected override void OnStart()
 	{
 		base.OnStart();
-        foreach ( var zone in SNG.EndZones )
-        {
+		MapInit();
+	}
+	public void MapInit()
+	{
+		base.OnStart();
+		foreach ( var zone in SNG.EndZones )
+		{
+			DecorateBox( zone );
+		}
+	}
+
+	public void DecorateBox( GameObject box )
+	{
+		var col = box.Components.Get<BoxCollider>();
+		if ( col == null ) return;
+		var decor = box.Components.Get<AutoDecor>();
+		if ( decor == null ) return;
+		if ( !decor.AutoDecorate ) return;
+
+
+
+	}
+	/*public void LegacyZoneCreate()
             EndZones.Add( EndZonePrefab.Clone( GameObject, zone.Transform.Position, zone.Transform.Rotation, zone.Transform.Scale ) );
             EndZones.Last().Enabled = true;
             var box = zone.Components.Get<EnvmapProbe>();
@@ -26,14 +46,12 @@ public sealed class ZoneCreate : Component
             zone.Enabled = false;
 			CurrentColor = endZoneColor;
 			CreateBoxEdges( EndZones.Last(), box );
-		}
-	}
-
-    private void CreateBoxEdges( GameObject parent, EnvmapProbe box )
-    {
+    */
+	private void CreateBoxEdges( GameObject parent, EnvmapProbe box )
+	{
 		Vector3[] c = box.Bounds.Corners.ToArray();
 		for ( int x = 0; x < c.Length; x++ ) c[x] += box.Transform.Position;
-		
+
 		CreateLine( parent, c[0], c[1] );
 		CreateLine( parent, c[1], c[2] );
 		CreateLine( parent, c[2], c[3] );
@@ -47,13 +65,13 @@ public sealed class ZoneCreate : Component
 		CreateLine( parent, c[2], c[6] );
 		CreateLine( parent, c[3], c[7] ); //kill me
 	}
-	private void CreateLine(GameObject parent, Vector3 p1, Vector3 p2)
+	private void CreateLine( GameObject parent, Vector3 p1, Vector3 p2 )
 	{
 		var l = LinePrefab.Clone();
 		l.Parent = parent;
 		l.Enabled = true;
 		var rend = l.Components.Get<LineRenderer>();
-		rend.Color = new Gradient( new Gradient.ColorFrame( 0, CurrentColor) );
+		rend.Color = new Gradient( new Gradient.ColorFrame( 0, CurrentColor ) );
 		rend.VectorPoints[0] = p1;
 		rend.VectorPoints[1] = p2;
 	}
