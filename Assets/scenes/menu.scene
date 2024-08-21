@@ -75,84 +75,6 @@
       ],
       "Children": [
         {
-          "__guid": "24ef250d-05e0-4222-af3e-daea8e553089",
-          "Flags": 0,
-          "Name": "Menu cam",
-          "Position": "-183.6963,40.68348,68.06692",
-          "Rotation": "-0.03123501,-0.1391667,-0.216756,0.9657505",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.CameraComponent",
-              "__guid": "c1fa1549-4a93-42d5-9d6c-19d6e77b1d68",
-              "BackgroundColor": "0.33333,0.46275,0.52157,1",
-              "ClearFlags": "All",
-              "FieldOfView": 86.85,
-              "IsMainCamera": true,
-              "Orthographic": false,
-              "OrthographicHeight": 1204,
-              "Priority": 3,
-              "RenderExcludeTags": "",
-              "RenderTags": "",
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 10000,
-              "ZNear": 10
-            },
-            {
-              "__type": "Sandbox.Bloom",
-              "__guid": "5bef2ff7-9269-4894-84e7-2b22f207d8f4",
-              "BloomColor": {
-                "color": [
-                  {
-                    "c": "1,1,1,1"
-                  },
-                  {
-                    "t": 1,
-                    "c": "1,1,1,1"
-                  }
-                ],
-                "alpha": []
-              },
-              "BloomCurve": [
-                {
-                  "y": 0.5
-                },
-                {
-                  "x": 1,
-                  "y": 1
-                }
-              ],
-              "Mode": "Additive",
-              "Strength": 0.5,
-              "Threshold": 0.5,
-              "ThresholdWidth": 0.5
-            },
-            {
-              "__type": "Sandbox.Tonemapping",
-              "__guid": "c5f35704-fa62-45af-b436-e6e5d1a89b16",
-              "__version": 1,
-              "ExposureBias": 2,
-              "ExposureCompensation": 0,
-              "ExposureMethod": "RGB",
-              "MaximumExposure": 2,
-              "MinimumExposure": 1,
-              "Mode": "Legacy",
-              "Rate": 1
-            },
-            {
-              "__type": "Sandbox.Sharpen",
-              "__guid": "485ab860-27cd-43a8-8dbb-5cdd3c3a0714",
-              "Scale": 0.2
-            },
-            {
-              "__type": "Sandbox.AudioListener",
-              "__guid": "15ea195c-8929-43be-96ea-92a0a6bbd080",
-              "UseCameraDirection": true
-            }
-          ]
-        },
-        {
           "__guid": "5f893dae-6a0c-4a91-9271-47742568167f",
           "Flags": 0,
           "Name": "Ingame UI",
@@ -173,30 +95,9 @@
           ]
         },
         {
-          "__guid": "c2b2e3f1-e13b-4bc4-88d9-ee970a9f89aa",
-          "Flags": 0,
-          "Name": "Main menu",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ScreenPanel",
-              "__guid": "d234fa6a-62dc-4068-9aab-723c4a681f01",
-              "AutoScreenScale": true,
-              "Opacity": 1,
-              "Scale": 1,
-              "ZIndex": 100
-            },
-            {
-              "__type": "MainMenu",
-              "__guid": "a61628c9-9937-4337-b49f-9de2ce3e194b"
-            }
-          ]
-        },
-        {
           "__guid": "4f5506c2-a71c-4870-9f89-ef9f2f9cfab0",
           "Flags": 0,
           "Name": "End screen",
-          "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.ScreenPanel",
@@ -209,6 +110,25 @@
             {
               "__type": "EndScreen",
               "__guid": "c06f7ec8-6048-44c5-847a-b5b3e2578c14"
+            }
+          ]
+        },
+        {
+          "__guid": "c2b2e3f1-e13b-4bc4-88d9-ee970a9f89aa",
+          "Flags": 0,
+          "Name": "Main menu",
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "d234fa6a-62dc-4068-9aab-723c4a681f01",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "MainMenu",
+              "__guid": "a61628c9-9937-4337-b49f-9de2ce3e194b"
             }
           ]
         }
@@ -280,13 +200,14 @@
           "__guid": "3c2490ef-54a0-49bb-8f13-490e40aa51d1",
           "Flags": 0,
           "Name": "Body",
-          "Position": "0.0001330646,-0.00000427652,-0.02441406",
+          "Position": "0.0001330646,-0.00000427652,0",
           "Scale": "0.5,0.5,0.5",
           "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.Rigidbody",
               "__guid": "54e58dc7-eef4-489e-8305-9eedc4239093",
+              "__enabled": false,
               "AngularDamping": 1,
               "Gravity": false,
               "LinearDamping": 0,
@@ -949,6 +870,84 @@
               ]
             }
           ]
+        },
+        {
+          "__guid": "24ef250d-05e0-4222-af3e-daea8e553089",
+          "Flags": 0,
+          "Name": "Menu cam",
+          "Position": "62.27324,-24.00161,3.63237",
+          "Rotation": "0.1415505,-0.01750567,0.9822931,0.1214809",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.CameraComponent",
+              "__guid": "c1fa1549-4a93-42d5-9d6c-19d6e77b1d68",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 86.85,
+              "IsMainCamera": true,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 3,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 10000,
+              "ZNear": 10
+            },
+            {
+              "__type": "Sandbox.Bloom",
+              "__guid": "5bef2ff7-9269-4894-84e7-2b22f207d8f4",
+              "BloomColor": {
+                "color": [
+                  {
+                    "c": "1,1,1,1"
+                  },
+                  {
+                    "t": 1,
+                    "c": "1,1,1,1"
+                  }
+                ],
+                "alpha": []
+              },
+              "BloomCurve": [
+                {
+                  "y": 0.5
+                },
+                {
+                  "x": 1,
+                  "y": 1
+                }
+              ],
+              "Mode": "Additive",
+              "Strength": 0.5,
+              "Threshold": 0.5,
+              "ThresholdWidth": 0.5
+            },
+            {
+              "__type": "Sandbox.Tonemapping",
+              "__guid": "c5f35704-fa62-45af-b436-e6e5d1a89b16",
+              "__version": 1,
+              "ExposureBias": 2,
+              "ExposureCompensation": 0,
+              "ExposureMethod": "RGB",
+              "MaximumExposure": 2,
+              "MinimumExposure": 1,
+              "Mode": "Legacy",
+              "Rate": 1
+            },
+            {
+              "__type": "Sandbox.Sharpen",
+              "__guid": "485ab860-27cd-43a8-8dbb-5cdd3c3a0714",
+              "Scale": 0.2
+            },
+            {
+              "__type": "Sandbox.AudioListener",
+              "__guid": "15ea195c-8929-43be-96ea-92a0a6bbd080",
+              "UseCameraDirection": true
+            }
+          ]
         }
       ]
     },
@@ -1044,53 +1043,38 @@
       ]
     },
     {
-      "__guid": "1d84eddb-9d21-43a5-9e36-5438a211d03e",
+      "__guid": "0f486b22-eb72-406a-a85d-5cd68040677a",
       "Flags": 0,
-      "Name": "map",
+      "Name": "end_zone (1)",
+      "Position": "-1486.715,-549.166,-290.4578",
+      "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.MapInstance",
-          "__guid": "7ef29ac8-8c2e-4e47-8539-1c25f0cd4e72",
-          "__version": 1,
-          "EnableCollision": true,
-          "MapName": "maps/playground.vmap",
-          "NoOrigin": false,
-          "UseMapFromLaunch": false
-        }
-      ]
-    },
-    {
-      "__guid": "d3badf1e-cbd8-43e7-8094-c6cad62544c5",
-      "Flags": 0,
-      "Name": "info_player_spawn",
-      "Position": "-127.271,5.043406,64.43455",
-      "Rotation": "-0,0,-0.9952274,-0.09758277"
-    },
-    {
-      "__guid": "ee087548-0d64-46ac-9bb6-4bb77281b854",
-      "Flags": 0,
-      "Name": "end_zone",
-      "Position": "-407.9152,-14.84684,182.7222",
-      "Rotation": "0,0,-0.7071067,0.7071068",
-      "Scale": "0.9416823,0.9416823,0.9416823",
-      "Components": [
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "da7c16d7-9694-4f6e-851f-087261b9dd95",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false
+          "__type": "Sandbox.Description",
+          "__guid": "ce829bfc-b049-4e5c-9b07-8b5e6c454896",
+          "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027, put trigger collider and End Zone component on it\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
         },
         {
           "__type": "Sandbox.AutoDecor",
-          "__guid": "a5d29f40-e4e6-4380-b9eb-c5b2244f0d10",
+          "__guid": "812996c7-53cc-4ef3-8cfc-d0fc1bf8b84d",
           "AutoDecorate": true,
-          "ColorOfTheLines": "0.90698,0,0,1"
+          "ColorOfTheLines": "0.81395,0,0,1"
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "a808c2d4-8fa8-4b23-b10b-84068867fa88",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "1368.5,1473.398,297.3",
+          "Static": true
+        },
+        {
+          "__type": "EndZone",
+          "__guid": "8e3dbe56-dc13-47ea-8f83-fb0ab4f5c49a"
         },
         {
           "__type": "Sandbox.DontDestroy",
-          "__guid": "337ecb27-6611-4e16-9b20-f074b8a9b2a9"
+          "__guid": "601f8408-6a17-49e2-90f9-c5f8fe21b025"
         }
       ]
     }

@@ -14,12 +14,12 @@
             </div>
             <div class="trophy">
                 <div class="times">
-                    <div class="gold">@Gold</div>
-                    <div class="silver">@Silver</div>
-                    <div class="bronze">@Bronze</div>
+                    <div class="gold @(medal == 1 ? "active" : "")" >@Gold</div>
+                    <div class="silver @(medal == 2 ? "active" : "")">@Silver</div>
+                    <div class="bronze @(medal == 3 ? "active" : "")">@Bronze</div>
                 </div>
                     <div class="img">
-                        <img src="/img/medal1.png">
+                        <img src=@img>
                 </div>
             </div>
         </div>
@@ -58,7 +58,15 @@
 
 @code
 {
-    public Image gg;
+    public int medal { get; set; }
+    public string _img;
+    public string img{
+        get
+        {
+            return $"img/medal{_img}.png";
+        }
+        set { _img = value; }
+    }
     public string Time { get; set; }
     public string Gold { get; set; }
     public string Silver { get; set; }
@@ -71,18 +79,16 @@
     protected override void OnAwake()
     {
         base.OnAwake();
+        medal = 2;
+        img = "2";
         Time = "1.54.";
         Gold = "0.25.000";
         Silver = "0.25.000";
         Bronze = "0.25.000";
         TimeDif = "-1.54.335";
         TimeMil = "414";
-        Author = "Daiter";
-        Name = "PLAYGROUND";
-        Scores.Add(new Score(1.50f,DateTime.Now));
-        Scores.Add(new Score(1.50f,DateTime.Now));
-        Scores.Add(new Score(1.50f,DateTime.Now));
-        Scores.Add(new Score(1.50f,DateTime.Now));
+        Author = "Daiter Andrew Brown";
+        Name = "PLAYGROUND_EXTENDED";
         Scores.Add(new Score(1.50f,DateTime.Now));
         Scores.Add(new Score(1.50f,DateTime.Now));
         Scores.Add(new Score(1.50f,DateTime.Now));
@@ -105,6 +111,7 @@
         Scores.Add(new Score(1.50f,DateTime.Now));
         Scores.Add(new Score(1.50f,DateTime.Now));
     }
+
     /// <summary>
     /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
     /// </summary>

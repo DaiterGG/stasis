@@ -1,4 +1,5 @@
 using Sandbox.Data;
+using System;
 
 namespace Sandbox;
 public sealed class Sng : Component
@@ -23,7 +24,6 @@ public sealed class Sng : Component
 		set { _spawnPoint = value; }
 	}
 	public List<GameObject> EndZones;
-	public Info MapInfo;
 	public string MapIndent;
 
 	public FileController File;
@@ -42,9 +42,9 @@ public sealed class Sng : Component
 
 	private void MapInit()
 	{
+		Info MapInfo = null;
 		Timer = new MainTimer();
 		StartPoint = null;
-		MapInfo = null;
 		SpawnPoint = null;
 		EndZones = new List<GameObject>();
 		var heap = Scene.GetAllObjects( true );
@@ -65,11 +65,12 @@ public sealed class Sng : Component
 			else if ( obj.Name == "Map Info" )
 			{
 				MapInfo = obj.Components.Get<Info>();
-				Log.Info( MapInfo.DisplayName );
+				Log.Info( MapInfo.DisplayName + " - info found" );
 			}
 		}
 		if ( MapInfo == null ) Log.Warning( "Info not found" );
-		else File.MapInfoSerialize( MapInfo );
+
+		File.MapInfoSerialize( MapInfo );
 
 		if ( EndZones.Count == 0 ) Log.Warning( "End zone not found" );
 		else ZoneC.MapInit();
@@ -83,33 +84,41 @@ public sealed class Sng : Component
 	}
 	protected override void OnFixedUpdate()
 	{
-		base.OnFixedUpdate();
-		if ( MenuC.IsGaming )
+		try
 		{
+			base.OnFixedUpdate();
+			if ( MenuC.IsGaming )
+			{
 
-			if ( Input.Pressed( "Restart" ) )
-			{
-				ResetPlayer();
+				if ( Input.Pressed( "Restart" ) )
+				{
+					ResetPlayer();
+				}
+				if ( Input.Pressed( "SelfDestruct" ) )
+				{
+					Player.SpinC.SpinCollision();
+				}
+				if ( Input.Pressed( "Back" ) )
+				{
+					MenuC.OpenMenu();
+				}
+				Timer.UpdateTimer();
+				MenuC.IngameUI.Timer = Timer.TimerStr;
 			}
-			if ( Input.Pressed( "SelfDestruct" ) )
-			{
-				Player.SpinC.SpinCollision();
-			}
-			if ( Input.Pressed( "Back" ) )
-			{
-				MenuC.OpenMenu();
-			}
-			Timer.UpdateTimer();
-			MenuC.IngameUI.Timer = Timer.TimerStr;
 		}
+		catch ( Exception e ) { Log.Warning( e.Message ); }
 	}
 	public void LoadNewMap( string mapPath )
 	{
 		MapIndent = mapPath;
+		var st = "move.stasis_playground_scene";
 		var str = Cloud.Asset( "move.stasis_playground_scene" );
 		// Package.
+
+		Log.Info( str );
 		Scene.LoadFromFile( str );
 		MapInit();
+		MenuC.OpenMenu();
 	}
 	public void SpawnPlayer()
 	{
@@ -127,8 +136,10 @@ public sealed class Sng : Component
 	}
 	public void EndZoneEnter( GameObject go, Collider cof )
 	{
+		File.SetScore( Timer.timerSeconds );
 		Timer.IsFinished = true;
-		MenuC.EndUI.GameObject.Enabled = true;
+		MenuC.ShowEndScreen();
+
 	}
 	public void ResetPlayer()
 	{
@@ -138,6 +149,27 @@ public sealed class Sng : Component
 		Player.CameraC.FreeCam.Enabled = false;
 		Player.CameraC.UpdateCam();
 		Player.SpinC.RestartSpin();
+	}
+	public string FormatTime( float totalSeconds )
+	{
+		TimeSpan timeSpan = TimeSpan.FromSeconds( totalSeconds );
+
+		string formattedTime = "";
+
+		if ( timeSpan.Hours > 0 )
+		{
+			formattedTime += $"{timeSpan.Hours:D2}:";
+		}
+		else if ( timeSpan.Minutes > 0 || timeSpan.Hours > 0 )
+		{
+			formattedTime += $"{timeSpan.Minutes:D2}:";
+		}
+		formattedTime += $"{timeSpan.Seconds:D2}.{timeSpan.Milliseconds:D3}";
+
+		if ( formattedTime[0] == '0' && formattedTime[1] != '.' )
+			formattedTime = formattedTime.Substring( 1 );
+
+		return formattedTime;
 	}
 	//unused
 	private void FindMaps()

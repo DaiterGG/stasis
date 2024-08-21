@@ -104,6 +104,18 @@
           "KeyboardCode": "MOUSE1",
           "GamepadCode": "None",
           "GroupName": "Other"
+        },
+        {
+          "Name": "Crouch",
+          "KeyboardCode": "ctrl",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "attack2",
+          "KeyboardCode": "mouse2",
+          "GamepadCode": "None",
+          "GroupName": "Other"
         }
       ],
       "__guid": "59de6fb9-5bc2-4da4-9a0c-4f98496b6e70"

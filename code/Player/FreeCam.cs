@@ -47,7 +47,7 @@ public sealed class FreeCam : Component
 		{
 			Transform.Position += new Vector3( 0, force * mult * -1, 0 ) * Transform.Rotation;
 		}
-		if ( Input.Down( "Jump" ) )
+		if ( Input.Down( "SelfDestruct" ) )
 		{
 			Transform.Position += new Vector3( 0, 0, force * mult );
 		}

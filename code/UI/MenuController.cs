@@ -1,3 +1,4 @@
+using Sandbox.Data;
 using System;
 namespace Sandbox;
 
@@ -7,15 +8,19 @@ public sealed class MenuController : Component
 	[Property] public IngameUI IngameUI { get; set; }
 	[Property] public EndScreen EndUI { get; set; }
 	[Property] public GameObject Camera { get; set; }
+
 	public float pitchOffset = -11.3f;
 	public float yawOffset = 13.111f;
-	public float speed = 0;
 	public Vector3 CameraPos;
+
+
+	public float speed = 0;
 	public bool IsGaming = false;
 	GameObject BODY;
 	SpinController SPINC;
 	EngineComponent ENGINE;
 	Sng SNG;
+	FileController FC;
 
 	protected override void OnAwake()
 	{
@@ -24,17 +29,16 @@ public sealed class MenuController : Component
 		SPINC = SNG.Player.SpinC;
 		BODY = SNG.Player.Body;
 		ENGINE = SNG.Player.Engine;
+		FC = SNG.File;
+		SetCameraOffset();
 	}
 	protected override void OnStart()
 	{
 		base.OnStart();
-		CameraPos = Camera.Transform.Position - BODY.Transform.Position;
-		CameraInit();
-		OpenMenu();
 	}
 	protected override void OnUpdate()
 	{
-		if ( Input.Down( "attack1" ) )
+		if ( Input.Down( "attack1" ) || Input.Down( "attack2" ) )
 		{
 			speed += Mouse.Delta.x / 2000f;
 		}
@@ -50,9 +54,15 @@ public sealed class MenuController : Component
 		SetCameraLook();
 		speed *= 0.93f;
 	}
+	public void SetCameraOffset()
+	{
+		CameraPos = Camera.Transform.LocalPosition;
+	}
 	public void CameraInit()
 	{
-		Camera.Transform.Position = BODY.Transform.Position + CameraPos;
+		Camera.Transform.LocalPosition = CameraPos;
+
+		Camera.Transform.ClearInterpolation();
 		SetCameraLook();
 	}
 	public void SetCameraLook()
@@ -65,7 +75,7 @@ public sealed class MenuController : Component
 	{
 		Camera.Enabled = false;
 		IngameUI.GameObject.Enabled = true;
-		MenuUI.Enabled = false;
+		MenuUI.GameObject.Enabled = false;
 		IsGaming = true;
 		ShowInfo();
 		SNG.ResetPlayer();
@@ -75,10 +85,12 @@ public sealed class MenuController : Component
 		SNG.SpawnPlayer();
 		SPINC.RestartSpin();
 		IngameUI.GameObject.Enabled = false;
-		MenuUI.Enabled = true;
+		EndUI.GameObject.Enabled = false;
+		MenuUI.GameObject.Enabled = true;
 		IsGaming = false;
-		ENGINE.UpdateInput();
+		CameraInit();
 		Camera.Enabled = true;
+		ENGINE.UpdateInput();
 	}
 	public void Controls()
 	{
@@ -88,6 +100,7 @@ public sealed class MenuController : Component
 	{
 
 	}
+
 
 	public void MapSelect()
 	{
@@ -101,6 +114,60 @@ public sealed class MenuController : Component
 	{
 		Game.Close();
 	}
+	public void ShowEndScreen()
+	{
+		if ( FC.currentMap == null )
+		{
+			Log.Warning( "no map info loaded?, why there is end_zone?" );
+			return;
+		}
+		if ( FC.currentTime == 0 )
+		{
+			Log.Warning( "currentTime = 0, no map info loaded?, why there is end_zone?" );
+			return;
+		}
+		var time = FC.currentTime;
+		if ( FC.currentMap.SpeedRun )
+		{
+			EndUI.Gold = SNG.FormatTime( FC.currentMap.GoldTime );
+			EndUI.Silver = SNG.FormatTime( FC.currentMap.SilverTime );
+			EndUI.Bronze = SNG.FormatTime( FC.currentMap.BronzeTime );
+			if ( FC.currentMap.GoldTime > time )
+			{
+				EndUI.medal = 1;
+				EndUI.img = "1";
+			}
+			else if ( FC.currentMap.SilverTime > time )
+			{
+				EndUI.medal = 2;
+				EndUI.img = "2";
+			}
+			else if ( FC.currentMap.BronzeTime > time )
+			{
+				EndUI.medal = 3;
+				EndUI.img = "3";
+
+			}
+		}
+		else
+		{
+		}
+		EndUI.Gold = "";
+		EndUI.Silver = "PASS";
+		EndUI.Bronze = "";
+		EndUI.medal = 2;
+		EndUI.img = "3";
+		var strtime = SNG.FormatTime( time );
+		EndUI.Time = strtime.Split( '.' )[0];
+		EndUI.TimeMil = strtime.Split( '.' )[1];
+
+
+
+		EndUI.GameObject.Enabled = true;
+	}
+
+
+
 	public void ShowInfo()
 	{
 		IngameUI.ShowInfo( ControlsInfo() );
