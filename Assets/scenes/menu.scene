@@ -98,6 +98,7 @@
           "__guid": "4f5506c2-a71c-4870-9f89-ef9f2f9cfab0",
           "Flags": 0,
           "Name": "End screen",
+          "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.ScreenPanel",
@@ -139,7 +140,7 @@
       "__guid": "75eb26c9-d9fc-4205-91a2-bebac64f876d",
       "Flags": 0,
       "Name": "Player",
-      "Position": "-127.271,5.043406,64.43455",
+      "Position": "-127.271,5.043406,61.53452",
       "Rotation": "-0,0,-0.9952274,-0.09758277",
       "Tags": "player",
       "Enabled": true,
@@ -790,6 +791,7 @@
               "Flags": 0,
               "Name": "Free cam",
               "Position": "-204.1001,0.000007629395,37.8",
+              "Enabled": true,
               "Components": [
                 {
                   "__type": "Sandbox.CameraComponent",
@@ -858,6 +860,14 @@
                   "__type": "Sandbox.AudioListener",
                   "__guid": "fde070c3-ccf9-4e21-8780-19b6b5a47817",
                   "UseCameraDirection": true
+                },
+                {
+                  "__type": "Sandbox.Player.FreeCam",
+                  "__guid": "fb7fd95f-5f04-4ef7-bd2a-f536c55bba04",
+                  "thirdCam": {
+                    "_type": "gameobject",
+                    "go": "d6d47027-a884-4a1d-b8fd-b0feabe121bd"
+                  }
                 }
               ]
             }
@@ -867,7 +877,7 @@
           "__guid": "24ef250d-05e0-4222-af3e-daea8e553089",
           "Flags": 0,
           "Name": "Menu cam",
-          "Position": "62.27324,-24.00161,3.63237",
+          "Position": "62.27408,-24.0021,2.132362",
           "Rotation": "0.1415505,-0.01750567,0.9822931,0.1214809",
           "Enabled": true,
           "Components": [
@@ -886,7 +896,7 @@
               "TargetEye": "None",
               "Viewport": "0,0,1,1",
               "ZFar": 10000,
-              "ZNear": 10
+              "ZNear": 1
             },
             {
               "__type": "Sandbox.Bloom",
@@ -1039,6 +1049,7 @@
       "Flags": 0,
       "Name": "Object",
       "Position": "-246.1377,-37.10921,-2.564705",
+      "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.MapInstance",
@@ -1048,6 +1059,43 @@
           "MapName": "move.stasis_playground",
           "NoOrigin": false,
           "UseMapFromLaunch": false
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "b0a87ae5-58ef-4ea5-be18-d83593e0b6ba",
+      "Flags": 0,
+      "Name": "end_zone",
+      "Position": "1753.212,-549.166,65.37964",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "8966af8d-eeb3-44c5-8eaf-28210dcdcb17",
+          "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027, put trigger collider and End Zone component on it\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
+        },
+        {
+          "__type": "Sandbox.AutoDecor",
+          "__guid": "09e2ee01-78d8-43ae-a80b-273fa60bc4c2",
+          "AutoDecorate": true,
+          "ColorOfTheLines": "0.81395,0,0,1"
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "34fe0d8c-5367-45b5-8c4d-ce9b1ce14400",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "1368.5,1473.398,297.3",
+          "Static": true
+        },
+        {
+          "__type": "EndZone",
+          "__guid": "24b7b640-580d-4383-a3cf-1f9dec95bb61"
+        },
+        {
+          "__type": "Sandbox.DontDestroy",
+          "__guid": "5d7fa397-9948-4c37-b2ab-c30919d219d0"
         }
       ]
     }

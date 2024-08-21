@@ -32,7 +32,6 @@ public sealed class Sng : Component
 	{
 		_sng = this;
 
-		if ( MenuC == null ) Log.Info( "GG" );
 		base.OnAwake();
 		File = new FileController();
 		File.ReadFiles();
@@ -137,6 +136,7 @@ public sealed class Sng : Component
 	}
 	public void EndZoneEnter( GameObject go, Collider cof )
 	{
+		if ( Timer.IsFinished ) return;
 		File.SetScore( Timer.timerSeconds );
 		Timer.IsFinished = true;
 		MenuC.ShowEndScreen();

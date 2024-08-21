@@ -69,34 +69,46 @@ public class FileController
 			currentMap = null;
 			return;
 		}
-		currentMap = Maps.FirstOrDefault( map =>
+		try
 		{
-			return map.Indent == SNG.MapIndent &&
-			map.Name == info.DisplayName &&
-			map.Vesrion == info.Version;
-		} );
-		bool _ = false;
-		if ( currentMap == default( MapData ) )
-		{
-			_ = true;
-			currentMap = new MapData();
-		}
-		currentMap.Name = info.DisplayName;
-		currentMap.Indent = SNG.MapIndent;
-		currentMap.Vesrion = info.Version;
-		foreach ( var item in info.Author )
-		{
-			currentMap.Authors.Add( item.Key );
-			currentMap.AuthorLinks.Add( item.Value );
-		}
-		currentMap.DifficultyTier = info.DifficultyTier;
-		currentMap.Description = info.Description;
-		currentMap.SpeedRun = info.SpeerunMap;
-		currentMap.GoldTime = info.SpeerunMap ? info.GoldTime : 0;
-		currentMap.SilverTime = info.SpeerunMap ? info.SilverTime : 0;
-		currentMap.BronzeTime = info.SpeerunMap ? info.BronzeTime : 0;
 
-		if ( _ ) Maps.Add( currentMap );
+			currentMap = Maps.FirstOrDefault( map =>
+			{
+				return map.Indent == SNG.MapIndent &&
+				map.Name == info.DisplayName &&
+				map.Vesrion == info.Version;
+			} );
+			bool _ = false;
+			if ( currentMap == default( MapData ) )
+			{
+				_ = true;
+				currentMap = new MapData();
+			}
+			Log.Info( _ );
+			currentMap.Name = info.DisplayName;
+			currentMap.Indent = SNG.MapIndent;
+			currentMap.Vesrion = info.Version;
+			var auth = new List<string>();
+			var authl = new List<string>();
+			foreach ( var item in info.Author )
+			{
+				auth.Add( item.Key );
+				authl.Add( item.Value );
+			}
+			currentMap.Authors = auth;
+			currentMap.AuthorLinks = authl;
+
+			currentMap.DifficultyTier = info.DifficultyTier;
+			currentMap.Description = info.Description;
+			currentMap.SpeedRun = info.SpeerunMap;
+			currentMap.GoldTime = info.SpeerunMap ? info.GoldTime : 0;
+			currentMap.SilverTime = info.SpeerunMap ? info.SilverTime : 0;
+			currentMap.BronzeTime = info.SpeerunMap ? info.BronzeTime : 0;
+
+			if ( _ ) Maps.Add( currentMap );
+		}
+		catch ( Exception err ) { Log.Warning( "Map serialize error: " + err.Message ); }
+
 
 		SaveMaps();
 	}
@@ -107,7 +119,7 @@ public class FileController
 		var scr = new Score( time, DateTime.Now );
 
 		currentMap.Scores.Add( scr );
-		currentMap.Scores.Sort( ( x, y ) => y.Time.CompareTo( x.Time ) );
+		currentMap.Scores.Sort( ( x, y ) => x.Time.CompareTo( y.Time ) );
 		SaveMaps();
 	}
 }

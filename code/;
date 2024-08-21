@@ -87,7 +87,7 @@ public sealed class MenuController : Component
 		SNG.SpawnPlayer();
 		SPINC.RestartSpin();
 		IngameUI.GameObject.Enabled = false;
-		//EndUI.GameObject.Enabled = false;
+		EndUI.GameObject.Enabled = false;
 		MenuUI.GameObject.Enabled = true;
 		IsGaming = false;
 		CameraInit();
@@ -112,8 +112,9 @@ public sealed class MenuController : Component
 
 		Sng.Inst.LoadNewMap( model, false );
 	}
-	public void MapSelect()
+	public async void MapSelect()
 	{
+
 		try
 		{
 			Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis_map", async delegate ( Package p )
@@ -139,7 +140,7 @@ public sealed class MenuController : Component
 			Log.Warning( "currentTime = 0, no map info loaded?, why there is end_zone?" );
 			return;
 		}
-		var time = FC.currentMap.Scores[0].Time;
+		var time = FC.currentTime;
 		if ( FC.currentMap.SpeedRun )
 		{
 			EndUI.Gold = SNG.FormatTime( FC.currentMap.GoldTime );
@@ -147,8 +148,8 @@ public sealed class MenuController : Component
 			EndUI.Bronze = SNG.FormatTime( FC.currentMap.BronzeTime );
 			if ( FC.currentMap.GoldTime > time )
 			{
-				EndUI.medal = 3;
-				EndUI.img = "3";
+				EndUI.medal = 1;
+				EndUI.img = "1";
 			}
 			else if ( FC.currentMap.SilverTime > time )
 			{
@@ -157,40 +158,24 @@ public sealed class MenuController : Component
 			}
 			else if ( FC.currentMap.BronzeTime > time )
 			{
-				EndUI.medal = 1;
-				EndUI.img = "1";
+				EndUI.medal = 3;
+				EndUI.img = "3";
 
 			}
 		}
 		else
 		{
-			EndUI.Gold = "";
-			EndUI.Silver = "PASS";
-			EndUI.Bronze = "";
-			EndUI.medal = 2;
-			EndUI.img = "3";
+		EndUI.Gold = "";
+		EndUI.Silver = "PASS";
+		EndUI.Bronze = "";
+		EndUI.medal = 2;
+		EndUI.img = "3";
 		}
-		var strtime = SNG.FormatTime( FC.currentTime );
+		var strtime = SNG.FormatTime( time );
 		EndUI.Time = strtime.Split( '.' )[0];
-		EndUI.TimeMil = "." + strtime.Split( '.' )[1];
-		EndUI.Scores = FC.currentMap.Scores;
-		if ( FC.currentMap.Scores.Count() > 0 )
-		{
-			var dif = FC.currentMap.Scores[0].Time - FC.currentTime;
-			EndUI.TimeDif = (dif < 0 ? "-" : "+") + SNG.FormatTime( dif );
-			EndUI.timesave = dif < 0;
+		EndUI.TimeMil = strtime.Split( '.' )[1];
 
-		}
-		else EndUI.TimeDif = "";
-		var auth = "";
-		foreach ( var a in FC.currentMap.Authors )
-		{
-			auth += a + ", ";
 
-		}
-
-		EndUI.Author = auth.Substring( 0, auth.Length - 2 );
-		EndUI.Name = FC.currentMap.Name.ToUpper();
 
 		EndUI.GameObject.Enabled = true;
 	}

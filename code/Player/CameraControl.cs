@@ -5,7 +5,6 @@ public sealed class CameraControl : Component
 	[Property] public GameObject FreeCam;
 	[Property] public List<GameObject> cameras;
 	int iEnabled = 0;
-	bool IsFreeCam = false;
 	protected override void OnAwake()
 	{
 		ENGINE = Sng.Inst.Player.Engine;

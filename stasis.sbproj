@@ -8,6 +8,7 @@
   "Resources": "fonts/*",
   "PackageReferences": [],
   "EditorReferences": null,
+  "IsWhitelistDisabled": false,
   "Metadata": {
     "MaxPlayers": 64,
     "MinPlayers": 1,
@@ -21,7 +22,7 @@
     "PerMapRanking": false,
     "LeaderboardType": "None",
     "CsProjName": "",
-    "StartupScene": "scenes/minimal.scene",
+    "StartupScene": "scenes/menu.scene",
     "ControlModes": {
       "Keyboard": true
     },

@@ -10,13 +10,13 @@
         <div class="score" >
             <div class="timer">
                 <div class="time"> @Time</div>
-                <div class="mil"> @TimeMil</div>
+                <div class="mil @(timesave ? "green":"red")"> @TimeMil</div>
             </div>
             <div class="trophy">
                 <div class="times">
-                    <div class="gold @(medal == 1 ? "active" : "")" >@Gold</div>
+                    <div class="gold @(medal == 3 ? "active" : "")" >@Gold</div>
                     <div class="silver @(medal == 2 ? "active" : "")">@Silver</div>
-                    <div class="bronze @(medal == 3 ? "active" : "")">@Bronze</div>
+                    <div class="bronze @(medal == 1 ? "active" : "")">@Bronze</div>
                 </div>
                     <div class="img">
                         <img src=@img>
@@ -36,18 +36,20 @@
             <div class="down">
                 @for (int i = 0; i < Scores.Count(); i++)
                 {
+                    var time = Sng.Inst.FormatTime(Scores[i].Time);
+                    Log.Info(time);
                     if (i % 2 == 0)
                     {
                         <div class="list-item " style="background-color: rgba(0, 0,0,0.2);">
                             <div class="count">@(i + 1).</div>
-                            <div class="time">@(Scores[i].Time)</div>
+                            <div class="time">@(time)</div>
                         </div>
                     }
                     else
                     {
                         <div class="list-item ">
                             <div class="count">@(i + 1).</div>
-                            <div class="time">@(Scores[i].Time)</div>
+                            <div class="time">@(time)</div>
                         </div>
                     } 
                 }
@@ -60,6 +62,7 @@
 
 @code
 {
+    public bool timesave { get; set; }
     public int medal { get; set; }
     public string _img;
     public string img{
@@ -78,6 +81,8 @@
     public string TimeDif { get; set; }
     public string TimeMil { get; set; }
     public List<Score> Scores { get; set; } = new List<Score>();
+    /*
+     * 
     protected override void OnAwake()
     {
         base.OnAwake();
@@ -114,6 +119,7 @@
         Scores.Add(new Score(1.50f,DateTime.Now));
     }
 
+     */
     /// <summary>
     /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
     /// </summary>
