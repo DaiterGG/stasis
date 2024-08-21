@@ -10,7 +10,8 @@ EndScreen {
     font-weight: bold;
     border-radius: 20px;
     pointer-events: all;
-    font-family: Signika Negative Light;
+    font-family: Uni Sans Heavy CAPS;
+    font-weight: 700;
     color: white;
 
     .panel {
@@ -22,17 +23,17 @@ EndScreen {
         padding: 10px;
 
         > .left {
-            width: 500px;
+            width: 470px;
             display: flex;
             flex-direction: column;
 
             > .score {
-                background-color: rgba(0,0,0,0.3);
                 height: 100%;
                 display: flex;
                 flex-direction: column;
 
                 > .timer {
+                    background-color: rgba(0,0,0,0.3);
                     display: flex;
                     flex: 0.4;
                     width: auto;
@@ -53,18 +54,49 @@ EndScreen {
 
                 > .trophy {
                     flex: 1;
+                    margin-top: 10px;
+                    background-color: rgba(0,0,0,0.3);
+                    display: flex;
+                    flex-direction: row;
+
+                    > .times {
+                        width: 100%;
+                        padding-right: 25px;
+                        display: flex;
+                        flex-direction: column;
+
+                        > div {
+                            height: 100%;
+                            margin-top: 10px;
+                            background-color: rgba(0,0,0,0.2);
+                        }
+                    }
+
+                    > .img {
+                        width: 125px;
+                        margin-right: 20px;
+                        margin-bottom: 55px;
+                        margin-top: 15px;
+
+                        > img {
+                        }
+                    }
                 }
             }
 
             > .name {
-               margin-top:10px; 
+                margin-top: 10px;
                 height: 70px;
-                background-color: rgba(0,0,0,0.3);
+                background-color: rgba(0,0,0,0.44);
+                font-size: 45px;
+                align-items: center;
+                justify-content: center;
             }
         }
 
         > .right {
             flex: 1;
+            display: flex;
             flex-direction: column;
             margin-left: 10px;
 
@@ -74,32 +106,62 @@ EndScreen {
                 flex-direction: row;
 
                 > .author {
-                    background-color: rgba(0,0,0,0.3);
+                    font-size: 30px;
+                    justify-content: center;
                     width: 100%;
+                    padding: 6px 0 0 10px;
+                    font-weight: 600;
+                    background-color: rgba(0,0,0,0.44);
                 }
 
                 > .exit {
+                    background-color: rgba(0,0,0,0.44);
                     margin-left: 10px;
                     width: 70px;
                     height: 100%;
                     font-size: 35px;
                     font-family: Poppins;
-                    background-color: rgba(0,0,0,0.3);
                     display: flex;
                     justify-content: center;
                     align-items: center;
 
                     > p {
-                        color: rgb(211, 211, 211);
+                        color: white;
                     }
                 }
             }
 
             > .down {
-                display: flex;
                 flex: 1;
+                flex-direction: column;
                 height: 100%;
                 background-color: rgba(0,0,0,0.3);
+                max-height: 100%; /* Adjust height as needed */
+                overflow-y: scroll; /* Enables vertical scrolling */
+
+                > .list-item {
+                    padding-left: 10px;
+                    padding-bottom: 20px;
+                    min-height:40px;
+                    display: flex;
+                    flex-direction: row;
+
+                    > .count {
+                        padding-top:5px;
+                        font-weight: 200;
+                        color: rgb(180,180,180);
+                        width: 40px;
+                        font-size:25px;
+                    }
+
+                    > .time {
+                        width: 100%;
+                        font-weight: 400;
+                        display: flex;
+                        align-content: center;
+                        justify-content: center;
+                    }
+                }
             }
         }
     }

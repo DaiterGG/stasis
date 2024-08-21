@@ -1,4 +1,5 @@
 @using Sandbox;
+@using System;
 @using Sandbox.UI;
 @inherits PanelComponent
 
@@ -11,7 +12,16 @@
                 <div class="time"> @Time</div>
                 <div class="mil"> @TimeMil</div>
             </div>
-            <div class="trophy"></div>
+            <div class="trophy">
+                <div class="times">
+                    <div class="gold">@Gold</div>
+                    <div class="silver">@Silver</div>
+                    <div class="bronze">@Bronze</div>
+                </div>
+                    <div class="img">
+                        <img src="/img/medal1.png">
+                </div>
+            </div>
         </div>
         <div class="name">@Name</div>
         </div>
@@ -22,7 +32,23 @@
 
             </div>
             <div class="down">
-
+                @for (int i = 0; i < Scores.Count(); i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        <div class="list-item " style="background-color: rgba(0, 0,0,0.2);">
+                            <div class="count">@(i + 1).</div>
+                            <div class="time">@(Scores[i].Time)</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="list-item ">
+                            <div class="count">@(i + 1).</div>
+                            <div class="time">@(Scores[i].Time)</div>
+                        </div>
+                    } 
+                }
             </div>
         </div>
 
@@ -32,15 +58,52 @@
 
 @code
 {
-
-    public string Time { get; set; } = "i.54.";
-    public string Author { get; set; } = "Daiter";
-    public string Name { get; set; } = "Playground";
-    public string TimeMil { get; set; } = "441";
+    public Image gg;
+    public string Time { get; set; }
+    public string Gold { get; set; }
+    public string Silver { get; set; }
+    public string Bronze { get; set; }
+    public string Author { get; set; }
+    public string Name { get; set; }
+    public string TimeDif { get; set; }
+    public string TimeMil { get; set; }
+    public List<Score> Scores { get; set; } = new List<Score>();
     protected override void OnAwake()
     {
         base.OnAwake();
-        Time = "I.54.";
+        Time = "1.54.";
+        Gold = "0.25.000";
+        Silver = "0.25.000";
+        Bronze = "0.25.000";
+        TimeDif = "-1.54.335";
+        TimeMil = "414";
+        Author = "Daiter";
+        Name = "PLAYGROUND";
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
+        Scores.Add(new Score(1.50f,DateTime.Now));
     }
     /// <summary>
     /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt

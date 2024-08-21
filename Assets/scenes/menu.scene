@@ -208,8 +208,7 @@
             },
             {
               "__type": "EndScreen",
-              "__guid": "c06f7ec8-6048-44c5-847a-b5b3e2578c14",
-              "MyStringValue": "Hello World!"
+              "__guid": "c06f7ec8-6048-44c5-847a-b5b3e2578c14"
             }
           ]
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sandbox.Data;
+namespace Sandbox;
 public class Score
 {
 	public Score( float time, DateTime date )
