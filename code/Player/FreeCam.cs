@@ -7,11 +7,9 @@ public sealed class FreeCam : Component
 	readonly float force = 20f;
 	float mult = 1f;
 	MainTimer TIMER;
-	EngineComponent ENGINE;
 	protected override void OnAwake()
 	{
 		base.OnAwake();
-		ENGINE = Sng.Inst.Player.Engine;
 		TIMER = Sng.Inst.Timer;
 	}
 	protected override void OnEnabled()
@@ -28,7 +26,7 @@ public sealed class FreeCam : Component
 	}
 	protected override void OnUpdate()
 	{
-
+		Log.Info( GameObject.Enabled );
 		if ( !GameObject.Enabled ) return;
 		TIMER.StopTimer();
 		if ( Input.Down( "Up" ) )

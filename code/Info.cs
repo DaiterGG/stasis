@@ -4,11 +4,6 @@ public sealed class Info : Component
 {
 	[Group( "General" ),
 		Property,
-		Description( "Name of the map" )]
-	public string DisplayName { get; set; } = "My Cool Map";
-
-	[Group( "General" ),
-		Property,
 		DefaultValue( "Author Name" ),
 		Description( "Author of the map and personal link (optional)" )]
 	public Dictionary<string, string> Author { get; set; }
@@ -22,12 +17,6 @@ public sealed class Info : Component
 		Property,
 		Description( "Version of the map, keep it in the format of x.y" )]
 	public string Version { get; set; } = "1.0";
-
-	[Group( "General" ),
-		Property,
-		TextArea,
-		Description( "All the information about the map" )]
-	public string Description { get; set; } = "Enjoy my new map \nAnd thanks for playing";
 
 	[Group( "Speedrun" ),
 		Property,

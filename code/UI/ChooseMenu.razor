@@ -1,0 +1,62 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Data;
+@inherits PanelComponent
+
+<root>
+    <div class="sub">
+
+        <div class="panel">
+
+            <div class="left">
+                <div class="up">
+                    Official
+                </div>
+                <div class="down">
+                    @for (int i = 0; i < Official.Count(); i++)
+                    {
+                        <div class="list-item @(i % 2 ==0 ? "dark":"")">
+                            <div class="count">@(i + 1).</div>
+                            <div class="time">@(Official[i].Name)</div>
+                        </div>
+                    } 
+                </div>
+            </div>
+            <div class="center">
+                <div class="up">
+                    Featured
+            </div>
+                <div class="down">
+                </div>
+            </div>
+            <div class="right">
+                <div class="up">
+                    Community
+                </div>
+                <div class="down">
+                    <div class="add" onclick="@MenuC.MapSelect">Find</div>
+                </div>
+            </div>
+        </div>
+        <div class="back">
+            <div class="text">Back</div>
+            <div class="bg"></div>
+        </div>
+    </div>
+</root>
+
+@code
+{
+    MenuController MenuC { get; set; }
+    public List<MapData> Official { get; set; } = new List<MapData>();
+    public List<MapData> Featured { get; set; }= new List<MapData>();
+    public List<MapData> Community { get; set; }= new List<MapData>();
+
+    protected override void OnAwake()
+    {
+        base.OnAwake();
+        MenuC = GameObject.Parent.Components.Get<MenuController>();
+    }
+
+    protected override int BuildHash() => System.HashCode.Combine( Official, Featured, Community );
+}

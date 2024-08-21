@@ -25,8 +25,6 @@ public sealed class Sng : Component
 		set { _spawnPoint = value; }
 	}
 	public List<GameObject> EndZones;
-	public string MapIndent;
-
 	public FileController File;
 	protected override void OnAwake()
 	{
@@ -38,7 +36,7 @@ public sealed class Sng : Component
 	}
 	protected override void OnStart()
 	{
-		LoadNewMap( "Playgrd", true );
+		LoadNewMap( "", true );
 		base.OnStart();
 	}
 
@@ -67,12 +65,12 @@ public sealed class Sng : Component
 			else if ( obj.Name == "Map Info" )
 			{
 				MapInfo = obj.Components.Get<Info>();
-				Log.Info( MapInfo.DisplayName + " - info found" );
+				Log.Info( "info found" );
 			}
 		}
 		if ( MapInfo == null ) Log.Warning( "Info not found" );
 
-		File.MapInfoSerialize( MapInfo );
+		File.InfoSerialize( MapInfo );
 
 		if ( EndZones.Count == 0 ) Log.Warning( "End zone not found" );
 		else ZoneC.MapInit();
@@ -110,13 +108,14 @@ public sealed class Sng : Component
 		}
 		catch ( Exception e ) { Log.Warning( e.Message ); }
 	}
-	public void LoadNewMap( string mapPath, bool playgournd )
+	public void LoadNewMap( string mapPath, bool playground )
 	{
-		if ( playgournd )
+		if ( playground )
 			mapPath = Cloud.Asset( "move.stasis_playground_scene" );
-		MapIndent = mapPath;
 
 		Scene.LoadFromFile( mapPath );
+
+		File.SetCurrentMap( mapPath );
 		MapInit();
 		MenuC.OpenMenu();
 	}

@@ -1,16 +1,28 @@
 ﻿using System;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Sandbox.Data;
 public class FileController
 {
 	public Settings Set { get; set; }
-	public List<MapData> Maps { get; set; }
+	public List<MapData> Maps { get; set; } = new List<MapData>();
 	public MapData currentMap;
 	public float currentTime = 0;
 	string s = "Settings.json";
 	string m = "Maps.json";
 	static Sng SNG = Sng.Inst;
+
+
+	static public string[] FeaturedMaps = new string[]
+	{
+
+	};
+	static public string[] OfficialMaps = new string[]
+	{
+		"move.stasis_playground_scene",
+	};
+
 	public void ReadFiles()
 	{
 		if ( FileSystem.Data.FileExists( s ) )
@@ -46,6 +58,18 @@ public class FileController
 			Maps = new List<MapData>();
 			FileSystem.Data.WriteAllText( m, ObjToJson( Maps ) );
 		}
+		AddOfficialMaps();
+	}
+	public void AddOfficialMaps()
+	{
+		foreach ( var i in FeaturedMaps )
+		{
+			FetchNewMap( i, "featured" );
+		}
+		foreach ( var i in OfficialMaps )
+		{
+			FetchNewMap( i, "official" );
+		}
 	}
 	public void SaveMaps()
 	{
@@ -62,7 +86,47 @@ public class FileController
 			WriteIndented = true
 		} );
 	}
-	public void MapInfoSerialize( Info info )
+	public async void FetchNewMap( string indent, string type )
+	{
+
+		var found = Maps.FirstOrDefault( x => x.Indent == indent );
+		if ( found == default( MapData ) )
+		{
+			var mp = new MapData();
+			mp.Type = type;
+			Maps.Add( mp );
+			await FetchMap( indent, mp );
+		}
+		SaveMaps();
+	}
+	static public async Task FetchMap( string packageIndent, MapData mapData )
+	{
+		var package = await Package.Fetch( packageIndent, false );
+		mapData.Name = package.Title;
+		mapData.Description = package.Description;
+		mapData.Indent = package.FullIdent;
+		mapData.Img = package.Thumb;
+	}
+	static public async void DownloadMap( string packageIndent )
+	{
+		var package = await Package.Fetch( packageIndent, false );
+		var meta = package.GetMeta( "PrimaryAsset", "models/dev/error.vmdl" );
+		await package.MountAsync();
+		Sng.Inst.LoadNewMap( meta, false );
+	}
+	public void SetCurrentMap( string ind )
+	{
+		currentMap = Maps.FirstOrDefault( map =>
+		{
+			return map.Indent == ind;
+		} );
+		if ( currentMap == default( MapData ) )
+		{
+			Log.Warning( "MAP LOADING WAS NOT FECHED CORRECLTY" );
+		}
+	}
+	//TODO FETCH 2 WAYS
+	public void InfoSerialize( Info info )
 	{
 		if ( info == null )
 		{
@@ -72,21 +136,6 @@ public class FileController
 		try
 		{
 
-			currentMap = Maps.FirstOrDefault( map =>
-			{
-				return map.Indent == SNG.MapIndent &&
-				map.Name == info.DisplayName &&
-				map.Vesrion == info.Version;
-			} );
-			bool _ = false;
-			if ( currentMap == default( MapData ) )
-			{
-				_ = true;
-				currentMap = new MapData();
-			}
-			Log.Info( _ );
-			currentMap.Name = info.DisplayName;
-			currentMap.Indent = SNG.MapIndent;
 			currentMap.Vesrion = info.Version;
 			var auth = new List<string>();
 			var authl = new List<string>();
@@ -99,16 +148,13 @@ public class FileController
 			currentMap.AuthorLinks = authl;
 
 			currentMap.DifficultyTier = info.DifficultyTier;
-			currentMap.Description = info.Description;
 			currentMap.SpeedRun = info.SpeerunMap;
 			currentMap.GoldTime = info.SpeerunMap ? info.GoldTime : 0;
 			currentMap.SilverTime = info.SpeerunMap ? info.SilverTime : 0;
 			currentMap.BronzeTime = info.SpeerunMap ? info.BronzeTime : 0;
 
-			if ( _ ) Maps.Add( currentMap );
 		}
 		catch ( Exception err ) { Log.Warning( "Map serialize error: " + err.Message ); }
-
 
 		SaveMaps();
 	}

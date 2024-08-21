@@ -37,21 +37,10 @@
                 @for (int i = 0; i < Scores.Count(); i++)
                 {
                     var time = Sng.Inst.FormatTime(Scores[i].Time);
-                    Log.Info(time);
-                    if (i % 2 == 0)
-                    {
-                        <div class="list-item " style="background-color: rgba(0, 0,0,0.2);">
-                            <div class="count">@(i + 1).</div>
-                            <div class="time">@(time)</div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="list-item ">
-                            <div class="count">@(i + 1).</div>
-                            <div class="time">@(time)</div>
-                        </div>
-                    } 
+                    <div class="list-item @(i % 2 ==0 ? "dark":"")">
+                        <div class="count">@(i + 1).</div>
+                        <div class="time">@(time)</div>
+                    </div>
                 }
             </div>
         </div>
@@ -82,7 +71,6 @@
     public string TimeMil { get; set; }
     public List<Score> Scores { get; set; } = new List<Score>();
     /*
-     * 
     protected override void OnAwake()
     {
         base.OnAwake();

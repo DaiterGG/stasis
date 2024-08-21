@@ -49,6 +49,12 @@
             "_type": "gameobject",
             "go": "24ef250d-05e0-4222-af3e-daea8e553089"
           },
+          "ChooseUI": {
+            "_type": "component",
+            "component_id": "f300e321-12f9-472a-b514-1c65022220b4",
+            "go": "05ca10bd-4f6a-4bf4-a9ef-f09992e1fbe7",
+            "component_type": "ChooseMenu"
+          },
           "EndUI": {
             "_type": "component",
             "component_id": "c06f7ec8-6048-44c5-847a-b5b3e2578c14",
@@ -98,7 +104,6 @@
           "__guid": "4f5506c2-a71c-4870-9f89-ef9f2f9cfab0",
           "Flags": 0,
           "Name": "End screen",
-          "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.ScreenPanel",
@@ -131,6 +136,26 @@
             {
               "__type": "MainMenu",
               "__guid": "a61628c9-9937-4337-b49f-9de2ce3e194b"
+            }
+          ]
+        },
+        {
+          "__guid": "05ca10bd-4f6a-4bf4-a9ef-f09992e1fbe7",
+          "Flags": 0,
+          "Name": "Choose menu",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "f43ba537-21f1-4099-8cd3-fc22694ca80c",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "ChooseMenu",
+              "__guid": "f300e321-12f9-472a-b514-1c65022220b4"
             }
           ]
         }
@@ -791,7 +816,6 @@
               "Flags": 0,
               "Name": "Free cam",
               "Position": "-204.1001,0.000007629395,37.8",
-              "Enabled": true,
               "Components": [
                 {
                   "__type": "Sandbox.CameraComponent",

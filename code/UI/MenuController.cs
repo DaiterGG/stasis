@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Sandbox.Data;
 using Sandbox.Player;
 namespace Sandbox;
@@ -9,6 +8,7 @@ public sealed class MenuController : Component
 	[Property] public MainMenu MenuUI { get; set; }
 	[Property] public IngameUI IngameUI { get; set; }
 	[Property] public EndScreen EndUI { get; set; }
+	[Property] public ChooseMenu ChooseUI { get; set; }
 	[Property] public GameObject Camera { get; set; }
 
 	public float pitchOffset = -11.3f;
@@ -102,26 +102,37 @@ public sealed class MenuController : Component
 	{
 
 	}
-	static async Task DownloadMap( string packageName, Scene sc )
-	{
-		var package = await Package.Fetch( packageName, false );
-
-		var model = package.GetMeta( "PrimaryAsset", "models/dev/error.vmdl" );
-		// downloads if not downloaded, mounts if not mounted
-		await package.MountAsync();
-
-		Sng.Inst.LoadNewMap( model, false );
-	}
 	public void MapSelect()
 	{
 		try
 		{
 			Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis_map", async delegate ( Package p )
 			{
-				await DownloadMap( p.FullIdent, Scene );
+				FC.FetchNewMap( p.FullIdent, "community" );
 			} );
 		}
 		catch ( Exception e ) { Log.Warning( e ); }
+	}
+	public void UpdateMapsList()
+	{
+		ChooseUI.Official.Clear();
+		ChooseUI.Featured.Clear();
+		ChooseUI.Community.Clear();
+		foreach ( var m in FC.Maps )
+		{
+			if ( m.Type == "official" )
+			{
+				ChooseUI.Official.Add( m );
+			}
+			else if ( m.Type == "featured" )
+			{
+				ChooseUI.Featured.Add( m );
+			}
+			else
+			{
+				ChooseUI.Community.Add( m );
+			}
+		}
 	}
 	public void Quit()
 	{
@@ -194,7 +205,6 @@ public sealed class MenuController : Component
 
 		EndUI.GameObject.Enabled = true;
 	}
-
 
 
 	public void ShowInfo()
