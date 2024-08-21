@@ -22,9 +22,9 @@ public sealed class EngineComponent : Component
 	[Property] public Transform turnVector;
 	//[Property, Range( 0, 50000f ), DefaultValue( 1000f )] readonly float maxSpeed;
 	public float gain { get; private set; } = 0f;
-	int invertVert = -1;
 	float maxGainGravityScale = 1.06f;
-	float maxGain { get { return gravity * maxGainGravityScale; } }
+	public float maxGain { get { return gravity * maxGainGravityScale; } }
+	int invertVert = -1;
 	//exp
 	[Property, Range( 1f, 300f, 1f ), DefaultValue( 1f )] readonly float boost = 1.1f;
 	float deltaZ = 0;

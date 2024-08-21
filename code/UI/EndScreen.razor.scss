@@ -1,0 +1,106 @@
+EndScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 20px;
+    pointer-events: all;
+    font-family: Signika Negative Light;
+    color: white;
+
+    .panel {
+        background-color: rgba(0,0,0,0.3);
+        width: 800px;
+        height: 600px;
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+
+        > .left {
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+
+            > .score {
+                background-color: rgba(0,0,0,0.3);
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+
+                > .timer {
+                    display: flex;
+                    flex: 0.4;
+                    width: auto;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: Font;
+
+                    > .time {
+                        font-weight: 100;
+                        font-size: 90px;
+                    }
+
+                    > .mil {
+                        margin-top: 36px;
+                        font-size: 50px;
+                    }
+                }
+
+                > .trophy {
+                    flex: 1;
+                }
+            }
+
+            > .name {
+               margin-top:10px; 
+                height: 70px;
+                background-color: rgba(0,0,0,0.3);
+            }
+        }
+
+        > .right {
+            flex: 1;
+            flex-direction: column;
+            margin-left: 10px;
+
+            > .up {
+                margin-bottom: 10px;
+                display: flex;
+                flex-direction: row;
+
+                > .author {
+                    background-color: rgba(0,0,0,0.3);
+                    width: 100%;
+                }
+
+                > .exit {
+                    margin-left: 10px;
+                    width: 70px;
+                    height: 100%;
+                    font-size: 35px;
+                    font-family: Poppins;
+                    background-color: rgba(0,0,0,0.3);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    > p {
+                        color: rgb(211, 211, 211);
+                    }
+                }
+            }
+
+            > .down {
+                display: flex;
+                flex: 1;
+                height: 100%;
+                background-color: rgba(0,0,0,0.3);
+            }
+        }
+    }
+}

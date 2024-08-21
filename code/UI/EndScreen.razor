@@ -1,0 +1,49 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+    <div class="panel">
+        <div class="left">
+
+        <div class="score" >
+            <div class="timer">
+                <div class="time"> @Time</div>
+                <div class="mil"> @TimeMil</div>
+            </div>
+            <div class="trophy"></div>
+        </div>
+        <div class="name">@Name</div>
+        </div>
+        <div class="right">
+            <div class="up">
+                <div class="author">By: @Author</div>
+                <div class="exit" onclick=@(x => { GameObject.Enabled = false; })><p>X</p></div>
+
+            </div>
+            <div class="down">
+
+            </div>
+        </div>
+
+
+    </div>
+</root>
+
+@code
+{
+
+    public string Time { get; set; } = "i.54.";
+    public string Author { get; set; } = "Daiter";
+    public string Name { get; set; } = "Playground";
+    public string TimeMil { get; set; } = "441";
+    protected override void OnAwake()
+    {
+        base.OnAwake();
+        Time = "I.54.";
+    }
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine( Time );
+}

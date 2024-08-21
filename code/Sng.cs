@@ -10,8 +10,8 @@ public sealed class Sng : Component
 	[Property] public PlayerComp Player;
 	[Property] public ZoneCreate ZoneC;
 	public static Sng Inst { get { return _sng; } }
-	public GameObject StartPoint;
 
+	public GameObject StartPoint;
 	private GameObject _spawnPoint;
 	public GameObject SpawnPoint
 	{
@@ -24,6 +24,7 @@ public sealed class Sng : Component
 	}
 	public List<GameObject> EndZones;
 	public Info MapInfo;
+	public string MapIndent;
 
 	public FileController File;
 	protected override void OnAwake()
@@ -32,11 +33,10 @@ public sealed class Sng : Component
 		base.OnAwake();
 		File = new FileController();
 		File.ReadFiles();
-		//LoadNewMap( "move/stasis_playground_scene" );
-		MapInit();
 	}
 	protected override void OnStart()
 	{
+		LoadNewMap( "move.stasis_playground_scene" );
 		base.OnStart();
 	}
 
@@ -65,6 +65,7 @@ public sealed class Sng : Component
 			else if ( obj.Name == "Map Info" )
 			{
 				MapInfo = obj.Components.Get<Info>();
+				Log.Info( MapInfo.DisplayName );
 			}
 		}
 		if ( MapInfo == null ) Log.Warning( "Info not found" );
@@ -104,7 +105,10 @@ public sealed class Sng : Component
 	}
 	public void LoadNewMap( string mapPath )
 	{
-		Scene.LoadFromFile( mapPath );
+		MapIndent = mapPath;
+		var str = Cloud.Asset( "move.stasis_playground_scene" );
+		// Package.
+		Scene.LoadFromFile( str );
 		MapInit();
 	}
 	public void SpawnPlayer()
@@ -124,6 +128,7 @@ public sealed class Sng : Component
 	public void EndZoneEnter( GameObject go, Collider cof )
 	{
 		Timer.IsFinished = true;
+		MenuC.EndUI.GameObject.Enabled = true;
 	}
 	public void ResetPlayer()
 	{

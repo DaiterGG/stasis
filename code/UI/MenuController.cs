@@ -5,6 +5,7 @@ public sealed class MenuController : Component
 {
 	[Property] public MainMenu MenuUI { get; set; }
 	[Property] public IngameUI IngameUI { get; set; }
+	[Property] public EndScreen EndUI { get; set; }
 	[Property] public GameObject Camera { get; set; }
 	public float pitchOffset = -11.3f;
 	public float yawOffset = 13.111f;
@@ -85,11 +86,7 @@ public sealed class MenuController : Component
 	}
 	public void Options()
 	{
-		Package gg = new Package();
-		Game.Overlay.ShowPackageSelector( "options", delegate ( Package p )
-		{
-			Log.Info( $"Package selected: {p.Url}" );
-		} );
+
 	}
 
 	public void MapSelect()

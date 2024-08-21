@@ -1,3 +1,5 @@
+using System;
+
 namespace Sandbox;
 public sealed class ZoneCreate : Component
 {
@@ -13,13 +15,18 @@ public sealed class ZoneCreate : Component
 	}
 	public void MapInit()
 	{
-		foreach ( var zone in SNG.EndZones )
+		try
 		{
-			//TODO
-			DecorateBox( zone );
+			foreach ( var zone in SNG.EndZones )
+			{
+				DecorateBox( zone );
+			}
+		}
+		catch ( Exception e )
+		{
+			Log.Warning( "Failed to decorate zones: " + e.Message );
 		}
 	}
-
 	public void DecorateBox( GameObject box )
 	{
 		var col = box.Components.Get<BoxCollider>();
@@ -27,6 +34,8 @@ public sealed class ZoneCreate : Component
 		var decor = box.Components.Get<AutoDecor>();
 		if ( decor == null ) return;
 		if ( !decor.AutoDecorate ) return;
+		CurrentColor = decor.ColorOfTheLines;
+		CreateBoxEdges( col );
 	}
 	/*public void LegacyZoneCreate()
             EndZones.Add( EndZonePrefab.Clone( GameObject, zone.Transform.Position, zone.Transform.Rotation, zone.Transform.Scale ) );
@@ -39,30 +48,46 @@ public sealed class ZoneCreate : Component
 			CurrentColor = endZoneColor;
 			CreateBoxEdges( EndZones.Last(), box );
     */
-	private void CreateBoxEdges( GameObject parent, EnvmapProbe box )
+	private void CreateBoxEdges( BoxCollider box )
 	{
-		Vector3[] c = box.Bounds.Corners.ToArray();
-		for ( int x = 0; x < c.Length; x++ ) c[x] += box.Transform.Position;
+		Vector3[] c = new Vector3[8];
 
-		CreateLine( parent, c[0], c[1] );
-		CreateLine( parent, c[1], c[2] );
-		CreateLine( parent, c[2], c[3] );
-		CreateLine( parent, c[3], c[0] );
-		CreateLine( parent, c[4], c[5] );
-		CreateLine( parent, c[5], c[6] );
-		CreateLine( parent, c[6], c[7] );
-		CreateLine( parent, c[7], c[4] );
-		CreateLine( parent, c[0], c[4] );
-		CreateLine( parent, c[1], c[5] );
-		CreateLine( parent, c[2], c[6] );
-		CreateLine( parent, c[3], c[7] ); //kill me
+		Vector3[] offsets = new Vector3[]
+		{
+			new Vector3(-1, -1, -1),
+			new Vector3( 1, -1, -1),
+			new Vector3( 1,  1, -1),
+			new Vector3(-1,  1, -1),
+			new Vector3(-1, -1,  1),
+			new Vector3( 1, -1,  1),
+			new Vector3( 1,  1,  1),
+			new Vector3(-1,  1,  1)
+		};
+
+		for ( int i = 0; i < 8; i++ )
+		{
+			c[i] = box.Transform.Position + box.Center + offsets[i] * (box.Scale * 0.5f);
+		}
+
+		int[,] edges = new int[,]
+		{
+			{0, 1}, {1, 2}, {2, 3}, {3, 0},
+			{4, 5}, {5, 6}, {6, 7}, {7, 4},
+			{0, 4}, {1, 5}, {2, 6}, {3, 7}
+		};
+
+		for ( int i = 0; i < edges.GetLength( 0 ); i++ )
+		{
+			CreateLine( c[edges[i, 0]], c[edges[i, 1]] );
+		}
 	}
-	private void CreateLine( GameObject parent, Vector3 p1, Vector3 p2 )
+	private void CreateLine( Vector3 p1, Vector3 p2 )
 	{
 		var l = LinePrefab.Clone();
-		l.Parent = parent;
+		l.Parent = GameObject;
 		l.Enabled = true;
 		var rend = l.Components.Get<LineRenderer>();
+		//Log.Info( rend.Width.AddOrReplacePoint( new Curve.Frame( 0f, 7f, 1f, 1f ) ) );
 		rend.Color = new Gradient( new Gradient.ColorFrame( 0, CurrentColor ) );
 		rend.VectorPoints[0] = p1;
 		rend.VectorPoints[1] = p2;

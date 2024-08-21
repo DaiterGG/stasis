@@ -49,6 +49,12 @@
             "_type": "gameobject",
             "go": "24ef250d-05e0-4222-af3e-daea8e553089"
           },
+          "EndUI": {
+            "_type": "component",
+            "component_id": "c06f7ec8-6048-44c5-847a-b5b3e2578c14",
+            "go": "4f5506c2-a71c-4870-9f89-ef9f2f9cfab0",
+            "component_type": "EndScreen"
+          },
           "IngameUI": {
             "_type": "component",
             "component_id": "bb7b5cbc-7216-42ad-863d-df3cb5af6e4d",
@@ -138,6 +144,11 @@
               "__type": "Sandbox.Sharpen",
               "__guid": "485ab860-27cd-43a8-8dbb-5cdd3c3a0714",
               "Scale": 0.2
+            },
+            {
+              "__type": "Sandbox.AudioListener",
+              "__guid": "15ea195c-8929-43be-96ea-92a0a6bbd080",
+              "UseCameraDirection": true
             }
           ]
         },
@@ -178,6 +189,27 @@
             {
               "__type": "MainMenu",
               "__guid": "a61628c9-9937-4337-b49f-9de2ce3e194b"
+            }
+          ]
+        },
+        {
+          "__guid": "4f5506c2-a71c-4870-9f89-ef9f2f9cfab0",
+          "Flags": 0,
+          "Name": "End screen",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "fdd7081b-bdef-4c64-9d07-0f20bb2be39c",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "EndScreen",
+              "__guid": "c06f7ec8-6048-44c5-847a-b5b3e2578c14",
+              "MyStringValue": "Hello World!"
             }
           ]
         }
@@ -425,6 +457,11 @@
                   "__type": "Sandbox.Sharpen",
                   "__guid": "b042ad34-6769-4024-816d-9f3ac3cfe9d0",
                   "Scale": 0.2
+                },
+                {
+                  "__type": "Sandbox.AudioListener",
+                  "__guid": "a92c08c9-a9a9-4479-81d1-7ae2cb073c66",
+                  "UseCameraDirection": true
                 }
               ]
             },
@@ -498,6 +535,11 @@
                   "__type": "Sandbox.Sharpen",
                   "__guid": "3a72a5f2-1d27-4e0a-84c9-508de634d995",
                   "Scale": 0.2
+                },
+                {
+                  "__type": "Sandbox.AudioListener",
+                  "__guid": "c8b45486-162b-480b-9f60-e6a4881c729e",
+                  "UseCameraDirection": true
                 }
               ]
             },
@@ -753,6 +795,46 @@
                   ]
                 }
               ]
+            },
+            {
+              "__guid": "31e10eb6-a499-49ce-b2b3-e0c60caee057",
+              "Flags": 0,
+              "Name": "Sound",
+              "Position": "-0.0002661292,0.000008553041,51.08102",
+              "Rotation": "0,0,0.9952275,-0.09758279",
+              "Scale": "2,2,2",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SoundPointComponent",
+                  "__guid": "c7a51dcb-22bc-4861-afef-cbd204d90eb7",
+                  "DistanceAttenuation": false,
+                  "DistanceAttenuationOverride": false,
+                  "Force2d": false,
+                  "MaxRepeatTime": 1,
+                  "MinRepeatTime": 1,
+                  "Occlusion": false,
+                  "OcclusionOverride": false,
+                  "OcclusionRadius": 32,
+                  "Pitch": 1,
+                  "PlayOnStart": true,
+                  "ReflectionOverride": false,
+                  "Reflections": false,
+                  "Repeat": true,
+                  "SoundEvent": "sounds/helicopter-sound-41975.sound",
+                  "SoundOverride": true,
+                  "StopOnNew": false,
+                  "TargetMixer": {
+                    "Name": "game",
+                    "Id": "db5f6b9a-9f5c-4c77-8c30-9391e8d54a06"
+                  },
+                  "Volume": 1
+                },
+                {
+                  "__type": "Sandbox.SoundControl",
+                  "__guid": "e62ae846-ee4b-44f1-b76a-d99a3f5c23bf"
+                }
+              ]
             }
           ]
         },
@@ -859,6 +941,11 @@
                     "_type": "gameobject",
                     "go": "d6d47027-a884-4a1d-b8fd-b0feabe121bd"
                   }
+                },
+                {
+                  "__type": "Sandbox.AudioListener",
+                  "__guid": "9221a111-e096-4b16-8fb8-ab6cf7638509",
+                  "UseCameraDirection": true
                 }
               ]
             }
@@ -944,10 +1031,10 @@
                 "0,0,0"
               ],
               "Width": {
-                "rangey": "0,4",
+                "rangey": "0,47.8",
                 "frames": [
                   {
-                    "y": 1
+                    "y": 0.08368204
                   }
                 ]
               },
@@ -961,7 +1048,6 @@
       "__guid": "1d84eddb-9d21-43a5-9e36-5438a211d03e",
       "Flags": 0,
       "Name": "map",
-      "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.MapInstance",
@@ -972,32 +1058,40 @@
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ],
-      "Children": []
+      ]
     },
     {
       "__guid": "d3badf1e-cbd8-43e7-8094-c6cad62544c5",
       "Flags": 0,
       "Name": "info_player_spawn",
       "Position": "-127.271,5.043406,64.43455",
-      "Rotation": "-0,0,-0.9952274,-0.09758277",
-      "Enabled": true
+      "Rotation": "-0,0,-0.9952274,-0.09758277"
     },
     {
       "__guid": "ee087548-0d64-46ac-9bb6-4bb77281b854",
       "Flags": 0,
-      "Name": "Object",
-      "Position": "-206.7726,-14.84681,95.71573",
+      "Name": "end_zone",
+      "Position": "-407.9152,-14.84684,182.7222",
       "Rotation": "0,0,-0.7071067,0.7071068",
       "Scale": "0.9416823,0.9416823,0.9416823",
       "Components": [
         {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "013b2a17-cbf2-4ca7-8f62-cd01cdd6d11d",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/heli_final.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "da7c16d7-9694-4f6e-851f-087261b9dd95",
+          "Center": "0,0,0",
+          "IsTrigger": false,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.AutoDecor",
+          "__guid": "a5d29f40-e4e6-4380-b9eb-c5b2244f0d10",
+          "AutoDecorate": true,
+          "ColorOfTheLines": "0.90698,0,0,1"
+        },
+        {
+          "__type": "Sandbox.DontDestroy",
+          "__guid": "337ecb27-6611-4e16-9b20-f074b8a9b2a9"
         }
       ]
     }
@@ -1026,6 +1120,8 @@
   "Title": "minimal",
   "Description": "",
   "ResourceVersion": 1,
-  "__references": [],
+  "__references": [
+    "move.black_marble1"
+  ],
   "__version": 1
 }
