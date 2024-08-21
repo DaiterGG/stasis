@@ -1,4 +1,6 @@
-﻿namespace Sandbox
+﻿using Sandbox.Player;
+
+namespace Sandbox
 {
 	public class MainTimer
 	{

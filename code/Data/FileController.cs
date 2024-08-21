@@ -4,8 +4,8 @@ using System.Text.Json;
 namespace Sandbox.Data;
 public class FileController
 {
-	public Settings set { get; set; }
-	public List<MapData> maps { get; set; }
+	public Settings Set { get; set; }
+	public List<MapData> Maps { get; set; }
 	public MapData currentMap;
 	public float currentTime = 0;
 	string s = "Settings.json";
@@ -17,7 +17,7 @@ public class FileController
 		{
 			try
 			{
-				set = FileSystem.Data.ReadJson<Settings>( s );
+				Set = FileSystem.Data.ReadJson<Settings>( s );
 
 			}
 			catch ( Exception err )
@@ -27,14 +27,14 @@ public class FileController
 		}
 		else
 		{
-			set = new Settings();
-			FileSystem.Data.WriteAllText( s, ObjToJson( set ) );
+			Set = new Settings();
+			FileSystem.Data.WriteAllText( s, ObjToJson( Set ) );
 		}
 		if ( FileSystem.Data.FileExists( m ) )
 		{
 			try
 			{
-				maps = JsonSerializer.Deserialize<List<MapData>>( FileSystem.Data.ReadAllText( m ) );
+				Maps = JsonSerializer.Deserialize<List<MapData>>( FileSystem.Data.ReadAllText( m ) );
 			}
 			catch ( Exception err )
 			{
@@ -43,17 +43,17 @@ public class FileController
 		}
 		else
 		{
-			maps = new List<MapData>();
-			FileSystem.Data.WriteAllText( m, ObjToJson( maps ) );
+			Maps = new List<MapData>();
+			FileSystem.Data.WriteAllText( m, ObjToJson( Maps ) );
 		}
 	}
 	public void SaveMaps()
 	{
-		FileSystem.Data.WriteAllText( m, ObjToJson( maps ) );
+		FileSystem.Data.WriteAllText( m, ObjToJson( Maps ) );
 	}
 	public void SaveSettings()
 	{
-		FileSystem.Data.WriteAllText( s, ObjToJson( set ) );
+		FileSystem.Data.WriteAllText( s, ObjToJson( Set ) );
 	}
 	private string ObjToJson( object o )
 	{
@@ -69,7 +69,7 @@ public class FileController
 			currentMap = null;
 			return;
 		}
-		currentMap = maps.FirstOrDefault( map =>
+		currentMap = Maps.FirstOrDefault( map =>
 		{
 			return map.Indent == SNG.MapIndent &&
 			map.Name == info.DisplayName &&
@@ -96,7 +96,7 @@ public class FileController
 		currentMap.SilverTime = info.SpeerunMap ? info.SilverTime : 0;
 		currentMap.BronzeTime = info.SpeerunMap ? info.BronzeTime : 0;
 
-		if ( _ ) maps.Add( currentMap );
+		if ( _ ) Maps.Add( currentMap );
 
 		SaveMaps();
 	}

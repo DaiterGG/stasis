@@ -1,9 +1,9 @@
-namespace Sandbox;
+namespace Sandbox.Player;
 public sealed class CameraControl : Component
 {
 	EngineComponent ENGINE;
 	[Property] public GameObject FreeCam;
-	[Property] List<GameObject> cameras;
+	[Property] public List<GameObject> cameras;
 	int iEnabled = 0;
 	bool IsFreeCam = false;
 	protected override void OnAwake()

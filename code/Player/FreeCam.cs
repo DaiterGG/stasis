@@ -1,9 +1,9 @@
 using System;
 
-namespace Sandbox;
+namespace Sandbox.Player;
 public sealed class FreeCam : Component
 {
-	[Property] readonly GameObject thirdCam;
+	[Property] public readonly GameObject thirdCam;
 	readonly float force = 20f;
 	float mult = 1f;
 	MainTimer TIMER;

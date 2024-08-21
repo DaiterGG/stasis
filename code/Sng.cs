@@ -1,5 +1,6 @@
-using Sandbox.Data;
 using System;
+using Sandbox.Data;
+using Sandbox.Player;
 
 namespace Sandbox;
 public sealed class Sng : Component
@@ -30,13 +31,15 @@ public sealed class Sng : Component
 	protected override void OnAwake()
 	{
 		_sng = this;
+
+		if ( MenuC == null ) Log.Info( "GG" );
 		base.OnAwake();
 		File = new FileController();
 		File.ReadFiles();
 	}
 	protected override void OnStart()
 	{
-		LoadNewMap( "move.stasis_playground_scene" );
+		LoadNewMap( "Playgrd", true );
 		base.OnStart();
 	}
 
@@ -108,15 +111,13 @@ public sealed class Sng : Component
 		}
 		catch ( Exception e ) { Log.Warning( e.Message ); }
 	}
-	public void LoadNewMap( string mapPath )
+	public void LoadNewMap( string mapPath, bool playgournd )
 	{
+		if ( playgournd )
+			mapPath = Cloud.Asset( "move.stasis_playground_scene" );
 		MapIndent = mapPath;
-		var st = "move.stasis_playground_scene";
-		var str = Cloud.Asset( "move.stasis_playground_scene" );
-		// Package.
 
-		Log.Info( str );
-		Scene.LoadFromFile( str );
+		Scene.LoadFromFile( mapPath );
 		MapInit();
 		MenuC.OpenMenu();
 	}

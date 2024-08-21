@@ -1,7 +1,6 @@
 using System;
 
-
-namespace Sandbox;
+namespace Sandbox.Player;
 public sealed class EngineComponent : Component
 {
 	IngameUI GAMEUI;
@@ -12,7 +11,7 @@ public sealed class EngineComponent : Component
 	public bool inputActive { get; private set; }
 	public bool isRunning;
 	public int progress;
-	[Property] Rigidbody rigid;
+	[Property] public Rigidbody rigid;
 	[Property, Range( 0.9f, 1f, 0.001f ), DefaultValue( 0.985f )] public float horizontalDumping;
 	[Property, Range( 0, 500f ), DefaultValue( 0f )] public float bodyOffsetZ;
 	[Property, Range( 0, 20000f ), DefaultValue( 16000f )] public float turnSpeed;
@@ -26,8 +25,8 @@ public sealed class EngineComponent : Component
 	public float maxGain { get { return gravity * maxGainGravityScale; } }
 	int invertVert = -1;
 	//exp
-	[Property, Range( 1f, 300f, 1f ), DefaultValue( 1f )] readonly float boost = 1.1f;
-	float deltaZ = 0;
+	[Property, Range( 1f, 300f, 1f ), DefaultValue( 1f )] public readonly float boost = 1.1f;
+	//float deltaZ = 0;
 	protected override void OnAwake()
 	{
 		base.OnAwake();

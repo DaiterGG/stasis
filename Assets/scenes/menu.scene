@@ -19,7 +19,7 @@
           },
           "Player": {
             "_type": "component",
-            "component_id": "744885b3-c930-4a06-a8f0-853db36a995a",
+            "component_id": "fb852f19-c91c-41bb-b506-363af2e5c7b8",
             "go": "75eb26c9-d9fc-4205-91a2-bebac64f876d",
             "component_type": "PlayerComp"
           },
@@ -117,6 +117,7 @@
           "__guid": "c2b2e3f1-e13b-4bc4-88d9-ee970a9f89aa",
           "Flags": 0,
           "Name": "Main menu",
+          "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.ScreenPanel",
@@ -144,21 +145,25 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.PlayerComp",
-          "__guid": "744885b3-c930-4a06-a8f0-853db36a995a",
+          "__type": "Sandbox.DontDestroy",
+          "__guid": "c740b5dc-e6a6-4dd9-818c-83b27d32ab6c"
+        },
+        {
+          "__type": "Sandbox.Player.PlayerComp",
+          "__guid": "fb852f19-c91c-41bb-b506-363af2e5c7b8",
           "Body": {
             "_type": "gameobject",
             "go": "3c2490ef-54a0-49bb-8f13-490e40aa51d1"
           },
           "CameraC": {
             "_type": "component",
-            "component_id": "b2d4e933-6ed4-4ed1-93ed-281ad94b95a7",
+            "component_id": "94048f2e-db16-4770-a617-44f26512029f",
             "go": "b85abaea-5c3e-427c-953a-7d73b892723a",
             "component_type": "CameraControl"
           },
           "Engine": {
             "_type": "component",
-            "component_id": "140f62ae-903c-464f-a94b-cebc521c6659",
+            "component_id": "8b3a009f-7760-4c75-9653-5399f19b6b28",
             "go": "3c2490ef-54a0-49bb-8f13-490e40aa51d1",
             "component_type": "EngineComponent"
           },
@@ -168,10 +173,6 @@
             "go": "b5c79e64-4919-4ff2-b640-e07aec2985bf",
             "component_type": "SpinController"
           }
-        },
-        {
-          "__type": "Sandbox.DontDestroy",
-          "__guid": "c740b5dc-e6a6-4dd9-818c-83b27d32ab6c"
         }
       ],
       "Children": [
@@ -207,7 +208,6 @@
             {
               "__type": "Sandbox.Rigidbody",
               "__guid": "54e58dc7-eef4-489e-8305-9eedc4239093",
-              "__enabled": false,
               "AngularDamping": 1,
               "Gravity": false,
               "LinearDamping": 0,
@@ -235,8 +235,16 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "Sandbox.EngineComponent",
-              "__guid": "140f62ae-903c-464f-a94b-cebc521c6659",
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "abe659c8-cc6f-4615-ae75-acdc5c95b6f9",
+              "Center": "0,0,0",
+              "IsTrigger": true,
+              "Scale": "250,250,250",
+              "Static": false
+            },
+            {
+              "__type": "Sandbox.Player.EngineComponent",
+              "__guid": "8b3a009f-7760-4c75-9653-5399f19b6b28",
               "bodyOffsetZ": 0,
               "boost": 1,
               "gainStep": 100,
@@ -259,14 +267,6 @@
                 "Scale": "1,1,1",
                 "Rotation": "0,0,0,1"
               }
-            },
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "abe659c8-cc6f-4615-ae75-acdc5c95b6f9",
-              "Center": "0,0,0",
-              "IsTrigger": true,
-              "Scale": "250,250,250",
-              "Static": false
             }
           ],
           "Children": [
@@ -751,8 +751,8 @@
                   "Volume": 1
                 },
                 {
-                  "__type": "Sandbox.SoundControl",
-                  "__guid": "e62ae846-ee4b-44f1-b76a-d99a3f5c23bf"
+                  "__type": "Sandbox.Player.SoundControl",
+                  "__guid": "282fe173-785d-443e-9862-b25dca4485e4"
                 }
               ]
             }
@@ -766,8 +766,8 @@
           "Enabled": true,
           "Components": [
             {
-              "__type": "Sandbox.CameraControl",
-              "__guid": "b2d4e933-6ed4-4ed1-93ed-281ad94b95a7",
+              "__type": "Sandbox.Player.CameraControl",
+              "__guid": "94048f2e-db16-4770-a617-44f26512029f",
               "cameras": [
                 {
                   "_type": "gameobject",
@@ -780,20 +780,20 @@
               ],
               "FreeCam": {
                 "_type": "gameobject",
-                "go": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a"
+                "go": "6591a34d-76fc-4c4d-80a6-beb4fe50de56"
               }
             }
           ],
           "Children": [
             {
-              "__guid": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
+              "__guid": "6591a34d-76fc-4c4d-80a6-beb4fe50de56",
               "Flags": 0,
               "Name": "Free cam",
-              "Position": "-204.1,0,37.79999",
+              "Position": "-204.1001,0.000007629395,37.8",
               "Components": [
                 {
                   "__type": "Sandbox.CameraComponent",
-                  "__guid": "040d8240-650b-4bc4-a3ae-2a208a153f3a",
+                  "__guid": "63b8cba0-2c8e-4f6a-a683-570cdf75f0ad",
                   "BackgroundColor": "0.33333,0.46275,0.52157,1",
                   "ClearFlags": "All",
                   "FieldOfView": 90,
@@ -810,7 +810,7 @@
                 },
                 {
                   "__type": "Sandbox.Bloom",
-                  "__guid": "e8f626f8-d790-493f-a154-03b920c75b3f",
+                  "__guid": "d8ff7cd5-6442-4dce-825a-58230b814837",
                   "BloomColor": {
                     "color": [
                       {
@@ -839,7 +839,7 @@
                 },
                 {
                   "__type": "Sandbox.Tonemapping",
-                  "__guid": "0bc0ad1a-415f-4642-bc93-b60a5e190fe5",
+                  "__guid": "74bc9f43-f6c1-4240-a504-edc24bdf55f3",
                   "__version": 1,
                   "ExposureBias": 2,
                   "ExposureCompensation": 0,
@@ -851,20 +851,12 @@
                 },
                 {
                   "__type": "Sandbox.Sharpen",
-                  "__guid": "3535a068-9975-4167-a6e0-2af7004b696e",
+                  "__guid": "16af0a6a-45c9-46c6-b1ed-1e131f4cb8ac",
                   "Scale": 0.2
                 },
                 {
-                  "__type": "Sandbox.FreeCam",
-                  "__guid": "744c29db-a478-442c-adef-510c0e498f6f",
-                  "thirdCam": {
-                    "_type": "gameobject",
-                    "go": "d6d47027-a884-4a1d-b8fd-b0feabe121bd"
-                  }
-                },
-                {
                   "__type": "Sandbox.AudioListener",
-                  "__guid": "9221a111-e096-4b16-8fb8-ab6cf7638509",
+                  "__guid": "fde070c3-ccf9-4e21-8780-19b6b5a47817",
                   "UseCameraDirection": true
                 }
               ]
@@ -1043,38 +1035,19 @@
       ]
     },
     {
-      "__guid": "0f486b22-eb72-406a-a85d-5cd68040677a",
+      "__guid": "731179a0-83a3-4f15-8eb7-ecaf0c021bb4",
       "Flags": 0,
-      "Name": "end_zone (1)",
-      "Position": "-1486.715,-549.166,-290.4578",
-      "Enabled": true,
+      "Name": "Object",
+      "Position": "-246.1377,-37.10921,-2.564705",
       "Components": [
         {
-          "__type": "Sandbox.Description",
-          "__guid": "ce829bfc-b049-4e5c-9b07-8b5e6c454896",
-          "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027, put trigger collider and End Zone component on it\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
-        },
-        {
-          "__type": "Sandbox.AutoDecor",
-          "__guid": "812996c7-53cc-4ef3-8cfc-d0fc1bf8b84d",
-          "AutoDecorate": true,
-          "ColorOfTheLines": "0.81395,0,0,1"
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "a808c2d4-8fa8-4b23-b10b-84068867fa88",
-          "Center": "0,0,0",
-          "IsTrigger": true,
-          "Scale": "1368.5,1473.398,297.3",
-          "Static": true
-        },
-        {
-          "__type": "EndZone",
-          "__guid": "8e3dbe56-dc13-47ea-8f83-fb0ab4f5c49a"
-        },
-        {
-          "__type": "Sandbox.DontDestroy",
-          "__guid": "601f8408-6a17-49e2-90f9-c5f8fe21b025"
+          "__type": "Sandbox.MapInstance",
+          "__guid": "acb651af-7fdf-4fa0-964a-16e52ddeceb1",
+          "__version": 1,
+          "EnableCollision": true,
+          "MapName": "move.stasis_playground",
+          "NoOrigin": false,
+          "UseMapFromLaunch": false
         }
       ]
     }

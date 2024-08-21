@@ -1,4 +1,4 @@
-namespace Sandbox;
+namespace Sandbox.Player;
 
 public sealed class PlayerComp : Component
 {

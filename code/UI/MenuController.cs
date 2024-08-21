@@ -1,5 +1,7 @@
-using Sandbox.Data;
 using System;
+using System.Threading.Tasks;
+using Sandbox.Data;
+using Sandbox.Player;
 namespace Sandbox;
 
 public sealed class MenuController : Component
@@ -62,8 +64,8 @@ public sealed class MenuController : Component
 	{
 		Camera.Transform.LocalPosition = CameraPos;
 
-		Camera.Transform.ClearInterpolation();
 		SetCameraLook();
+		Camera.Transform.ClearInterpolation();
 	}
 	public void SetCameraLook()
 	{
@@ -100,15 +102,27 @@ public sealed class MenuController : Component
 	{
 
 	}
-
-
-	public void MapSelect()
+	static async Task DownloadMap( string packageName, Scene sc )
 	{
-		Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis_map", delegate ( Package p )
-		{
-			Scene.LoadFromFile( p.FullIdent );
+		var package = await Package.Fetch( packageName, false );
 
-		} );
+		var model = package.GetMeta( "PrimaryAsset", "models/dev/error.vmdl" );
+		// downloads if not downloaded, mounts if not mounted
+		await package.MountAsync();
+
+		Sng.Inst.LoadNewMap( model, false );
+	}
+	public async void MapSelect()
+	{
+
+		try
+		{
+			Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis_map", async delegate ( Package p )
+			{
+				await DownloadMap( p.FullIdent, Scene );
+			} );
+		}
+		catch ( Exception e ) { Log.Warning( e ); }
 	}
 	public void Quit()
 	{
