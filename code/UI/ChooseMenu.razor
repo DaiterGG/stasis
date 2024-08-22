@@ -8,6 +8,11 @@
         <div class="panel">
             @if(info != null)
             {
+                <style>
+                    .sub{
+                        width:1600px;
+                    }
+                </style>
                 <div class="mapinfo" style="@("background-image: url(" + info.Img + ")")">
                     <div class="header ">
                         <div class="text">
@@ -37,7 +42,9 @@
                     <div class="bot" >
                         <div class="play" 
                             onclick="@(x => Sng.Inst.File.DownloadAndLoad(info.Indent))">
-                            play
+                            <p>
+                                PLAY
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -55,14 +62,24 @@
                         style="@("background-image: url(" + Official[i].Img + ")")">
                             <div class="time" >@(Official[i].Name.ToUpper())</div>
                         </div>
-                    } 
+                    }
                 </div>
             </div>
             <div class="center">
                 <div class="up">
                     Featured
-            </div>
+                </div>
                 <div class="down">
+                    @for (int i = 0; i < Featured.Count(); i++)
+                    {
+                        var m = Featured[i];
+                        <div class="list-item dark"
+                             onclick="@(x => {ShowInfo(m, "featured");})"
+                             style="@("background-image: url(" + Featured[i].Img + ")")">
+                            <div class="time">@(Featured[i].Name.ToUpper())</div>
+                        </div>
+                    } 
+
                 </div>
             </div>
             <div class="right">
@@ -70,12 +87,27 @@
                     Community
                 </div>
                 <div class="down">
+
+
+                    @for (int i = 0; i < Community.Count(); i++)
+                    {
+                        var m = Community[i];
+                        <div class="list-item dark"
+                             onclick="@(x => {ShowInfo(m, "community");})"
+                             style="@("background-image: url(" + Community[i].Img + ")")">
+                            <div class="time">@(Community[i].Name.ToUpper())</div>
+                        </div>
+                    }
+                    
+
                     <div class="add" onclick="@MenuC.MapSelect">Find</div>
                 </div>
-                <div class="back" onclick="@CloseMenu">
-                    <div class="text">Back</div>
-                    <div class="bg" onclick="@CloseMenu"></div>
-                </div>
+            </div>
+        </div>
+        <div class="bk">
+            <div class="back" onclick="@CloseMenu">
+                <div class="text">Back</div>
+                <div class="bg" onclick="@CloseMenu"></div>
             </div>
         </div>
     </div>

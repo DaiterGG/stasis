@@ -144,26 +144,8 @@ public sealed class MenuController : Component
 			{
 				ChooseUI.Community.Add( m );
 			}
-			ChooseUI.Official.Add( m );
-			ChooseUI.Official.Add( m );
-			ChooseUI.Official.Add( m );
-			ChooseUI.Official.Add( m );
-			ChooseUI.Official.Add( m );
-			ChooseUI.Official.Add( m );
-			ChooseUI.Official.Add( m );
-			ChooseUI.Official.Add( m );
-			ChooseUI.Official.Add( m );
-			ChooseUI.Community.Add( m );
-			ChooseUI.Community.Add( m );
-			ChooseUI.Community.Add( m );
-			ChooseUI.Community.Add( m );
-			ChooseUI.Community.Add( m );
-			ChooseUI.Community.Add( m );
-			ChooseUI.Community.Add( m );
-			ChooseUI.Community.Add( m );
-			ChooseUI.Community.Add( m );
-			ChooseUI.Community.Add( m );
-			ChooseUI.Community.Add( m );
+			//ChooseUI.Official.Add( m );
+			//ChooseUI.Community.Add( m );
 		}
 	}
 	public void Quit()
