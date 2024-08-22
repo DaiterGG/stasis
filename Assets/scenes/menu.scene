@@ -11,6 +11,12 @@
         {
           "__type": "Sandbox.Sng",
           "__guid": "b61062db-fe84-4099-b23c-7960ed71c12e",
+          "File": {
+            "_type": "component",
+            "component_id": "034cfebf-6289-4adc-bc9a-3be3168cd4fa",
+            "go": "98bb0b93-0525-4488-81eb-fd8b91d719cd",
+            "component_type": "FileController"
+          },
           "MenuC": {
             "_type": "component",
             "component_id": "e535a0d9-b6da-4e83-9382-76dfb6f69301",
@@ -917,7 +923,6 @@
           "Name": "Menu cam",
           "Position": "62.27419,-24.00217,3.932354",
           "Rotation": "0.1415505,-0.01750567,0.9822931,0.1214809",
-          "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.CameraComponent",
@@ -1094,19 +1099,16 @@
           "__guid": "acb651af-7fdf-4fa0-964a-16e52ddeceb1",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "move.stasis_playground",
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ],
-      "Children": []
+      ]
     },
     {
       "__guid": "b0a87ae5-58ef-4ea5-be18-d83593e0b6ba",
       "Flags": 0,
       "Name": "end_zone",
       "Position": "1753.212,-549.166,65.37964",
-      "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.Description",
@@ -1130,10 +1132,6 @@
         {
           "__type": "EndZone",
           "__guid": "24b7b640-580d-4383-a3cf-1f9dec95bb61"
-        },
-        {
-          "__type": "Sandbox.DontDestroy",
-          "__guid": "5d7fa397-9948-4c37-b2ab-c30919d219d0"
         }
       ]
     }

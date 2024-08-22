@@ -11,6 +11,7 @@ public sealed class Sng : Component
 	[Property] public MenuController MenuC;
 	[Property] public PlayerComp Player;
 	[Property] public ZoneCreate ZoneC;
+	[Property] public FileController File;
 	public static Sng Inst { get { return _sng; } }
 
 	public GameObject StartPoint;
@@ -25,19 +26,22 @@ public sealed class Sng : Component
 		set { _spawnPoint = value; }
 	}
 	public List<GameObject> EndZones;
-	public FileController File;
 	protected override void OnAwake()
 	{
 		_sng = this;
 
 		base.OnAwake();
-		File = new FileController();
 		File.ReadFiles();
 	}
 	protected override void OnStart()
 	{
+
+		File.AddOfficialMaps();
 		//File.FetchNewMap( "move.stasis_playground_scene", "official" );
-		File.DownloadAndLoad( "move.stasis_playground_scene" );
+		File.FetchNewMap( "dicta.base", "community" );
+		//	File.DownloadAndLoad( "move.stasis_playground_scene" );
+		Log.Info( "Fetched, now downloading" );
+		File.DownloadAndLoad( "dicta.base" );
 		base.OnStart();
 	}
 
@@ -109,20 +113,25 @@ public sealed class Sng : Component
 		}
 		catch ( Exception e ) { Log.Warning( e.Message ); }
 	}
-	public void LoadNewMap( string mapPath )
+	public void LoadNewMap( SceneFile file )
 	{
+		Log.Info( "Map trying to load: " + file.ResourceName );
 		try
 		{
-			Scene.LoadFromFile( mapPath );
-
+			Scene.Load( file );
 		}
-		catch ( Exception e ) { Log.Warning( "Map not found localy: " + mapPath + " " + e.Message ); }
+		catch ( Exception e ) { Log.Warning( "Map not found localy: " + e.Message ); }
 
 		MapInit();
 		MenuC.OpenMenu();
 	}
 	public void SpawnPlayer()
 	{
+		if ( SpawnPoint == null )
+		{
+			Log.Warning( "No spawn point" );
+			return;
+		}
 		Player.Transform.Position = SpawnPoint.Transform.Position;
 		Player.Transform.Rotation = SpawnPoint.Transform.Rotation;
 		Player.Transform.ClearInterpolation();

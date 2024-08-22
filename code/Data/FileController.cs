@@ -16,6 +16,7 @@ public sealed class FileController : Component
 	{
 		base.OnAwake();
 		SNG = Sng.Inst;
+		Log.Info( SNG.MenuC );
 	}
 
 	static public string[] FeaturedMaps = new string[]
@@ -27,6 +28,7 @@ public sealed class FileController : Component
 		"move.stasis_playground_scene",
 	};
 
+	//OnAwake init!
 	public void ReadFiles()
 	{
 		if ( FileSystem.Data.FileExists( s ) )
@@ -62,7 +64,6 @@ public sealed class FileController : Component
 			Maps = new List<MapData>();
 			FileSystem.Data.WriteAllText( m, ObjToJson( Maps ) );
 		}
-		AddOfficialMaps();
 	}
 	public void AddOfficialMaps()
 	{
@@ -78,6 +79,8 @@ public sealed class FileController : Component
 	public void SaveMaps()
 	{
 		FileSystem.Data.WriteAllText( m, ObjToJson( Maps ) );
+
+		SNG.MenuC.UpdateMapsList();
 	}
 	public void SaveSettings()
 	{
@@ -90,14 +93,14 @@ public sealed class FileController : Component
 			WriteIndented = true
 		} );
 	}
-	public async void FetchNewMap( string indent, string type )
+	public void FetchNewMap( string indent, string type )
 	{
 
 		var found = Maps.FirstOrDefault( x =>
 		{
 			return x.Indent == indent;
 		} );
-		if ( found != default( MapData ) && found != null && ((found.Meta == null) || (found.Img == null) || (found.Name == null) || (found.Description == null)) )
+		if ( found != default( MapData ) && found != null && (found.Img == null || found.Name == null || found.Description == null) )
 		{
 			Log.Warning( "Bad data, fetch new one" );
 			Log.Info( "removed: " + Maps.Remove( found ).ToString() );
@@ -109,23 +112,22 @@ public sealed class FileController : Component
 			mp.Type = type;
 			Log.Info( "map added" );
 			Maps.Add( mp );
-			await FetchMap( indent, mp );
+			FetchMap( indent, mp ).Wait();
 		}
 		SaveMaps();
 	}
 	static public async Task FetchMap( string packageIndent, MapData mapData )
 	{
-		var package = await Package.Fetch( packageIndent, false );
-		var meta = package.GetMeta( "PrimaryAsset", "models/dev/error.vmdl" );
-		mapData.Meta = meta;
+		Log.Info( "fetching asset" + packageIndent );
+		var package = await Package.Fetch( packageIndent, true );
 		mapData.Name = package.Title;
 		mapData.Description = package.Summary;
 		mapData.Indent = package.FullIdent;
 		mapData.Img = package.Thumb;
 	}
-	public async void DownloadAndLoad( string packageIndent )
+	public void DownloadAndLoad( string packageIndent )
 	{
-		var t = DownloadMap( packageIndent );
+		DownloadScene( packageIndent ).Wait();
 
 		currentMap = Maps.FirstOrDefault( map =>
 		{
@@ -137,13 +139,19 @@ public sealed class FileController : Component
 			Log.Warning( "ABORT THE MISSION" );
 			return;
 		}
-		await t;
-		SNG.LoadNewMap( currentMap.Meta );
+		SNG.LoadNewMap( tempFile );
 	}
-	public async Task DownloadMap( string packageIndent )
+	public static SceneFile tempFile = new SceneFile();
+	public async Task DownloadScene( string sceneIndent )
 	{
-		var package = await Package.Fetch( packageIndent, false );
-		await package.MountAsync();
+		var package = await Package.Fetch( sceneIndent, false );
+
+		var meta = package.GetMeta( "PrimaryAsset", "ERROR" );
+		var g = await package.MountAsync();
+		//var scene = package.GetMeta<SceneFile>( "PrimaryAsset" );
+		tempFile.LoadFromJson( g.ReadAllText( meta ) );
+
+		//Sng.Inst.Scene.Load( scene );
 	}
 
 	public void InfoSerialize( Info info )

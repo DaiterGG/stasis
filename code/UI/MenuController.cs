@@ -62,6 +62,7 @@ public sealed class MenuController : Component
 	}
 	public void CameraInit()
 	{
+		Camera.Enabled = true;
 		Camera.Transform.LocalPosition = CameraPos;
 
 		SetCameraLook();
@@ -87,7 +88,9 @@ public sealed class MenuController : Component
 		SNG.SpawnPlayer();
 		SPINC.RestartSpin();
 		IngameUI.GameObject.Enabled = false;
-		//EndUI.GameObject.Enabled = false;
+		EndUI.GameObject.Enabled = false;
+
+		ChooseUI.GameObject.Enabled = false;
 		MenuUI.GameObject.Enabled = true;
 		IsGaming = false;
 		CameraInit();
@@ -172,15 +175,13 @@ public sealed class MenuController : Component
 			EndUI.Bronze = SNG.FormatTime( FC.currentMap.BronzeTime );
 
 			EndUI.medal = GetMedal( FC.currentMap );
-			EndUI.img = EndUI.medal.ToString();
 		}
 		else
 		{
 			EndUI.Gold = "";
 			EndUI.Silver = "PASS";
 			EndUI.Bronze = "";
-			EndUI.medal = 2;
-			EndUI.img = "3";
+			EndUI.medal = -1;
 		}
 		var strtime = SNG.FormatTime( FC.currentTime );
 		EndUI.Time = strtime.Split( '.' )[0];
