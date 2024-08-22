@@ -4,9 +4,8 @@ public sealed class Info : Component
 {
 	[Group( "General" ),
 		Property,
-		DefaultValue( "Author Name" ),
-		Description( "Author of the map and personal link (optional)" )]
-	public Dictionary<string, string> Author { get; set; }
+		Description( "Author of the map" )]
+	public string Author { get; set; } = "Author Name";
 
 	[Group( "General" ),
 			Property,

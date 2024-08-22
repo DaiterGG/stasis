@@ -5,9 +5,43 @@
 
 <root>
     <div class="sub">
-
         <div class="panel">
-
+            @if(info != null)
+            {
+                <div class="mapinfo" style="@("background-image: url(" + info.Img + ")")">
+                    <div class="header ">
+                        <div class="text">
+                            <div class="name">@info.Name</div>
+                            @if(info.Scores.Count() != 0)
+                            {
+                                <div class="btime">Best Time: @Sng.Inst.FormatTime(info.Scores[0].Time)
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="btime">Not Played</div>
+                            }
+                            @if(info.Author != null)
+                            {
+                                <div class="author">By: @info.Author</div>
+                            }
+                            @if(info.DifficultyTier != null)
+                            {
+                                <div class="difficulty">Tier: @info.DifficultyTier</div>
+                            }
+                            
+                        </div>
+                        <div class="medal" style="@("background-image: url(img/medal"+(MenuC.GetMedal(info)).ToString()+".png);")"></div>
+                    </div>
+                    <div class="gradi"></div>
+                    <div class="bot" >
+                        <div class="play" 
+                            onclick="@(x => Sng.Inst.File.DownloadAndLoad(info.Indent))">
+                            play
+                        </div>
+                    </div>
+                </div>
+            }
             <div class="left">
                 <div class="up">
                     Official
@@ -15,9 +49,11 @@
                 <div class="down">
                     @for (int i = 0; i < Official.Count(); i++)
                     {
-                        <div class="list-item @(i % 2 ==0 ? "dark":"")">
-                            <div class="count">@(i + 1).</div>
-                            <div class="time">@(Official[i].Name)</div>
+                        var m = Official[i];
+                        <div class="list-item dark" 
+                        onclick="@(x => {ShowInfo(m, "official");})"
+                        style="@("background-image: url(" + Official[i].Img + ")")">
+                            <div class="time" >@(Official[i].Name.ToUpper())</div>
                         </div>
                     } 
                 </div>
@@ -36,11 +72,11 @@
                 <div class="down">
                     <div class="add" onclick="@MenuC.MapSelect">Find</div>
                 </div>
+                <div class="back" onclick="@CloseMenu">
+                    <div class="text">Back</div>
+                    <div class="bg" onclick="@CloseMenu"></div>
+                </div>
             </div>
-        </div>
-        <div class="back">
-            <div class="text">Back</div>
-            <div class="bg"></div>
         </div>
     </div>
 </root>
@@ -51,12 +87,24 @@
     public List<MapData> Official { get; set; } = new List<MapData>();
     public List<MapData> Featured { get; set; }= new List<MapData>();
     public List<MapData> Community { get; set; }= new List<MapData>();
+    public MapData info = null;
 
+    public void ShowInfo(MapData i, string type)
+    {
+        var list = type == "official" ? Official : type == "featured" ? Featured : Community;
+        info = i;
+    }
+
+    void CloseMenu()
+    {
+        MenuC.CloseChooseMenu();
+        info=null;
+    }
     protected override void OnAwake()
     {
         base.OnAwake();
         MenuC = GameObject.Parent.Components.Get<MenuController>();
     }
 
-    protected override int BuildHash() => System.HashCode.Combine( Official, Featured, Community );
+    protected override int BuildHash() => System.HashCode.Combine( Official, Featured, Community , info);
 }

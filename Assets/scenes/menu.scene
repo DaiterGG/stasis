@@ -34,6 +34,21 @@
           "__type": "Sandbox.DontDestroy",
           "__guid": "9fb01cf6-11d0-4a7b-9151-d44a0bc6650c"
         }
+      ],
+      "Children": [
+        {
+          "__guid": "98bb0b93-0525-4488-81eb-fd8b91d719cd",
+          "Flags": 0,
+          "Name": "File system",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.Data.FileController",
+              "__guid": "034cfebf-6289-4adc-bc9a-3be3168cd4fa"
+            }
+          ]
+        }
       ]
     },
     {
@@ -101,6 +116,25 @@
           ]
         },
         {
+          "__guid": "05ca10bd-4f6a-4bf4-a9ef-f09992e1fbe7",
+          "Flags": 0,
+          "Name": "Choose menu",
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "f43ba537-21f1-4099-8cd3-fc22694ca80c",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "ChooseMenu",
+              "__guid": "f300e321-12f9-472a-b514-1c65022220b4"
+            }
+          ]
+        },
+        {
           "__guid": "4f5506c2-a71c-4870-9f89-ef9f2f9cfab0",
           "Flags": 0,
           "Name": "End screen",
@@ -136,26 +170,6 @@
             {
               "__type": "MainMenu",
               "__guid": "a61628c9-9937-4337-b49f-9de2ce3e194b"
-            }
-          ]
-        },
-        {
-          "__guid": "05ca10bd-4f6a-4bf4-a9ef-f09992e1fbe7",
-          "Flags": 0,
-          "Name": "Choose menu",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ScreenPanel",
-              "__guid": "f43ba537-21f1-4099-8cd3-fc22694ca80c",
-              "AutoScreenScale": true,
-              "Opacity": 1,
-              "Scale": 1,
-              "ZIndex": 100
-            },
-            {
-              "__type": "ChooseMenu",
-              "__guid": "f300e321-12f9-472a-b514-1c65022220b4"
             }
           ]
         }

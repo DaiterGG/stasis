@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Sandbox.Data;
-public class FileController
+public sealed class FileController : Component
 {
 	public Settings Set { get; set; }
 	public List<MapData> Maps { get; set; } = new List<MapData>();
@@ -11,8 +11,12 @@ public class FileController
 	public float currentTime = 0;
 	string s = "Settings.json";
 	string m = "Maps.json";
-	static Sng SNG = Sng.Inst;
-
+	static Sng SNG;
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		SNG = Sng.Inst;
+	}
 
 	static public string[] FeaturedMaps = new string[]
 	{
@@ -89,11 +93,21 @@ public class FileController
 	public async void FetchNewMap( string indent, string type )
 	{
 
-		var found = Maps.FirstOrDefault( x => x.Indent == indent );
-		if ( found == default( MapData ) )
+		var found = Maps.FirstOrDefault( x =>
+		{
+			return x.Indent == indent;
+		} );
+		if ( found != default( MapData ) && found != null && ((found.Meta == null) || (found.Img == null) || (found.Name == null) || (found.Description == null)) )
+		{
+			Log.Warning( "Bad data, fetch new one" );
+			Log.Info( "removed: " + Maps.Remove( found ).ToString() );
+			found = default;
+		}
+		if ( found == default( MapData ) || (found == null) )
 		{
 			var mp = new MapData();
 			mp.Type = type;
+			Log.Info( "map added" );
 			Maps.Add( mp );
 			await FetchMap( indent, mp );
 		}
@@ -102,30 +116,36 @@ public class FileController
 	static public async Task FetchMap( string packageIndent, MapData mapData )
 	{
 		var package = await Package.Fetch( packageIndent, false );
+		var meta = package.GetMeta( "PrimaryAsset", "models/dev/error.vmdl" );
+		mapData.Meta = meta;
 		mapData.Name = package.Title;
-		mapData.Description = package.Description;
+		mapData.Description = package.Summary;
 		mapData.Indent = package.FullIdent;
 		mapData.Img = package.Thumb;
 	}
-	static public async void DownloadMap( string packageIndent )
+	public async void DownloadAndLoad( string packageIndent )
 	{
-		var package = await Package.Fetch( packageIndent, false );
-		var meta = package.GetMeta( "PrimaryAsset", "models/dev/error.vmdl" );
-		await package.MountAsync();
-		Sng.Inst.LoadNewMap( meta, false );
-	}
-	public void SetCurrentMap( string ind )
-	{
+		var t = DownloadMap( packageIndent );
+
 		currentMap = Maps.FirstOrDefault( map =>
 		{
-			return map.Indent == ind;
+			return map.Indent == packageIndent;
 		} );
-		if ( currentMap == default( MapData ) )
+		if ( currentMap == default( MapData ) || currentMap == null )
 		{
 			Log.Warning( "MAP LOADING WAS NOT FECHED CORRECLTY" );
+			Log.Warning( "ABORT THE MISSION" );
+			return;
 		}
+		await t;
+		SNG.LoadNewMap( currentMap.Meta );
 	}
-	//TODO FETCH 2 WAYS
+	public async Task DownloadMap( string packageIndent )
+	{
+		var package = await Package.Fetch( packageIndent, false );
+		await package.MountAsync();
+	}
+
 	public void InfoSerialize( Info info )
 	{
 		if ( info == null )
@@ -133,20 +153,16 @@ public class FileController
 			currentMap = null;
 			return;
 		}
+		if ( currentMap == null )
+		{
+			Log.Warning( "Map data was not fetched correctly" );
+			return;
+		}
 		try
 		{
 
-			currentMap.Vesrion = info.Version;
-			var auth = new List<string>();
-			var authl = new List<string>();
-			foreach ( var item in info.Author )
-			{
-				auth.Add( item.Key );
-				authl.Add( item.Value );
-			}
-			currentMap.Authors = auth;
-			currentMap.AuthorLinks = authl;
-
+			currentMap.Version = info.Version;
+			currentMap.Author = info.Author;
 			currentMap.DifficultyTier = info.DifficultyTier;
 			currentMap.SpeedRun = info.SpeerunMap;
 			currentMap.GoldTime = info.SpeerunMap ? info.GoldTime : 0;

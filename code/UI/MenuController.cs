@@ -106,12 +106,24 @@ public sealed class MenuController : Component
 	{
 		try
 		{
-			Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis_map", async delegate ( Package p )
+			Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis_map", delegate ( Package p )
 			{
 				FC.FetchNewMap( p.FullIdent, "community" );
 			} );
 		}
 		catch ( Exception e ) { Log.Warning( e ); }
+	}
+	public void OpenChooseMenu()
+	{
+		UpdateMapsList();
+		ChooseUI.GameObject.Enabled = true;
+		MenuUI.GameObject.Enabled = false;
+
+	}
+	public void CloseChooseMenu()
+	{
+		ChooseUI.GameObject.Enabled = false;
+		MenuUI.GameObject.Enabled = true;
 	}
 	public void UpdateMapsList()
 	{
@@ -132,6 +144,26 @@ public sealed class MenuController : Component
 			{
 				ChooseUI.Community.Add( m );
 			}
+			ChooseUI.Official.Add( m );
+			ChooseUI.Official.Add( m );
+			ChooseUI.Official.Add( m );
+			ChooseUI.Official.Add( m );
+			ChooseUI.Official.Add( m );
+			ChooseUI.Official.Add( m );
+			ChooseUI.Official.Add( m );
+			ChooseUI.Official.Add( m );
+			ChooseUI.Official.Add( m );
+			ChooseUI.Community.Add( m );
+			ChooseUI.Community.Add( m );
+			ChooseUI.Community.Add( m );
+			ChooseUI.Community.Add( m );
+			ChooseUI.Community.Add( m );
+			ChooseUI.Community.Add( m );
+			ChooseUI.Community.Add( m );
+			ChooseUI.Community.Add( m );
+			ChooseUI.Community.Add( m );
+			ChooseUI.Community.Add( m );
+			ChooseUI.Community.Add( m );
 		}
 	}
 	public void Quit()
@@ -156,22 +188,9 @@ public sealed class MenuController : Component
 			EndUI.Gold = SNG.FormatTime( FC.currentMap.GoldTime );
 			EndUI.Silver = SNG.FormatTime( FC.currentMap.SilverTime );
 			EndUI.Bronze = SNG.FormatTime( FC.currentMap.BronzeTime );
-			if ( FC.currentMap.GoldTime > time )
-			{
-				EndUI.medal = 3;
-				EndUI.img = "3";
-			}
-			else if ( FC.currentMap.SilverTime > time )
-			{
-				EndUI.medal = 2;
-				EndUI.img = "2";
-			}
-			else if ( FC.currentMap.BronzeTime > time )
-			{
-				EndUI.medal = 1;
-				EndUI.img = "1";
 
-			}
+			EndUI.medal = GetMedal( FC.currentMap );
+			EndUI.img = EndUI.medal.ToString();
 		}
 		else
 		{
@@ -193,17 +212,41 @@ public sealed class MenuController : Component
 
 		}
 		else EndUI.TimeDif = "";
-		var auth = "";
-		foreach ( var a in FC.currentMap.Authors )
-		{
-			auth += a + ", ";
 
-		}
-
-		EndUI.Author = auth.Substring( 0, auth.Length - 2 );
+		EndUI.Author = FC.currentMap.Author;
 		EndUI.Name = FC.currentMap.Name.ToUpper();
 
 		EndUI.GameObject.Enabled = true;
+	}
+
+	public int GetMedal( MapData map )
+	{
+		if ( map.SpeedRun == null ) return 0;
+		if ( map.Scores.Count() == 0 ) return 0;
+		var time = map.Scores[0].Time;
+		if ( map.SpeedRun )
+		{
+			if ( FC.currentMap.GoldTime > time )
+			{
+				return 3;
+			}
+			else if ( FC.currentMap.SilverTime > time )
+			{
+				return 2;
+			}
+			else if ( FC.currentMap.BronzeTime > time )
+			{
+				return 1;
+
+			}
+
+		}
+		else
+		{
+			return 3;
+		}
+		return 0;
+
 	}
 
 

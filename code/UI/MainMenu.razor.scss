@@ -7,6 +7,7 @@ MainMenu {
     bottom: 0;
     justify-content: center;
     align-items: center;
+    z-index:1;
 
     .buttons {
         position: absolute;
@@ -38,14 +39,16 @@ MainMenu {
                 align-self: center;
                 margin-left: 80px;
                 font-family: Signika Negative;
-                font-weight:600;
+            font-family: Signika Negative;
+                font-weight:400;
                 color: #d9d7e0;
                 font-size: 60px;
+                z-index:1;
             }
 
 
             > .bg {
-                transform: skew(-40deg, 0deg);
+                transform: skew(-26deg, 0deg);
                 border-radius: 10px 0 10px 0;
                 background-color: rgba(0,0,0,0.3);
                 backdrop-filter: blur(0px);

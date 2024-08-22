@@ -36,7 +36,8 @@ public sealed class Sng : Component
 	}
 	protected override void OnStart()
 	{
-		LoadNewMap( "", true );
+		//File.FetchNewMap( "move.stasis_playground_scene", "official" );
+		File.DownloadAndLoad( "move.stasis_playground_scene" );
 		base.OnStart();
 	}
 
@@ -108,14 +109,15 @@ public sealed class Sng : Component
 		}
 		catch ( Exception e ) { Log.Warning( e.Message ); }
 	}
-	public void LoadNewMap( string mapPath, bool playground )
+	public void LoadNewMap( string mapPath )
 	{
-		if ( playground )
-			mapPath = Cloud.Asset( "move.stasis_playground_scene" );
+		try
+		{
+			Scene.LoadFromFile( mapPath );
 
-		Scene.LoadFromFile( mapPath );
+		}
+		catch ( Exception e ) { Log.Warning( "Map not found localy: " + mapPath + " " + e.Message ); }
 
-		File.SetCurrentMap( mapPath );
 		MapInit();
 		MenuC.OpenMenu();
 	}

@@ -8,30 +8,34 @@ ChooseMenu {
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    border-radius: 20px;
-    pointer-events: all;
-    font-family: Signika Negative;
     font-weight: 700;
     color: white;
+    font-family: Uni Sans Heavy CAPS;
     text-overflow: ellipsis;
+    pointer-events: all;
 
     .sub {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dark {
+        background-color: rgba(0,0,0,0.2);
     }
 
     .panel {
         background-color: rgba(0,0,0,0.3);
-        width: 1200px;
         height: 700px;
-        margin-right: 500px;
+        min-width: 1200px;
         display: flex;
         flex-direction: row;
         padding: 10px;
         border-radius: 15px;
 
-
         > div {
+            min-width: 400px;
             flex: 1;
             border-radius: 15px;
             display: flex;
@@ -40,6 +44,8 @@ ChooseMenu {
             align-content: center;
 
             > .up {
+                font-family: Uni Sans Heavy CAPS;
+                border-radius: 15px;
                 height: 100px;
                 background-color: rgba(0,0,0,0.2);
                 justify-content: center;
@@ -49,40 +55,120 @@ ChooseMenu {
             }
 
             > .down {
+                padding: 10px;
                 display: flex;
+                gap: 10px;
                 flex-direction: column;
                 align-items: center;
                 flex: 1;
                 height: 100%;
-                background-color: rgba(0,0,0,0.3);
                 max-height: 100%; /* Adjust height as needed */
                 overflow-y: scroll; /* Enables vertical scrolling */
-                > .dark {
-                    background-color: rgba(0,0,0,0.2);
-                }
 
                 > .list-item {
-                    padding-left: 10px;
-                    min-height: 40px;
+                    min-height: 90px;
                     display: flex;
                     flex-direction: row;
-
-                    > .count {
-                        width: 50px;
-                        padding-top: 5px;
-                        font-weight: 200;
-                        color: rgb(180,180,180);
-                        font-size: 25px;
-                    }
+                    align-items: center;
+                    width: 100%;
+                    border-radius: 15px;
+                    background-size-y: 100%;
+                    background-position-y: center;
 
                     > .time {
-                        margin-left: -50px;
-                        font-weight: 400;
+                        padding-left: 20px;
+                        background-color: #000000BB;
+                        font-weight: 700;
+                        border-radius: 15px;
                         width: 100%;
+                        height: 100%;
+                        font-size: 30px;
+                        font-family: Uni Sans Heavy CAPS;
                         display: flex;
-                        align-content: center;
-                        justify-content: center;
+                        align-items: center;
+                        justify-content: flex-start;
                     }
+                }
+            }
+        }
+
+        > .mapinfo {
+            margin-right: 10px;
+            border-radius: 15px 15px 15px 15px;
+            min-width: 400px;
+            background-size: 100%;
+            background-position-y: center;
+            display: flex;
+            flex-direction: column;
+
+
+            > .header {
+                height: 200px;
+                border-radius: 15px 15px 0 0;
+                width: 100%;
+                background-color: #000000DD;
+                flex: 52%;
+                display: flex;
+                flex-direction: row;
+
+
+                > .text {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    padding-left: 10px;
+                    padding-top: 7px;
+
+                    > div {
+                        font-family: Uni Sans Heavy CAPS;
+                        font-weight: 200;
+                    }
+
+                    > .name {
+                        font-family: Uni Sans Heavy CAPS;
+                        font-weight: 700;
+                    }
+
+                    > .btime {
+                        width: 100%;
+                    }
+                }
+
+
+                > .medal {
+                    height: 100%;
+                    width: 25%;
+                    background-size: 83px 162px;
+                    margin-right: 20px;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            > .gradi {
+                flex: 100%;
+                width: 100%;
+                background: linear-gradient(to bottom, #000000EF,#000000DD,#00000000,#00000000);
+            }
+
+            > .bot {
+                width: 100%;
+                height: 27%;
+                padding-bottom: 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+
+                > .play {
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.8);
+                    border-radius: 40px;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 60px;
+                    padding-bottom: 15px;
+                    font-weight: 100;
                 }
             }
         }
@@ -107,36 +193,42 @@ ChooseMenu {
                 background-color: rgba(0,0,0,0.2);
                 border-radius: 15px;
             }
-        }
-    }
 
-    .back {
-        align-self: flex-start;
-        width: 250px;
-        margin-left: 25px;
-        margin-top: 10px;
-        height: 100px;
-        transition: all 0.02s ease;
+            > .back:hover {
+                > .bg {
+                    background-color: rgba(0,0,0,0.60);
+                }
+            }
 
-        > .text {
-            position: absolute;
-            align-self: center;
-            width: 100%;
-            margin-left: 50px;
-            font-family: Signika Negative;
-            font-weight: 600;
-            color: #d9d7e0;
-            font-size: 60px;
-            z-index: 3;
-        }
+            > .back {
+                width: 250px;
+                margin-left: 130px;
+                margin-bottom: -123px;
+                height: 100px;
+                z-index: 10;
 
-        > .bg {
-            transform: skew(40deg, 0deg);
-            border-radius: 10px 0 10px 0;
-            background-color: rgba(0,0,0,0.3);
-            backdrop-filter: blur(0px);
-            width: 100%;
-            height: 100%;
+                > .text {
+                    z-index: 10;
+                    position: absolute;
+                    align-self: center;
+                    width: 100%;
+                    margin-left: 60px;
+                    font-weight: 400;
+                    font-family: Uni Sans Heavy CAPS;
+                    color: #d9d7e0;
+                    font-size: 60px;
+                    z-index: 3;
+                }
+
+                > .bg {
+                transform: skew(-26deg, 0deg);
+                    border-radius: 10px 0 10px 0;
+                    background-color: rgba(0,0,0,0.44);
+                    backdrop-filter: blur(0px);
+                    width: 100%;
+                    height: 100%;
+                }
+            }
         }
     }
 }
