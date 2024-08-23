@@ -1,0 +1,19 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "mynewmaptest",
+      "Type": "asset",
+      "Org": "move",
+      "Ident": "mynewmaptest",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "Metadata": {
+        "SingleAssetSource": "scenes/mynewmap.scene"
+      }
+    }
+  }
+}
