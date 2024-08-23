@@ -1,6 +1,7 @@
 using System;
 using Sandbox.Data;
 using Sandbox.Player;
+using Sandbox.UI;
 namespace Sandbox;
 
 public sealed class MenuController : Component
@@ -8,6 +9,7 @@ public sealed class MenuController : Component
 	[Property] public MainMenu MenuUI { get; set; }
 	[Property] public IngameUI IngameUI { get; set; }
 	[Property] public EndScreen EndUI { get; set; }
+	[Property] public SettingsUI SetUI { get; set; }
 	[Property] public ChooseMenu ChooseUI { get; set; }
 	[Property] public GameObject Camera { get; set; }
 
@@ -88,7 +90,7 @@ public sealed class MenuController : Component
 		SNG.SpawnPlayer();
 		SPINC.RestartSpin();
 		IngameUI.GameObject.Enabled = false;
-		EndUI.GameObject.Enabled = false;
+		if ( !Game.IsEditor ) EndUI.GameObject.Enabled = false;
 
 		ChooseUI.GameObject.Enabled = false;
 		MenuUI.GameObject.Enabled = true;
@@ -128,6 +130,18 @@ public sealed class MenuController : Component
 		ChooseUI.GameObject.Enabled = false;
 		MenuUI.GameObject.Enabled = true;
 	}
+	public void OpenSettings()
+	{
+		SetUI.GameObject.Enabled = true;
+		MenuUI.GameObject.Enabled = false;
+
+	}
+	public void CloseSettings()
+	{
+		SetUI.GameObject.Enabled = false;
+		MenuUI.GameObject.Enabled = true;
+	}
+
 	public void UpdateMapsList()
 	{
 		ChooseUI.Official.Clear();

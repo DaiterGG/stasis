@@ -10,7 +10,8 @@
         <div class="score" >
             <div class="timer">
                 <div class="time"> @Time</div>
-                <div class="mil @(timesave ? "green":"red")"> @TimeMil</div>
+                <div class="mil"> @TimeMil</div>
+                <div class="dif @(timesave ? "green":"red")"> @TimeDif</div>
             </div>
             <div class="trophy">
                 <div class="times">
@@ -44,7 +45,7 @@
                 @for (int i = 0; i < Scores.Count(); i++)
                 {
                     var time = Sng.Inst.FormatTime(Scores[i].Time);
-                    <div class="list-item @(Scores.Count() - i % 2 == 0 ? "dark":"")">
+                    <div class="list-item @((Scores.Count() - i) % 2 == 0 ? "dark":"")">
                         <div class="count">@(i + 1).</div>
                         <div class="time">@(time)</div>
                     </div>
@@ -69,18 +70,17 @@
     public string TimeDif { get; set; }
     public string TimeMil { get; set; }
     public List<Score> Scores { get; set; } = new List<Score>();
-    /*
+    
     protected override void OnAwake()
     {
         base.OnAwake();
         medal = 2;
-        img = "2";
-        Time = "1.54.";
+        Time = "11:00:00";
         Gold = "0.25.000";
         Silver = "0.25.000";
-        Bronze = "0.25.000";
-        TimeDif = "-1.54.335";
-        TimeMil = "414";
+        Bronze = "11:00:25.000";
+        TimeDif = "-11:01:54.335";
+        TimeMil = ".414";
         Author = "Daiter Andrew Brown";
         Name = "PLAYGROUND_EXTENDED";
         Scores.Add(new Score(1.50f,DateTime.Now));
@@ -106,7 +106,7 @@
         Scores.Add(new Score(1.50f,DateTime.Now));
     }
 
-     */
+     
     /// <summary>
     /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
     /// </summary>

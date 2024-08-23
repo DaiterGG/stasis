@@ -1,0 +1,93 @@
+SettingsUI {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    color: white;
+    font-family: Uni Sans Heavy CAPS;
+    text-overflow: ellipsis;
+    pointer-events: all;
+
+    .sub {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dark {
+        background-color: rgba(0,0,0,0.2);
+    }
+
+    .panel {
+        background-color: rgba(0,0,0,0.3);
+        height: 700px;
+        width: 1200px;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        border-radius: 15px;
+
+        > .right {
+            flex-direction: column;
+            gap: 40px;
+            display: flex;
+            width: 100%;
+            height: 100%;
+
+            > .slider {
+
+
+            }
+        }
+    }
+
+    .bk {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        flex-direction: row;
+        min-height: 100px;
+        justify-content: flex-end;
+
+        > .back:hover {
+            > .bg {
+                background-color: rgba(0,0,0,0.60);
+            }
+        }
+
+        > .back {
+            width: 250px;
+            height: 100px;
+            margin-top: 15px;
+            margin-right: 15px;
+
+            > .text {
+                z-index: 10;
+                position: absolute;
+                align-self: center;
+                width: 100%;
+                margin-left: 60px;
+                font-weight: 400;
+                font-family: Uni Sans Heavy CAPS;
+                color: #d9d7e0;
+                font-size: 60px;
+                z-index: 3;
+            }
+
+            > .bg {
+                transform: skew(-26deg, 0deg);
+                border-radius: 10px 0 10px 0;
+                background-color: rgba(0,0,0,0.44);
+                backdrop-filter: blur(0px);
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

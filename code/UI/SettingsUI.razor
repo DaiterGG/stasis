@@ -1,0 +1,71 @@
+@using Sandbox;
+@using Sandbox.Data;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+    <div class="sub">
+        <div class="panel">
+            <div class="right">
+                <div class="sound">Sound Effects</div>
+                <div class="slider">
+                    <div class="left" onclick="@(x => Volume(false))"></div>
+                    <div class="num">
+                        
+                    </div>
+                    <div class="right"></div>
+                </div>
+                <div class="invx">Invert Mounse X</div>
+                <div class="checkbox"></div>
+
+
+
+            </div>
+        </div>
+            <div class="bk">
+                <div class="back" onclick="@MenuC.CloseSettings">
+                    <div class="text">Back</div>
+                    <div class="bg" onclick="@MenuC.CloseSettings"></div>
+                </div>
+            </div>
+    </div>
+</root>
+
+@code
+{
+    MenuController MenuC { get; set; }
+    FileController FC { get; set; }
+    int volume { get; set; }
+
+    void Volume(bool up)
+    {
+        var add = up ? 1 : -1;
+
+
+
+        if(volume + add < 0)
+        {
+            return;
+        }
+        else if(volume + add > 10)
+        {
+            return;
+        }
+
+        volume += add;
+        FC.Set.Volume = volume;
+        FC.SaveSettings();
+    }
+    protected override void OnAwake()
+    {
+        base.OnAwake();
+        MenuC = GameObject.Parent.Components.Get<MenuController>();
+        FC = Sng.Inst.File;
+    }
+    protected override void OnTreeFirstBuilt()
+    {
+        base.OnTreeFirstBuilt();
+        volume = FC.Set.Volume;
+    }
+
+}

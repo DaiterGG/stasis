@@ -1,6 +1,7 @@
 using System;
 using Sandbox.Data;
 using Sandbox.Player;
+using Sandbox.UI;
 
 namespace Sandbox;
 public sealed class Sng : Component
@@ -38,10 +39,9 @@ public sealed class Sng : Component
 
 		File.AddOfficialMaps();
 		//File.FetchNewMap( "move.stasis_playground_scene", "official" );
-		File.FetchNewMap( "dicta.base", "community" );
-		//	File.DownloadAndLoad( "move.stasis_playground_scene" );
-		Log.Info( "Fetched, now downloading" );
-		File.DownloadAndLoad( "dicta.base" );
+		//File.FetchNewMap( "dicta.base", "community" );
+		File.DownloadAndLoad( "move.stasis_playground_scene" );
+		// File.DownloadAndLoad( "dicta.base" );
 		base.OnStart();
 	}
 

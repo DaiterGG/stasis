@@ -148,9 +148,9 @@ public sealed class FileController : Component
 
 		var meta = package.GetMeta( "PrimaryAsset", "ERROR" );
 		var g = await package.MountAsync();
-		//var scene = package.GetMeta<SceneFile>( "PrimaryAsset" );
-		tempFile.LoadFromJson( g.ReadAllText( meta ) );
+		//tempFile = package.GetMeta<SceneFile>( "PrimaryAsset" );
 
+		tempFile.LoadFromJson( g.ReadAllText( meta ) );
 		//Sng.Inst.Scene.Load( scene );
 	}
 
@@ -192,4 +192,6 @@ public sealed class FileController : Component
 		currentMap.Scores.Sort( ( x, y ) => x.Time.CompareTo( y.Time ) );
 		SaveMaps();
 	}
+
+
 }
