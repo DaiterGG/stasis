@@ -1,7 +1,6 @@
 using System;
 using Sandbox.Data;
 using Sandbox.Player;
-using Sandbox.UI;
 
 namespace Sandbox;
 public sealed class Sng : Component
@@ -15,9 +14,9 @@ public sealed class Sng : Component
 	[Property] public FileController File;
 	public static Sng Inst { get { return _sng; } }
 
-	public GameObject StartPoint;
-	private GameObject _spawnPoint;
-	public GameObject SpawnPoint
+	public GameTransform StartPoint;
+	private GameTransform _spawnPoint;
+	public GameTransform SpawnPoint
 	{
 		get
 		{
@@ -30,17 +29,16 @@ public sealed class Sng : Component
 	protected override void OnAwake()
 	{
 		_sng = this;
-
+		Timer = new MainTimer();
 		base.OnAwake();
 		File.ReadFiles();
 	}
 	protected override void OnStart()
 	{
-
 		File.AddOfficialMaps();
 		//File.FetchNewMap( "move.stasis_playground_scene", "official" );
 		//File.FetchNewMap( "dicta.base", "community" );
-		File.DownloadAndLoad( "move.stasis_playground_scene" );
+		File.DownloadAndLoad( "move.stasis_playground_scene", true );
 		// File.DownloadAndLoad( "dicta.base" );
 		base.OnStart();
 	}
@@ -49,19 +47,19 @@ public sealed class Sng : Component
 	{
 		Info MapInfo = null;
 		Timer = new MainTimer();
-		StartPoint = null;
-		SpawnPoint = null;
+		//StartPoint = null;
+		//SpawnPoint = null;
 		EndZones = new List<GameObject>();
 		var heap = Scene.GetAllObjects( true );
 		foreach ( var obj in heap )
 		{
 			if ( obj.Name == "info_player_spawn" )
 			{
-				SpawnPoint = obj;
+				SpawnPoint = obj.Transform;
 			}
 			else if ( obj.Name == "info_player_start" )
 			{
-				StartPoint = obj;
+				StartPoint = obj.Transform;
 			}
 			else if ( obj.Name.Contains( "end_zone" ) )
 			{
@@ -91,6 +89,7 @@ public sealed class Sng : Component
 	{
 		try
 		{
+			MenuC.BlackUI.Opacity -= 0.005f;
 			base.OnFixedUpdate();
 			if ( MenuC.IsGaming )
 			{
@@ -113,14 +112,23 @@ public sealed class Sng : Component
 		}
 		catch ( Exception e ) { Log.Warning( e.Message ); }
 	}
-	public void LoadNewMap( SceneFile file )
+	public void LoadNewMap( SceneFile file, bool playground = false )
 	{
-		Log.Info( "Map trying to load: " + file.ResourceName );
-		try
+		if ( playground )
 		{
+			var m = Cloud.Asset( "move.stasis_playground_scene" );
 			Scene.Load( file );
 		}
-		catch ( Exception e ) { Log.Warning( "Map not found localy: " + e.Message ); }
+		else
+		{
+
+			Log.Info( "Map trying to load: " + file.ResourceName );
+			try
+			{
+				Scene.Load( file );
+			}
+			catch ( Exception e ) { Log.Warning( "Map not found localy: " + e.Message ); }
+		}
 
 		MapInit();
 		MenuC.OpenMenu();
@@ -129,18 +137,37 @@ public sealed class Sng : Component
 	{
 		if ( SpawnPoint == null )
 		{
-			Log.Warning( "No spawn point" );
-			return;
+			Log.Warning( "No spawn and no start point" );
+			SpawnPoint = Player.Transform;
+			StartPoint = Player.Transform;
 		}
-		Player.Transform.Position = SpawnPoint.Transform.Position;
-		Player.Transform.Rotation = SpawnPoint.Transform.Rotation;
+		Player.Transform.Position = Transform.Position;
+		Player.Transform.Rotation = Transform.Rotation;
 		Player.Transform.ClearInterpolation();
 		Player.Engine.ResetPos( true );
 	}
 	public void TeleportPlayer( GameTransform pos )
 	{
-		Player.Transform.Position = pos.Position;
-		Player.Transform.Rotation = pos.Rotation;
+		if ( SpawnPoint == null )
+		{
+			Log.Warning( "No spawn and no start point" );
+			SpawnPoint = Player.Transform;
+			StartPoint = Player.Transform;
+		}
+		if ( pos == null )
+		{
+			try
+			{
+				Player.Transform.Position = SpawnPoint.Position;
+				Player.Transform.Rotation = SpawnPoint.Rotation;
+			}
+			catch { }
+		}
+		else
+		{
+			Player.Transform.Position = pos.Position;
+			Player.Transform.Rotation = pos.Rotation;
+		}
 		Player.Transform.ClearInterpolation();
 		Player.Engine.ResetPos( false );
 	}
@@ -155,7 +182,7 @@ public sealed class Sng : Component
 	public void ResetPlayer()
 	{
 		Player.Engine.UpdateInput();
-		TeleportPlayer( StartPoint.Transform );
+		TeleportPlayer( StartPoint );
 		Timer.TimerReset();
 		Player.CameraC.FreeCam.Enabled = false;
 		Player.CameraC.UpdateCam();

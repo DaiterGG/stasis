@@ -110,24 +110,30 @@ public sealed class FileController : Component
 		{
 			var mp = new MapData();
 			mp.Type = type;
-			Log.Info( "map added" );
-			Maps.Add( mp );
-			FetchMap( indent, mp ).Wait();
+			try
+			{
+
+				FetchMap( indent, mp ).Wait();
+				Maps.Add( mp );
+				//Log.Info( "Map Fetched" );
+			}
+			catch ( Exception e ) { Log.Info( "Fetching map failed, are you offline? " + e.Message ); }
 		}
+
 		SaveMaps();
 	}
 	static public async Task FetchMap( string packageIndent, MapData mapData )
 	{
 		Log.Info( "fetching asset" + packageIndent );
 		var package = await Package.Fetch( packageIndent, true );
+		if ( package == null ) throw new Exception( "Fetching failled" );
 		mapData.Name = package.Title;
 		mapData.Description = package.Summary;
 		mapData.Indent = package.FullIdent;
 		mapData.Img = package.Thumb;
 	}
-	public void DownloadAndLoad( string packageIndent )
+	public void DownloadAndLoad( string packageIndent, bool playground = false )
 	{
-		DownloadScene( packageIndent ).Wait();
 
 		currentMap = Maps.FirstOrDefault( map =>
 		{
@@ -135,11 +141,13 @@ public sealed class FileController : Component
 		} );
 		if ( currentMap == default( MapData ) || currentMap == null )
 		{
-			Log.Warning( "MAP LOADING WAS NOT FECHED CORRECLTY" );
-			Log.Warning( "ABORT THE MISSION" );
+			Log.Warning( "Fetching Data Don't have that map" );
 			return;
 		}
-		SNG.LoadNewMap( tempFile );
+		if ( !playground )
+			DownloadScene( packageIndent ).Wait();
+
+		SNG.LoadNewMap( tempFile, playground );
 	}
 	public static SceneFile tempFile = new SceneFile();
 	public async Task DownloadScene( string sceneIndent )

@@ -70,6 +70,12 @@
         {
           "__type": "Sandbox.MenuController",
           "__guid": "ec21591c-da5f-48ac-9e79-48155aa526eb",
+          "BlackUI": {
+            "_type": "component",
+            "component_id": "642e9474-c963-4832-8555-72d5805c1426",
+            "go": "2c1b8eba-e6ef-48b6-a9ef-b1388ff510ea",
+            "component_type": "ScreenPanel"
+          },
           "Camera": {
             "_type": "gameobject",
             "go": "24ef250d-05e0-4222-af3e-daea8e553089"
@@ -189,7 +195,6 @@
           "__guid": "38ca4db6-5333-4444-947c-05b58d60fe7f",
           "Flags": 0,
           "Name": "Settings",
-          "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.ScreenPanel",
@@ -202,6 +207,27 @@
             {
               "__type": "SettingsUI",
               "__guid": "ec761ac3-aeb4-44c7-98bf-5773f9ae98a7"
+            }
+          ]
+        },
+        {
+          "__guid": "2c1b8eba-e6ef-48b6-a9ef-b1388ff510ea",
+          "Flags": 0,
+          "Name": "Black",
+          "Position": "0,0,96.27712",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "642e9474-c963-4832-8555-72d5805c1426",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 258
+            },
+            {
+              "__type": "BlackScreen",
+              "__guid": "44102842-1319-48cf-ad93-450cd28d8cbf"
             }
           ]
         }
@@ -1117,7 +1143,7 @@
       "__guid": "731179a0-83a3-4f15-8eb7-ecaf0c021bb4",
       "Flags": 0,
       "Name": "Object",
-      "Position": "-246.1377,-37.10921,-2.564705",
+      "Position": "-246.1377,-37.10921,-174.2707",
       "Enabled": true,
       "Components": [
         {
@@ -1125,10 +1151,12 @@
           "__guid": "acb651af-7fdf-4fa0-964a-16e52ddeceb1",
           "__version": 1,
           "EnableCollision": true,
+          "MapName": "maps/playground.vmap",
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "b0a87ae5-58ef-4ea5-be18-d83593e0b6ba",

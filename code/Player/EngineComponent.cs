@@ -1,4 +1,5 @@
 using System;
+using Sandbox.Data;
 
 namespace Sandbox.Player;
 public sealed class EngineComponent : Component
@@ -6,6 +7,7 @@ public sealed class EngineComponent : Component
 	IngameUI GAMEUI;
 	MenuController MENUC;
 	GameObject FREECAM;
+	FileController FC;
 	SpinController SPINC;
 
 	public bool inputActive { get; private set; }
@@ -34,6 +36,7 @@ public sealed class EngineComponent : Component
 		SPINC = Sng.Inst.Player.SpinC;
 		MENUC = Sng.Inst.MenuC;
 		GAMEUI = MENUC.IngameUI;
+		FC = Sng.Inst.File;
 	}
 	protected override void OnStart()
 	{
@@ -64,7 +67,9 @@ public sealed class EngineComponent : Component
 
 
 			var dx = Mouse.Delta.x == 0 ? 0 : Mouse.Delta.x / Math.Abs( Mouse.Delta.x ) * 17000f;
+			if ( FC.Set.MouseInvertX ) dx *= -1f;
 			var dy = Mouse.Delta.y == 0 ? 0 : Mouse.Delta.y / Math.Abs( Mouse.Delta.y ) * 17000f;
+			if ( FC.Set.MouseInvertY ) dy *= -1f;
 			var dz = 0f;
 
 			if ( Input.Down( "Left" ) )

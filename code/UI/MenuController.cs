@@ -1,7 +1,7 @@
 using System;
+using Sandbox.Audio;
 using Sandbox.Data;
 using Sandbox.Player;
-using Sandbox.UI;
 namespace Sandbox;
 
 public sealed class MenuController : Component
@@ -11,6 +11,7 @@ public sealed class MenuController : Component
 	[Property] public EndScreen EndUI { get; set; }
 	[Property] public SettingsUI SetUI { get; set; }
 	[Property] public ChooseMenu ChooseUI { get; set; }
+	[Property] public ScreenPanel BlackUI { get; set; }
 	[Property] public GameObject Camera { get; set; }
 
 	public float pitchOffset = -11.3f;
@@ -39,6 +40,8 @@ public sealed class MenuController : Component
 	protected override void OnStart()
 	{
 		base.OnStart();
+		UpdateSettings();
+
 	}
 	protected override void OnUpdate()
 	{
@@ -218,7 +221,6 @@ public sealed class MenuController : Component
 
 	public int GetMedal( MapData map )
 	{
-		if ( map.SpeedRun == null ) return 0;
 		if ( map.Scores.Count() == 0 ) return 0;
 		var time = map.Scores[0].Time;
 		if ( map.SpeedRun )
@@ -246,7 +248,12 @@ public sealed class MenuController : Component
 
 	}
 
+	public void UpdateSettings()
+	{
+		if ( FC.Set.Volume > 10 ) FC.Set.Volume = 10;
+		Mixer.Master.Volume = FC.Set.Volume / 10f;
 
+	}
 	public void ShowInfo()
 	{
 		IngameUI.ShowInfo( ControlsInfo() );

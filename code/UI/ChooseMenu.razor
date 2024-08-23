@@ -26,11 +26,11 @@
                             {
                                 <div class="btime">Not Played</div>
                             }
-                            @if(info.Author != null)
+                            @if(info.Author != null || info.Author != "")
                             {
                                 <div class="author">By: @info.Author</div>
                             }
-                            @if(info.DifficultyTier != null)
+                            @if(info.DifficultyTier != 0)
                             {
                                 <div class="difficulty">Tier: @info.DifficultyTier</div>
                             }

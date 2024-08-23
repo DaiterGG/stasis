@@ -9,16 +9,25 @@
             <div class="right">
                 <div class="sound">Sound Effects</div>
                 <div class="slider">
-                    <div class="left" onclick="@(x => Volume(false))"></div>
+                    <div class="left" onclick="@(x => Volume(false))">@("<")</div>
                     <div class="num">
-                        
+                       @volume 
                     </div>
-                    <div class="right"></div>
+                    <div class="right" onclick="@(x => Volume(true))">></div>
                 </div>
-                <div class="invx">Invert Mounse X</div>
-                <div class="checkbox"></div>
+                <div class="invx">Invert Mouse X</div>
+                <div class="checkbox" onclick="@(x => Invert(true))">
+                   @if(mx){
+                        <p>X</p>
+                    } 
+                </div>
 
-
+                <div class="invx" >Invert Mouse Y</div>
+                <div class="checkbox" onclick="@(x => Invert(false))">
+                   @if(my){
+                        <p>X</p>
+                    } 
+                </div>
 
             </div>
         </div>
@@ -36,12 +45,12 @@
     MenuController MenuC { get; set; }
     FileController FC { get; set; }
     int volume { get; set; }
+    bool mx { get; set; }
+    bool my { get; set; }
 
     void Volume(bool up)
     {
         var add = up ? 1 : -1;
-
-
 
         if(volume + add < 0)
         {
@@ -54,7 +63,23 @@
 
         volume += add;
         FC.Set.Volume = volume;
-        FC.SaveSettings();
+        MenuC.UpdateSettings();
+		FC.SaveSettings();
+    }
+    void Invert(bool isX)
+    {
+        if (isX)
+        {
+            FC.Set.MouseInvertX = !FC.Set.MouseInvertX;
+            mx = FC.Set.MouseInvertX;
+        }
+        else
+        {
+            FC.Set.MouseInvertY = !FC.Set.MouseInvertY;
+            my = FC.Set.MouseInvertY;
+        }
+        MenuC.UpdateSettings();
+		FC.SaveSettings();
     }
     protected override void OnAwake()
     {
@@ -66,6 +91,8 @@
     {
         base.OnTreeFirstBuilt();
         volume = FC.Set.Volume;
+        mx = FC.Set.MouseInvertX;
+        my = FC.Set.MouseInvertY;
     }
 
 }
