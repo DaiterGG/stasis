@@ -36,13 +36,17 @@ public sealed class Sng : Component
 	protected override void OnStart()
 	{
 		File.AddOfficialMaps();
-		//File.FetchNewMap( "move.stasis_playground_scene", "official" );
+		//File.FetchNewMap( "move.stasis_playgr", "official" );
 		//File.FetchNewMap( "dicta.base", "community" );
-		File.DownloadAndLoad( "move.stasis_playground_scene", true );
+		//File.DownloadAndLoad( "move.stasis_playground", true );
 		// File.DownloadAndLoad( "dicta.base" );
+		if ( GameObject.Parent == Scene )
+		{
+			//var m = Cloud.Asset( "move.stasis_playgrou" );
+			//Scene.LoadFromFile( m );
+		}
 		base.OnStart();
 	}
-
 	private void MapInit()
 	{
 		Info MapInfo = null;
@@ -116,8 +120,8 @@ public sealed class Sng : Component
 	{
 		if ( playground )
 		{
-			var m = Cloud.Asset( "move.stasis_playground_scene" );
-			Scene.Load( file );
+			//var m = Cloud.Asset( "move.stasis_playground_" );
+			//	Scene.LoadFromFile( m );
 		}
 		else
 		{

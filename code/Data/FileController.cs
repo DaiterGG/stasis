@@ -25,7 +25,7 @@ public sealed class FileController : Component
 	};
 	static public string[] OfficialMaps = new string[]
 	{
-		"move.stasis_playground_scene",
+
 	};
 
 	//OnAwake init!

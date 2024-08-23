@@ -1,11 +1,11 @@
 {
-  "Title": "Stasis",
+  "Title": "StasisMap",
   "Type": "game",
-  "Org": "move",
-  "Ident": "stasis",
+  "Org": "local",
+  "Ident": "StasisMap",
   "Schema": 1,
   "IncludeSourceFiles": true,
-  "Resources": "fonts/*",
+  "Resources": "fonts/*\nimg/*\nsounds/*\nmaterials/*",
   "PackageReferences": [],
   "EditorReferences": null,
   "IsWhitelistDisabled": false,
@@ -22,7 +22,7 @@
     "PerMapRanking": false,
     "LeaderboardType": "None",
     "CsProjName": "",
-    "StartupScene": "scenes/menu.scene",
+    "StartupScene": "scenes/mapnew.scene",
     "ControlModes": {
       "Keyboard": true
     },

@@ -1144,7 +1144,6 @@
       "Flags": 0,
       "Name": "Object",
       "Position": "-246.1377,-37.10921,-174.2707",
-      "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.MapInstance",
@@ -1155,8 +1154,7 @@
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ],
-      "Children": []
+      ]
     },
     {
       "__guid": "b0a87ae5-58ef-4ea5-be18-d83593e0b6ba",
