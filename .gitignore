@@ -4,7 +4,6 @@
 
 # Auto-generated code editor files
 .vs/*
-.vs
 .vscode/*
 *.csproj
 obj

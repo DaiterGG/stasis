@@ -39,12 +39,19 @@ public sealed class Sng : Component
 		//File.FetchNewMap( "move.stasis_playgr", "official" );
 		//File.FetchNewMap( "dicta.base", "community" );
 		//File.DownloadAndLoad( "move.stasis_playground", true );
-		// File.DownloadAndLoad( "dicta.base" );
-		if ( GameObject.Parent == Scene )
+
+		if ( Game.IsEditor )
 		{
-			//var m = Cloud.Asset( "move.stasis_playgrou" );
-			//Scene.LoadFromFile( m );
+			File.SetCurrentMap( "move.plground" );
+			MapInit();
+			MenuC.OpenMenu();
 		}
+		else
+		{
+			File.DownloadAndLoad( "move.plground" );
+
+		}
+
 		base.OnStart();
 	}
 	private void MapInit()
@@ -106,7 +113,7 @@ public sealed class Sng : Component
 				{
 					Player.SpinC.SpinCollision();
 				}
-				if ( Input.Pressed( "Back" ) )
+				if ( Input.Pressed( "Back" ) || Input.EscapePressed )
 				{
 					MenuC.OpenMenu();
 				}
@@ -116,37 +123,30 @@ public sealed class Sng : Component
 		}
 		catch ( Exception e ) { Log.Warning( e.Message ); }
 	}
-	public void LoadNewMap( SceneFile file, bool playground = false )
+	public void LoadNewMap( SceneFile file )
 	{
-		if ( playground )
-		{
-			//var m = Cloud.Asset( "move.stasis_playground_" );
-			//	Scene.LoadFromFile( m );
-		}
-		else
-		{
 
-			Log.Info( "Map trying to load: " + file.ResourceName );
-			try
-			{
-				Scene.Load( file );
-			}
-			catch ( Exception e ) { Log.Warning( "Map not found localy: " + e.Message ); }
+		Log.Info( "Map trying to load: " + file.ResourceName );
+		try
+		{
+			Scene.Load( file );
 		}
+		catch ( Exception e ) { Log.Warning( "Map not found localy: " + e.Message ); }
 
 		MapInit();
 		MenuC.OpenMenu();
 	}
 	public void SpawnPlayer()
 	{
+
 		if ( SpawnPoint == null )
 		{
 			Log.Warning( "No spawn and no start point" );
 			SpawnPoint = Player.Transform;
 			StartPoint = Player.Transform;
 		}
-		Player.Transform.Position = Transform.Position;
-		Player.Transform.Rotation = Transform.Rotation;
+		Player.Transform.Position = SpawnPoint.Position;
+		Player.Transform.Rotation = SpawnPoint.Rotation;
 		Player.Transform.ClearInterpolation();
 		Player.Engine.ResetPos( true );
 	}
@@ -160,12 +160,8 @@ public sealed class Sng : Component
 		}
 		if ( pos == null )
 		{
-			try
-			{
-				Player.Transform.Position = SpawnPoint.Position;
-				Player.Transform.Rotation = SpawnPoint.Rotation;
-			}
-			catch { }
+			Player.Transform.Position = SpawnPoint.Position;
+			Player.Transform.Rotation = SpawnPoint.Rotation;
 		}
 		else
 		{

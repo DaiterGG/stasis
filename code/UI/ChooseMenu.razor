@@ -79,7 +79,23 @@
                             <div class="time">@(Featured[i].Name.ToUpper())</div>
                         </div>
                     } 
-
+                    <div class="add" onclick="@Copy">
+                        @if (copied)
+                        {
+                            <p>
+                                Copied to clipboard
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                Join the Discord
+                            </p>
+                            <p>
+                                to create maps
+                            </p>
+                        }
+                    </div>
                 </div>
             </div>
             <div class="right">
@@ -120,6 +136,13 @@
     public List<MapData> Featured { get; set; }= new List<MapData>();
     public List<MapData> Community { get; set; }= new List<MapData>();
     public MapData info = null;
+    public bool copied = false;
+
+    public void Copy()
+    {
+        copied = true;
+        MenuC.Copy();
+    }
     public void ShowInfo(MapData i, string type)
     {
         var list = type == "official" ? Official : type == "featured" ? Featured : Community;
@@ -130,6 +153,7 @@
     {
         MenuC.CloseChooseMenu();
         info=null;
+        copied = false;
     }
     protected override void OnAwake()
     {

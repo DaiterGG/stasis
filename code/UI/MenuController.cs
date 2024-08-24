@@ -2,6 +2,7 @@ using System;
 using Sandbox.Audio;
 using Sandbox.Data;
 using Sandbox.Player;
+using Sandbox.UI;
 namespace Sandbox;
 
 public sealed class MenuController : Component
@@ -114,8 +115,24 @@ public sealed class MenuController : Component
 	{
 		try
 		{
-			Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis_map", delegate ( Package p )
+			Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis", delegate ( Package p )
 			{
+				foreach ( var m in FC.OfficialMaps )
+				{
+					if ( m == p.FullIdent )
+					{
+						FC.FetchNewMap( m, "official" );
+						return;
+					}
+				}
+				foreach ( var m in FC.FeaturedMaps )
+				{
+					if ( m == p.FullIdent )
+					{
+						FC.FetchNewMap( m, "featured" );
+						return;
+					}
+				}
 				FC.FetchNewMap( p.FullIdent, "community" );
 			} );
 		}
@@ -206,9 +223,18 @@ public sealed class MenuController : Component
 		EndUI.Scores = FC.currentMap.Scores;
 		if ( FC.currentMap.Scores.Count() > 0 )
 		{
-			var dif = FC.currentMap.Scores[0].Time - FC.currentTime;
-			EndUI.TimeDif = (dif < 0 ? "-" : "+") + SNG.FormatTime( dif );
-			EndUI.timesave = dif < 0;
+			if ( FC.currentMap.Scores[0].Time == FC.currentTime && FC.currentMap.Scores.Count() > 1 )
+			{
+				EndUI.TimeDif = ("-" + SNG.FormatTime( FC.currentMap.Scores[1].Time - FC.currentTime ));
+				EndUI.timesave = true;
+
+			}
+			else
+			{
+
+				EndUI.timesave = false;
+				EndUI.TimeDif = ("+" + SNG.FormatTime( FC.currentTime - FC.currentMap.Scores[0].Time ));
+			}
 
 		}
 		else EndUI.TimeDif = "";
@@ -254,6 +280,10 @@ public sealed class MenuController : Component
 		Mixer.Master.Volume = FC.Set.Volume / 10f;
 
 	}
+	public void Copy()
+	{
+		Clipboard.SetText( "https://discord.gg/JNrNHxDE2D" );
+	}
 	public void ShowInfo()
 	{
 		IngameUI.ShowInfo( ControlsInfo() );
@@ -266,12 +296,14 @@ public sealed class MenuController : Component
 		var d = Input.GetButtonOrigin( "Right" ).ToUpper();
 		var p = Input.GetButtonOrigin( "SelfDestruct" ).ToUpper();
 		var g = Input.GetButtonOrigin( "Back" ).ToUpper();
+		var r = Input.GetButtonOrigin( "Restart" ).ToUpper();
+		var t = Input.GetButtonOrigin( "CameraCycle" ).ToUpper();
 		var c = Input.GetButtonOrigin( "FreeCamera" ).ToUpper();
 		return $"{g} - Back to menu\n" +
 			$"{w} {a} {s} {d} - To move\n" +
-			$"{g} - Reset\n" +
+			$"{r} - Reset\n" +
 			$"{p} - Self destruct\n" +
-			$"1-3 - Change view\n" +
+			$"{t} - Change view\n" +
 			$"{c} - Free camera\n";
 
 	}

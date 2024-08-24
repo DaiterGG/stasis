@@ -33,6 +33,7 @@ SettingsUI {
         padding: 10px;
         border-radius: 15px;
 
+                backdrop-filter: blur(10px);
         > .right {
             background-color: rgba(0,0,0,0.2);
             border-radius: 15px;

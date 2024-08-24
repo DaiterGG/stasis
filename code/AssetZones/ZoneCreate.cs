@@ -84,7 +84,7 @@ public sealed class ZoneCreate : Component
 	private void CreateLine( Vector3 p1, Vector3 p2 )
 	{
 		var l = LinePrefab.Clone();
-		l.Parent = GameObject;
+		l.Parent = Scene;
 		l.Enabled = true;
 		var rend = l.Components.Get<LineRenderer>();
 		//Log.Info( rend.Width.AddOrReplacePoint( new Curve.Frame( 0f, 7f, 1f, 1f ) ) );

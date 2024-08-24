@@ -26,7 +26,6 @@ public sealed class FreeCam : Component
 	}
 	protected override void OnUpdate()
 	{
-		Log.Info( GameObject.Enabled );
 		if ( !GameObject.Enabled ) return;
 		TIMER.StopTimer();
 		if ( Input.Down( "Up" ) )

@@ -488,7 +488,7 @@
               "Flags": 0,
               "Name": "Third person",
               "Position": "-175.7618,-0.000004516136,79.72442",
-              "Rotation": "0,0.03315518,0,0.9994502",
+              "Rotation": "0,-0.03925982,0,0.999229",
               "Scale": "0.639677,1.31012,1.775288",
               "Components": [
                 {
@@ -1140,50 +1140,106 @@
       ]
     },
     {
-      "__guid": "731179a0-83a3-4f15-8eb7-ecaf0c021bb4",
+      "__guid": "2e1874c0-6ca1-4070-b69c-7a6bc16ffabd",
       "Flags": 0,
-      "Name": "Object",
-      "Position": "-246.1377,-37.10921,-174.2707",
+      "Name": "info_player_spawn",
+      "Position": "-1352.889,717.2153,193.1008",
+      "Rotation": "0,0,0.9893994,0.14522",
+      "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.MapInstance",
-          "__guid": "acb651af-7fdf-4fa0-964a-16e52ddeceb1",
-          "__version": 1,
-          "EnableCollision": true,
-          "MapName": "maps/playground.vmap",
-          "NoOrigin": false,
-          "UseMapFromLaunch": false
+          "__type": "Sandbox.Description",
+          "__guid": "ddcd2493-6922-41fd-9b7e-4ab37e725f07",
+          "WhatIsThat": "Player will spawn here to pose for the menu\nIt is optional"
         }
       ]
     },
     {
-      "__guid": "b0a87ae5-58ef-4ea5-be18-d83593e0b6ba",
+      "__guid": "3b1754cb-f59c-436a-af40-79b28d1ca481",
       "Flags": 0,
       "Name": "end_zone",
-      "Position": "1753.212,-549.166,65.37964",
+      "Position": "790.1044,13.89676,-912.0723",
+      "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.Description",
-          "__guid": "8966af8d-eeb3-44c5-8eaf-28210dcdcb17",
+          "__guid": "d97e4895-3be3-4c2d-820a-1a16f35ae95c",
           "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027, put trigger collider and End Zone component on it\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
         },
         {
           "__type": "Sandbox.AutoDecor",
-          "__guid": "09e2ee01-78d8-43ae-a80b-273fa60bc4c2",
+          "__guid": "53c84250-f07c-4377-85c2-0732ccb25cb4",
           "AutoDecorate": true,
           "ColorOfTheLines": "0.81395,0,0,1"
         },
         {
           "__type": "Sandbox.BoxCollider",
-          "__guid": "34fe0d8c-5367-45b5-8c4d-ce9b1ce14400",
+          "__guid": "1b69b0f1-0345-4e35-82ee-35ca3d4e5684",
           "Center": "0,0,0",
           "IsTrigger": true,
-          "Scale": "1368.5,1473.398,297.3",
+          "Scale": "525.1001,985.8994,408.7997",
           "Static": true
         },
         {
           "__type": "EndZone",
-          "__guid": "24b7b640-580d-4383-a3cf-1f9dec95bb61"
+          "__guid": "3c7aac91-9a77-4b30-bfb2-b6096f1ba663"
+        }
+      ]
+    },
+    {
+      "__guid": "5fe5341c-4b11-480b-9e17-657b28d8e542",
+      "Flags": 0,
+      "Name": "info_player_start",
+      "Position": "-1274.911,705.0283,193.1007",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "ec1929b7-7327-48b0-ade5-651dae7a096a",
+          "WhatIsThat": "Player will respawn here to play the map"
+        }
+      ]
+    },
+    {
+      "__guid": "f99bc60e-14db-4dee-8925-a4b53f303ba3",
+      "Flags": 0,
+      "Name": "Map",
+      "Position": "0,224.5872,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "7f5b5c7e-742b-4a47-a83a-c6ed48190079",
+          "WhatIsThat": "Important!\nYou have to publish your map first\nThen attach \u0027Cloud Asset\u0027 to Map instance bellow"
+        },
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "c8e4f91e-ffe7-4b0b-879c-c77dc11c6101",
+          "__version": 1,
+          "EnableCollision": true,
+          "MapName": "move.st_playground1",
+          "NoOrigin": false,
+          "UseMapFromLaunch": false
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "37223077-8383-4809-a04f-8f677ebe9ab8",
+      "Flags": 0,
+      "Name": "Map Info",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Info",
+          "__guid": "f8c1f30f-11c0-439f-9ee7-b419822b6087",
+          "Author": "Daiter",
+          "BronzeTime": 25,
+          "DifficultyTier": 1,
+          "GoldTime": 6,
+          "SilverTime": 13,
+          "SpeerunMap": true,
+          "Version": "1.0"
         }
       ]
     }

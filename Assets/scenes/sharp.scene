@@ -10,7 +10,7 @@
         {
           "__type": "Sandbox.Info",
           "__guid": "47a6e548-63e2-4100-80b9-8b4706e3a9ce",
-          "Author": "Author Name",
+          "Author": "Daiter",
           "BronzeTime": 25,
           "DifficultyTier": 1,
           "GoldTime": 12.3,
@@ -37,15 +37,18 @@
           "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
           "__version": 1,
           "EnableCollision": true,
+          "MapName": "move.sharp1",
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "bddf0c53-f7e6-4afe-86f2-3f9dade8a1e6",
       "Flags": 0,
       "Name": "info_player_start",
+      "Position": "-955.2417,-1033.086,707.3992",
       "Enabled": true,
       "Components": [
         {
@@ -59,7 +62,8 @@
       "__guid": "0784ce75-4b08-4265-8876-f1c83d30c647",
       "Flags": 0,
       "Name": "info_player_spawn",
-      "Position": "0,0,29.46581",
+      "Position": "-1069.062,-978.6199,707.3992",
+      "Rotation": "0,0,0.9741734,0.2258014",
       "Enabled": true,
       "Components": [
         {
@@ -113,6 +117,7 @@
       "Flags": 0,
       "Name": "Game logic",
       "Position": "-27.91804,5.34903,-30.56471",
+      "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.Sng",
@@ -167,6 +172,7 @@
       "__guid": "da963576-bd7b-4275-abde-c953c1558d0e",
       "Flags": 0,
       "Name": "UI",
+      "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.DontDestroy",
@@ -345,6 +351,7 @@
       "Position": "-127.271,5.043406,61.53452",
       "Rotation": "-0,0,-0.9952274,-0.09758277",
       "Tags": "player",
+      "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.DontDestroy",
@@ -1156,6 +1163,7 @@
       "__guid": "58217797-4834-4521-837a-63cbe7ed3c7f",
       "Flags": 0,
       "Name": "Zones",
+      "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.ZoneCreate",

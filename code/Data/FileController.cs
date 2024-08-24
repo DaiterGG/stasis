@@ -19,13 +19,14 @@ public sealed class FileController : Component
 		Log.Info( SNG.MenuC );
 	}
 
-	static public string[] FeaturedMaps = new string[]
+	public string[] FeaturedMaps = new string[]
 	{
 
 	};
-	static public string[] OfficialMaps = new string[]
+	public string[] OfficialMaps = new string[]
 	{
-
+		"move.sharp2",
+		"move.plground"
 	};
 
 	//OnAwake init!
@@ -95,7 +96,6 @@ public sealed class FileController : Component
 	}
 	public void FetchNewMap( string indent, string type )
 	{
-
 		var found = Maps.FirstOrDefault( x =>
 		{
 			return x.Indent == indent;
@@ -115,7 +115,6 @@ public sealed class FileController : Component
 
 				FetchMap( indent, mp ).Wait();
 				Maps.Add( mp );
-				//Log.Info( "Map Fetched" );
 			}
 			catch ( Exception e ) { Log.Info( "Fetching map failed, are you offline? " + e.Message ); }
 		}
@@ -132,22 +131,32 @@ public sealed class FileController : Component
 		mapData.Indent = package.FullIdent;
 		mapData.Img = package.Thumb;
 	}
-	public void DownloadAndLoad( string packageIndent, bool playground = false )
+	public void DownloadAndLoad( string packageIndent )
 	{
+		SetCurrentMap( packageIndent );
 
+		try
+		{
+
+			DownloadScene( packageIndent ).Wait();
+		}
+		catch ( Exception e ) { Log.Info( "Download failed, try again" + m ); }
+
+		Log.Info( currentMap );
+		SNG.LoadNewMap( tempFile );
+	}
+	public void SetCurrentMap( string ind )
+	{
 		currentMap = Maps.FirstOrDefault( map =>
 		{
-			return map.Indent == packageIndent;
+			return map.Indent == ind;
 		} );
 		if ( currentMap == default( MapData ) || currentMap == null )
 		{
 			Log.Warning( "Fetching Data Don't have that map" );
 			return;
 		}
-		if ( !playground )
-			DownloadScene( packageIndent ).Wait();
 
-		SNG.LoadNewMap( tempFile, playground );
 	}
 	public static SceneFile tempFile = new SceneFile();
 	public async Task DownloadScene( string sceneIndent )
@@ -156,6 +165,7 @@ public sealed class FileController : Component
 
 		var meta = package.GetMeta( "PrimaryAsset", "ERROR" );
 		var g = await package.MountAsync();
+
 		//tempFile = package.GetMeta<SceneFile>( "PrimaryAsset" );
 
 		tempFile.LoadFromJson( g.ReadAllText( meta ) );
