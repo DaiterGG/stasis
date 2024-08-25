@@ -37,12 +37,11 @@
           "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "move.st_playground1",
+          "MapName": "maps/st_playground1.vmap",
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ],
-      "Children": []
+      ]
     },
     {
       "__guid": "bddf0c53-f7e6-4afe-86f2-3f9dade8a1e6",
@@ -1272,7 +1271,8 @@
   "Description": "",
   "ResourceVersion": 1,
   "__references": [
-    "move.black_marble1"
+    "move.black_marble1",
+    "move.hextest"
   ],
   "__version": 1
 }

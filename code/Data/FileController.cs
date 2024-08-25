@@ -26,7 +26,8 @@ public sealed class FileController : Component
 	public string[] OfficialMaps = new string[]
 	{
 		"move.sharp2",
-		"move.plground"
+		"move.hexagon1",
+		"move.plground",
 	};
 
 	//OnAwake init!
@@ -62,8 +63,13 @@ public sealed class FileController : Component
 		}
 		else
 		{
-			Maps = new List<MapData>();
-			FileSystem.Data.WriteAllText( m, ObjToJson( Maps ) );
+			try
+			{
+				Maps = new List<MapData>();
+				FileSystem.Data.WriteAllText( m, ObjToJson( Maps ) );
+
+			}
+			catch ( Exception err ) { Log.Warning( "Move/Stasis folder does not exist?" + err.Message ); }
 		}
 	}
 	public void AddOfficialMaps()
@@ -106,24 +112,27 @@ public sealed class FileController : Component
 			Log.Info( "removed: " + Maps.Remove( found ).ToString() );
 			found = default;
 		}
-		if ( found == default( MapData ) || (found == null) )
+		var f = false;
+		if ( found == default( MapData ) || found == null )
 		{
-			var mp = new MapData();
-			mp.Type = type;
-			try
-			{
-
-				FetchMap( indent, mp ).Wait();
-				Maps.Add( mp );
-			}
-			catch ( Exception e ) { Log.Info( "Fetching map failed, are you offline? " + e.Message ); }
+			found = new MapData();
+			found.Type = type;
+			f = true;
 		}
+		try
+		{
+
+			FetchMap( indent, found ).Wait();
+		}
+		catch ( Exception e ) { Log.Info( "Fetching map failed, are you offline? " + e.Message ); }
+
+		if ( f ) Maps.Add( found );
+
 
 		SaveMaps();
 	}
 	static public async Task FetchMap( string packageIndent, MapData mapData )
 	{
-		Log.Info( "fetching asset" + packageIndent );
 		var package = await Package.Fetch( packageIndent, true );
 		if ( package == null ) throw new Exception( "Fetching failled" );
 		mapData.Name = package.Title;
@@ -140,7 +149,7 @@ public sealed class FileController : Component
 
 			DownloadScene( packageIndent ).Wait();
 		}
-		catch ( Exception e ) { Log.Info( "Download failed, try again" + m ); }
+		catch ( Exception e ) { Log.Info( "Download failed, try again" + e ); }
 
 		Log.Info( currentMap );
 		SNG.LoadNewMap( tempFile );
@@ -153,7 +162,7 @@ public sealed class FileController : Component
 		} );
 		if ( currentMap == default( MapData ) || currentMap == null )
 		{
-			Log.Warning( "Fetching Data Don't have that map" );
+			Log.Warning( "Fetched data Don't have that map" );
 			return;
 		}
 

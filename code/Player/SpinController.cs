@@ -35,6 +35,7 @@ public sealed class SpinController : Component
 	}
 	public void SpinCollision()
 	{
+		Log.Info( "spin collision" );
 		if ( !isAttached ) return;
 
 		blades.ForEach( x =>

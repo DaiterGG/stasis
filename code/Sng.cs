@@ -181,12 +181,12 @@ public sealed class Sng : Component
 	}
 	public void ResetPlayer()
 	{
-		Player.Engine.UpdateInput();
 		TeleportPlayer( StartPoint );
 		Timer.TimerReset();
 		Player.CameraC.FreeCam.Enabled = false;
 		Player.CameraC.UpdateCam();
 		Player.SpinC.RestartSpin();
+		Player.Engine.UpdateInput();
 	}
 	public string FormatTime( float totalSeconds )
 	{

@@ -37,10 +37,12 @@
           "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
           "__version": 1,
           "EnableCollision": true,
+          "MapName": "maps/testhex.vmap",
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "bddf0c53-f7e6-4afe-86f2-3f9dade8a1e6",
@@ -104,7 +106,7 @@
     {
       "__guid": "786acfe1-1fc7-498b-87a1-7d7253282457",
       "Flags": 0,
-      "Name": "TURN OFF ALL BELOW",
+      "Name": "TURN OFF ALL BELLOW",
       "Position": "-418.0334,331.1658,295.9147",
       "Enabled": true
     },

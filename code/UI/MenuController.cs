@@ -41,7 +41,7 @@ public sealed class MenuController : Component
 	protected override void OnStart()
 	{
 		base.OnStart();
-		UpdateSettings();
+		ApplySettings();
 
 	}
 	protected override void OnUpdate()
@@ -274,7 +274,7 @@ public sealed class MenuController : Component
 
 	}
 
-	public void UpdateSettings()
+	public void ApplySettings()
 	{
 		if ( FC.Set.Volume > 10 ) FC.Set.Volume = 10;
 		Mixer.Master.Volume = FC.Set.Volume / 10f;

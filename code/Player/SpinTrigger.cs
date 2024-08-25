@@ -22,8 +22,8 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
 
 	public void OnCollisionStart( Collision col )
 	{
-
-		if ( col.Other.GameObject.Tags.Contains( "particle" ) ) return; // not secessary since blades have 'player'
+		if ( !SPIN.isAttached ) return;
+		if ( col.Other.GameObject.Tags.Contains( "particle" ) ) return; // not secessary since blades have 'player' tag
 		SPIN.SpinCollision();
 	}
 	protected override void OnFixedUpdate()
@@ -35,7 +35,9 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
 			return;
 		}
 		//patch for bug in physics
-		if ( Math.Abs( SPIN.PropRig.Transform.Position.y - Transform.Position.y ) > 2f )
+		if ( Math.Abs( Transform.LocalPosition.y ) > 4f
+			|| Math.Abs( Transform.LocalRotation.Pitch() ) > 1f
+			|| Math.Abs( Transform.LocalRotation.Roll() ) > 1f )
 		{
 			ResetPos();
 		}
