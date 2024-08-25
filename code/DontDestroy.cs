@@ -1,7 +1,7 @@
 namespace Sandbox;
 public sealed class DontDestroy : Component
 {
-	protected override void OnAwake() //you're wellcome
+	protected override void OnAwake() //you're welcome
 	{
 		base.OnAwake();
 

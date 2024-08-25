@@ -422,7 +422,7 @@
                   "IsMainCamera": true,
                   "Orthographic": false,
                   "OrthographicHeight": 1204,
-                  "Priority": 1,
+                  "Priority": 14,
                   "RenderExcludeTags": "",
                   "RenderTags": "",
                   "TargetEye": "None",
@@ -500,7 +500,7 @@
                   "IsMainCamera": true,
                   "Orthographic": false,
                   "OrthographicHeight": 1204,
-                  "Priority": 1,
+                  "Priority": 14,
                   "RenderExcludeTags": "",
                   "RenderTags": "",
                   "TargetEye": "None",
@@ -898,7 +898,7 @@
                   "IsMainCamera": true,
                   "Orthographic": false,
                   "OrthographicHeight": 1204,
-                  "Priority": 2,
+                  "Priority": 15,
                   "RenderExcludeTags": "",
                   "RenderTags": "",
                   "TargetEye": "None",
@@ -985,7 +985,7 @@
               "IsMainCamera": true,
               "Orthographic": false,
               "OrthographicHeight": 1204,
-              "Priority": 3,
+              "Priority": 16,
               "RenderExcludeTags": "",
               "RenderTags": "",
               "TargetEye": "None",
@@ -1143,7 +1143,7 @@
       "__guid": "2e1874c0-6ca1-4070-b69c-7a6bc16ffabd",
       "Flags": 0,
       "Name": "info_player_spawn",
-      "Position": "-1352.889,717.2153,193.1008",
+      "Position": "-1352.889,717.2156,192.3996",
       "Rotation": "0,0,0.9893994,0.14522",
       "Enabled": true,
       "Components": [
@@ -1190,7 +1190,7 @@
       "__guid": "5fe5341c-4b11-480b-9e17-657b28d8e542",
       "Flags": 0,
       "Name": "info_player_start",
-      "Position": "-1274.911,705.0283,193.1007",
+      "Position": "-1274.911,705.0283,192.2418",
       "Enabled": true,
       "Components": [
         {
@@ -1208,11 +1208,6 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.Description",
-          "__guid": "7f5b5c7e-742b-4a47-a83a-c6ed48190079",
-          "WhatIsThat": "Important!\nYou have to publish your map first\nThen attach \u0027Cloud Asset\u0027 to Map instance bellow"
-        },
-        {
           "__type": "Sandbox.MapInstance",
           "__guid": "c8e4f91e-ffe7-4b0b-879c-c77dc11c6101",
           "__version": 1,
@@ -1221,7 +1216,8 @@
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "37223077-8383-4809-a04f-8f677ebe9ab8",

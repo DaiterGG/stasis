@@ -11,10 +11,10 @@
           "__type": "Sandbox.Info",
           "__guid": "47a6e548-63e2-4100-80b9-8b4706e3a9ce",
           "Author": "Daiter",
-          "BronzeTime": 40,
+          "BronzeTime": 55,
           "DifficultyTier": 1,
-          "GoldTime": 30,
-          "SilverTime": 35,
+          "GoldTime": 35,
+          "SilverTime": 40,
           "SpeerunMap": true,
           "Version": "1.0"
         }
@@ -28,16 +28,11 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.Description",
-          "__guid": "2f372fd6-59f2-4044-91bc-e7eac2e8c43d",
-          "WhatIsThat": "Important!\nYou have to publish your map first\nThen attach \u0027Cloud Asset\u0027 to Map instance bellow"
-        },
-        {
           "__type": "Sandbox.MapInstance",
           "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "maps/st_hexagon1.vmap",
+          "MapName": "maps/st_hexagon3.vmap",
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
@@ -48,7 +43,7 @@
       "__guid": "bddf0c53-f7e6-4afe-86f2-3f9dade8a1e6",
       "Flags": 0,
       "Name": "info_player_start",
-      "Position": "-420.0398,662.8955,-19.38976",
+      "Position": "-420.0398,662.8955,-19.74308",
       "Enabled": true,
       "Components": [
         {
@@ -62,7 +57,7 @@
       "__guid": "0784ce75-4b08-4265-8876-f1c83d30c647",
       "Flags": 0,
       "Name": "info_player_spawn",
-      "Position": "-853.1754,661.3358,644.8073",
+      "Position": "-853.1749,661.3358,643.2466",
       "Rotation": "0,-0,-0.1598806,0.9871364",
       "Enabled": true,
       "Components": [

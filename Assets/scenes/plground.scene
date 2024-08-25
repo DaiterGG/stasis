@@ -28,11 +28,6 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.Description",
-          "__guid": "2f372fd6-59f2-4044-91bc-e7eac2e8c43d",
-          "WhatIsThat": "Important!\nYou have to publish your map first\nThen attach \u0027Cloud Asset\u0027 to Map instance bellow"
-        },
-        {
           "__type": "Sandbox.MapInstance",
           "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
           "__version": 1,
@@ -41,7 +36,8 @@
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "bddf0c53-f7e6-4afe-86f2-3f9dade8a1e6",
@@ -1271,8 +1267,7 @@
   "Description": "",
   "ResourceVersion": 1,
   "__references": [
-    "move.black_marble1",
-    "move.hextest"
+    "move.black_marble1"
   ],
   "__version": 1
 }

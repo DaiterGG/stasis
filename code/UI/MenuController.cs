@@ -107,15 +107,11 @@ public sealed class MenuController : Component
 	{
 		Game.Overlay.ShowBinds();
 	}
-	public void Options()
-	{
-
-	}
 	public void MapSelect()
 	{
 		try
 		{
-			Game.Overlay.ShowPackageSelector( "type:asset ext:scene stasis", delegate ( Package p )
+			Game.Overlay.ShowPackageSelector( "type:asset ext:scene ", delegate ( Package p )
 			{
 				foreach ( var m in FC.OfficialMaps )
 				{
@@ -247,19 +243,19 @@ public sealed class MenuController : Component
 
 	public int GetMedal( MapData map )
 	{
-		if ( map.Scores.Count() == 0 ) return 0;
+		if ( map == null || map.Scores == null || map.Scores.Count() == 0 || map.GoldTime == 0 ) return 0;
 		var time = map.Scores[0].Time;
 		if ( map.SpeedRun )
 		{
-			if ( FC.currentMap.GoldTime > time )
+			if ( map.GoldTime > time )
 			{
 				return 3;
 			}
-			else if ( FC.currentMap.SilverTime > time )
+			else if ( map.SilverTime > time )
 			{
 				return 2;
 			}
-			else if ( FC.currentMap.BronzeTime > time )
+			else if ( map.BronzeTime > time )
 			{
 				return 1;
 

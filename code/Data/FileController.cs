@@ -26,7 +26,7 @@ public sealed class FileController : Component
 	public string[] OfficialMaps = new string[]
 	{
 		"move.sharp2",
-		"move.hexagon1",
+		"move.hexagon2",
 		"move.plground",
 	};
 
