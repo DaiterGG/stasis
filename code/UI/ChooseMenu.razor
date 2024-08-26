@@ -57,6 +57,7 @@
                     @for (int i = 0; i < Official.Count(); i++)
                     {
                         var m = Official[i];
+                        if (m.Name == null) return;
                         <div class="list-item dark" 
                         onclick="@(x => {ShowInfo(m, "official");})"
                         style="@("background-image: url(" + Official[i].Img + ")")">
@@ -73,6 +74,7 @@
                     @for (int i = 0; i < Featured.Count(); i++)
                     {
                         var m = Featured[i];
+                        if (m.Name == null) return;
                         <div class="list-item dark"
                              onclick="@(x => {ShowInfo(m, "featured");})"
                              style="@("background-image: url(" + Featured[i].Img + ")")">
@@ -108,6 +110,7 @@
                     @for (int i = 0; i < Community.Count(); i++)
                     {
                         var m = Community[i];
+                        if (m.Name == null) return;
                         <div class="list-item dark"
                              onclick="@(x => {ShowInfo(m, "community");})"
                              style="@("background-image: url(" + Community[i].Img + ")")">

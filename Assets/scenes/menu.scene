@@ -1212,7 +1212,7 @@
           "__guid": "c8e4f91e-ffe7-4b0b-879c-c77dc11c6101",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "maps/st_playground1.vmap",
+          "MapName": "move.st_playground3",
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }

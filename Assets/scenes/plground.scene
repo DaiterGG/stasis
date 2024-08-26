@@ -32,7 +32,7 @@
           "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "maps/st_playground1.vmap",
+          "MapName": "move.st_playground3",
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
