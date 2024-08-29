@@ -6,61 +6,60 @@ public sealed class EngineComponent : Component
 {
 	IngameUI GAMEUI;
 	MenuController MENUC;
-	GameObject FREECAM;
+	FreeCam FREECAM;
 	FileController FC;
-	SpinController SPINC;
+	SpinControl SPINC;
 
-	public bool inputActive { get; private set; }
 	public bool isRunning;
 	public int progress;
-	[Property] public Rigidbody rigid;
-	[Property, Range( 0.9f, 1f, 0.001f ), DefaultValue( 0.985f )] public float horizontalDumping;
-	[Property, Range( 0, 500f ), DefaultValue( 0f )] public float bodyOffsetZ;
-	[Property, Range( 0, 20000f ), DefaultValue( 16000f )] public float turnSpeed;
-	[Property, Range( 0, 20000f ), DefaultValue( 40f )] public float gravity;
-	[Property, Range( 0, 2000f ), DefaultValue( 100f )] public float gainStep;
-	[Property, Range( 0, 500f ), DefaultValue( 100f )] public float settleStep;
-	[Property] public Transform turnVector;
+	public Rigidbody rigid;
+	[Property, Range( 0.9f, 1f, 0.001f )] public float horizontalDumping { get; private set; } = 0.978f;
+	[Property, Range( 0.9f, 1f, 0.001f )] public float verticalDumping { get; private set; } = 0.968f;
+	[Property, Range( 0, 500f )] public float bodyOffsetZ { get; private set; } = 0f;
+	[Property, Range( 0, 20000f )] public float turnSpeed { get; private set; } = 16000f;
+	[Property, Range( 0, 20000f )] public float gravity { get; private set; } = 40f;
+	[Property, Range( 0, 2000f )] public float gainStep { get; private set; } = 100f;
+	[Property, Range( 0, 500f )] public float settleStep { get; private set; } = 100f;
 	//[Property, Range( 0, 50000f ), DefaultValue( 1000f )] readonly float maxSpeed;
 	public float gain { get; private set; } = 0f;
-	float maxGainGravityScale = 1.06f;
+	float maxGainGravityScale = 1.15f;
 	public float maxGain { get { return gravity * maxGainGravityScale; } }
 	int invertVert = -1;
+	public bool inputActive
+	{
+		get
+		{
+			return !(FREECAM.GameObject.Enabled || !SPINC.isAttached || !MENUC.IsGaming);
+		}
+		set { }
+	}
+
 	//exp
 	[Property, Range( 1f, 300f, 1f ), DefaultValue( 1f )] public readonly float boost = 1.1f;
-	//float deltaZ = 0;
-	protected override void OnAwake()
+	float deltaZ = 0;
+	//
+
+
+	public void OnAwakeInit()
 	{
-		base.OnAwake();
+
 		FREECAM = Sng.Inst.Player.CameraC.FreeCam;
 		SPINC = Sng.Inst.Player.SpinC;
 		MENUC = Sng.Inst.MenuC;
 		GAMEUI = MENUC.IngameUI;
 		FC = Sng.Inst.File;
-	}
-	protected override void OnStart()
-	{
-		base.OnStart();
+		rigid = GameObject.Components.Get<Rigidbody>();
+		Log.Info( rigid );
 		ResetPos( true );
 	}
-	public void UpdateInput()
+	public void OnFixedGlobal()
 	{
+
 		//Log.Info( FREECAM.Enabled + " " + !SPINC.isAttached + " " + !MENUC.IsGaming );
-		if ( FREECAM.Enabled || !SPINC.isAttached || !MENUC.IsGaming )
-		{
-			inputActive = false;
-		}
-		else
-			inputActive = true;
-	}
-	protected override void OnFixedUpdate()
-	{
 		//gravity
 		if ( !isRunning ) rigid.ApplyImpulse( new Vector3( 0, 0, gravity * -1 * .05f ) );
 		else rigid.ApplyImpulse( new Vector3( 0, 0, gravity * -1 ) );
-
-		rigid.Velocity *= horizontalDumping;
-
+		//Sng.LogOnce( "InputActive == " + inputActive );
 		//input
 		if ( inputActive )
 		{
@@ -88,10 +87,10 @@ public sealed class EngineComponent : Component
 			}
 			if ( Input.Down( "Up" ) )
 			{
-				if ( !isRunning ) engStart();
+				if ( !isRunning ) EngStart();
 				else gain += gravity / gainStep;
 			}
-			else if ( !isRunning ) engStart( false );
+			else if ( !isRunning ) EngStart( false );
 
 			if ( !Input.Down( "Up" ) && !Input.Down( "Down" ) )
 			{
@@ -119,6 +118,7 @@ public sealed class EngineComponent : Component
 			//experimental
 			//rigid.ApplyForce( new Vector3(rigid.Velocity.x * boost, rigid.Velocity.y * boost, 0 ) * Transform.Rotation);
 		}
+		rigid.Velocity *= new Vector3( horizontalDumping, horizontalDumping, verticalDumping );
 
 		/*
 		deltaZ -= Transform.Position.z;
@@ -159,18 +159,16 @@ public sealed class EngineComponent : Component
 		rigid.AngularVelocity = new Vector3( 0 );
 		GameObject.Transform.ClearInterpolation();
 		if ( engineRestart )
-		{
-			engOff();
-		}
+			EngOff();
 		else if ( isRunning ) gain = gravity;
 	}
-	public void engOff()
+	public void EngOff()
 	{
 		progress = 0;
 		isRunning = false;
 		gain = 0f;
 	}
-	public void engStart( bool increase = true )
+	public void EngStart( bool increase = true )
 	{
 		progress += increase ? 1 : -1;
 		if ( progress < 0 ) progress = 0;

@@ -1,0 +1,54 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Data;
+@inherits PanelComponent
+
+<root class="mapinfo">
+    <style>
+        .mapinfo {
+            background-image: url(@info.Img);
+        }
+    </style>
+    <div class="header ">
+        <div class="text">
+            <div class="name">@info.Name</div>
+            @if (info.Scores.Count() != 0)
+            {
+    <div class="btime">
+                    Best Time: @Sng.Inst.FormatTime(info.Scores[0].Time)
+                </div>
+            }
+            else
+            {
+                <div class="btime">Not Played</div>
+            }
+    @if (info.Author != null && info.Author != "")
+    {
+    <div class="author">By: @info.Author</div>
+    }
+    @if (info.DifficultyTier != 0)
+            {
+                <div class="difficulty">Tier: @info.DifficultyTier</div>
+            }
+
+        </div>
+        <img class="medal" src="@("img/medal"+(Sng.Inst.MenuC.GetMedal(info)).ToString()+".png")" />
+    </div>
+    <div class="gradi"></div>
+    <div class="bot">
+    <div class="play"
+    onclick="@(x => Sng.Inst.File.DownloadAndLoad(info.Indent))">
+    <p>
+    PLAY
+    </p>
+    </div>
+        </div>
+
+</root>
+
+@code
+{
+    
+        
+    public MapData info = new MapData();
+}

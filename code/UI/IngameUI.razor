@@ -1,5 +1,7 @@
 @using Sandbox;
+@using Sandbox.Player;
 @using Sandbox.UI;
+@using System;
 @inherits PanelComponent
 <root>
     <div class="gain">@Gain%</div>
@@ -11,6 +13,39 @@
     </div>
     <div class="timer">@Timer</div>
     <div class="speedVert">@SpeedVert</div>
+    <div class="pitch">
+
+        <div class="bars">
+            @{
+                var r = ENGINE.Transform.Rotation.Pitch() + 90f;
+                var s = (int)(r / 4f);
+                var of = (r % 4f) / 4f * 124f;
+                for(int i = -6;i <5 ;i++ )
+                {
+                    var t = i + s;
+                    var p = (t + 6) % 11;
+                    var f = (((p % 2) + 2) * p % 4);
+                    if (t == 10 || t == 32 || (t + 1) % 22 == 0)
+                    {
+                        f = 7;
+                    }
+                    <div class="bar" style="
+                        @( $"margin-top: {-of}px;width: {5 + 10 * f};")"></div>
+                    of = 0;
+                }
+            }
+
+        </div>
+        <div class="roll">
+            <div class="point">
+            </div>
+            @{
+                <div class="line" style="@($"transform: rotate({(Math.Abs(ENGINE.Transform.Rotation.Roll() + 90)  * -1) % 180 + 90 }deg)")">
+                </div>
+            }
+        </div>
+                
+    </div>
     <div class="speed">@SpeedMain</div>
     <div class="bot">
         <div class="speedHor">@SpeedHor</div>
@@ -19,6 +54,7 @@
 
 @code
 {
+
     public string SpeedMain { get; set; } = "0";
     public string SpeedHor { get; set; } = "0";
     public string SpeedVert { get; set; } = "0";
@@ -26,12 +62,18 @@
     public string Timer { get; set; } = "";
     private string Info =  "";
     public float infotime { get; set; }
+    EngineComponent ENGINE;
     public void ShowInfo( string info)
     {
         infotime = Time.Now;  
         Info = info;
     }
-
+    protected override void OnEnabled()
+    {
+        base.OnEnabled();
+        ENGINE = Sng.Inst.Player.Engine;
+      
+    }
     /// <summary>
     /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
     /// </summary>

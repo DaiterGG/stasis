@@ -4,6 +4,12 @@ public class MapData
 	public MapData()
 	{
 		Scores = new List<Score>();
+		Img = "";
+		Author = "";
+		Indent = "";
+		Description = "";
+		Version = "";
+		Type = "";
 	}
 	public List<Score> Scores { get; set; }
 	public string Name { get; set; }

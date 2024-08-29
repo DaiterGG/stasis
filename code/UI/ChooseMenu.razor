@@ -2,73 +2,16 @@
 @using Sandbox.Data;
 @using Sandbox.UI;
 @inherits PanelComponent
-
+    
 <root>
     <div class="sub">
         <div class="panel">
-            @if(info != null)
-            {
-                <style>
-                    .sub{
-                        width:1600px;
-                    }
-                </style>
-                <div class="mapinfo" style="@("background-image: url(" + info.Img + ")")">
-                    <div class="header ">
-                        <div class="text">
-                            <div class="name">@info.Name</div>
-                            @if(info.Scores.Count() != 0)
-                            {
-                                <div class="btime">Best Time: @Sng.Inst.FormatTime(info.Scores[0].Time)
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="btime">Not Played</div>
-                            }
-                            @if(info.Author != null && info.Author != "")
-                            {
-                                <div class="author">By: @info.Author</div>
-                            }
-                            @if(info.DifficultyTier != 0)
-                            {
-                                <div class="difficulty">Tier: @info.DifficultyTier</div>
-                            }
-                            
-                        </div>
-                        <img class="medal" src="@("img/medal"+(MenuC.GetMedal(info)).ToString()+".png")"/>
-                    </div>
-                    <div class="gradi"></div>
-                    <div class="bot" >
-                        <div class="play" 
-                            onclick="@(x => Sng.Inst.File.DownloadAndLoad(info.Indent))">
-                            <p>
-                                PLAY
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            }
             <div class="left">
                 <div class="up">
-                    Official
-                </div>
-                <div class="down">
-                    @for (int i = 0; i < Official.Count(); i++)
-                    {
-                        var m = Official[i];
-                        if (m.Name == null) return;
-                        <div class="list-item dark" 
-                        onclick="@(x => {ShowInfo(m, "official");})"
-                        style="@("background-image: url(" + Official[i].Img + ")")">
-                            <div class="time" >@(Official[i].Name.ToUpper())</div>
-                        </div>
-                    }
-                </div>
-            </div>
-            <div class="center">
-                <div class="up">
-                    Featured
+                    <div class="tabrow">
+                         <div class="tab" onclick="@(() => {})">Official</div>
+                         <div class="tab" onclick="@(() => {})">Official</div>
+                    </div>
                 </div>
                 <div class="down">
                     @for (int i = 0; i < Featured.Count(); i++)
@@ -102,7 +45,11 @@
             </div>
             <div class="right">
                 <div class="up">
-                    Community
+                    <div class="tabrow">
+                        <div class="tab" onclick="@(() => {})">Official</div>
+                        <div class="tab" onclick="@(() => {})">Feachured</div>
+                        <div class="tab" onclick="@(() => {})">Comm</div>
+                    </div>
                 </div>
                 <div class="down">
 
@@ -138,9 +85,12 @@
     public List<MapData> Official { get; set; } = new List<MapData>();
     public List<MapData> Featured { get; set; }= new List<MapData>();
     public List<MapData> Community { get; set; }= new List<MapData>();
-    public MapData info = null;
+    public MapData info = new MapData();
     public bool copied = false;
+	public List<MapData> GetList(string str)
+	{
 
+		}
     public void Copy()
     {
         copied = true;
@@ -155,7 +105,6 @@
     void CloseMenu()
     {
         MenuC.CloseChooseMenu();
-        info=null;
         copied = false;
     }
     protected override void OnAwake()

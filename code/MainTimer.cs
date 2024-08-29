@@ -5,18 +5,25 @@ namespace Sandbox
 	public class MainTimer
 	{
 		Sng SNG;
+		MenuController MENUC;
 		EngineComponent ENGINE;
 		public MainTimer()
 		{
 			SNG = Sng.Inst;
+			MENUC = SNG.MenuC;
 			ENGINE = SNG.Player.Engine;
 		}
 		public string TimerStr { get; private set; } = "Nan";
 		public float timerSeconds = 0;
 
-		public bool IsRunning { get; set; } = false;
-		public bool IsFinished { get; set; } = false;
-		public bool IsRequareReset { get; set; } = false;
+		public bool IsFinished { get; private set; } = false;
+		bool IsRunning { get; set; } = false;
+		public bool IsRequareReset { get; set; }
+		public void OnFixedGlobal()
+		{
+			UpdateTimer();
+			MENUC.IngameUI.Timer = TimerStr;
+		}
 		public void UpdateTimer()
 		{
 			if ( ENGINE.isRunning && !IsFinished ) IsRunning = true;
@@ -43,8 +50,10 @@ namespace Sandbox
 				TimerStr = SNG.FormatTime( timerSeconds );
 			}
 		}
-		public void TimerReset()
+		public void Reset()
 		{
+			TimerStr = "Nan";
+			IsRunning = false;
 			timerSeconds = 0;
 			IsFinished = false;
 			IsRequareReset = false;
@@ -54,6 +63,10 @@ namespace Sandbox
 		{
 			IsRunning = false;
 			IsRequareReset = true;
+		}
+		public void TimerFinish()
+		{
+			IsFinished = true;
 		}
 	}
 }

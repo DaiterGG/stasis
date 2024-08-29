@@ -5,18 +5,14 @@ namespace Sandbox;
 public sealed class SpinTrigger : Component, Component.ICollisionListener
 {
 	[Property, Range( 0, 360f )] public float rotationOffset;
-	SpinController SPIN;
+	SpinControl SPIN;
 	Rigidbody rig;
 
-	protected override void OnAwake()
-	{
-		SPIN = Sng.Inst.Player.SpinC;
-		rig = GameObject.Components.Get<Rigidbody>();
-
-	}
 	protected override void OnStart()
 	{
 		base.OnStart();
+		rig = GameObject.Components.Get<Rigidbody>();
+		SPIN = Sng.Inst.Player.SpinC;
 		ResetPos();
 	}
 
@@ -26,9 +22,8 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
 		if ( col.Other.GameObject.Tags.Contains( "particle" ) ) return; // not secessary since blades have 'player' tag
 		SPIN.SpinCollision();
 	}
-	protected override void OnFixedUpdate()
+	public void OnFixedGlobal()
 	{
-		base.OnFixedUpdate();
 		if ( !SPIN.isAttached )
 		{
 			rig.ApplyForce( new Vector3( 0, 0, SPIN.BladeGravity * -1 ) );

@@ -9,7 +9,7 @@ public sealed class ZoneCreate : Component
 	[Property] public GameObject LinePrefab;
 	public List<GameObject> EndZones = new List<GameObject>();
 	Sng SNG;
-	protected override void OnAwake()
+	public void OnAwakeInit()
 	{
 		SNG = Sng.Inst;
 	}
@@ -84,7 +84,8 @@ public sealed class ZoneCreate : Component
 	private void CreateLine( Vector3 p1, Vector3 p2 )
 	{
 		var l = LinePrefab.Clone();
-		l.Parent = Scene;
+
+		l.Parent = GameObject.Parent;
 		l.Enabled = true;
 		var rend = l.Components.Get<LineRenderer>();
 		//Log.Info( rend.Width.AddOrReplacePoint( new Curve.Frame( 0f, 7f, 1f, 1f ) ) );

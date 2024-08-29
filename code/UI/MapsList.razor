@@ -1,0 +1,41 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Data;
+@inherits PanelComponent
+
+<root class="mapinfo">
+	@for (int i = 0; i < Featured.Count(); i++)
+	{
+		var m = Featured[i];
+		if (m.Name == null) return;
+		<div class="list-item dark" onclick="@(x => {ShowInfo(m, "featured");})"
+			style="@("background-image: url(" + Featured[i].Img + ")")">
+			<div class="time">@(Featured[i].Name.ToUpper())</div>
+		</div>
+	}
+	<div class="add" onclick="@Copy">
+		@if (copied)
+		{
+			<p>
+				Copied to clipboard
+			</p>
+		}
+		else
+		{
+			<p>
+				Join the Discord
+			</p>
+			<p>
+				to create maps
+			</p>
+		}
+	</div>
+
+</root>
+
+@code
+{
+	public string type {get;set;}
+	public List<MapData> maps{get;set;}
+	public MapData info = new MapData();
+}

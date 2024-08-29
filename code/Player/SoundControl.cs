@@ -4,14 +4,15 @@ public sealed class SoundControl : Component
 {
 	SoundPointComponent SPC;
 	EngineComponent ENGINE;
-	SpinController SPINC;
-	protected override void OnAwake()
+	SpinControl SPINC;
+	public void OnAwakeInit()
 	{
 		SPC = GameObject.Components.Get<SoundPointComponent>();
 		ENGINE = Sng.Inst.Player.Engine;
 		SPINC = Sng.Inst.Player.SpinC;
+
 	}
-	protected override void OnFixedUpdate()
+	public void OnFixedGlobal()
 	{
 		if ( ENGINE.isRunning )
 		{

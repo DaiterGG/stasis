@@ -1,19 +1,18 @@
 using System;
 using Sandbox.Data;
 using Sandbox.Player;
-
 namespace Sandbox;
 public sealed class Sng : Component
 {
 	private static Sng _sng;
+	public static Sng Inst { get { return _sng; } }
 
 	public MainTimer Timer;
 	[Property] public MenuController MenuC;
 	[Property] public PlayerComp Player;
 	[Property] public ZoneCreate ZoneC;
 	[Property] public FileController File;
-	public static Sng Inst { get { return _sng; } }
-
+	public bool firstTime { get; set; } = true;
 	public GameTransform StartPoint;
 	private GameTransform _spawnPoint;
 	public GameTransform SpawnPoint
@@ -26,13 +25,55 @@ public sealed class Sng : Component
 		set { _spawnPoint = value; }
 	}
 	public List<GameObject> EndZones;
+	public static void ELog( object s )
+	{
+		if ( Game.IsEditor ) Log.Info( s );
+	}
+	string lastLog;
+	public static void LogOnce( object s, bool editLog = true )
+	{
+		if ( Inst.lastLog != s.ToString() )
+		{
+			if ( editLog )
+			{
+				ELog( s );
+			}
+			else Log.Info( s );
+			Inst.lastLog = s.ToString();
+		}
+	}
 	protected override void OnAwake()
 	{
-		_sng = this;
-		Timer = new MainTimer();
-		base.OnAwake();
-		File.ReadFiles();
+		if ( Game.IsEditor && Scene.Name != "Scene" )
+		{
+			_sng = this;
+			ELog( "testing in editor" );
+		}
+		else if ( GameObject.Parent.Name == "Menu" )
+		{
+			_sng = this;
+		}
+		else
+		{
+			GameObject.Parent.Enabled = false;
+			return;
+		}
+
+		OnAwakeInit();
 	}
+	public void OnAwakeInit()
+	{
+		Timer = new MainTimer();
+		File.OnAwakeInit();
+		MenuC.OnAwakeInit();
+		Player.Engine.OnAwakeInit();
+		Player.SoundC.OnAwakeInit();
+		Player.SpinC.OnAwakeInit();
+		ZoneC.OnAwakeInit();
+		Player.CameraC.OnAwakeInit();
+
+	}
+
 	protected override void OnStart()
 	{
 		File.AddOfficialMaps();
@@ -44,12 +85,10 @@ public sealed class Sng : Component
 		{
 			File.SetCurrentMap( "move.plground" );
 			MapInit();
-			MenuC.OpenMenu();
 		}
 		else
 		{
 			File.DownloadAndLoad( "move.plground" );
-
 		}
 
 		base.OnStart();
@@ -57,9 +96,8 @@ public sealed class Sng : Component
 	private void MapInit()
 	{
 		Info MapInfo = null;
-		Timer = new MainTimer();
-		//StartPoint = null;
-		//SpawnPoint = null;
+		StartPoint = null;
+		SpawnPoint = null;
 		EndZones = new List<GameObject>();
 		var heap = Scene.GetAllObjects( true );
 		foreach ( var obj in heap )
@@ -79,7 +117,7 @@ public sealed class Sng : Component
 			else if ( obj.Name == "Map Info" )
 			{
 				MapInfo = obj.Components.Get<Info>();
-				Log.Info( "info found" );
+				ELog( "Info Found" );
 			}
 		}
 		if ( MapInfo == null ) Log.Warning( "Info not found" );
@@ -90,18 +128,17 @@ public sealed class Sng : Component
 		else ZoneC.MapInit();
 
 		if ( StartPoint == null ) Log.Warning( "Start not found" );
-		else
-		{
-			MenuC.SetCameraLook();
-			SpawnPlayer();
-		}
+		SpawnPlayer();
 	}
 	protected override void OnFixedUpdate()
+	{
+		OnFixedUpdateSequence();
+	}
+	private void OnFixedUpdateSequence()
 	{
 		try
 		{
 			MenuC.BlackUI.Opacity -= 0.005f;
-			base.OnFixedUpdate();
 			if ( MenuC.IsGaming )
 			{
 
@@ -117,12 +154,16 @@ public sealed class Sng : Component
 				{
 					MenuC.OpenMenu();
 				}
-				Timer.UpdateTimer();
-				MenuC.IngameUI.Timer = Timer.TimerStr;
 			}
+			Player.SoundC.OnFixedGlobal();
+			Player.SpinC.OnFixedGlobal();
+			Player.Engine.OnFixedGlobal();
+			if ( MenuC.IsGaming ) Timer.OnFixedGlobal();
+			Player.CameraC.OnFixedGlobal();
 		}
-		catch ( Exception e ) { Log.Warning( e.Message ); }
+		catch ( Exception e ) { LogOnce( "Main fixed error" + e.StackTrace ); }
 	}
+
 	public void LoadNewMap( SceneFile file )
 	{
 
@@ -149,6 +190,7 @@ public sealed class Sng : Component
 		Player.Transform.Rotation = SpawnPoint.Rotation;
 		Player.Transform.ClearInterpolation();
 		Player.Engine.ResetPos( true );
+		MenuC.SetCameraLook();
 	}
 	public void TeleportPlayer( GameTransform pos )
 	{
@@ -175,18 +217,17 @@ public sealed class Sng : Component
 	{
 		if ( Timer.IsFinished ) return;
 		File.SetScore( Timer.timerSeconds );
-		Timer.IsFinished = true;
+		Timer.TimerFinish();
 		MenuC.ShowEndScreen();
 
 	}
 	public void ResetPlayer()
 	{
 		TeleportPlayer( StartPoint );
-		Timer.TimerReset();
-		Player.CameraC.FreeCam.Enabled = false;
+		Timer.Reset();
+		Player.CameraC.FreeCam.GameObject.Enabled = false;
 		Player.CameraC.UpdateCam();
 		Player.SpinC.RestartSpin();
-		Player.Engine.UpdateInput();
 	}
 	public string FormatTime( float totalSeconds )
 	{

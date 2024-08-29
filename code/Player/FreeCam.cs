@@ -7,27 +7,22 @@ public sealed class FreeCam : Component
 	readonly float force = 20f;
 	float mult = 1f;
 	MainTimer TIMER;
-	protected override void OnAwake()
+
+	public void OnAwakeInit()
 	{
-		base.OnAwake();
 		TIMER = Sng.Inst.Timer;
 	}
 	protected override void OnEnabled()
 	{
 		base.OnEnabled();
-
+		TIMER.StopTimer();
 		Transform.Position = thirdCam.Transform.Position + new Vector3( 0, 0, 10 );
 		Transform.Rotation = thirdCam.Transform.Rotation;
 		Transform.ClearInterpolation();
 	}
-	protected override void OnDisabled()
-	{
-		base.OnDisabled();
-	}
 	protected override void OnUpdate()
 	{
 		if ( !GameObject.Enabled ) return;
-		TIMER.StopTimer();
 		if ( Input.Down( "Up" ) )
 		{ //W or forward		
 			Transform.Position += new Vector3( force * mult, 0, 0 ) * Transform.Rotation;

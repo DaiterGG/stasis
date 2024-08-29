@@ -23,26 +23,24 @@ public sealed class MenuController : Component
 	public float speed = 0;
 	public bool IsGaming = false;
 	GameObject BODY;
-	SpinController SPINC;
+	SpinControl SPINC;
+	MainTimer TIMER;
 	EngineComponent ENGINE;
 	Sng SNG;
 	FileController FC;
 
-	protected override void OnAwake()
+	public void OnAwakeInit()
 	{
-		base.OnAwake();
 		SNG = Sng.Inst;
 		SPINC = SNG.Player.SpinC;
+		TIMER = SNG.Timer;
 		BODY = SNG.Player.Body;
 		ENGINE = SNG.Player.Engine;
 		FC = SNG.File;
+		//Set camera angle to use for all other menues
 		SetCameraOffset();
-	}
-	protected override void OnStart()
-	{
-		base.OnStart();
+		Camera.Enabled = true;
 		ApplySettings();
-
 	}
 	protected override void OnUpdate()
 	{
@@ -86,6 +84,7 @@ public sealed class MenuController : Component
 		IngameUI.GameObject.Enabled = true;
 		MenuUI.GameObject.Enabled = false;
 		IsGaming = true;
+		TIMER.Reset();
 		ShowInfo();
 		SNG.ResetPlayer();
 	}
@@ -101,7 +100,6 @@ public sealed class MenuController : Component
 		IsGaming = false;
 		CameraInit();
 		Camera.Enabled = true;
-		ENGINE.UpdateInput();
 	}
 	public void Controls()
 	{
@@ -279,10 +277,13 @@ public sealed class MenuController : Component
 	public void Copy()
 	{
 		Clipboard.SetText( "https://discord.gg/JNrNHxDE2D" );
+
 	}
+	bool infoOnce = true;
 	public void ShowInfo()
 	{
-		IngameUI.ShowInfo( ControlsInfo() );
+		if ( infoOnce && SNG.firstTime ) IngameUI.ShowInfo( ControlsInfo() );
+		infoOnce = false;
 	}
 	private string ControlsInfo()
 	{

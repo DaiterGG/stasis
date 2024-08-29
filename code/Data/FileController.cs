@@ -12,26 +12,23 @@ public sealed class FileController : Component
 	string s = "Settings.json";
 	string m = "Maps.json";
 	static Sng SNG;
-	protected override void OnAwake()
+	public string[] FeaturedMaps;
+	public string[] OfficialMaps;
+	public void OnAwakeInit()
 	{
-		base.OnAwake();
 		SNG = Sng.Inst;
-		Log.Info( SNG.MenuC );
-	}
-
-	public string[] FeaturedMaps = new string[]
-	{
-
-	};
-	public string[] OfficialMaps = new string[]
-	{
+		FeaturedMaps = new string[] { };
+		OfficialMaps = new string[]
+		{
 		"move.sharp2",
 		"move.hexagon2",
 		"move.plground",
-	};
+		};
 
-	//OnAwake init!
-	public void ReadFiles()
+		FilesInit();
+	}
+
+	public void FilesInit()
 	{
 		if ( FileSystem.Data.FileExists( s ) )
 		{
