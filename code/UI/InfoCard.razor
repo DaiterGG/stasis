@@ -1,54 +1,60 @@
-@using Sandbox;
-@using Sandbox.UI;
-@using Sandbox.Data;
-@inherits PanelComponent
+@namespace Stasis.UI
+@using Sandbox
+@using Sandbox.UI
+@using Stasis.Data
+@inherits Panel
 
-<root class="mapinfo">
-    <style>
-        .mapinfo {
-            background-image: url(@info.Img);
-        }
-    </style>
-    <div class="header ">
-        <div class="text">
-            <div class="name">@info.Name</div>
-            @if (info.Scores.Count() != 0)
-            {
-    <div class="btime">
-                    Best Time: @Sng.Inst.FormatTime(info.Scores[0].Time)
-                </div>
-            }
-            else
-            {
-                <div class="btime">Not Played</div>
-            }
-    @if (info.Author != null && info.Author != "")
-    {
-    <div class="author">By: @info.Author</div>
-    }
-    @if (info.DifficultyTier != 0)
-            {
-                <div class="difficulty">Tier: @info.DifficultyTier</div>
-            }
-
-        </div>
-        <img class="medal" src="@("img/medal"+(Sng.Inst.MenuC.GetMedal(info)).ToString()+".png")" />
-    </div>
-    <div class="gradi"></div>
-    <div class="bot">
-    <div class="play"
-    onclick="@(x => Sng.Inst.File.DownloadAndLoad(info.Indent))">
-    <p>
-    PLAY
-    </p>
-    </div>
-        </div>
+<root class="mapinfo" style="@("background-image: url("+map.Img+");")">
+	<div class="header ">
+		<div class="text">
+			<div class="name">@map.Name</div>
+			@if (map.Scores.Count() != 0)
+			{
+				<div class="btime">
+					Best Time: @Sng.Inst.FormatTime(map.Scores[0].Time)
+				</div>
+			}
+			else
+			{
+				<div class="btime">Not Played</div>
+			}
+			@if (map.Author != null && map.Author != "")
+			{
+				<div class="author">By: @map.Author</div>
+			}
+			@if (map.DifficultyTier != 0)
+			{
+				<div class="difficulty">Tier: @map.DifficultyTier</div>
+			}
+		</div>
+		<img class="medal" src="@("img/medal"+(Sng.Inst.MenuC.GetMedal(map)).ToString()+".png")" />
+	</div>
+	<div class="gradi"></div>
+	<div class="bot">
+		<div class="play" onclick="@(x => Sng.Inst.FileC.DownloadAndLoad(map.Indent))">
+			<p>
+				PLAY
+			</p>
+		</div>
+	</div>
 
 </root>
 
 @code
 {
-    
-        
-    public MapData info = new MapData();
+
+	protected override int BuildHash() => System.HashCode.Combine(map);
+	MapData map {get; set;}
+	ChooseMenu parent { get; set; }
+	public MenuController MENUC { get; set; }
+	public void Update(){
+		map = parent.GetSelectedMap();
+	}
+	public InfoCard()
+	{
+		MENUC = Sng.Inst.MenuC;
+		parent = MENUC.ChooseUI;
+		parent.infCard = this;
+		Update();
+	}
 }

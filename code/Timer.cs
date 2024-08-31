@@ -1,13 +1,13 @@
-﻿using Sandbox.Player;
-
-namespace Sandbox
+﻿using Stasis.Player;
+using Stasis.UI;
+namespace Stasis
 {
-	public class MainTimer
+	public class Timer
 	{
 		Sng SNG;
 		MenuController MENUC;
 		EngineComponent ENGINE;
-		public MainTimer()
+		public Timer()
 		{
 			SNG = Sng.Inst;
 			MENUC = SNG.MenuC;

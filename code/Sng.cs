@@ -1,46 +1,28 @@
 using System;
-using Sandbox.Data;
-using Sandbox.Player;
-namespace Sandbox;
+using Stasis.Data;
+using Stasis.Player;
+using Stasis.UI;
+using Stasis.Zones;
+namespace Stasis;
 public sealed class Sng : Component
 {
 	private static Sng _sng;
 	public static Sng Inst { get { return _sng; } }
 
-	public MainTimer Timer;
+	public Timer Timer;
 	[Property] public MenuController MenuC;
 	[Property] public PlayerComp Player;
-	[Property] public ZoneCreate ZoneC;
-	[Property] public FileController File;
+	[Property] public ZoneControl ZoneC;
+	public LBControl LB;
+	public FileControl FileC;
 	public bool firstTime { get; set; } = true;
+	public bool blurOn {get; set;}
 	public GameTransform StartPoint;
 	private GameTransform _spawnPoint;
 	public GameTransform SpawnPoint
 	{
-		get
-		{
-			if ( _spawnPoint == null ) return StartPoint;
-			return _spawnPoint;
-		}
-		set { _spawnPoint = value; }
-	}
-	public List<GameObject> EndZones;
-	public static void ELog( object s )
-	{
-		if ( Game.IsEditor ) Log.Info( s );
-	}
-	string lastLog;
-	public static void LogOnce( object s, bool editLog = true )
-	{
-		if ( Inst.lastLog != s.ToString() )
-		{
-			if ( editLog )
-			{
-				ELog( s );
-			}
-			else Log.Info( s );
-			Inst.lastLog = s.ToString();
-		}
+		get => _spawnPoint == null ? StartPoint: _spawnPoint;
+		set => _spawnPoint = value;
 	}
 	protected override void OnAwake()
 	{
@@ -56,15 +38,18 @@ public sealed class Sng : Component
 		else
 		{
 			GameObject.Parent.Enabled = false;
+			GameObject.Parent.DestroyImmediate();
 			return;
 		}
-
+		blurOn = !Game.IsEditor;
 		OnAwakeInit();
 	}
 	public void OnAwakeInit()
 	{
-		Timer = new MainTimer();
-		File.OnAwakeInit();
+		FileC = new FileControl();
+		Timer = new Timer();
+		LB = new LBControl();
+		FileC.OnAwakeInit();
 		MenuC.OnAwakeInit();
 		Player.Engine.OnAwakeInit();
 		Player.SoundC.OnAwakeInit();
@@ -76,21 +61,21 @@ public sealed class Sng : Component
 
 	protected override void OnStart()
 	{
-		File.AddOfficialMaps();
+		FileC.AddOfficialMaps();
 		//File.FetchNewMap( "move.stasis_playgr", "official" );
 		//File.FetchNewMap( "dicta.base", "community" );
 		//File.DownloadAndLoad( "move.stasis_playground", true );
 
-		if ( Game.IsEditor )
+		if ( Game.IsEditor && Scene.Name != "Scene" )
 		{
-			File.SetCurrentMap( "move.plground" );
+			FileC.SetCurrentMap( "move.plground" );
 			MapInit();
 		}
 		else
 		{
-			File.DownloadAndLoad( "move.plground" );
+			FileC.DownloadAndLoad( "move.plground" );
 		}
-
+		
 		base.OnStart();
 	}
 	private void MapInit()
@@ -98,7 +83,7 @@ public sealed class Sng : Component
 		Info MapInfo = null;
 		StartPoint = null;
 		SpawnPoint = null;
-		EndZones = new List<GameObject>();
+		ZoneC.EndZones = new List<GameObject>();
 		var heap = Scene.GetAllObjects( true );
 		foreach ( var obj in heap )
 		{
@@ -112,19 +97,22 @@ public sealed class Sng : Component
 			}
 			else if ( obj.Name.Contains( "end_zone" ) )
 			{
-				EndZones.Add( obj );
+				ZoneC.EndZones.Add( obj );
 			}
 			else if ( obj.Name == "Map Info" )
 			{
 				MapInfo = obj.Components.Get<Info>();
-				ELog( "Info Found" );
+				if ( MapInfo == null ) 
+					ELog( "no info component found" );
+				else
+					ELog( "Info Found" );
 			}
 		}
 		if ( MapInfo == null ) Log.Warning( "Info not found" );
 
-		File.InfoSerialize( MapInfo );
+		FileC.InfoSerialize( MapInfo );
 
-		if ( EndZones.Count == 0 ) Log.Warning( "End zone not found" );
+		if ( ZoneC.EndZones.Count == 0 ) Log.Warning( "End zone not found" );
 		else ZoneC.MapInit();
 
 		if ( StartPoint == null ) Log.Warning( "Start not found" );
@@ -216,7 +204,7 @@ public sealed class Sng : Component
 	public void EndZoneEnter( GameObject go, Collider cof )
 	{
 		if ( Timer.IsFinished ) return;
-		File.SetScore( Timer.timerSeconds );
+		FileC.SetScore( Timer.timerSeconds );
 		Timer.TimerFinish();
 		MenuC.ShowEndScreen();
 
@@ -260,6 +248,35 @@ public sealed class Sng : Component
 		}
 
 	}
+	/// <summary>
+	/// Log. for Editor Mode only
+	/// type = "Log", "Warn", "Err"
+	/// </summary>
+	public static void ELog( object s , string type = "Log")
+	{
+		if ( Game.IsEditor ) {
+			if (type == "Log")
+				Log.Info( s );
+			else if (type == "Warn")	
+				Log.Warning( s );
+			else if (type == "Err")	
+				Log.Error( s );
+		}
+	}
+	string lastLog;
+	public static void LogOnce( object s, bool editLog = true )
+	{
+		if ( Inst.lastLog != s.ToString() )
+		{
+			if ( editLog )
+			{
+				ELog( s );
+			}
+			else Log.Info( s );
+			Inst.lastLog = s.ToString();
+		}
+	}
+	
 
 }
 

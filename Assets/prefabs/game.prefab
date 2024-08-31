@@ -19,51 +19,30 @@
         "Enabled": true,
         "Components": [
           {
-            "__type": "Sandbox.Sng",
-            "__guid": "b61062db-fe84-4099-b23c-7960ed71c12e",
-            "File": {
-              "_type": "component",
-              "component_id": "034cfebf-6289-4adc-bc9a-3be3168cd4fa",
-              "go": "98bb0b93-0525-4488-81eb-fd8b91d719cd",
-              "component_type": "FileController"
-            },
+            "__type": "Sandbox.DontDestroy",
+            "__guid": "9fb01cf6-11d0-4a7b-9151-d44a0bc6650c"
+          },
+          {
+            "__type": "Stasis.Sng",
+            "__guid": "1701c084-2e24-4627-9b11-303a778c47ae",
             "MenuC": {
               "_type": "component",
-              "component_id": "ec21591c-da5f-48ac-9e79-48155aa526eb",
+              "component_id": "d907fe69-71b4-4697-bca0-372548e32760",
               "go": "6c506e2a-4776-4955-8734-9de87f444cb6",
               "component_type": "MenuController"
             },
             "Player": {
               "_type": "component",
-              "component_id": "fb852f19-c91c-41bb-b506-363af2e5c7b8",
+              "component_id": "404ae361-f66e-4b7f-a68d-18e245300d7d",
               "go": "75eb26c9-d9fc-4205-91a2-bebac64f876d",
               "component_type": "PlayerComp"
             },
             "ZoneC": {
               "_type": "component",
-              "component_id": "e81f93ce-e5b4-41d3-8aed-703f6dd0c6b0",
+              "component_id": "fbec91d5-efd4-4d35-85ce-5366c22a2aa9",
               "go": "138ff680-c485-4250-9018-21dfe7b269b5",
-              "component_type": "ZoneCreate"
+              "component_type": "ZoneControl"
             }
-          },
-          {
-            "__type": "Sandbox.DontDestroy",
-            "__guid": "9fb01cf6-11d0-4a7b-9151-d44a0bc6650c"
-          }
-        ],
-        "Children": [
-          {
-            "__guid": "98bb0b93-0525-4488-81eb-fd8b91d719cd",
-            "Flags": 0,
-            "Name": "File system",
-            "Position": "0,0,0",
-            "Enabled": true,
-            "Components": [
-              {
-                "__type": "Sandbox.Data.FileController",
-                "__guid": "034cfebf-6289-4adc-bc9a-3be3168cd4fa"
-              }
-            ]
           }
         ]
       },
@@ -78,8 +57,8 @@
             "__guid": "82815329-4038-4225-9f6b-493b6cf71183"
           },
           {
-            "__type": "Sandbox.MenuController",
-            "__guid": "ec21591c-da5f-48ac-9e79-48155aa526eb",
+            "__type": "Stasis.UI.MenuController",
+            "__guid": "d907fe69-71b4-4697-bca0-372548e32760",
             "BlackUI": {
               "_type": "component",
               "component_id": "642e9474-c963-4832-8555-72d5805c1426",
@@ -92,13 +71,13 @@
             },
             "ChooseUI": {
               "_type": "component",
-              "component_id": "5585c466-55f3-43e8-9537-ffdb34818246",
+              "component_id": "784efb82-57f3-4eef-926d-3751e922a5cc",
               "go": "06ebe112-8204-434b-b177-5a3739b32f07",
               "component_type": "ChooseMenu"
             },
             "EndUI": {
               "_type": "component",
-              "component_id": "f6e657a5-66e4-4f45-9f2e-2027d7138ffa",
+              "component_id": "d765a7a3-b49a-4896-be28-2f669a9d61fb",
               "go": "4211c887-7c0e-413a-9543-5cd4d30d29a1",
               "component_type": "EndScreen"
             },
@@ -159,8 +138,8 @@
                 "ZIndex": 100
               },
               {
-                "__type": "ChooseMenu",
-                "__guid": "5585c466-55f3-43e8-9537-ffdb34818246"
+                "__type": "Stasis.UI.ChooseMenu",
+                "__guid": "784efb82-57f3-4eef-926d-3751e922a5cc"
               }
             ]
           },
@@ -179,8 +158,8 @@
                 "ZIndex": 100
               },
               {
-                "__type": "EndScreen",
-                "__guid": "f6e657a5-66e4-4f45-9f2e-2027d7138ffa"
+                "__type": "Stasis.UI.EndScreen",
+                "__guid": "d765a7a3-b49a-4896-be28-2f669a9d61fb"
               }
             ]
           },
@@ -200,7 +179,7 @@
                 "ZIndex": 100
               },
               {
-                "__type": "MainMenu",
+                "__type": "Stasis.UI.MainMenu",
                 "__guid": "020f993b-0a55-4a96-975d-a55c7a26d29b"
               }
             ]
@@ -220,7 +199,7 @@
                 "ZIndex": 100
               },
               {
-                "__type": "SettingsUI",
+                "__type": "Stasis.UI.SettingsUI",
                 "__guid": "ec761ac3-aeb4-44c7-98bf-5773f9ae98a7"
               }
             ]
@@ -242,7 +221,7 @@
                 "ZIndex": 258
               },
               {
-                "__type": "BlackScreen",
+                "__type": "Stasis.UI.BlackScreen",
                 "__guid": "44102842-1319-48cf-ad93-450cd28d8cbf"
               }
             ]
@@ -259,33 +238,33 @@
         "Enabled": true,
         "Components": [
           {
-            "__type": "Sandbox.Player.PlayerComp",
-            "__guid": "fb852f19-c91c-41bb-b506-363af2e5c7b8",
+            "__type": "Stasis.Player.PlayerComp",
+            "__guid": "404ae361-f66e-4b7f-a68d-18e245300d7d",
             "Body": {
               "_type": "gameobject",
               "go": "3c2490ef-54a0-49bb-8f13-490e40aa51d1"
             },
             "CameraC": {
               "_type": "component",
-              "component_id": "94048f2e-db16-4770-a617-44f26512029f",
+              "component_id": "23fb4439-3721-406a-9001-8e9c8d70131a",
               "go": "b85abaea-5c3e-427c-953a-7d73b892723a",
               "component_type": "CameraControl"
             },
             "Engine": {
               "_type": "component",
-              "component_id": "8b3a009f-7760-4c75-9653-5399f19b6b28",
+              "component_id": "0434357a-6202-49f1-b95f-7752f248704a",
               "go": "3c2490ef-54a0-49bb-8f13-490e40aa51d1",
               "component_type": "EngineComponent"
             },
             "SoundC": {
               "_type": "component",
-              "component_id": "282fe173-785d-443e-9862-b25dca4485e4",
+              "component_id": "9f4f1824-64d9-4aaa-9c8b-6b2d5482196c",
               "go": "31e10eb6-a499-49ce-b2b3-e0c60caee057",
               "component_type": "SoundControl"
             },
             "SpinC": {
               "_type": "component",
-              "component_id": "5390635d-40ff-4fef-8d18-30ab8766b9ad",
+              "component_id": "5c71f089-43f5-46e1-920c-a5a9196dab93",
               "go": "b5c79e64-4919-4ff2-b640-e07aec2985bf",
               "component_type": "SpinControl"
             }
@@ -305,15 +284,15 @@
             "Enabled": true,
             "Components": [
               {
-                "__type": "Sandbox.SpinControl",
-                "__guid": "5390635d-40ff-4fef-8d18-30ab8766b9ad",
-                "BladeGravity": 0,
+                "__type": "Stasis.Player.SpinControl",
+                "__guid": "5c71f089-43f5-46e1-920c-a5a9196dab93",
                 "PropRig": {
                   "_type": "component",
                   "component_id": "b0dcc293-9824-4652-a44e-f9639944259c",
                   "go": "869c7782-052d-42ad-af0b-0fea8a7e3cf2",
                   "component_type": "Rigidbody"
-                }
+                },
+                "BladeGravity": 1500
               }
             ]
           },
@@ -325,18 +304,6 @@
             "Scale": "0.5,0.5,0.5",
             "Enabled": true,
             "Components": [
-              {
-                "__type": "Sandbox.Player.EngineComponent",
-                "__guid": "8b3a009f-7760-4c75-9653-5399f19b6b28",
-                "boost": 1,
-                "bodyOffsetZ": 0,
-                "gainStep": 100,
-                "gravity": 40,
-                "horizontalDumping": 0.978,
-                "settleStep": 100,
-                "turnSpeed": 16000,
-                "verticalDumping": 0.968
-              },
               {
                 "__type": "Sandbox.Rigidbody",
                 "__guid": "54e58dc7-eef4-489e-8305-9eedc4239093",
@@ -373,46 +340,21 @@
                 "IsTrigger": true,
                 "Scale": "250,250,250",
                 "Static": false
+              },
+              {
+                "__type": "Stasis.Player.EngineComponent",
+                "__guid": "0434357a-6202-49f1-b95f-7752f248704a",
+                "boost": 1.1,
+                "bodyOffsetZ": 0,
+                "gainStep": 100,
+                "gravity": 40,
+                "horizontalDumping": 0.978,
+                "settleStep": 100,
+                "turnSpeed": 16000,
+                "verticalDumping": 0.968
               }
             ],
             "Children": [
-              {
-                "__guid": "15be8f17-ec53-4ac6-a71b-e6c2450c6a33",
-                "Flags": 0,
-                "Name": "Model",
-                "Position": "0,0,0",
-                "Components": [
-                  {
-                    "__type": "Sandbox.ModelRenderer",
-                    "__guid": "fd74e77e-854a-4a2a-a432-010ad6aad99c",
-                    "BodyGroups": 18446744073709551615,
-                    "Model": "models/dev/error.vmdl",
-                    "RenderType": "On",
-                    "Tint": "1,1,1,1"
-                  },
-                  {
-                    "__type": "Sandbox.ModelCollider",
-                    "__guid": "348fc713-739c-4b2e-9692-57bd442cccfe",
-                    "IsTrigger": false,
-                    "Model": "models/dev/error.vmdl",
-                    "Static": false
-                  },
-                  {
-                    "__type": "Sandbox.Rigidbody",
-                    "__guid": "05d56c8c-5d87-4d16-9350-79844a497913",
-                    "AngularDamping": 0,
-                    "Gravity": false,
-                    "LinearDamping": 0,
-                    "Locking": {},
-                    "MassCenterOverride": "0,0,0",
-                    "MassOverride": 0,
-                    "MotionEnabled": false,
-                    "OverrideMassCenter": false,
-                    "RigidbodyFlags": 0,
-                    "StartAsleep": false
-                  }
-                ]
-              },
               {
                 "__guid": "0066e55b-2a26-478d-9087-bc7a47e2c030",
                 "Flags": 0,
@@ -631,9 +573,9 @@
                         "Static": false
                       },
                       {
-                        "__type": "Sandbox.SpinTrigger",
-                        "__guid": "2384fad3-3a98-4397-b270-aead01535bc9",
-                        "rotationOffset": 0
+                        "__type": "Stasis.Player.SpinTrigger",
+                        "__guid": "81f655f5-46f3-4907-bd75-045214f20348",
+                        "rotationOffset": 120
                       }
                     ]
                   },
@@ -675,11 +617,6 @@
                         "OverrideMassCenter": false,
                         "RigidbodyFlags": 0,
                         "StartAsleep": false
-                      },
-                      {
-                        "__type": "Sandbox.SpinTrigger",
-                        "__guid": "93c8a355-c413-4827-bc9f-4565c38c51d8",
-                        "rotationOffset": 0
                       }
                     ]
                   },
@@ -722,9 +659,9 @@
                         "Static": false
                       },
                       {
-                        "__type": "Sandbox.SpinTrigger",
-                        "__guid": "bfc552e6-a5b4-497f-b840-384c8c083e6d",
-                        "rotationOffset": 120
+                        "__type": "Stasis.Player.SpinTrigger",
+                        "__guid": "5a4b8b75-e5be-4182-9dfb-cc867d79a2ca",
+                        "rotationOffset": 0
                       }
                     ]
                   },
@@ -767,11 +704,6 @@
                         "OverrideMassCenter": false,
                         "RigidbodyFlags": 0,
                         "StartAsleep": false
-                      },
-                      {
-                        "__type": "Sandbox.SpinTrigger",
-                        "__guid": "adbe0b20-21ee-4e04-a45a-af41670c0b8f",
-                        "rotationOffset": 90
                       }
                     ]
                   },
@@ -783,6 +715,11 @@
                     "Tags": "particle",
                     "Enabled": true,
                     "Components": [
+                      {
+                        "__type": "Stasis.Player.SpinTrigger",
+                        "__guid": "79ebc416-7b7a-4adb-9929-bd28c5263cba",
+                        "rotationOffset": 240
+                      },
                       {
                         "__type": "Sandbox.ModelRenderer",
                         "__guid": "b7222cb0-371a-45fe-a072-49aadf42ab60",
@@ -812,11 +749,6 @@
                         "IsTrigger": false,
                         "Model": "models/tail_final.vmdl",
                         "Static": false
-                      },
-                      {
-                        "__type": "Sandbox.SpinTrigger",
-                        "__guid": "25582e99-4ccb-43d6-a91e-2a82f03f2ec9",
-                        "rotationOffset": 240
                       }
                     ]
                   }
@@ -857,8 +789,8 @@
                     "Volume": 0
                   },
                   {
-                    "__type": "Sandbox.Player.SoundControl",
-                    "__guid": "282fe173-785d-443e-9862-b25dca4485e4"
+                    "__type": "Stasis.Player.SoundControl",
+                    "__guid": "9f4f1824-64d9-4aaa-9c8b-6b2d5482196c"
                   }
                 ]
               }
@@ -872,8 +804,8 @@
             "Enabled": true,
             "Components": [
               {
-                "__type": "Sandbox.Player.CameraControl",
-                "__guid": "94048f2e-db16-4770-a617-44f26512029f",
+                "__type": "Stasis.Player.CameraControl",
+                "__guid": "23fb4439-3721-406a-9001-8e9c8d70131a",
                 "cameras": [
                   {
                     "_type": "gameobject",
@@ -886,30 +818,22 @@
                 ],
                 "FreeCam": {
                   "_type": "component",
-                  "component_id": "fb7fd95f-5f04-4ef7-bd2a-f536c55bba04",
-                  "go": "6591a34d-76fc-4c4d-80a6-beb4fe50de56",
+                  "component_id": "735e3b9c-7cc8-4419-8396-9a9dc20ebc0f",
+                  "go": "0a3e7296-a152-496d-b225-bc03c7793e21",
                   "component_type": "FreeCam"
                 }
               }
             ],
             "Children": [
               {
-                "__guid": "6591a34d-76fc-4c4d-80a6-beb4fe50de56",
+                "__guid": "0a3e7296-a152-496d-b225-bc03c7793e21",
                 "Flags": 0,
                 "Name": "Free cam",
-                "Position": "-204.1001,0.000007629395,37.8",
+                "Position": "-204.1002,0.000003814697,37.8",
                 "Components": [
                   {
-                    "__type": "Sandbox.Player.FreeCam",
-                    "__guid": "fb7fd95f-5f04-4ef7-bd2a-f536c55bba04",
-                    "thirdCam": {
-                      "_type": "gameobject",
-                      "go": "d6d47027-a884-4a1d-b8fd-b0feabe121bd"
-                    }
-                  },
-                  {
                     "__type": "Sandbox.CameraComponent",
-                    "__guid": "63b8cba0-2c8e-4f6a-a683-570cdf75f0ad",
+                    "__guid": "0738b1fb-4a32-43e5-823e-50ef9d111f5c",
                     "BackgroundColor": "0.33333,0.46275,0.52157,1",
                     "ClearFlags": "All",
                     "FieldOfView": 90,
@@ -925,8 +849,20 @@
                     "ZNear": 10
                   },
                   {
+                    "__type": "Sandbox.Tonemapping",
+                    "__guid": "9203d07a-e7bb-437f-9aed-b98682024944",
+                    "__version": 1,
+                    "ExposureBias": 2,
+                    "ExposureCompensation": 0,
+                    "ExposureMethod": "RGB",
+                    "MaximumExposure": 2,
+                    "MinimumExposure": 1,
+                    "Mode": "Legacy",
+                    "Rate": 1
+                  },
+                  {
                     "__type": "Sandbox.Bloom",
-                    "__guid": "d8ff7cd5-6442-4dce-825a-58230b814837",
+                    "__guid": "007fa505-4468-4dab-88a2-09935ae2ce05",
                     "BloomColor": {
                       "color": [
                         {
@@ -954,26 +890,22 @@
                     "ThresholdWidth": 0.5
                   },
                   {
-                    "__type": "Sandbox.Tonemapping",
-                    "__guid": "74bc9f43-f6c1-4240-a504-edc24bdf55f3",
-                    "__version": 1,
-                    "ExposureBias": 2,
-                    "ExposureCompensation": 0,
-                    "ExposureMethod": "RGB",
-                    "MaximumExposure": 2,
-                    "MinimumExposure": 1,
-                    "Mode": "Legacy",
-                    "Rate": 1
-                  },
-                  {
                     "__type": "Sandbox.Sharpen",
-                    "__guid": "16af0a6a-45c9-46c6-b1ed-1e131f4cb8ac",
+                    "__guid": "4b51212f-13de-43d7-b48b-afe48e9acd57",
                     "Scale": 0.2
                   },
                   {
                     "__type": "Sandbox.AudioListener",
-                    "__guid": "fde070c3-ccf9-4e21-8780-19b6b5a47817",
+                    "__guid": "c86c3c10-1ad2-4295-8f65-02623ee99d07",
                     "UseCameraDirection": true
+                  },
+                  {
+                    "__type": "Stasis.Player.FreeCam",
+                    "__guid": "735e3b9c-7cc8-4419-8396-9a9dc20ebc0f",
+                    "thirdCam": {
+                      "_type": "gameobject",
+                      "go": "d6d47027-a884-4a1d-b8fd-b0feabe121bd"
+                    }
                   }
                 ]
               }
@@ -1066,40 +998,36 @@
         "Enabled": true,
         "Components": [
           {
-            "__type": "Sandbox.ZoneCreate",
-            "__guid": "e81f93ce-e5b4-41d3-8aed-703f6dd0c6b0",
+            "__type": "Sandbox.DontDestroy",
+            "__guid": "db4f7d1a-6f70-41ff-8f69-3c6852440f07"
+          },
+          {
+            "__type": "Stasis.Zones.ZoneControl",
+            "__guid": "fbec91d5-efd4-4d35-85ce-5366c22a2aa9",
             "EndZonePrefab": {
               "_type": "gameobject",
-              "go": "4a8d7747-0225-4371-9bca-a5a3f8919134"
+              "go": "b782b4f4-bd73-4118-a35e-a8f808a2da38"
             },
             "LinePrefab": {
               "_type": "gameobject",
               "go": "38aa241a-3042-49c1-b050-af126a31941b"
             }
-          },
-          {
-            "__type": "Sandbox.DontDestroy",
-            "__guid": "db4f7d1a-6f70-41ff-8f69-3c6852440f07"
           }
         ],
         "Children": [
           {
-            "__guid": "4a8d7747-0225-4371-9bca-a5a3f8919134",
+            "__guid": "b782b4f4-bd73-4118-a35e-a8f808a2da38",
             "Flags": 0,
             "Name": "End zone prefab",
             "Position": "0,0,128.186",
             "Components": [
               {
                 "__type": "Sandbox.BoxCollider",
-                "__guid": "12b14629-f101-49d1-b320-89edba3f6e80",
+                "__guid": "60d78f2e-ebcc-455d-9f95-cdaee41c85a8",
                 "Center": "0,0,0",
                 "IsTrigger": true,
                 "Scale": "50,50,50",
                 "Static": true
-              },
-              {
-                "__type": "EndZone",
-                "__guid": "368acaa1-c8b7-4dfe-9e8b-7adbfd43c32b"
               }
             ]
           },

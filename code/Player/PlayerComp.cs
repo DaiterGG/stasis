@@ -1,4 +1,4 @@
-namespace Sandbox.Player;
+namespace Stasis.Player;
 
 public sealed class PlayerComp : Component
 {

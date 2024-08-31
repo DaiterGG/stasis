@@ -1,117 +1,99 @@
-@using Sandbox;
-@using Sandbox.Data;
-@using Sandbox.UI;
+@namespace Stasis.UI
+@using System
+@using Stasis.Data
+@using Stasis.UI
 @inherits PanelComponent
-    
+
 <root>
-    <div class="sub">
-        <div class="panel">
-            <div class="left">
-                <div class="up">
-                    <div class="tabrow">
-                         <div class="tab" onclick="@(() => {})">Official</div>
-                         <div class="tab" onclick="@(() => {})">Official</div>
-                    </div>
-                </div>
-                <div class="down">
-                    @for (int i = 0; i < Featured.Count(); i++)
-                    {
-                        var m = Featured[i];
-                        if (m.Name == null) return;
-                        <div class="list-item dark"
-                             onclick="@(x => {ShowInfo(m, "featured");})"
-                             style="@("background-image: url(" + Featured[i].Img + ")")">
-                            <div class="time">@(Featured[i].Name.ToUpper())</div>
-                        </div>
-                    } 
-                    <div class="add" onclick="@Copy">
-                        @if (copied)
-                        {
-                            <p>
-                                Copied to clipboard
-                            </p>
-                        }
-                        else
-                        {
-                            <p>
-                                Join the Discord
-                            </p>
-                            <p>
-                                to create maps
-                            </p>
-                        }
-                    </div>
-                </div>
-            </div>
-            <div class="right">
-                <div class="up">
-                    <div class="tabrow">
-                        <div class="tab" onclick="@(() => {})">Official</div>
-                        <div class="tab" onclick="@(() => {})">Feachured</div>
-                        <div class="tab" onclick="@(() => {})">Comm</div>
-                    </div>
-                </div>
-                <div class="down">
-
-
-                    @for (int i = 0; i < Community.Count(); i++)
-                    {
-                        var m = Community[i];
-                        if (m.Name == null) return;
-                        <div class="list-item dark"
-                             onclick="@(x => {ShowInfo(m, "community");})"
-                             style="@("background-image: url(" + Community[i].Img + ")")">
-                            <div class="time">@(Community[i].Name.ToUpper())</div>
-                        </div>
-                    }
-                    
-
-                    <div class="add" onclick="@MenuC.MapSelect">Find</div>
-                </div>
-            </div>
-        </div>
-        <div class="bk">
-            <div class="back" onclick="@CloseMenu">
-                <div class="text">Back</div>
-                <div class="bg" onclick="@CloseMenu"></div>
-            </div>
-        </div>
-    </div>
+	<div class="sub">
+		<div class="panel">
+			<div class="left">
+				<div class="up">
+					<div class="tabrow">
+						<div class="tab @(!scoreTabSelected?"active":"")"
+							onclick="@(() => {scoreTabSelected = !scoreTabSelected;})">Info</div>
+						<div class="tab @(scoreTabSelected?"active":"")"
+							onclick="@(() => {scoreTabSelected = !scoreTabSelected;})">Scores</div>
+					</div>
+				</div>
+				<div class="down">
+					<LB style="@($"display:" + (!scoreTabSelected ? "none" : "flex") + ";")" />
+					<InfoCard style="@($"display:" + (scoreTabSelected ? "none" : "flex") + ";")" />
+				</div>
+			</div>
+			<div class="right">
+				<div class="up">
+					<div class="tabrow">
+						<div class="tab @(selectedType == "official" ? "active": "")"
+							onclick="@(() => {SelectType("official");})">Official</div>
+						<div class="tab @(selectedType == "featured" ? "active": "")"
+							onclick="@(() => {SelectType("featured");})">Featured</div>
+						<div class="tab @(selectedType == "community" ? "active": "")"
+							onclick="@(() => {SelectType("community");})">Community</div>
+					</div>
+				</div>
+				<div class="down">
+					<MapsList />
+				</div>
+			</div>
+		</div>
+		<div class="bk">
+			<div class="back" onclick="@CloseMenu">
+				<div class="text">Back</div>
+				<div class="bg" onclick="@CloseMenu"></div>
+			</div>
+		</div>
+	</div>
 </root>
 
 @code
 {
-    MenuController MenuC { get; set; }
-    public List<MapData> Official { get; set; } = new List<MapData>();
-    public List<MapData> Featured { get; set; }= new List<MapData>();
-    public List<MapData> Community { get; set; }= new List<MapData>();
-    public MapData info = new MapData();
-    public bool copied = false;
-	public List<MapData> GetList(string str)
+	public MapsList list { get; set; }
+	public InfoCard infCard { get; set; }
+	public LB leaderboard { get; set; }
+	public MenuController MenuC { get; set; }
+	public List<MapData> Official { get; set; } = new List<MapData>();
+	public List<MapData> Featured { get; set; } = new List<MapData>();
+	public List<MapData> Community { get; set; } = new List<MapData>();
+	public bool scoreTabSelected { get; set; } = false;
+	public int selectedMapId { get; set; } = 0;
+	public string selectedType { get; set; } = "official";
+	public bool copied = false;
+	public void SelectType(string type)
 	{
+		selectedType = type;
+		list.Update();
+	}
+	public void ShowInfo(int i)
+	{
+		selectedMapId = i;
+		infCard.Update();
+		leaderboard.Update();
+	}
+	public List<MapData> GetList(string type)
+	{
+		return type == "official" ? Official : type == "featured" ? Featured : Community;
+	}
+	public void Copy()
+	{
+		copied = true;
+		MenuC.Copy();
+	}
+	public MapData GetSelectedMap()
+	{
+		return GetList(selectedType)[selectedMapId];
+	}
+	void CloseMenu()
+	{
+		MenuC.CloseChooseMenu();
+		copied = false;
+	}
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		MenuC = GameObject.Parent.Components.Get<MenuController>();
+	}
 
-		}
-    public void Copy()
-    {
-        copied = true;
-        MenuC.Copy();
-    }
-    public void ShowInfo(MapData i, string type)
-    {
-        var list = type == "official" ? Official : type == "featured" ? Featured : Community;
-        info = i;
-    }
-
-    void CloseMenu()
-    {
-        MenuC.CloseChooseMenu();
-        copied = false;
-    }
-    protected override void OnAwake()
-    {
-        base.OnAwake();
-        MenuC = GameObject.Parent.Components.Get<MenuController>();
-    }
-
-    protected override int BuildHash() => System.HashCode.Combine( Official, Featured, Community , info);
+	protected override int BuildHash() => System.HashCode.Combine(Official, Featured, Community
+	, selectedType, selectedMapId, scoreTabSelected);
 }

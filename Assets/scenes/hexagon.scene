@@ -16,13 +16,13 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.Info",
-          "__guid": "47a6e548-63e2-4100-80b9-8b4706e3a9ce",
+          "__type": "Stasis.Info",
+          "__guid": "86f96566-fad0-4a05-96f5-3c060d2e69ec",
           "Author": "Daiter",
           "BronzeTime": 55,
           "DifficultyTier": 1,
           "GoldTime": 35,
-          "SilverTime": 40,
+          "SilverTime": 45,
           "SpeerunMap": true,
           "Version": "1.0"
         }
@@ -44,7 +44,8 @@
           "NoOrigin": false,
           "UseMapFromLaunch": false
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "bddf0c53-f7e6-4afe-86f2-3f9dade8a1e6",
@@ -83,10 +84,9 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.AutoDecor",
-          "__guid": "f4406c3f-5517-4a68-bab7-6620fbcd1761",
-          "AutoDecorate": true,
-          "ColorOfTheLines": "0.81395,0,0,1"
+          "__type": "Sandbox.Description",
+          "__guid": "008b1737-9f28-4086-b7b8-2c7aa18852ac",
+          "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027, put trigger collider and End Zone component on it\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
         },
         {
           "__type": "Sandbox.BoxCollider",
@@ -97,12 +97,13 @@
           "Static": true
         },
         {
-          "__type": "Sandbox.Description",
-          "__guid": "008b1737-9f28-4086-b7b8-2c7aa18852ac",
-          "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027, put trigger collider and End Zone component on it\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "b4057cd7-c6ff-4d46-a54d-ebb58d3efd58",
+          "AutoDecorate": true,
+          "ColorOfTheLines": "1,0,0,1"
         },
         {
-          "__type": "EndZone",
+          "__type": "Stasis.Zones.EndZone",
           "__guid": "5a4904d8-0b68-4a9b-a97a-7f40bce63ce6"
         }
       ]

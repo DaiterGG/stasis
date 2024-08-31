@@ -1,7 +1,7 @@
 using System;
 
-namespace Sandbox;
-public sealed class ZoneCreate : Component
+namespace Stasis.Zones;
+public sealed class ZoneControl : Component
 {
 	private Color endZoneColor = new Color( 1f, 0, 0 );
 	private Color CurrentColor;
@@ -17,7 +17,7 @@ public sealed class ZoneCreate : Component
 	{
 		try
 		{
-			foreach ( var zone in SNG.EndZones )
+			foreach ( var zone in EndZones )
 			{
 				DecorateBox( zone );
 			}
@@ -85,7 +85,7 @@ public sealed class ZoneCreate : Component
 	{
 		var l = LinePrefab.Clone();
 
-		l.Parent = GameObject.Parent;
+		l.Parent = Scene;
 		l.Enabled = true;
 		var rend = l.Components.Get<LineRenderer>();
 		//Log.Info( rend.Width.AddOrReplacePoint( new Curve.Frame( 0f, 7f, 1f, 1f ) ) );

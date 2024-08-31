@@ -1,92 +1,99 @@
-@using Sandbox;
-@using Sandbox.Data;
-@using Sandbox.UI;
-@using System;
+@namespace Stasis.UI
+@using Sandbox
+@using Stasis.Data
+@using Sandbox.UI
+@using System
+
 @inherits PanelComponent
 
 <root>
-    <div class="sub">
-        <div class="panel">
-            <div class="right">
-                 <div class="sens label">Sensitivity</div>
-                <div class="slider">
-                    <div class="left" onclick="@(x => Sensitivity(false))">@("<")</div>
-                    <div class="num">
-                       @FC.Set.Sensitivity 
-                    </div>
-                    <div class="right" onclick="@(x => Sensitivity(true))">@(">")</div>
-                </div>
-                <div class="sound label">Sound Effects</div>
-                <div class="slider">
-                    <div class="left" onclick="@(x => Volume(false))">@("<")</div>
-                    <div class="num">
-                       @FC.Set.Volume
-                    </div>
-                    <div class="right" onclick="@(x => Volume(true))">@(">")</div>
-                </div>
-                <div class="invx label">Invert Mouse X</div>
-                <div class="checkbox" onclick="@(x => Invert(true))">
-                   @if(FC.Set.MouseInvertX){
-                        <p>X</p>
-                    } 
-                </div>
+	<div class="sub">
+		<div class="panel">
+			<div class="right">
+				<div class="sens label">Sensitivity</div>
+				<div class="slider">
+					<div class="left" onclick="@(x => Sensitivity(false))">@("<")</div>
+					<div class="num">
+						@FC.Set.Sensitivity
+					</div>
+					<div class="right" onclick="@(x => Sensitivity(true))">@(">")</div>
+				</div>
+				<div class="sound label">Sound Effects</div>
+				<div class="slider">
+					<div class="left" onclick="@(x => Volume(false))">@("<")</div>
+					<div class="num">
+						@FC.Set.Volume
+					</div>
+					<div class="right" onclick="@(x => Volume(true))">@(">")</div>
+				</div>
 
-                <div class="invy label" >Invert Mouse Y</div>
-                <div class="checkbox" onclick="@(x => Invert(false))">
-                   @if(FC.Set.MouseInvertY){
-                        <p>X</p>
-                    } 
-                </div>
-
-            </div>
-        </div>
-            <div class="bk">
-                <div class="back" onclick="@MenuC.CloseSettings">
-                    <div class="text">Back</div>
-                    <div class="bg" onclick="@MenuC.CloseSettings"></div>
-                </div>
-            </div>
-    </div>
+				<div class="invx label">Invert Mouse X</div>
+				<div class="checkbox" onclick="@(x => {
+				FC.Set.MouseInvertX = !FC.Set.MouseInvertX;
+				FileControl.SaveSettings();
+				} )">
+					@if (FC.Set.MouseInvertX)
+					{
+						<p>X</p>
+					}
+				</div>
+				<div class="invy label">Invert Mouse Y</div>
+				<div class="checkbox" onclick="@(x => {
+				FC.Set.MouseInvertY = !FC.Set.MouseInvertY;
+				FileControl.SaveSettings();
+				})">
+					@if (FC.Set.MouseInvertY)
+					{
+						<p>X</p>
+					}
+				</div>
+				<div class="pitch label">Rotation Overlay</div>
+				<div class="checkbox" onclick="@(x => {
+				FC.Set.PitchAndRoll = !FC.Set.PitchAndRoll;
+				FileControl.SaveSettings();
+				})">
+					@if (FC.Set.PitchAndRoll)
+					{
+						<p>X</p>
+					}
+				</div>
+			</div>
+		</div>
+		<div class="bk">
+			<div class="back" onclick="@MenuC.CloseSettings">
+				<div class="text">Back</div>
+				<div class="bg" onclick="@MenuC.CloseSettings"></div>
+			</div>
+		</div>
+	</div>
 </root>
 
 @code
 {
-    MenuController MenuC { get; set; }
-    FileController FC { get; set; }
-    void Sensitivity(bool up)
-    {
-        int add = up ? 1 : -1;
-        FC.Set.Sensitivity += add;
-        FC.Set.Sensitivity = Math.Min(100, Math.Max(1, FC.Set.Sensitivity));
-        FC.SaveSettings();
-    }
+	MenuController MenuC { get; set; }
+	FileControl FC { get; set; }
+	void Sensitivity(bool up)
+	{
+		int add = up ? 1 : -1;
+		FC.Set.Sensitivity += add;
+		FC.Set.Sensitivity = Math.Min(100, Math.Max(1, FC.Set.Sensitivity));
+		FileControl.SaveSettings();
+	}
 
-    void Volume(bool up)
-    {
-        var add = up ? 1 : -1;
-        FC.Set.Volume += add;
-        FC.Set.Volume = Math.Min(10, Math.Max(0, FC.Set.Volume));
+	void Volume(bool up)
+	{
+		var add = up ? 1 : -1;
+		FC.Set.Volume += add;
+		FC.Set.Volume = Math.Min(10, Math.Max(0, FC.Set.Volume));
 
-        MenuC.ApplySettings();
-		FC.SaveSettings();
-    }
-    void Invert(bool isX)
-    {
-        if (isX)
-            FC.Set.MouseInvertX = !FC.Set.MouseInvertX;
-        else
-            FC.Set.MouseInvertY = !FC.Set.MouseInvertY;
-		FC.SaveSettings();
-    }
-    protected override void OnAwake()
-    {
-        base.OnAwake();
-        MenuC = GameObject.Parent.Components.Get<MenuController>();
-        FC = Sng.Inst.File;
-    }
-    protected override void OnTreeFirstBuilt()
-    {
-        base.OnTreeFirstBuilt();
-    }
+		MenuC.ApplySettings();
+		FileControl.SaveSettings();
+	}
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		MenuC = GameObject.Parent.Components.Get<MenuController>();
+		FC = Sng.Inst.FileC;
+	}
 
 }

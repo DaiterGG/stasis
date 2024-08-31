@@ -1,4 +1,4 @@
-﻿namespace Sandbox.Data;
+﻿namespace Stasis.Data;
 public class MapData
 {
 	public MapData()

@@ -38,12 +38,6 @@
           "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027, put trigger collider and End Zone component on it\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
         },
         {
-          "__type": "Sandbox.AutoDecor",
-          "__guid": "53c84250-f07c-4377-85c2-0732ccb25cb4",
-          "AutoDecorate": true,
-          "ColorOfTheLines": "0.81395,0,0,1"
-        },
-        {
           "__type": "Sandbox.BoxCollider",
           "__guid": "1b69b0f1-0345-4e35-82ee-35ca3d4e5684",
           "Center": "0,0,0",
@@ -52,8 +46,14 @@
           "Static": true
         },
         {
-          "__type": "EndZone",
-          "__guid": "3c7aac91-9a77-4b30-bfb2-b6096f1ba663"
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "01f0a83d-60e2-4d8a-8c1f-9b7ded165bd4",
+          "AutoDecorate": true,
+          "ColorOfTheLines": "1,0,0,1"
+        },
+        {
+          "__type": "Stasis.Zones.EndZone",
+          "__guid": "e4040c17-7cbb-4f16-9e06-a0d81500be8f"
         }
       ]
     },
@@ -97,8 +97,8 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.Info",
-          "__guid": "f8c1f30f-11c0-439f-9ee7-b419822b6087",
+          "__type": "Stasis.Info",
+          "__guid": "995ed996-cc4d-4971-be41-4449208c64e7",
           "Author": "Daiter",
           "BronzeTime": 25,
           "DifficultyTier": 1,

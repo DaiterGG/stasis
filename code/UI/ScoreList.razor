@@ -1,0 +1,59 @@
+@namespace Stasis.UI
+@using Sandbox.UI
+@using Sandbox
+@using Stasis.Data
+@using System
+@using Sandbox.Services
+
+@inherits Panel
+
+<root>
+	@{
+		if (scores != null && scores.Count() != 0)
+		{
+			for (int i = 0; i < scores.Count(); i++)
+			{
+				var time = Sng.Inst.FormatTime(scores[i].Time);
+				<div class="list-item @(( i) % 2 == 0 ? "dark":"")">
+					<div class="count">@(i + 1).</div>
+					<div class="name">@(scores[i].DisplayName)</div>
+					<div class="time">@(time)</div>
+				</div>
+			}
+		}
+	}
+</root>
+
+@code
+{
+	LB parent { get; set; }
+	MenuController MENUC { get; set; }
+	List<Score> scores { get; set; }
+	protected override int BuildHash() => System.HashCode.Combine(scores);
+	public void Update()
+	{
+		SetScores();
+	}
+	async void SetScores()
+	{
+		scores = await LBControl.GetScores(parent.map.Indent, 20, parent.centerOnMe, parent.yourCountry);
+		/*
+		long id = 12923012312;
+		var s = new Score(99999.99f, DateTime.Now, "Daiter", id);
+		scores.Add(s);
+		scores.Add(s);
+		scores.Add(s);
+		scores.Add(s);
+		scores.Add(s);
+		scores.Add(s);
+		scores.Add(s);
+		*/
+	}
+	public ScoreList()
+	{
+		MENUC = Sng.Inst.MenuC;
+		parent = MENUC.ChooseUI.leaderboard;
+		parent.list = this;
+		Update();
+	}
+}

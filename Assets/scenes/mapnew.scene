@@ -16,8 +16,8 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.Info",
-          "__guid": "47a6e548-63e2-4100-80b9-8b4706e3a9ce",
+          "__type": "Stasis.Info",
+          "__guid": "4b98eade-e9d0-49ff-a58b-3a51f422207a",
           "Author": "Author Name",
           "BronzeTime": 25,
           "DifficultyTier": 1,
@@ -90,12 +90,6 @@
           "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027, put trigger collider and End Zone component on it\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
         },
         {
-          "__type": "Sandbox.AutoDecor",
-          "__guid": "f4406c3f-5517-4a68-bab7-6620fbcd1761",
-          "AutoDecorate": true,
-          "ColorOfTheLines": "0.81395,0,0,1"
-        },
-        {
           "__type": "Sandbox.BoxCollider",
           "__guid": "6112d98f-97ec-426d-b4e5-a201e5185a57",
           "Center": "0,0,0",
@@ -104,7 +98,13 @@
           "Static": true
         },
         {
-          "__type": "EndZone",
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "516908bc-e9e4-4a96-8b71-8c55f0994005",
+          "AutoDecorate": true,
+          "ColorOfTheLines": "1,0,0,1"
+        },
+        {
+          "__type": "Stasis.Zones.EndZone",
           "__guid": "5a4904d8-0b68-4a9b-a97a-7f40bce63ce6"
         }
       ]

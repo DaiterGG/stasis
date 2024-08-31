@@ -1,13 +1,14 @@
 using System;
-using Sandbox.Data;
+using Stasis.Data;
+using Stasis.UI;
 
-namespace Sandbox.Player;
+namespace Stasis.Player;
 public sealed class EngineComponent : Component
 {
 	IngameUI GAMEUI;
 	MenuController MENUC;
 	FreeCam FREECAM;
-	FileController FC;
+	FileControl FC;
 	SpinControl SPINC;
 
 	public bool isRunning;
@@ -47,9 +48,8 @@ public sealed class EngineComponent : Component
 		SPINC = Sng.Inst.Player.SpinC;
 		MENUC = Sng.Inst.MenuC;
 		GAMEUI = MENUC.IngameUI;
-		FC = Sng.Inst.File;
+		FC = Sng.Inst.FileC;
 		rigid = GameObject.Components.Get<Rigidbody>();
-		Log.Info( rigid );
 		ResetPos( true );
 	}
 	public void OnFixedGlobal()

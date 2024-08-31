@@ -1,4 +1,4 @@
-namespace Sandbox;
+namespace Stasis.Zones;
 
 public sealed class AutoDecor : Component
 {
@@ -6,5 +6,5 @@ public sealed class AutoDecor : Component
 	public bool AutoDecorate { get; set; } = true;
 
 	[Property]
-	public Color ColorOfTheLines { get; set; }
+	public Color ColorOfTheLines { get; set; } = new Color(1,0,0);
 }

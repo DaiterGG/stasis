@@ -1,9 +1,9 @@
 using System;
 using Sandbox.Audio;
-using Sandbox.Data;
-using Sandbox.Player;
+using Stasis.Data;
+using Stasis.Player;
 using Sandbox.UI;
-namespace Sandbox;
+namespace Stasis.UI;
 
 public sealed class MenuController : Component
 {
@@ -24,10 +24,10 @@ public sealed class MenuController : Component
 	public bool IsGaming = false;
 	GameObject BODY;
 	SpinControl SPINC;
-	MainTimer TIMER;
+	Timer TIMER;
 	EngineComponent ENGINE;
 	Sng SNG;
-	FileController FC;
+	FileControl FC;
 
 	public void OnAwakeInit()
 	{
@@ -36,7 +36,7 @@ public sealed class MenuController : Component
 		TIMER = SNG.Timer;
 		BODY = SNG.Player.Body;
 		ENGINE = SNG.Player.Engine;
-		FC = SNG.File;
+		FC = SNG.FileC;
 		//Set camera angle to use for all other menues
 		SetCameraOffset();
 		Camera.Enabled = true;
@@ -215,7 +215,7 @@ public sealed class MenuController : Component
 		EndUI.Time = strtime.Split( '.' )[0];
 		EndUI.TimeMil = "." + strtime.Split( '.' )[1];
 		EndUI.Scores = FC.currentMap.Scores;
-		if ( FC.currentMap.Scores.Count() > 0 )
+		if ( FC.currentMap.Scores.Count > 0 )
 		{
 			if ( FC.currentMap.Scores[0].Time == FC.currentTime && FC.currentMap.Scores.Count() > 1 )
 			{

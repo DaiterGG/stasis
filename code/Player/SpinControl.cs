@@ -1,15 +1,14 @@
 using System;
-using Sandbox.Player;
 
-namespace Sandbox;
+namespace Stasis.Player;
 
 public sealed class SpinControl : Component
 {
 	[Property] public Rigidbody PropRig;
-	[Property, Range( 0, 10000f, 100f ), DefaultValue( 1500f )] public float BladeGravity;
+	[Property, Range( 0, 10000f, 100f )] public float BladeGravity {get; set;} = 1500f;
 	EngineComponent ENGINE;
 	GameObject PLAYEROBJ;
-	MainTimer TIMER;
+	Timer TIMER;
 	float speedMult = 0.2f;
 	public bool isAttached;
 	List<SpinTrigger> blades = new List<SpinTrigger>();

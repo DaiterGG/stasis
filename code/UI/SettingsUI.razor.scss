@@ -25,6 +25,7 @@ SettingsUI {
     }
 
     .panel {
+        box-shadow: 1px 1px 15px #000000cc;
         background-color: rgba(0,0,0,0.3);
         height: 700px;
         width: 1200px;
@@ -89,7 +90,7 @@ SettingsUI {
 
         > .back:hover {
             > .bg {
-                background-color: rgba(0,0,0,0.60);
+                background-color: rgba(0,0,0,0.44);
             }
         }
 
@@ -113,9 +114,10 @@ SettingsUI {
             }
 
             > .bg {
+                box-shadow: 1px 1px 15px #000000aa;
                 transform: skew(-26deg, 0deg);
                 border-radius: 10px 0 10px 0;
-                background-color: rgba(0,0,0,0.44);
+                background-color: rgba(0,0,0,0.3);
                 backdrop-filter: blur(0px);
                 width: 100%;
                 height: 100%;

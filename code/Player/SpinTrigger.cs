@@ -1,6 +1,6 @@
 using System;
 
-namespace Sandbox;
+namespace Stasis.Player;
 
 public sealed class SpinTrigger : Component, Component.ICollisionListener
 {

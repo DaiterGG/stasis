@@ -1,12 +1,12 @@
 using System;
 
-namespace Sandbox.Player;
+namespace Stasis.Player;
 public sealed class FreeCam : Component
 {
 	[Property] public readonly GameObject thirdCam;
 	readonly float force = 20f;
 	float mult = 1f;
-	MainTimer TIMER;
+	Timer TIMER;
 
 	public void OnAwakeInit()
 	{

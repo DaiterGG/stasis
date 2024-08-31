@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-
-namespace Sandbox.Data;
-public sealed class FileController : Component
+using Sandbox.Utility;
+using Sandbox.Network;
+namespace Stasis.Data;
+public sealed class FileControl
 {
 	public Settings Set { get; set; }
 	public List<MapData> Maps { get; set; } = new List<MapData>();
 	public MapData currentMap;
 	public float currentTime = 0;
-	string s = "Settings.json";
-	string m = "Maps.json";
-	static Sng SNG;
+	static string s = "Settings.json";
+	static string m = "Maps.json";
+	Sng SNG;
 	public string[] FeaturedMaps;
 	public string[] OfficialMaps;
 	public void OnAwakeInit()
@@ -20,9 +21,9 @@ public sealed class FileController : Component
 		FeaturedMaps = new string[] { };
 		OfficialMaps = new string[]
 		{
-		"move.sharp2",
-		"move.hexagon2",
 		"move.plground",
+		"move.hexagon2",
+		"move.sharp2",
 		};
 
 		FilesInit();
@@ -30,17 +31,14 @@ public sealed class FileController : Component
 
 	public void FilesInit()
 	{
+		Set = new Settings();
 		if ( FileSystem.Data.FileExists( s ) )
 		{
 			try
 			{
 				Set = FileSystem.Data.ReadJson<Settings>( s );
-
 			}
-			catch ( Exception err )
-			{
-				Log.Warning( err.Message );
-			}
+			catch ( Exception err ) { Log.Error( err.Message ); }
 		}
 		else
 		{
@@ -51,7 +49,7 @@ public sealed class FileController : Component
 		{
 			try
 			{
-				Maps = JsonSerializer.Deserialize<List<MapData>>( FileSystem.Data.ReadAllText( m ) );
+				Maps = JsonSerializer.Deserialize<List<MapData>>( FileSystem.Data.ReadAllText( m ) , new JsonSerializerOptions { IncludeFields = true } );
 			}
 			catch ( Exception err )
 			{
@@ -68,6 +66,7 @@ public sealed class FileController : Component
 			}
 			catch ( Exception err ) { Log.Warning( "Move/Stasis folder does not exist?" + err.Message ); }
 		}
+		Log.Info(Maps.Count());
 	}
 	public void AddOfficialMaps()
 	{
@@ -80,17 +79,17 @@ public sealed class FileController : Component
 			FetchNewMap( i, "official" );
 		}
 	}
-	public void SaveMaps()
+	public static void SaveMaps()
 	{
-		FileSystem.Data.WriteAllText( m, ObjToJson( Maps ) );
+		FileSystem.Data.WriteAllText( m, ObjToJson( Sng.Inst.FileC.Maps ) );
 
-		SNG.MenuC.UpdateMapsList();
+		Sng.Inst.MenuC.UpdateMapsList();
 	}
-	public void SaveSettings()
+	public static void SaveSettings()
 	{
-		FileSystem.Data.WriteAllText( s, ObjToJson( Set ) );
+		FileSystem.Data.WriteAllText( s, ObjToJson( Sng.Inst.FileC.Set ) );
 	}
-	private string ObjToJson( object o )
+	private static string ObjToJson( object o )
 	{
 		return JsonSerializer.Serialize( o, new JsonSerializerOptions
 		{
@@ -101,6 +100,8 @@ public sealed class FileController : Component
 	{
 		var found = Maps.FirstOrDefault( x =>
 		{
+
+			Sng.ELog("indent1 = " + indent + " indent2 = " + x.Indent);
 			return x.Indent == indent;
 		} );
 		if ( found != default( MapData ) && found != null && (found.Img == null || found.Name == null || found.Description == null) )
@@ -109,21 +110,25 @@ public sealed class FileController : Component
 			Log.Info( "removed: " + Maps.Remove( found ).ToString() );
 			found = default;
 		}
-		var f = false;
+		var _new = false;
+			Sng.ELog(found);
+			Sng.ELog(found == default( MapData ));
 		if ( found == default( MapData ) || found == null )
 		{
-			found = new MapData();
-			found.Type = type;
-			f = true;
+			Sng.ELog("new");
+			found = new MapData
+			{
+				Type = type
+			};
+			_new = true;
 		}
 		try
 		{
-
 			FetchMap( indent, found ).Wait();
 		}
 		catch ( Exception e ) { Log.Info( "Fetching map failed, are you offline? " + e.Message ); }
 
-		if ( f ) Maps.Add( found );
+		if ( _new ) Maps.Add( found );
 
 
 		SaveMaps();
@@ -140,16 +145,26 @@ public sealed class FileController : Component
 	public void DownloadAndLoad( string packageIndent )
 	{
 		SetCurrentMap( packageIndent );
-
 		try
 		{
-
 			DownloadScene( packageIndent ).Wait();
 		}
 		catch ( Exception e ) { Log.Info( "Download failed, try again" + e ); }
 
-		Log.Info( currentMap );
 		SNG.LoadNewMap( tempFile );
+	}
+	static SceneFile tempFile {get; set;} = new SceneFile();
+	public async Task DownloadScene( string sceneIndent )
+	{
+		var package = await Package.Fetch( sceneIndent, false );
+
+		var meta = package.GetMeta( "PrimaryAsset", "ERROR" );
+		var g = await package.MountAsync();
+
+		//tempFile = package.GetMeta<SceneFile>( "PrimaryAsset" );
+
+		tempFile.LoadFromJson( g.ReadAllText( meta ) );
+		//Sng.Inst.Scene.Load( scene );
 	}
 	public void SetCurrentMap( string ind )
 	{
@@ -163,19 +178,6 @@ public sealed class FileController : Component
 			return;
 		}
 
-	}
-	public static SceneFile tempFile = new SceneFile();
-	public async Task DownloadScene( string sceneIndent )
-	{
-		var package = await Package.Fetch( sceneIndent, false );
-
-		var meta = package.GetMeta( "PrimaryAsset", "ERROR" );
-		var g = await package.MountAsync();
-
-		//tempFile = package.GetMeta<SceneFile>( "PrimaryAsset" );
-
-		tempFile.LoadFromJson( g.ReadAllText( meta ) );
-		//Sng.Inst.Scene.Load( scene );
 	}
 
 	public void InfoSerialize( Info info )
@@ -210,7 +212,9 @@ public sealed class FileController : Component
 	{
 		currentTime = time;
 		if ( currentMap == null ) return;
-		var scr = new Score( time, DateTime.Now );
+		var scr = new Score( time, DateTime.Now, Steam.PersonaName, (long)Steam.SteamId );
+		
+		LBControl.SetScore(scr, currentMap.Indent);
 
 		currentMap.Scores.Add( scr );
 		currentMap.Scores.Sort( ( x, y ) => x.Time.CompareTo( y.Time ) );

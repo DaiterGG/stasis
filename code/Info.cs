@@ -1,4 +1,4 @@
-namespace Sandbox;
+namespace Stasis;
 
 public sealed class Info : Component
 {
