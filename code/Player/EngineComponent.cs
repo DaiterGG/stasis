@@ -7,12 +7,13 @@ public sealed class EngineComponent : Component
 {
 	IngameUI GAMEUI;
 	MenuController MENUC;
+	Timer TIMER;
 	FreeCam FREECAM;
 	FileControl FC;
 	SpinControl SPINC;
 
-	public bool isRunning;
-	public int progress;
+	public bool isRunning {get; private set;}
+	public int progress {get; private set;}
 	public Rigidbody rigid;
 	[Property, Range( 0.9f, 1f, 0.001f )] public float horizontalDumping { get; private set; } = 0.978f;
 	[Property, Range( 0.9f, 1f, 0.001f )] public float verticalDumping { get; private set; } = 0.968f;
@@ -49,6 +50,7 @@ public sealed class EngineComponent : Component
 		MENUC = Sng.Inst.MenuC;
 		GAMEUI = MENUC.IngameUI;
 		FC = Sng.Inst.FileC;
+		TIMER = Sng.Inst.Timer;
 		rigid = GameObject.Components.Get<Rigidbody>();
 		ResetPos( true );
 	}
@@ -166,6 +168,7 @@ public sealed class EngineComponent : Component
 	{
 		progress = 0;
 		isRunning = false;
+		TIMER.UpdateEngine( false );
 		gain = 0f;
 	}
 	public void EngStart( bool increase = true )
@@ -176,7 +179,24 @@ public sealed class EngineComponent : Component
 		{
 			progress = 100;
 			isRunning = true;
+			TIMER.UpdateEngine( true );
 			gain = gravity;
 		}
+	}
+	public void ApplySaveState( SaveState state )
+	{
+		Transform.Position = state.Transform;
+		Transform.Rotation = Rotation.From(
+			state.Rotation.Pitch(),
+			state.Rotation.Yaw(),
+			state.Rotation.Roll()
+		);
+
+		rigid.Velocity = state.Velocity;
+		rigid.AngularVelocity = state.AngularVelocity;
+		progress = state.Progress;
+		gain = state.Gain;
+		isRunning = state.EngineRunning;
+
 	}
 }

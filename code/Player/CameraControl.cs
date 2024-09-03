@@ -22,8 +22,7 @@ public sealed class CameraControl : Component
 		}
 		if ( Input.Pressed( "FreeCamera" ) )
 		{
-			FreeCam.GameObject.Enabled = !FreeCam.GameObject.Enabled;
-			UpdateCam();
+			FreeCamToggle();
 		}
 
 	}
@@ -39,5 +38,13 @@ public sealed class CameraControl : Component
 			if ( i == iEnabled ) cameras[i].Enabled = true;
 			else cameras[i].Enabled = false;
 		}
+	}
+	public void FreeCamEnable(bool enable = true){
+		FreeCam.GameObject.Enabled = enable;
+		UpdateCam();
+	}
+	public void FreeCamToggle(){
+		FreeCam.GameObject.Enabled = !FreeCam.GameObject.Enabled;
+		UpdateCam();
 	}
 }

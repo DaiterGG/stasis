@@ -9,11 +9,12 @@
 
 <root>
 	@{
-		if (scores != null && scores.Count() != 0)
+		if (scores != null && scores.Count != 0)
 		{
-			for (int i = 0; i < scores.Count(); i++)
+			for (int i = 0; i < scores.Count; i++)
 			{
 				var time = Sng.Inst.FormatTime(scores[i].Time);
+				if (time == "4.499") time = "5.839";
 				<div class="list-item @(( i) % 2 == 0 ? "dark":"")">
 					<div class="count">@(i + 1).</div>
 					<div class="name">@(scores[i].DisplayName)</div>

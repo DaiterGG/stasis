@@ -8,7 +8,7 @@
 
 <root>
 
-	@for (int i = 0; i < maps.Count(); i++)
+	@for (int i = 0; i < maps.Count; i++)
 	{
 		if (maps[i].Name != null)
 		{
@@ -21,22 +21,22 @@
 			</div>
 		}
 	}
-	@if (type == "featured")
+	@if (type == "featured" || type == "official" || type == "community")
 	{
-		<div class="add" onclick="@parent.Copy">
+		<div class="join" onclick="@parent.Copy">
 			@if (parent.copied)
 			{
 				<p>
-					Copied to clipboard
+					Link copied to clipboard
 				</p>
 			}
 			else
 			{
 				<p>
-					Join the Discord
+					Join the Discord server
 				</p>
 				<p>
-					to create maps
+					to create maps (clickable)
 				</p>
 			}
 		</div>

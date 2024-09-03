@@ -1,4 +1,5 @@
 using System;
+using Stasis.Data;
 
 namespace Stasis.Player;
 
@@ -57,5 +58,21 @@ public sealed class SpinControl : Component
 	public void RestartSpin()
 	{
 		isAttached = true;
+	}
+
+	public void ApplySaveState( SaveState state )
+	{
+		if (state.SpinAttached)
+			isAttached = true;
+		else 
+		{
+			isAttached = false;
+			blades.ForEach( x =>
+			{
+				x.GameObject.Parent = PLAYEROBJ;
+				x.Transform.Position = new Vector3(9999999,9999999,9999999);
+				x.Transform.ClearInterpolation();
+			} );
+		}
 	}
 }

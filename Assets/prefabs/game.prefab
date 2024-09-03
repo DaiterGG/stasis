@@ -118,7 +118,7 @@
                 "ZIndex": 100
               },
               {
-                "__type": "IngameUI",
+                "__type": "Stasis.UI.IngameUI",
                 "__guid": "eff26266-07bc-42fa-9ec1-28bd9c1b8322"
               }
             ]
@@ -543,6 +543,11 @@
                     "Enabled": true,
                     "Components": [
                       {
+                        "__type": "Stasis.Player.SpinTrigger",
+                        "__guid": "81f655f5-46f3-4907-bd75-045214f20348",
+                        "rotationOffset": 120
+                      },
+                      {
                         "__type": "Sandbox.ModelRenderer",
                         "__guid": "27f365c7-77c6-45a9-982c-a80f8514e330",
                         "BodyGroups": 18446744073709551615,
@@ -571,52 +576,6 @@
                         "IsTrigger": false,
                         "Model": "models/tail_final.vmdl",
                         "Static": false
-                      },
-                      {
-                        "__type": "Stasis.Player.SpinTrigger",
-                        "__guid": "81f655f5-46f3-4907-bd75-045214f20348",
-                        "rotationOffset": 120
-                      }
-                    ]
-                  },
-                  {
-                    "__guid": "d6cba7a9-bb48-4b0a-b36a-5c8e93202589",
-                    "Flags": 0,
-                    "Name": "prop1",
-                    "Position": "0,0,0",
-                    "Scale": "2,0.09999992,0.01",
-                    "Tags": "particle",
-                    "Components": [
-                      {
-                        "__type": "Sandbox.ModelRenderer",
-                        "__guid": "79e9b985-0c32-447e-ad5e-6e8b3417ac3c",
-                        "BodyGroups": 18446744073709551615,
-                        "MaterialOverride": "materials/black_marble.vmat",
-                        "Model": "models/dev/box.vmdl",
-                        "RenderType": "On",
-                        "Tint": "1,1,1,1"
-                      },
-                      {
-                        "__type": "Sandbox.BoxCollider",
-                        "__guid": "a846d5fd-2032-4e7f-a635-f2a297edcbdd",
-                        "Center": "0,0,0",
-                        "IsTrigger": false,
-                        "Scale": "50,50,50",
-                        "Static": false
-                      },
-                      {
-                        "__type": "Sandbox.Rigidbody",
-                        "__guid": "bc670979-f5d7-42b7-b602-b5cc9e60e231",
-                        "AngularDamping": 0,
-                        "Gravity": false,
-                        "LinearDamping": 0,
-                        "Locking": {},
-                        "MassCenterOverride": "0,0,0",
-                        "MassOverride": 1,
-                        "MotionEnabled": true,
-                        "OverrideMassCenter": false,
-                        "RigidbodyFlags": 0,
-                        "StartAsleep": false
                       }
                     ]
                   },
@@ -628,6 +587,11 @@
                     "Tags": "particle",
                     "Enabled": true,
                     "Components": [
+                      {
+                        "__type": "Stasis.Player.SpinTrigger",
+                        "__guid": "5a4b8b75-e5be-4182-9dfb-cc867d79a2ca",
+                        "rotationOffset": 0
+                      },
                       {
                         "__type": "Sandbox.ModelRenderer",
                         "__guid": "80d87dc1-f515-4c9d-9c97-7737b684837f",
@@ -657,53 +621,6 @@
                         "IsTrigger": false,
                         "Model": "models/tail_final.vmdl",
                         "Static": false
-                      },
-                      {
-                        "__type": "Stasis.Player.SpinTrigger",
-                        "__guid": "5a4b8b75-e5be-4182-9dfb-cc867d79a2ca",
-                        "rotationOffset": 0
-                      }
-                    ]
-                  },
-                  {
-                    "__guid": "deeaf9dd-bcaf-488b-8479-ab5bb34fb111",
-                    "Flags": 0,
-                    "Name": "prop2",
-                    "Position": "0,0,0",
-                    "Rotation": "0,0,0.7071068,0.7071068",
-                    "Scale": "2,0.09999992,0.01",
-                    "Tags": "particle",
-                    "Components": [
-                      {
-                        "__type": "Sandbox.ModelRenderer",
-                        "__guid": "2b34c0df-074e-4d36-9821-d3f329600464",
-                        "BodyGroups": 18446744073709551615,
-                        "MaterialOverride": "materials/black_marble.vmat",
-                        "Model": "models/dev/box.vmdl",
-                        "RenderType": "On",
-                        "Tint": "1,1,1,1"
-                      },
-                      {
-                        "__type": "Sandbox.BoxCollider",
-                        "__guid": "12e411ca-63e3-41a3-b9fa-164c883a620b",
-                        "Center": "0,0,0",
-                        "IsTrigger": false,
-                        "Scale": "50,50,50",
-                        "Static": false
-                      },
-                      {
-                        "__type": "Sandbox.Rigidbody",
-                        "__guid": "2c89ffe7-9218-48cb-b2dc-3ef4eb88fcf0",
-                        "AngularDamping": 0,
-                        "Gravity": false,
-                        "LinearDamping": 0,
-                        "Locking": {},
-                        "MassCenterOverride": "0,0,0",
-                        "MassOverride": 1,
-                        "MotionEnabled": true,
-                        "OverrideMassCenter": false,
-                        "RigidbodyFlags": 0,
-                        "StartAsleep": false
                       }
                     ]
                   },
@@ -751,6 +668,25 @@
                         "Static": false
                       }
                     ]
+                  }
+                ]
+              },
+              {
+                "__guid": "5c999508-2c51-46f8-bf4d-a63165813b25",
+                "Flags": 0,
+                "Name": "Propeller Hitbox",
+                "Position": "0.0002248215,0.0002000662,47.28818",
+                "Scale": "8,8,0.04",
+                "Tags": "particle",
+                "Enabled": true,
+                "Components": [
+                  {
+                    "__type": "Sandbox.SphereCollider",
+                    "__guid": "5a89fdeb-24ae-446e-a882-d119cf26af74",
+                    "Center": "0,0,0",
+                    "IsTrigger": true,
+                    "Radius": 10,
+                    "Static": false
                   }
                 ]
               },
@@ -1004,10 +940,6 @@
           {
             "__type": "Stasis.Zones.ZoneControl",
             "__guid": "fbec91d5-efd4-4d35-85ce-5366c22a2aa9",
-            "EndZonePrefab": {
-              "_type": "gameobject",
-              "go": "b782b4f4-bd73-4118-a35e-a8f808a2da38"
-            },
             "LinePrefab": {
               "_type": "gameobject",
               "go": "38aa241a-3042-49c1-b050-af126a31941b"
@@ -1018,7 +950,7 @@
           {
             "__guid": "b782b4f4-bd73-4118-a35e-a8f808a2da38",
             "Flags": 0,
-            "Name": "End zone prefab",
+            "Name": "End zone prefab (Unused)",
             "Position": "0,0,128.186",
             "Components": [
               {
@@ -1064,14 +996,11 @@
                   "0,0,0",
                   "0,0,0"
                 ],
-                "Width": {
-                  "rangey": "0,47.8",
-                  "frames": [
-                    {
-                      "y": 0.08368204
-                    }
-                  ]
-                },
+                "Width": [
+                  {
+                    "y": 1
+                  }
+                ],
                 "Wireframe": false
               }
             ]

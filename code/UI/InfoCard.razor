@@ -8,11 +8,9 @@
 	<div class="header ">
 		<div class="text">
 			<div class="name">@map.Name</div>
-			@if (map.Scores.Count() != 0)
+			@if (map.Scores.Count != 0)
 			{
-				<div class="btime">
-					Best Time: @Sng.Inst.FormatTime(map.Scores[0].Time)
-				</div>
+				<div class="btime">Best Time: @Sng.Inst.FormatTime(map.Scores[0].Time)</div>
 			}
 			else
 			{

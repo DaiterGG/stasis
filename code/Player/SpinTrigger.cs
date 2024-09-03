@@ -28,9 +28,7 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
 		{
 			rig.ApplyForce( new Vector3( 0, 0, SPIN.BladeGravity * -1 ) );
 			return;
-		}
-		//patch for bug in physics
-		if ( Math.Abs( Transform.LocalPosition.y ) > 4f
+		} else if ( Math.Abs( Transform.LocalPosition.y ) > 4f
 			|| Math.Abs( Transform.LocalRotation.Pitch() ) > 1f
 			|| Math.Abs( Transform.LocalRotation.Roll() ) > 1f )
 		{

@@ -56,22 +56,26 @@ MapsList {
 	}
 
 	.add,
-	.copy {
+	.join {
 		margin-top: 10px;
 		justify-content: center;
 		align-items: center;
 		min-height: 70px;
-		font-size: 40px;
 		font-weight: 400;
 		background-color: rgba(0, 0, 0, 0.2);
 		border-radius: 15px;
-	}
-
-	.add {
-		display: flex;
 		padding: 10px;
 		padding-left: 20px;
 		padding-right: 20px;
+	}
+	.join{
+		
+		display: flex;
+		font-size: 35px;
 		flex-direction: column;
+	}
+	
+	.add {
+		font-size: 40px;
 	}
 }

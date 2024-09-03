@@ -28,8 +28,8 @@
     {
       "__guid": "3b1754cb-f59c-436a-af40-79b28d1ca481",
       "Flags": 0,
-      "Name": "end_zone",
-      "Position": "790.1044,13.89676,-912.0723",
+      "Name": "End Zone",
+      "Position": "790.1044,13.89676,-911.4724",
       "Enabled": true,
       "Components": [
         {
@@ -49,7 +49,8 @@
           "__type": "Stasis.Zones.AutoDecor",
           "__guid": "01f0a83d-60e2-4d8a-8c1f-9b7ded165bd4",
           "AutoDecorate": true,
-          "ColorOfTheLines": "1,0,0,1"
+          "ColorOfTheLines": "1,0,0,1",
+          "LineWidth": 4.5
         },
         {
           "__type": "Stasis.Zones.EndZone",

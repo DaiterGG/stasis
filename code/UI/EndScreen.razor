@@ -43,10 +43,10 @@
 
             </div>
             <div class="down">
-                @for (int i = 0; i < Scores.Count(); i++)
+                @for (int i = 0; i < Scores.Count; i++)
                 {
                     var time = Sng.Inst.FormatTime(Scores[i].Time);
-                    <div class="list-item @((Scores.Count() - i) % 2 == 0 ? "dark":"")">
+                    <div class="list-item @((Scores.Count - i) % 2 == 0 ? "dark":"")">
                         <div class="count">@(i + 1).</div>
                         <div class="time">@(time)</div>
                     </div>

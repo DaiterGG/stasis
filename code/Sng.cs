@@ -9,21 +9,15 @@ public sealed class Sng : Component
 	private static Sng _sng;
 	public static Sng Inst { get { return _sng; } }
 
-	public Timer Timer;
 	[Property] public MenuController MenuC;
 	[Property] public PlayerComp Player;
 	[Property] public ZoneControl ZoneC;
-	public LBControl LB;
-	public FileControl FileC;
+	public LBControl LB = new();
+	public FileControl FileC = new();
+	public Timer Timer = new();
+	public SaveStateControl StateC = new();
 	public bool firstTime { get; set; } = true;
 	public bool blurOn {get; set;}
-	public GameTransform StartPoint;
-	private GameTransform _spawnPoint;
-	public GameTransform SpawnPoint
-	{
-		get => _spawnPoint == null ? StartPoint: _spawnPoint;
-		set => _spawnPoint = value;
-	}
 	protected override void OnAwake()
 	{
 		if ( Game.IsEditor && Scene.Name != "Scene" )
@@ -46,9 +40,8 @@ public sealed class Sng : Component
 	}
 	public void OnAwakeInit()
 	{
-		FileC = new FileControl();
-		Timer = new Timer();
-		LB = new LBControl();
+		Timer.OnAwakeInit();
+		StateC.OnAwakeInit();
 		FileC.OnAwakeInit();
 		MenuC.OnAwakeInit();
 		Player.Engine.OnAwakeInit();
@@ -78,26 +71,24 @@ public sealed class Sng : Component
 		
 		base.OnStart();
 	}
+	/// <summary>
+	/// Called on every map load
+	/// </summary>
 	private void MapInit()
 	{
 		Info MapInfo = null;
-		StartPoint = null;
-		SpawnPoint = null;
-		ZoneC.EndZones = new List<GameObject>();
+		
+		ZoneC.ZonesClearAll();
 		var heap = Scene.GetAllObjects( true );
 		foreach ( var obj in heap )
 		{
 			if ( obj.Name == "info_player_spawn" )
 			{
-				SpawnPoint = obj.Transform;
+				ZoneC.SpawnPoint = obj.Transform;
 			}
 			else if ( obj.Name == "info_player_start" )
 			{
-				StartPoint = obj.Transform;
-			}
-			else if ( obj.Name.Contains( "end_zone" ) )
-			{
-				ZoneC.EndZones.Add( obj );
+				ZoneC.StartPoint = obj.Transform;
 			}
 			else if ( obj.Name == "Map Info" )
 			{
@@ -107,16 +98,22 @@ public sealed class Sng : Component
 				else
 					ELog( "Info Found" );
 			}
+			else
+			{
+				var zone = obj.Components.Get<IZone>();
+				if ( zone != null )
+					ZoneC.Zones.Add( zone );
+			}
 		}
-		if ( MapInfo == null ) Log.Warning( "Info not found" );
+		if ( MapInfo == null ) Log.Warning( "Info Not Found" );
 
 		FileC.InfoSerialize( MapInfo );
 
-		if ( ZoneC.EndZones.Count == 0 ) Log.Warning( "End zone not found" );
+		if ( ZoneC.Zones.Count == 0 ) Log.Warning( "No Zones Found" );
 		else ZoneC.MapInit();
 
-		if ( StartPoint == null ) Log.Warning( "Start not found" );
-		SpawnPlayer();
+		if ( ZoneC.StartPoint == null ) Log.Warning( "Start Not Found" );
+		Spawn();
 	}
 	protected override void OnFixedUpdate()
 	{
@@ -132,7 +129,7 @@ public sealed class Sng : Component
 
 				if ( Input.Pressed( "Restart" ) )
 				{
-					ResetPlayer();
+					Play();
 				}
 				if ( Input.Pressed( "SelfDestruct" ) )
 				{
@@ -142,7 +139,15 @@ public sealed class Sng : Component
 				{
 					MenuC.OpenMenu();
 				}
+				if (Input.Pressed( "HideUI" )){
+					MenuC.InGameUIToggle();
+				}
+				if (Input.Pressed( "ShowInfo")){
+					MenuC.InGameHelpToggle();
+				}
 			}
+
+			StateC.OnFixedGlobal();
 			Player.SoundC.OnFixedGlobal();
 			Player.SpinC.OnFixedGlobal();
 			Player.Engine.OnFixedGlobal();
@@ -151,7 +156,10 @@ public sealed class Sng : Component
 		}
 		catch ( Exception e ) { LogOnce( "Main fixed error" + e.StackTrace ); }
 	}
-
+	protected override void OnUpdate(){
+		Timer.OnUpdateGlobal();
+		StateC.OnUpdateGlobal();
+	}
 	public void LoadNewMap( SceneFile file )
 	{
 
@@ -165,33 +173,50 @@ public sealed class Sng : Component
 		MapInit();
 		MenuC.OpenMenu();
 	}
-	public void SpawnPlayer()
+	// TODO: Make more states like Reset/Play/Spawn
+	/// <summary>
+	/// On map change and on back to menu
+	/// </summary>
+	public void Spawn()
 	{
-
-		if ( SpawnPoint == null )
+		if ( ZoneC.SpawnPoint == null )
 		{
 			Log.Warning( "No spawn and no start point" );
-			SpawnPoint = Player.Transform;
-			StartPoint = Player.Transform;
+			ZoneC.SpawnPoint = Player.Transform;
+			ZoneC.StartPoint = Player.Transform;
 		}
-		Player.Transform.Position = SpawnPoint.Position;
-		Player.Transform.Rotation = SpawnPoint.Rotation;
+		Player.Transform.Position = ZoneC.SpawnPoint.Position;
+		Player.Transform.Rotation = ZoneC.SpawnPoint.Rotation;
 		Player.Transform.ClearInterpolation();
 		Player.Engine.ResetPos( true );
 		MenuC.SetCameraLook();
+		StateC.Enabled = false;
+		Player.SpinC.RestartSpin();
+	}
+	/// <summary>
+	/// On play button and reset button
+	/// </summary>
+	public void Play()
+	{
+		ZoneC.ZonesReset();
+		TeleportPlayer( ZoneC.StartPoint );
+		Timer.Reset();
+		Player.CameraC.FreeCamEnable(false);
+		Player.SpinC.RestartSpin();
+		StateC.Reset();
 	}
 	public void TeleportPlayer( GameTransform pos )
 	{
-		if ( SpawnPoint == null )
+		if ( ZoneC.SpawnPoint == null )
 		{
 			Log.Warning( "No spawn and no start point" );
-			SpawnPoint = Player.Transform;
-			StartPoint = Player.Transform;
+			ZoneC.SpawnPoint = Player.Transform;
+			ZoneC.StartPoint = Player.Transform;
 		}
 		if ( pos == null )
 		{
-			Player.Transform.Position = SpawnPoint.Position;
-			Player.Transform.Rotation = SpawnPoint.Rotation;
+			Player.Transform.Position = ZoneC.SpawnPoint.Position;
+			Player.Transform.Rotation = ZoneC.SpawnPoint.Rotation;
 		}
 		else
 		{
@@ -201,22 +226,7 @@ public sealed class Sng : Component
 		Player.Transform.ClearInterpolation();
 		Player.Engine.ResetPos( false );
 	}
-	public void EndZoneEnter( GameObject go, Collider cof )
-	{
-		if ( Timer.IsFinished ) return;
-		FileC.SetScore( Timer.timerSeconds );
-		Timer.TimerFinish();
-		MenuC.ShowEndScreen();
 
-	}
-	public void ResetPlayer()
-	{
-		TeleportPlayer( StartPoint );
-		Timer.Reset();
-		Player.CameraC.FreeCam.GameObject.Enabled = false;
-		Player.CameraC.UpdateCam();
-		Player.SpinC.RestartSpin();
-	}
 	public string FormatTime( float totalSeconds )
 	{
 		TimeSpan timeSpan = TimeSpan.FromSeconds( totalSeconds );

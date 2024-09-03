@@ -3,12 +3,12 @@
 namespace Stasis.Data;
 public class Score
 {
-	public Score( float time, DateTime date, string name = "Error Name", long steamid = 0 )
+	public Score( float Time, DateTime Date, string DisplayName = "Error Name", long SteamID = 0 )
 	{
-		Time = time;
-		Date = date;
-		DisplayName = name;
-		SteamID = steamid;
+		this.Time = Time;
+		this.Date = Date;
+		this.DisplayName = DisplayName;
+		this.SteamID = SteamID;
 	}
 	public float Time { get; set; }
 	public DateTime Date { get; set; }

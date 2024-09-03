@@ -84,20 +84,18 @@ public sealed class MenuController : Component
 		IngameUI.GameObject.Enabled = true;
 		MenuUI.GameObject.Enabled = false;
 		IsGaming = true;
-		TIMER.Reset();
 		ShowInfo();
-		SNG.ResetPlayer();
+		GameUIVisible = true;
+		SNG.Play();
 	}
 	public void OpenMenu()
 	{
-		SNG.SpawnPlayer();
-		SPINC.RestartSpin();
+		SNG.Spawn();
 		IngameUI.GameObject.Enabled = false;
-		if ( !Game.IsEditor ) EndUI.GameObject.Enabled = false;
-
 		ChooseUI.GameObject.Enabled = false;
 		MenuUI.GameObject.Enabled = true;
 		IsGaming = false;
+		HelpVisible = false;
 		CameraInit();
 		Camera.Enabled = true;
 	}
@@ -183,16 +181,16 @@ public sealed class MenuController : Component
 	{
 		Game.Close();
 	}
-	public void ShowEndScreen()
+	public void ShowEndScreen(float Time)
 	{
 		if ( FC.currentMap == null )
 		{
 			Log.Warning( "no map info loaded?, why there is end_zone?" );
 			return;
 		}
-		if ( FC.currentTime == 0 )
+		if ( Time == 0 )
 		{
-			Log.Warning( "currentTime = 0, no map info loaded?, why there is end_zone?" );
+			Log.Warning( "Time = 0" );
 			return;
 		}
 		var time = FC.currentMap.Scores[0].Time;
@@ -211,15 +209,15 @@ public sealed class MenuController : Component
 			EndUI.Bronze = "";
 			EndUI.medal = -1;
 		}
-		var strtime = SNG.FormatTime( FC.currentTime );
+		var strtime = SNG.FormatTime( Time );
 		EndUI.Time = strtime.Split( '.' )[0];
 		EndUI.TimeMil = "." + strtime.Split( '.' )[1];
 		EndUI.Scores = FC.currentMap.Scores;
 		if ( FC.currentMap.Scores.Count > 0 )
 		{
-			if ( FC.currentMap.Scores[0].Time == FC.currentTime && FC.currentMap.Scores.Count() > 1 )
+			if ( FC.currentMap.Scores[0].Time == Time && FC.currentMap.Scores.Count > 1 )
 			{
-				EndUI.TimeDif = ("-" + SNG.FormatTime( FC.currentMap.Scores[1].Time - FC.currentTime ));
+				EndUI.TimeDif = ("-" + SNG.FormatTime( FC.currentMap.Scores[1].Time - Time ));
 				EndUI.timesave = true;
 
 			}
@@ -227,7 +225,7 @@ public sealed class MenuController : Component
 			{
 
 				EndUI.timesave = false;
-				EndUI.TimeDif = ("+" + SNG.FormatTime( FC.currentTime - FC.currentMap.Scores[0].Time ));
+				EndUI.TimeDif = ("+" + SNG.FormatTime( Time - FC.currentMap.Scores[0].Time ));
 			}
 
 		}
@@ -238,10 +236,19 @@ public sealed class MenuController : Component
 
 		EndUI.GameObject.Enabled = true;
 	}
-
+	public bool GameUIVisible {get; set;} = true;
+	public void InGameUIToggle(){
+		GameUIVisible = !GameUIVisible;
+		Sng.ELog(GameUIVisible);
+	}
+public bool HelpVisible {get; set;} = false;
+	public void InGameHelpToggle(){
+		HelpVisible = !HelpVisible;
+		Sng.ELog(HelpVisible);
+	}
 	public int GetMedal( MapData map )
 	{
-		if ( map == null || map.Scores == null || map.Scores.Count() == 0 || map.GoldTime == 0 ) return 0;
+		if ( map == null || map.Scores == null || map.Scores.Count == 0 || map.GoldTime == 0 ) return 0;
 		var time = map.Scores[0].Time;
 		if ( map.SpeedRun )
 		{
@@ -282,8 +289,9 @@ public sealed class MenuController : Component
 	bool infoOnce = true;
 	public void ShowInfo()
 	{
-		if ( infoOnce && SNG.firstTime ) IngameUI.ShowInfo( ControlsInfo() );
-		infoOnce = false;
+		//if ( infoOnce && SNG.firstTime ) IngameUI.ShowInfo( ControlsInfo() );
+		IngameUI.ShowInfo( ControlsInfo() );
+		infoOnce = false; 
 	}
 	private string ControlsInfo()
 	{
@@ -296,12 +304,17 @@ public sealed class MenuController : Component
 		var r = Input.GetButtonOrigin( "Restart" ).ToUpper();
 		var t = Input.GetButtonOrigin( "CameraCycle" ).ToUpper();
 		var c = Input.GetButtonOrigin( "FreeCamera" ).ToUpper();
+		var u = Input.GetButtonOrigin( "HideUI" ).ToUpper();
+		var h = Input.GetButtonOrigin( "ShowInfo" ).ToUpper();
+		var o = Input.GetButtonOrigin( "Toggle" ).ToUpper();
 		return $"{g} - Back to menu\n" +
 			$"{w} {a} {s} {d} - To move\n" +
 			$"{r} - Reset\n" +
 			$"{p} - Self destruct\n" +
 			$"{t} - Change view\n" +
-			$"{c} - Free camera\n";
-
+			$"{c} - Free camera\n" +
+			$"{o} - Save State Menu\n" + 
+			$"{u} - Hide UI\n" +
+			$"{h} - Hide Info\n";
 	}
 }

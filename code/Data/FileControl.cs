@@ -9,15 +9,16 @@ public sealed class FileControl
 	public Settings Set { get; set; }
 	public List<MapData> Maps { get; set; } = new List<MapData>();
 	public MapData currentMap;
-	public float currentTime = 0;
 	static string s = "Settings.json";
 	static string m = "Maps.json";
 	Sng SNG;
+	Timer TIMER;
 	public string[] FeaturedMaps;
 	public string[] OfficialMaps;
 	public void OnAwakeInit()
 	{
 		SNG = Sng.Inst;
+		TIMER = SNG.Timer;
 		FeaturedMaps = new string[] { };
 		OfficialMaps = new string[]
 		{
@@ -49,12 +50,9 @@ public sealed class FileControl
 		{
 			try
 			{
-				Maps = JsonSerializer.Deserialize<List<MapData>>( FileSystem.Data.ReadAllText( m ) , new JsonSerializerOptions { IncludeFields = true } );
+				Maps = JsonSerializer.Deserialize<List<MapData>>( FileSystem.Data.ReadAllText( m ), new JsonSerializerOptions { IncludeFields = true } );
 			}
-			catch ( Exception err )
-			{
-				Log.Warning( err.Message );
-			}
+			catch ( Exception err ) { Log.Error( err.Message ); }
 		}
 		else
 		{
@@ -66,7 +64,6 @@ public sealed class FileControl
 			}
 			catch ( Exception err ) { Log.Warning( "Move/Stasis folder does not exist?" + err.Message ); }
 		}
-		Log.Info(Maps.Count());
 	}
 	public void AddOfficialMaps()
 	{
@@ -100,26 +97,16 @@ public sealed class FileControl
 	{
 		var found = Maps.FirstOrDefault( x =>
 		{
-
-			Sng.ELog("indent1 = " + indent + " indent2 = " + x.Indent);
 			return x.Indent == indent;
 		} );
 		if ( found != default( MapData ) && found != null && (found.Img == null || found.Name == null || found.Description == null) )
 		{
-			Log.Warning( "Bad data, fetch new one" );
-			Log.Info( "removed: " + Maps.Remove( found ).ToString() );
 			found = default;
 		}
 		var _new = false;
-			Sng.ELog(found);
-			Sng.ELog(found == default( MapData ));
 		if ( found == default( MapData ) || found == null )
 		{
-			Sng.ELog("new");
-			found = new MapData
-			{
-				Type = type
-			};
+			found = new MapData { Type = type };
 			_new = true;
 		}
 		try
@@ -153,7 +140,7 @@ public sealed class FileControl
 
 		SNG.LoadNewMap( tempFile );
 	}
-	static SceneFile tempFile {get; set;} = new SceneFile();
+	static SceneFile tempFile { get; set; } = new SceneFile();
 	public async Task DownloadScene( string sceneIndent )
 	{
 		var package = await Package.Fetch( sceneIndent, false );
@@ -208,13 +195,12 @@ public sealed class FileControl
 
 		SaveMaps();
 	}
-	public void SetScore( float time )
+	public void SetScore()
 	{
-		currentTime = time;
 		if ( currentMap == null ) return;
-		var scr = new Score( time, DateTime.Now, Steam.PersonaName, (long)Steam.SteamId );
-		
-		LBControl.SetScore(scr, currentMap.Indent);
+		var scr = new Score( TIMER.timerSeconds, DateTime.Now, Steam.PersonaName, (long)Steam.SteamId );
+		if (!Game.IsEditor)
+			LBControl.SetScore( scr, currentMap.Indent );
 
 		currentMap.Scores.Add( scr );
 		currentMap.Scores.Sort( ( x, y ) => x.Time.CompareTo( y.Time ) );

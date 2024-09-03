@@ -23,7 +23,9 @@
     "LeaderboardType": "None",
     "CsProjName": "",
     "StartupScene": "scenes/menu.scene",
-    "ControlModes": {},
+    "ControlModes": {
+      "Keyboard": true
+    },
     "InputSettings": {
       "Actions": [
         {
@@ -115,6 +117,72 @@
           "KeyboardCode": "mouse2",
           "GamepadCode": "None",
           "GroupName": "Other"
+        },
+        {
+          "Name": "HideUI",
+          "KeyboardCode": "h",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "ShowInfo",
+          "KeyboardCode": "x",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Load",
+          "KeyboardCode": "1",
+          "GamepadCode": "None",
+          "GroupName": "SaveState"
+        },
+        {
+          "Name": "Save",
+          "KeyboardCode": "2",
+          "GamepadCode": "None",
+          "GroupName": "SaveState"
+        },
+        {
+          "Name": "Next",
+          "KeyboardCode": "3",
+          "GamepadCode": "None",
+          "GroupName": "SaveState"
+        },
+        {
+          "Name": "Prev",
+          "KeyboardCode": "4",
+          "GamepadCode": "None",
+          "GroupName": "SaveState"
+        },
+        {
+          "Name": "First",
+          "KeyboardCode": "5",
+          "GamepadCode": "None",
+          "GroupName": "SaveState"
+        },
+        {
+          "Name": "Last",
+          "KeyboardCode": "6",
+          "GamepadCode": "None",
+          "GroupName": "SaveState"
+        },
+        {
+          "Name": "Remove",
+          "KeyboardCode": "7",
+          "GamepadCode": "None",
+          "GroupName": "SaveState"
+        },
+        {
+          "Name": "Wipe",
+          "KeyboardCode": "8",
+          "GamepadCode": "None",
+          "GroupName": "SaveState"
+        },
+        {
+          "Name": "Toggle",
+          "KeyboardCode": "0",
+          "GamepadCode": "None",
+          "GroupName": "SaveState"
         }
       ],
       "__guid": "a9e66315-10cc-4419-9044-753cd6ddd758"

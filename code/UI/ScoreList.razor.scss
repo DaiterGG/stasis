@@ -12,7 +12,7 @@ ScoreList {
 
 	>.list-item {
 		padding-left: 10px;
-		min-height: 40px;
+		height: 40px;
 		display: flex;
 		flex-direction: row;
 
@@ -25,23 +25,16 @@ ScoreList {
 		}
 
 		> .name{
-			
-			margin-left: -50px;
 			font-weight: 400;
 			padding-top: 5px;
 			width: 100%;
-			display: flex;
-			align-content: center;
-			justify-content: center;
 		}
 
 		>.time {
-			margin-right:20px;
+			margin-right:13px;
 			font-weight: 400;
 			padding-top: 5px;
-			width: 100%;
-			display: flex;
-			align-content: center;
+			width: 40%;
 			justify-content: flex-end;
 		}
 	}

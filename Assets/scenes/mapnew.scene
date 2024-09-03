@@ -80,14 +80,14 @@
     {
       "__guid": "b2a7c630-7740-47a9-95c3-6f783a2c9930",
       "Flags": 0,
-      "Name": "end_zone",
+      "Name": "End Zone",
       "Position": "-98.89951,0,0",
       "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.Description",
           "__guid": "008b1737-9f28-4086-b7b8-2c7aa18852ac",
-          "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027, put trigger collider and End Zone component on it\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
+          "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nPut trigger collider and End Zone component on all of them\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
         },
         {
           "__type": "Sandbox.BoxCollider",
@@ -101,11 +101,50 @@
           "__type": "Stasis.Zones.AutoDecor",
           "__guid": "516908bc-e9e4-4a96-8b71-8c55f0994005",
           "AutoDecorate": true,
-          "ColorOfTheLines": "1,0,0,1"
+          "ColorOfTheLines": "1,0,0,1",
+          "LineWidth": 4.5
         },
         {
           "__type": "Stasis.Zones.EndZone",
           "__guid": "5a4904d8-0b68-4a9b-a97a-7f40bce63ce6"
+        }
+      ]
+    },
+    {
+      "__guid": "044cd2f6-2a6c-4e0f-836c-b18415615188",
+      "Flags": 0,
+      "Name": "Beacon",
+      "Position": "-474.7329,693.126,454.4197",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "2cf2992d-129b-4ae1-8a40-1ca3c53d1dd3",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "8a21a100-ef42-4a00-a751-8e5e15227663",
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.024,1",
+          "ColorBefore": "1,0.933,0,1",
+          "ID": 1
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "91201f7b-e42a-4ec3-9bb7-02a6ef72721a",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "179af59d-0d7e-48b2-b747-125a2007c749",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "RenderType": "On",
+          "Tint": "1,0.98333,0,1"
         }
       ]
     }
