@@ -9,6 +9,6 @@ public interface IChangeColorZone : IZone
 	Color ColorBefore {get; set;}
 	[Property, ShowIf("ChangeColor", true)]
 	Color ColorAfter {get; set;}
-	public void Activate(bool activate = true);
+	public void ActivateToggle(bool activate = true);
 	public void ColorUpdate();
 }

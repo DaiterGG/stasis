@@ -13,12 +13,14 @@ InfoCard {
 	display: flex;
 	flex-direction: column;
 	border-radius: 0 0 15px 15px;
+	font-size: 30px;
+	text-overflow: clip;
 
 	>.header {
-		height: 200px;
+		height: 300px;
 		width: 100%;
 		background-color: #000000dd;
-		flex: 52%;
+		flex: 80%;
 		display: flex;
 		flex-direction: row;
 
@@ -27,7 +29,7 @@ InfoCard {
 			height: 100%;
 			display: flex;
 			flex-direction: column;
-			gap: 10px;
+			gap: 0px;
 			padding-left: 10px;
 			padding-top: 7px;
 
@@ -58,7 +60,7 @@ InfoCard {
 	>.gradi {
 		flex: 100%;
 		width: 100%;
-		background: linear-gradient(to bottom, #000000ef, #000000e6,  #000000cc, #000000aa, #00000088,#00000055, #00000000, #00000000, #00000000);
+		background: linear-gradient(to bottom, #000000ef, #000000e6, #000000cc, #000000aa, #00000088, #00000055, #00000000, #00000000, #00000000);
 	}
 
 	>.bot {

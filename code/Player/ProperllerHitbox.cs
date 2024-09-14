@@ -11,7 +11,7 @@ protected override void OnStart()
 
 	public void OnCollisionStart( Collision col )
 	{
-		if ( !SPIN.isAttached ) return;
+		if ( !SPIN.IsAttached ) return;
 		if ( col.Other.GameObject.Tags.Contains( "particle" ) ) return; // not secessary since blades have 'player' tag
 		SPIN.SpinCollision();
 	}

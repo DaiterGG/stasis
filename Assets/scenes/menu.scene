@@ -48,9 +48,9 @@
         {
           "__type": "Stasis.Zones.AutoDecor",
           "__guid": "01f0a83d-60e2-4d8a-8c1f-9b7ded165bd4",
-          "AutoDecorate": true,
           "ColorOfTheLines": "1,0,0,1",
-          "LineWidth": 4.5
+          "LineWidth": 3,
+          "WireFrame": false
         },
         {
           "__type": "Stasis.Zones.EndZone",
@@ -84,8 +84,10 @@
           "__guid": "c8e4f91e-ffe7-4b0b-879c-c77dc11c6101",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "maps/st_playground1.vmap",
+          "MapName": "maps/st_playground2.vmap",
           "NoOrigin": false,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
       ],
@@ -107,6 +109,33 @@
           "SilverTime": 13,
           "SpeerunMap": true,
           "Version": "1.0"
+        }
+      ]
+    },
+    {
+      "__guid": "8f5a3271-ab7e-49db-8d5b-0ae78adbf31c",
+      "Flags": 0,
+      "Name": "Cube",
+      "Position": "0,149.1744,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "9fa42905-9fdc-42de-96a7-a0869c4c3805",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.LogTransform",
+          "__guid": "bcd0d601-ea65-49ac-8cf2-0d72ef560b9f"
         }
       ]
     }

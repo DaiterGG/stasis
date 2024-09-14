@@ -101,7 +101,7 @@
           "GroupName": "Other"
         },
         {
-          "Name": "attack1",
+          "Name": "Attack1",
           "KeyboardCode": "MOUSE1",
           "GamepadCode": "None",
           "GroupName": "Other"
@@ -113,7 +113,7 @@
           "GroupName": "Other"
         },
         {
-          "Name": "attack2",
+          "Name": "Attack2",
           "KeyboardCode": "mouse2",
           "GamepadCode": "None",
           "GroupName": "Other"
@@ -183,6 +183,18 @@
           "KeyboardCode": "0",
           "GamepadCode": "None",
           "GroupName": "SaveState"
+        },
+        {
+          "Name": "SoftRestart",
+          "KeyboardCode": "F",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Quit",
+          "KeyboardCode": "Q",
+          "GamepadCode": "None",
+          "GroupName": "Other"
         }
       ],
       "__guid": "a9e66315-10cc-4419-9044-753cd6ddd758"

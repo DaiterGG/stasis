@@ -18,10 +18,8 @@ public class LBControl
 			lb.CenterOnMe();
 		lb.MaxEntries = amount;
 		lb.SetAggregationMin();
-		lb.SetSortAscending();
 		await lb.Refresh();
 		return lb;
-
 	}
 
 	public static async Task<List<Score>> GetScores(string mapInd, int amount,bool centerOnMe = false, bool yourCountry = false)

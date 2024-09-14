@@ -40,8 +40,10 @@
           "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "move.st_playground3",
+          "MapName": "move.st_playground4",
           "NoOrigin": false,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
       ],
@@ -79,7 +81,7 @@
     {
       "__guid": "b2a7c630-7740-47a9-95c3-6f783a2c9930",
       "Flags": 0,
-      "Name": "end_zone",
+      "Name": "End zone",
       "Position": "790.1044,13.89676,-912.0723",
       "Enabled": true,
       "Components": [
@@ -99,8 +101,9 @@
         {
           "__type": "Stasis.Zones.AutoDecor",
           "__guid": "7d937c5d-c7f7-497b-b6fa-871976626bc4",
-          "AutoDecorate": true,
-          "ColorOfTheLines": "1,0,0,1"
+          "ColorOfTheLines": "1,0,0,1",
+          "LineWidth": 3,
+          "WireFrame": false
         },
         {
           "__type": "Stasis.Zones.EndZone",

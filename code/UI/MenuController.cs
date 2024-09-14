@@ -244,7 +244,6 @@ public sealed class MenuController : Component
 public bool HelpVisible {get; set;} = false;
 	public void InGameHelpToggle(){
 		HelpVisible = !HelpVisible;
-		Sng.ELog(HelpVisible);
 	}
 	public int GetMedal( MapData map )
 	{
@@ -299,18 +298,22 @@ public bool HelpVisible {get; set;} = false;
 		var s = Input.GetButtonOrigin( "Down" ).ToUpper();
 		var a = Input.GetButtonOrigin( "Left" ).ToUpper();
 		var d = Input.GetButtonOrigin( "Right" ).ToUpper();
-		var p = Input.GetButtonOrigin( "SelfDestruct" ).ToUpper();
+		var space = Input.GetButtonOrigin( "SelfDestruct" ).ToUpper();
 		var g = Input.GetButtonOrigin( "Back" ).ToUpper();
+		var f = Input.GetButtonOrigin( "SoftRestart" ).ToUpper();
 		var r = Input.GetButtonOrigin( "Restart" ).ToUpper();
 		var t = Input.GetButtonOrigin( "CameraCycle" ).ToUpper();
 		var c = Input.GetButtonOrigin( "FreeCamera" ).ToUpper();
 		var u = Input.GetButtonOrigin( "HideUI" ).ToUpper();
 		var h = Input.GetButtonOrigin( "ShowInfo" ).ToUpper();
 		var o = Input.GetButtonOrigin( "Toggle" ).ToUpper();
+		var m = Input.GetButtonOrigin( "Attack2" ).ToUpper();
 		return $"{g} - Back to menu\n" +
 			$"{w} {a} {s} {d} - To move\n" +
-			$"{r} - Reset\n" +
-			$"{p} - Self destruct\n" +
+			$"{f} - Reset to checkpoint\n" +
+			$"{r} - Reset to start\n" +
+			$"{space} - Self destruct/jump\n" +
+			$"{m} - Adjust camera Angle\n" +
 			$"{t} - Change view\n" +
 			$"{c} - Free camera\n" +
 			$"{o} - Save State Menu\n" + 

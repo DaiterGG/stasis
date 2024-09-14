@@ -40,7 +40,7 @@ public sealed class SoundControl : Component
 
 			}
 		}
-		if ( !SPINC.isAttached ) SPC.Volume = 0;
+		if ( !SPINC.IsAttached ) SPC.Volume = 0;
 		SPC.Pitch = SPC.Pitch > 1f ? 1f : SPC.Pitch;
 	}
 }

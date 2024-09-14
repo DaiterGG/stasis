@@ -137,7 +137,8 @@ public sealed class FileControl
 			DownloadScene( packageIndent ).Wait();
 		}
 		catch ( Exception e ) { Log.Info( "Download failed, try again" + e ); }
-
+		if ( tempFile.ResourceName == null )
+			Log.Info( "Map Name not found" );
 		SNG.LoadNewMap( tempFile );
 	}
 	static SceneFile tempFile { get; set; } = new SceneFile();
@@ -199,7 +200,7 @@ public sealed class FileControl
 	{
 		if ( currentMap == null ) return;
 		var scr = new Score( TIMER.timerSeconds, DateTime.Now, Steam.PersonaName, (long)Steam.SteamId );
-		if (!Game.IsEditor)
+		if ( !Game.IsEditor )
 			LBControl.SetScore( scr, currentMap.Indent );
 
 		currentMap.Scores.Add( scr );

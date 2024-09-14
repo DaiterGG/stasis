@@ -1,0 +1,960 @@
+{
+  "__guid": "be405f75-9c99-4c14-9666-8fdfc86bc928",
+  "GameObjects": [
+    {
+      "__guid": "33663781-5e88-404d-81c8-8b4b47dce10c",
+      "Flags": 0,
+      "Name": "Game",
+      "Enabled": true,
+      "__Prefab": "prefabs/game.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "7f36b1d7-f001-4c59-befc-531076219a15",
+      "Flags": 0,
+      "Name": "Map Info",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Stasis.Info",
+          "__guid": "4b98eade-e9d0-49ff-a58b-3a51f422207a",
+          "Author": "Author Name",
+          "BronzeTime": 25,
+          "DifficultyTier": 1,
+          "GoldTime": 12.3,
+          "SilverTime": 15.5,
+          "SpeerunMap": true,
+          "Version": "1.0"
+        }
+      ]
+    },
+    {
+      "__guid": "c40b0c5d-16e2-4bfd-a7dd-52852758c463",
+      "Flags": 0,
+      "Name": "Map",
+      "Position": "0,-267.4792,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "2f372fd6-59f2-4044-91bc-e7eac2e8c43d",
+          "WhatIsThat": "Important!\nYou have to publish your map first\nThen attach \u0027Cloud Asset\u0027 to Map instance below"
+        },
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
+          "__version": 1,
+          "EnableCollision": true,
+          "MapName": "maps/zonetrial1.vmap",
+          "NoOrigin": false,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": false
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "d96214e9-bddc-4821-811e-458d5eb1e5ef",
+      "Flags": 0,
+      "Name": "info_player_start",
+      "Position": "-0.0002383645,144.3514,416.8821",
+      "Rotation": "0,-0,-0.7071068,0.7071068",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "6f3aa8db-5898-42c8-898d-5f0c69e9aaf2",
+          "WhatIsThat": "Player will respawn here to play the map"
+        }
+      ]
+    },
+    {
+      "__guid": "bddf0c53-f7e6-4afe-86f2-3f9dade8a1e6",
+      "Flags": 0,
+      "Name": "info_player_start",
+      "Position": "-0.00009236452,-454.9799,128.0368",
+      "Rotation": "0,0,0.7071068,0.7071068",
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "ab108671-09bc-4197-aa38-fad1b06b5de7",
+          "WhatIsThat": "Player will respawn here to play the map"
+        }
+      ]
+    },
+    {
+      "__guid": "0784ce75-4b08-4265-8876-f1c83d30c647",
+      "Flags": 0,
+      "Name": "info_player_spawn",
+      "Position": "-336.2798,178.0385,480.0586",
+      "Rotation": "0,0,0.7181258,0.6959133",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "bb14eb28-7ee5-4830-84c6-c7b2f15547a1",
+          "WhatIsThat": "Player will spawn here to pose for the menu\nIt is optional"
+        }
+      ]
+    },
+    {
+      "__guid": "b2a7c630-7740-47a9-95c3-6f783a2c9930",
+      "Flags": 0,
+      "Name": "End Zone",
+      "Position": "-98.89951,0,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "008b1737-9f28-4086-b7b8-2c7aa18852ac",
+          "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nPut trigger collider and End Zone component on all of them\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "6112d98f-97ec-426d-b4e5-a201e5185a57",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "516908bc-e9e4-4a96-8b71-8c55f0994005",
+          "ColorOfTheLines": "1,0,0,1",
+          "LineWidth": 3,
+          "WireFrame": false
+        },
+        {
+          "__type": "Stasis.Zones.EndZone",
+          "__guid": "5a4904d8-0b68-4a9b-a97a-7f40bce63ce6"
+        }
+      ]
+    },
+    {
+      "__guid": "24508041-e502-4e0c-ae67-22a01f469e0e",
+      "Flags": 0,
+      "Name": "beacon triangle 1",
+      "Position": "-83.96317,3207.827,-296.0893",
+      "Rotation": "0,0,0.7071068,0.7071068",
+      "Scale": "1,11.6,10.9",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "5d076e3a-ce7e-4073-9fcd-18984f02f1f9",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "04c44da0-c9fa-47ca-92d6-ca2728ed3409",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "6e416080-82db-47f5-8125-4b1c9c58d880"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.61961,0.01961,0",
+          "ColorBefore": "1,0.78431,0,1",
+          "ID": 1
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "364dc7cd-6257-4c96-a00f-501be4b8fc3a",
+          "Center": "0,0,-5.699999",
+          "IsTrigger": true,
+          "Scale": "1,14.29999,18.80002",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "1cbb1018-ed45-4f12-b40f-5676c79aae8c",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "Model": "models/roadsign_triangle.vmdl",
+          "RenderType": "Off",
+          "Tint": "1,0.78333,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "e2b8fb30-f6d7-4430-9028-1c0afdbe0494",
+      "Flags": 0,
+      "Name": "beacon triangle 2",
+      "Position": "776.8583,4676.88,-755.7676",
+      "Rotation": "0.06682002,-0.248299,-0.9322884,0.2544034",
+      "Scale": "1,11.3,11.3",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "60e66b75-e435-483b-857e-c32f90430809",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "1729b012-f074-4830-8dd8-1a9477ce6c77",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "6e416080-82db-47f5-8125-4b1c9c58d880"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.02067,0",
+          "ColorBefore": "1,0.78431,0,1",
+          "ID": 2
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "2a2bdb4e-7ff0-4ac0-9c24-1f2d03d0f605",
+          "Center": "0,0,-5.699999",
+          "IsTrigger": true,
+          "Scale": "1,14.29999,18.80002",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "2bd8e172-308a-485b-852d-f48ecfd35125",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "Model": "models/roadsign_triangle.vmdl",
+          "RenderType": "Off",
+          "Tint": "1,0.98333,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "ee7c0928-1535-4597-adda-fdb1dbb6d13e",
+      "Flags": 0,
+      "Name": "Beacon Ark 6",
+      "Position": "7295.577,-985.4177,442.7755",
+      "Scale": "1,11.7,12.7",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "898e20d6-d5ba-41c5-be60-121660b20892",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "b416e2cd-1315-42ed-9490-021b407f2424",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "b8ece921-a576-4f5b-a5f3-6bbde5cea6cc"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.02067,0",
+          "ColorBefore": "1,0.78431,0,1",
+          "ID": 9
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "ae00da22-65f6-4f7f-a90c-7141fd6649de",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "6d6d3bef-1af5-4cd7-8592-8b29780157be",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "Off",
+          "Tint": "1,0.78431,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "aa412f21-e1c3-48d4-9730-8ff9b95532e8",
+      "Flags": 0,
+      "Name": "Beacon Ark 5",
+      "Position": "7295.577,-220.6746,442.7755",
+      "Scale": "1,11.7,12.7",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "6ee789d0-811d-44d0-8e8c-6c5f8194e00d",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "4bdec943-e9d1-42fc-96f1-a9dfd05ab294",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "b8ece921-a576-4f5b-a5f3-6bbde5cea6cc"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.02067,0",
+          "ColorBefore": "1,0.78431,0,1",
+          "ID": 8
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "83dae7d8-9396-432e-b3b8-be72b0228b5e",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "03a8e6c7-95c9-4a42-9258-af7daf7d1963",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "Off",
+          "Tint": "1,0.78431,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "3edf74d4-6437-4d1f-8dbf-22be5f16a0ab",
+      "Flags": 0,
+      "Name": "Beacon Ark 1",
+      "Position": "6912.897,-1374.241,442.7755",
+      "Rotation": "0,0,0.7071068,0.7071068",
+      "Scale": "1,11.7,12.7",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "d4218497-3f32-4003-a225-0632ee17ae25",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "54a1bd92-4b75-4a2a-860d-7699077f16ad",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "b8ece921-a576-4f5b-a5f3-6bbde5cea6cc"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.02067,0",
+          "ColorBefore": "1,0.78431,0,1",
+          "ID": 4
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "6e4b56d1-cec2-4cae-a081-aa2aa28026a3",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "a9236beb-b536-4ff3-a5ac-02a0840a3d27",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "Off",
+          "Tint": "1,0.78431,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "e2eddd95-a2e6-4349-a998-d08bf0ea61ec",
+      "Flags": 0,
+      "Name": "Beacon Ark 2",
+      "Position": "7678.486,-1370.76,442.7755",
+      "Rotation": "0,0,0.7071068,0.7071068",
+      "Scale": "1,11.7,12.7",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "a9d09886-7cfb-43cb-a739-af86599ec18d",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "36b26928-d056-4c27-b892-7a14eb456e75",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "b8ece921-a576-4f5b-a5f3-6bbde5cea6cc"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.02067,0",
+          "ColorBefore": "1,0.78431,0,1",
+          "ID": 5
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "00f922da-c64e-438f-8599-a8f2be927918",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "d0467074-930c-4413-88bd-81ebf341a623",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "Off",
+          "Tint": "1,0.78431,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "864f091d-4321-4590-b34e-2a5132c04928",
+      "Flags": 0,
+      "Name": "Beacon Ark 4",
+      "Position": "6907.782,-592.8216,442.7755",
+      "Rotation": "0,0,0.7071068,0.7071068",
+      "Scale": "1,11.7,12.7",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "fded8c99-43e5-4952-bb0d-8cb879d7c2aa",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "c9cbc26a-4b02-474d-9234-213e7c14a16b",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "b8ece921-a576-4f5b-a5f3-6bbde5cea6cc"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.02067,0",
+          "ColorBefore": "1,0.78431,0,1",
+          "ID": 7
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "32af2d1b-a30c-47ec-ab1b-9511b0072cdc",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "0ee5c150-4517-475f-a5bc-b11f1802dae7",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "Off",
+          "Tint": "1,0.78431,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "d406e99d-972a-428d-9053-d9a1ca30db11",
+      "Flags": 0,
+      "Name": "Beacon Ark 3",
+      "Position": "7678.487,-592.8227,442.7755",
+      "Rotation": "0,0,0.7071068,0.7071068",
+      "Scale": "1,11.7,12.7",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "9423cf21-3ea4-4d73-a826-ed7d95e62984",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "a40c106f-d8b1-49e3-833f-a745021592c9",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "b8ece921-a576-4f5b-a5f3-6bbde5cea6cc"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.02067,0",
+          "ColorBefore": "1,0.78431,0,1",
+          "ID": 6
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "925a04f9-891a-4619-99a8-019ed81c881b",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "60d63d62-e4c9-4977-8e58-db52c3b2d45c",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "Off",
+          "Tint": "1,0.78431,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "12c745ee-b3f6-4cb7-807f-208e3215a92a",
+      "Flags": 0,
+      "Name": "Beacon Bar",
+      "Position": "2245.106,4564.654,-1249.178",
+      "Scale": "2.800001,41.39999,2.799999",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "377be386-63d4-4bff-923e-acd31553e092",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "06d2c8f5-862d-43e8-8fa7-e7b8b6eee82e",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "6e416080-82db-47f5-8125-4b1c9c58d880"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.02067,0",
+          "ColorBefore": "1,0.78431,0,1",
+          "ID": 3
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "9c95141d-52d4-4038-a306-0b90036f2060",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "df83a6df-3d93-4a90-8303-b920650c23fb",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "Off",
+          "Tint": "1,0.78431,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "044cd2f6-2a6c-4e0f-836c-b18415615188",
+      "Flags": 0,
+      "Name": "Beacon",
+      "Position": "258.6052,-90.91534,173.774",
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "2cf2992d-129b-4ae1-8a40-1ca3c53d1dd3",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "8a21a100-ef42-4a00-a751-8e5e15227663",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "8fd6721a-da10-4fdb-abc9-a556fe599d43"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.024,1",
+          "ColorBefore": "1,0.933,0,1",
+          "ID": 1
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "91201f7b-e42a-4ec3-9bb7-02a6ef72721a",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "179af59d-0d7e-48b2-b747-125a2007c749",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "RenderType": "On",
+          "Tint": "1,0.98333,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "8fd6721a-da10-4fdb-abc9-a556fe599d43",
+      "Flags": 0,
+      "Name": "Teleport 1",
+      "Position": "16.24217,131.9434,287.2252",
+      "Scale": "1,0.9,0.95",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "34e492f5-ff0f-450a-9777-10cca28831d8",
+          "WhatIsThat": "You can put any collider on it"
+        },
+        {
+          "__type": "Stasis.Zones.Teleport",
+          "__guid": "6d5e4ab3-cbc7-47e8-81e2-5d3ca427f2ce",
+          "Exit": {
+            "_type": "gameobject",
+            "go": "c6522a4d-f1fa-4638-bf69-dd7afba349e7"
+          },
+          "RepairPropeller": true,
+          "ResetRotation": true,
+          "ResetVelocity": true
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "7b97416b-482a-45bc-9b01-a087a37a2932",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "221.6001,27.99998,200",
+          "Static": false
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "d94dcb53-7e58-4d47-aa11-f9c1231c4323",
+          "ColorOfTheLines": "0.24706,1,0,1",
+          "LineWidth": 2,
+          "WireFrame": false
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "c6522a4d-f1fa-4638-bf69-dd7afba349e7",
+          "Flags": 0,
+          "Name": "Exit",
+          "Position": "-1.387695,1516.628,-506.4028",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Enabled": true
+        }
+      ]
+    },
+    {
+      "__guid": "6e416080-82db-47f5-8125-4b1c9c58d880",
+      "Flags": 0,
+      "Name": "Teleport 2",
+      "Position": "2104.152,4568.621,-2327.669",
+      "Scale": "4.5,9.200002,4.700001",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "14cdbdc9-5ded-44bd-b7b7-b0f8cdd285e3",
+          "WhatIsThat": "You can put any collider on it"
+        },
+        {
+          "__type": "Stasis.Zones.Teleport",
+          "__guid": "7269291f-52ea-4421-9a5e-1652ff32eb2b",
+          "Exit": {
+            "_type": "gameobject",
+            "go": "10661af6-bcd6-4e18-a877-019c9b83b725"
+          },
+          "RepairPropeller": true,
+          "ResetRotation": true,
+          "ResetVelocity": true
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "a370fb85-7da5-411d-b4ff-696e77c688b9",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "200,200,200",
+          "Static": false
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "b9b92768-c933-476a-8dd0-1db670e96b9e",
+          "ColorOfTheLines": "0.25,1,0,1",
+          "LineWidth": 4.5,
+          "WireFrame": false
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "10661af6-bcd6-4e18-a877-019c9b83b725",
+          "Flags": 0,
+          "Name": "Exit",
+          "Position": "1154.78,-707.4341,563.3038",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Enabled": true
+        }
+      ]
+    },
+    {
+      "__guid": "b8ece921-a576-4f5b-a5f3-6bbde5cea6cc",
+      "Flags": 0,
+      "Name": "Teleport 3",
+      "Position": "7296.417,-2172.288,440.1314",
+      "Scale": "2.8,0.4,2.909999",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "6901a8b6-94f6-4698-874f-1daeab65d127",
+          "WhatIsThat": "You can put any collider on it"
+        },
+        {
+          "__type": "Stasis.Zones.Teleport",
+          "__guid": "1f62c283-2b2a-4824-8e9b-0965c8fd48e9",
+          "Exit": {
+            "_type": "gameobject",
+            "go": "c57b1400-d9db-470c-a4bf-cf1aafea6d58"
+          },
+          "RepairPropeller": true,
+          "ResetRotation": true,
+          "ResetVelocity": true
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "0c2f278e-8f2e-4cf9-8090-9a7164b5f888",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "200,200,200",
+          "Static": false
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "7135a64d-3640-4efa-859e-5279377fc8eb",
+          "ColorOfTheLines": "0.25,1,0,1",
+          "LineWidth": 4.5,
+          "WireFrame": false
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "c57b1400-d9db-470c-a4bf-cf1aafea6d58",
+          "Flags": 0,
+          "Name": "Exit",
+          "Position": "1154.779,-707.4349,522.5276",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Enabled": true
+        }
+      ]
+    },
+    {
+      "__guid": "9468d61d-eff0-4dda-94b2-01fdd0099337",
+      "Flags": 0,
+      "Name": "Teleport",
+      "Position": "16.24217,131.9434,304.4609",
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "e2d9de19-81b0-4fcd-8081-9bc57a1ff020",
+          "WhatIsThat": "You can put any collider on it"
+        },
+        {
+          "__type": "Stasis.Zones.Teleport",
+          "__guid": "a7f9c234-5a5e-4a87-ab1c-dd77538003c2",
+          "RepairPropeller": true,
+          "ResetRotation": true,
+          "ResetVelocity": true
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "e3ffed48-b447-4cf6-9e5d-ed4f2278a30c",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "221.6001,27.99998,200",
+          "Static": false
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "b4a8161d-9206-4dd2-8c84-fc8c58384432",
+          "__enabled": false,
+          "ColorOfTheLines": "0.62326,0.62326,0.62326,1",
+          "LineWidth": 2,
+          "WireFrame": false
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "51850bad-8f15-4e52-9fe1-b01e69d60aa5",
+          "Flags": 0,
+          "Name": "Exit",
+          "Position": "-6.049072,2726.553,-856.2778",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Enabled": true
+        }
+      ]
+    },
+    {
+      "__guid": "2708cea7-6cc5-49c0-b8d9-8b36259a4916",
+      "Flags": 0,
+      "Name": "Check Point 1",
+      "Position": "1.299415,1697.721,-126.5278",
+      "Scale": "12.89999,11.6,4.099999",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "3c206089-f43b-42b5-a8b1-9d2c9525dbf9",
+          "WhatIsThat": "After player touch it, it will spawn player on \u0027spawn\u0027 child, when reset pressed\nYou can finish map without activating it "
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "c1255233-2eea-4f00-993d-0beb2db1237c",
+          "__enabled": false,
+          "ColorOfTheLines": "0.05209,0.52093,0,1",
+          "LineWidth": 3,
+          "WireFrame": false
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "0d36065f-a693-4a75-ad59-e3a4e008aa2a",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": true
+        },
+        {
+          "__type": "Stasis.Zones.CheckPoint",
+          "__guid": "bf6754c3-2259-4de8-9ce6-4f4369430453",
+          "Spawn": {
+            "_type": "gameobject",
+            "go": "c6522a4d-f1fa-4638-bf69-dd7afba349e7"
+          }
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "a4af9586-aacf-4039-8ff5-6893fd15e019",
+          "Flags": 0,
+          "Name": "Spawn",
+          "Position": "0,0,13.926"
+        }
+      ]
+    },
+    {
+      "__guid": "b72eb138-f975-4f6f-ab81-5c49038c1463",
+      "Flags": 0,
+      "Name": "Check Point 2",
+      "Position": "7251.979,-1875.722,258.5021",
+      "Scale": "12.89999,11.6,4.099999",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "6e88195b-8be9-407f-ac5e-6fd910f34ca9",
+          "WhatIsThat": "After player touch it, it will spawn player on \u0027spawn\u0027 child, when reset pressed\nYou can finish map without activating it "
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "87435c40-e361-4aa0-872e-0f349c2f4296",
+          "__enabled": false,
+          "ColorOfTheLines": "0.05209,0.52093,0,1",
+          "LineWidth": 3,
+          "WireFrame": false
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "9e35b8b5-456a-4238-a6bf-dd3b807eb7bd",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": true
+        },
+        {
+          "__type": "Stasis.Zones.CheckPoint",
+          "__guid": "6adb4f78-0c64-4315-acc3-4d5c896059ce",
+          "Spawn": {
+            "_type": "gameobject",
+            "go": "10661af6-bcd6-4e18-a877-019c9b83b725"
+          }
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "b77e73d3-16a6-4bac-b41f-df363688ac26",
+          "Flags": 0,
+          "Name": "Spawn",
+          "Position": "0,0,13.926"
+        }
+      ]
+    },
+    {
+      "__guid": "65110e4a-a2ae-402b-8620-90895d1dd244",
+      "Flags": 0,
+      "Name": "Check Point",
+      "Position": "587.5367,0,170.6926",
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "64f8a44d-05a7-4ffa-9409-115460437d60",
+          "WhatIsThat": "After player touch it, it will spawn player on \u0027spawn\u0027 child, when reset pressed\nYou can finish map without activating it "
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "8773a832-6455-4542-904b-6fa9e13fc12d",
+          "ColorOfTheLines": "0.05209,0.52093,0,1",
+          "LineWidth": 3,
+          "WireFrame": false
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "bcb254e4-5830-4afb-9657-9cbf11cb5bc0",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": true
+        },
+        {
+          "__type": "Stasis.Zones.CheckPoint",
+          "__guid": "b4048c0e-2b70-4a00-b4a2-764db8cb3be0"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "1e93dfca-3be3-43ca-a07c-e43b456a3c68",
+          "Flags": 0,
+          "Name": "Spawn",
+          "Position": "0,0,13.926",
+          "Enabled": true
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "map",
+  "Description": "",
+  "ResourceVersion": 1,
+  "__references": [
+    "baik.roadsigntriangle"
+  ],
+  "__version": 1
+}

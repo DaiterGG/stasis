@@ -256,6 +256,12 @@
               "go": "3c2490ef-54a0-49bb-8f13-490e40aa51d1",
               "component_type": "EngineComponent"
             },
+            "JumpC": {
+              "_type": "component",
+              "component_id": "5bab8f2c-8d6c-44be-8c10-2c04e0683050",
+              "go": "3c2490ef-54a0-49bb-8f13-490e40aa51d1",
+              "component_type": "JumpComponent"
+            },
             "SoundC": {
               "_type": "component",
               "component_id": "9f4f1824-64d9-4aaa-9c8b-6b2d5482196c",
@@ -352,6 +358,10 @@
                 "settleStep": 100,
                 "turnSpeed": 16000,
                 "verticalDumping": 0.968
+              },
+              {
+                "__type": "Stasis.Player.JumpComponent",
+                "__guid": "5bab8f2c-8d6c-44be-8c10-2c04e0683050"
               }
             ],
             "Children": [
@@ -381,52 +391,6 @@
                     "ZNear": 1
                   },
                   {
-                    "__type": "Sandbox.Bloom",
-                    "__guid": "0492304e-41a4-429d-a643-7daa96993728",
-                    "BloomColor": {
-                      "color": [
-                        {
-                          "c": "1,1,1,1"
-                        },
-                        {
-                          "t": 1,
-                          "c": "1,1,1,1"
-                        }
-                      ],
-                      "alpha": []
-                    },
-                    "BloomCurve": [
-                      {
-                        "y": 0.5
-                      },
-                      {
-                        "x": 1,
-                        "y": 1
-                      }
-                    ],
-                    "Mode": "Additive",
-                    "Strength": 0.5,
-                    "Threshold": 0.5,
-                    "ThresholdWidth": 0.5
-                  },
-                  {
-                    "__type": "Sandbox.Tonemapping",
-                    "__guid": "3853a1b9-ecc3-43c8-a8e1-215e1e004893",
-                    "__version": 1,
-                    "ExposureBias": 2,
-                    "ExposureCompensation": 0,
-                    "ExposureMethod": "RGB",
-                    "MaximumExposure": 2,
-                    "MinimumExposure": 1,
-                    "Mode": "Legacy",
-                    "Rate": 1
-                  },
-                  {
-                    "__type": "Sandbox.Sharpen",
-                    "__guid": "b042ad34-6769-4024-816d-9f3ac3cfe9d0",
-                    "Scale": 0.2
-                  },
-                  {
                     "__type": "Sandbox.AudioListener",
                     "__guid": "a92c08c9-a9a9-4479-81d1-7ae2cb073c66",
                     "UseCameraDirection": true
@@ -434,80 +398,30 @@
                 ]
               },
               {
-                "__guid": "d6d47027-a884-4a1d-b8fd-b0feabe121bd",
+                "__guid": "f56d823c-8db7-4b36-8dc1-60d568faa367",
                 "Flags": 0,
                 "Name": "Third person",
                 "Position": "-175.7618,-0.000004516136,79.72442",
                 "Rotation": "0,-0.03925982,0,0.999229",
                 "Scale": "0.639677,1.31012,1.775288",
+                "Tags": "maincamera",
                 "Components": [
                   {
                     "__type": "Sandbox.CameraComponent",
-                    "__guid": "d4999fa6-e1fe-45b7-92ce-573080a6a97c",
+                    "__guid": "be6e86b5-3c7f-44b4-b8f5-f8caf1b8b856",
                     "BackgroundColor": "0.33333,0.46275,0.52157,1",
                     "ClearFlags": "All",
                     "FieldOfView": 90,
                     "IsMainCamera": true,
                     "Orthographic": false,
                     "OrthographicHeight": 1204,
-                    "Priority": 14,
+                    "Priority": 1,
                     "RenderExcludeTags": "",
                     "RenderTags": "",
                     "TargetEye": "None",
                     "Viewport": "0,0,1,1",
                     "ZFar": 10000,
-                    "ZNear": 10
-                  },
-                  {
-                    "__type": "Sandbox.Bloom",
-                    "__guid": "00872ee9-dde8-42fe-927e-402a3d336fcc",
-                    "BloomColor": {
-                      "color": [
-                        {
-                          "c": "1,1,1,1"
-                        },
-                        {
-                          "t": 1,
-                          "c": "1,1,1,1"
-                        }
-                      ],
-                      "alpha": []
-                    },
-                    "BloomCurve": [
-                      {
-                        "y": 0.5
-                      },
-                      {
-                        "x": 1,
-                        "y": 1
-                      }
-                    ],
-                    "Mode": "Additive",
-                    "Strength": 0.5,
-                    "Threshold": 0.5,
-                    "ThresholdWidth": 0.5
-                  },
-                  {
-                    "__type": "Sandbox.Tonemapping",
-                    "__guid": "8503bf14-7d9c-4ffe-9c28-59b7050261f7",
-                    "__version": 1,
-                    "ExposureBias": 2,
-                    "ExposureCompensation": 0,
-                    "ExposureMethod": "RGB",
-                    "MaximumExposure": 2,
-                    "MinimumExposure": 1,
-                    "Mode": "Legacy",
-                    "Rate": 1
-                  },
-                  {
-                    "__type": "Sandbox.Sharpen",
-                    "__guid": "3a72a5f2-1d27-4e0a-84c9-508de634d995",
-                    "Scale": 0.2
-                  },
-                  {
-                    "__type": "Sandbox.AudioListener",
-                    "__guid": "c8b45486-162b-480b-9f60-e6a4881c729e",
-                    "UseCameraDirection": true
+                    "ZNear": 1
                   }
                 ]
               },
@@ -745,7 +659,7 @@
                 "cameras": [
                   {
                     "_type": "gameobject",
-                    "go": "d6d47027-a884-4a1d-b8fd-b0feabe121bd"
+                    "go": "f56d823c-8db7-4b36-8dc1-60d568faa367"
                   },
                   {
                     "_type": "gameobject",
@@ -782,53 +696,7 @@
                     "TargetEye": "None",
                     "Viewport": "0,0,1,1",
                     "ZFar": 10000,
-                    "ZNear": 10
-                  },
-                  {
-                    "__type": "Sandbox.Tonemapping",
-                    "__guid": "9203d07a-e7bb-437f-9aed-b98682024944",
-                    "__version": 1,
-                    "ExposureBias": 2,
-                    "ExposureCompensation": 0,
-                    "ExposureMethod": "RGB",
-                    "MaximumExposure": 2,
-                    "MinimumExposure": 1,
-                    "Mode": "Legacy",
-                    "Rate": 1
-                  },
-                  {
-                    "__type": "Sandbox.Bloom",
-                    "__guid": "007fa505-4468-4dab-88a2-09935ae2ce05",
-                    "BloomColor": {
-                      "color": [
-                        {
-                          "c": "1,1,1,1"
-                        },
-                        {
-                          "t": 1,
-                          "c": "1,1,1,1"
-                        }
-                      ],
-                      "alpha": []
-                    },
-                    "BloomCurve": [
-                      {
-                        "y": 0.5
-                      },
-                      {
-                        "x": 1,
-                        "y": 1
-                      }
-                    ],
-                    "Mode": "Additive",
-                    "Strength": 0.5,
-                    "Threshold": 0.5,
-                    "ThresholdWidth": 0.5
-                  },
-                  {
-                    "__type": "Sandbox.Sharpen",
-                    "__guid": "4b51212f-13de-43d7-b48b-afe48e9acd57",
-                    "Scale": 0.2
+                    "ZNear": 1
                   },
                   {
                     "__type": "Sandbox.AudioListener",
@@ -840,7 +708,7 @@
                     "__guid": "735e3b9c-7cc8-4419-8396-9a9dc20ebc0f",
                     "thirdCam": {
                       "_type": "gameobject",
-                      "go": "d6d47027-a884-4a1d-b8fd-b0feabe121bd"
+                      "go": "f56d823c-8db7-4b36-8dc1-60d568faa367"
                     }
                   }
                 ]
@@ -871,52 +739,6 @@
                 "Viewport": "0,0,1,1",
                 "ZFar": 10000,
                 "ZNear": 1
-              },
-              {
-                "__type": "Sandbox.Bloom",
-                "__guid": "5bef2ff7-9269-4894-84e7-2b22f207d8f4",
-                "BloomColor": {
-                  "color": [
-                    {
-                      "c": "1,1,1,1"
-                    },
-                    {
-                      "t": 1,
-                      "c": "1,1,1,1"
-                    }
-                  ],
-                  "alpha": []
-                },
-                "BloomCurve": [
-                  {
-                    "y": 0.5
-                  },
-                  {
-                    "x": 1,
-                    "y": 1
-                  }
-                ],
-                "Mode": "Additive",
-                "Strength": 0.5,
-                "Threshold": 0.5,
-                "ThresholdWidth": 0.5
-              },
-              {
-                "__type": "Sandbox.Tonemapping",
-                "__guid": "c5f35704-fa62-45af-b436-e6e5d1a89b16",
-                "__version": 1,
-                "ExposureBias": 2,
-                "ExposureCompensation": 0,
-                "ExposureMethod": "RGB",
-                "MaximumExposure": 2,
-                "MinimumExposure": 1,
-                "Mode": "Legacy",
-                "Rate": 1
-              },
-              {
-                "__type": "Sandbox.Sharpen",
-                "__guid": "485ab860-27cd-43a8-8dbb-5cdd3c3a0714",
-                "Scale": 0.2
               },
               {
                 "__type": "Sandbox.AudioListener",

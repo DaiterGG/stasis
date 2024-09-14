@@ -12,8 +12,8 @@ public sealed class EngineComponent : Component
 	FileControl FC;
 	SpinControl SPINC;
 
-	public bool isRunning {get; private set;}
-	public int progress {get; private set;}
+	public bool isRunning { get; private set; }
+	public int progress { get; private set; }
 	public Rigidbody rigid;
 	[Property, Range( 0.9f, 1f, 0.001f )] public float horizontalDumping { get; private set; } = 0.978f;
 	[Property, Range( 0.9f, 1f, 0.001f )] public float verticalDumping { get; private set; } = 0.968f;
@@ -31,7 +31,7 @@ public sealed class EngineComponent : Component
 	{
 		get
 		{
-			return !(FREECAM.GameObject.Enabled || !SPINC.isAttached || !MENUC.IsGaming);
+			return !(FREECAM.GameObject.Enabled || !SPINC.IsAttached || !MENUC.IsGaming);
 		}
 		set { }
 	}
@@ -56,8 +56,7 @@ public sealed class EngineComponent : Component
 	}
 	public void OnFixedGlobal()
 	{
-
-		//Log.Info( FREECAM.Enabled + " " + !SPINC.isAttached + " " + !MENUC.IsGaming );
+		//Log.Info( FREECAM.Enabled + " " + !SPINC.IsAttached + " " + !MENUC.IsGaming );
 		//gravity
 		if ( !isRunning ) rigid.ApplyImpulse( new Vector3( 0, 0, gravity * -1 * .05f ) );
 		else rigid.ApplyImpulse( new Vector3( 0, 0, gravity * -1 ) );
@@ -89,10 +88,10 @@ public sealed class EngineComponent : Component
 			}
 			if ( Input.Down( "Up" ) )
 			{
-				if ( !isRunning ) EngStart();
+				if ( !isRunning ) EngStartProcess();
 				else gain += gravity / gainStep;
 			}
-			else if ( !isRunning ) EngStart( false );
+			else if ( !isRunning ) EngStartProcess( false );
 
 			if ( !Input.Down( "Up" ) && !Input.Down( "Down" ) )
 			{
@@ -161,26 +160,23 @@ public sealed class EngineComponent : Component
 		rigid.AngularVelocity = new Vector3( 0 );
 		GameObject.Transform.ClearInterpolation();
 		if ( engineRestart )
-			EngOff();
+			EngOn( false );
 		else if ( isRunning ) gain = gravity;
 	}
-	public void EngOff()
+	void EngOn( bool on )
 	{
-		progress = 0;
-		isRunning = false;
-		TIMER.UpdateEngine( false );
-		gain = 0f;
+		progress = on ? 100 : 0;
+		isRunning = on;
+		TIMER.Update();
+		gain = on ? gravity : 0f;
 	}
-	public void EngStart( bool increase = true )
+	void EngStartProcess( bool increaseProgress = true )
 	{
-		progress += increase ? 1 : -1;
+		progress += increaseProgress ? 1 : -1;
 		if ( progress < 0 ) progress = 0;
 		if ( progress >= 100 )
 		{
-			progress = 100;
-			isRunning = true;
-			TIMER.UpdateEngine( true );
-			gain = gravity;
+			EngOn( true );
 		}
 	}
 	public void ApplySaveState( SaveState state )
@@ -197,6 +193,11 @@ public sealed class EngineComponent : Component
 		progress = state.Progress;
 		gain = state.Gain;
 		isRunning = state.EngineRunning;
-
+		Transform.ClearInterpolation();
+	}
+	public void ApplyTick( Vector3 transform, Rotation rotation )
+	{
+		Transform.Position = transform;
+		Transform.Rotation = rotation;
 	}
 }

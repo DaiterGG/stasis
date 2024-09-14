@@ -1,6 +1,7 @@
 ﻿using System;
 using Stasis.Player;
 using Stasis.UI;
+using Stasis.Zones;
 namespace Stasis
 {
 	public class Timer
@@ -8,11 +9,12 @@ namespace Stasis
 		Sng SNG;
 		MenuController MENUC;
 		EngineComponent ENGINE;
+		SpinControl SPIN;
+		ZoneControl ZONEC;
 		public string TimerStr { get; private set; } = "Nan";
 		public float timerSeconds = 0;
 
 		public bool IsFinished { get; private set; } = false;
-		public bool IsEngineRunning { get; private set; } = false;
 		public bool IsRunning { get; private set; } = false;
 		public bool IsRequareReset { get; private set; }
 		internal void OnAwakeInit()
@@ -20,16 +22,18 @@ namespace Stasis
 			SNG = Sng.Inst;
 			MENUC = SNG.MenuC;
 			ENGINE = SNG.Player.Engine;
+			SPIN = SNG.Player.SpinC;
+			ZONEC = SNG.ZoneC;
 		}
 		public void OnFixedGlobal()
 		{
-			UpdateTimer();
+			//UpdateTimerStr();
 			MENUC.IngameUI.Timer = SNG.FormatTime( timerSeconds ) + TimerStr;
 		}
 		public void OnUpdateGlobal(){
 			if ( IsRunning ) timerSeconds += Time.Delta;
 		}
-		public void UpdateTimer()
+		void UpdateTimerStr()
 		{
 			//Engine starts at fixed update anyway
 			if ( ENGINE.isRunning && !IsFinished && !IsRequareReset) IsRunning = true;
@@ -45,9 +49,11 @@ namespace Stasis
 			{
 				TimerStr = $" - Press \'{Input.GetButtonOrigin( "Restart" ).ToUpper()}\' to restart timer";
 			}
-			else if ( ENGINE.isRunning && !ENGINE.inputActive )
+			else if ( !SPIN.IsAttached )
 			{
-				TimerStr = $" - Press \'{Input.GetButtonOrigin( "Restart" ).ToUpper()}\' to start over";
+				if (ZONEC.CheckPointActivated != null)
+					TimerStr = $" - Press \'{Input.GetButtonOrigin( "SoftRestart" ).ToUpper()}\' to respawn";
+				else TimerStr = $" - Press \'{Input.GetButtonOrigin( "Restart" ).ToUpper()}\' to start over";
 			}
 			else
 			{
@@ -61,7 +67,7 @@ namespace Stasis
 			timerSeconds = 0;
 			IsFinished = false;
 			IsRequareReset = false;
-			UpdateTimer();
+			UpdateTimerStr();
 		}
 
 		public void StopTimer()
@@ -69,17 +75,20 @@ namespace Stasis
 			if ( !IsRunning ) return;
 			IsRunning = false;
 			IsRequareReset = true;
-			UpdateTimer();
+			UpdateTimerStr();
 		}
 		public void TimerFinish()
 		{
 			IsFinished = true;
 			IsRunning = false;
-			UpdateTimer();
+			UpdateTimerStr();
 		}
-		public void UpdateEngine(bool eng){
-			IsEngineRunning = eng;	
-			UpdateTimer();
+		/// <summary>
+		/// Update when some actions may change Timer state
+		/// Optimization instead of fixed update
+		/// </summary>
+		public void Update(){
+			UpdateTimerStr();
 		}
 
 	}

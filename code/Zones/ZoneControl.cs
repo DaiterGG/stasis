@@ -1,12 +1,12 @@
 using System;
 using Stasis.Data;
+using Stasis.Player;
 using Stasis.UI;
 using static Sandbox.Curve;
 
 namespace Stasis.Zones;
 public sealed class ZoneControl : Component
 {
-	private Color CurrentColor;
 	[Property] public GameObject LinePrefab;
 
 	public GameTransform StartPoint;
@@ -16,15 +16,18 @@ public sealed class ZoneControl : Component
 		get => _spawnPoint == null ? StartPoint : _spawnPoint;
 		set => _spawnPoint = value;
 	}
-	public List<IZone> Zones;
-	public List<Beacon> Beacons;
-	public Dictionary<int, List<Beacon>> GroupedBeacons;
-	public int BeaconsActivated;
+	public List<IZone> Zones { get; set; }
+	public Dictionary<int, List<Beacon>> GroupedBeacons { get; private set; }
+	public int BeaconsActivatedCount { get; private set; }
+	Dictionary<int, CheckPoint> CheckPoints;
+	public int? CheckPointActivated {get; private set;}
 	Sng SNG;
 	FileControl FC;
 	Timer TIMER;
 	MenuController MENUC;
 	SaveStateControl STATE;
+	SpinControl SPIN;
+	EngineComponent ENGINE;
 	public void OnAwakeInit()
 	{
 		SNG = Sng.Inst;
@@ -32,6 +35,8 @@ public sealed class ZoneControl : Component
 		TIMER = SNG.Timer;
 		MENUC = SNG.MenuC;
 		STATE = SNG.StateC;
+		SPIN = SNG.Player.SpinC;
+		ENGINE = SNG.Player.Engine;
 		ZonesClearAll();
 	}
 
@@ -43,16 +48,18 @@ public sealed class ZoneControl : Component
 		StartPoint = null;
 		SpawnPoint = null;
 		Zones = new List<IZone>();
-		Beacons = new List<Beacon>();
 		GroupedBeacons = new Dictionary<int, List<Beacon>>();
-		BeaconsActivated = 0;
+		CheckPoints = new Dictionary<int, CheckPoint>();
+		CheckPointActivated = null;
+		BeaconsActivatedCount = 0;
+		ResetDelegate = null;
 	}
 	delegate void ResetAllZones( bool activate );
 	ResetAllZones ResetDelegate;
 	/// <summary>
 	/// Called if any zones found
 	/// </summary>
-	public void MapInit()
+	public void ZoneInit()
 	{
 		try
 		{
@@ -61,63 +68,56 @@ public sealed class ZoneControl : Component
 				if ( zone is Component comp )
 				{
 					TryDecorateBox( comp.GameObject );
-					if ( zone is Beacon )
+					if ( zone is Beacon beacon )
 					{
-						Beacons.Add( (Beacon)zone );
+						ResetDelegate += beacon.ActivateToggle;
+						InsertAtId( GroupedBeacons, beacon );
+					}
+					if ( zone is CheckPoint check )
+					{
+						check.ID = CheckPoints.Count;
+						InsertAtId( CheckPoints, check );
 					}
 				}
 			}
-			BeaconsInit();
 			ZonesReset();
 		}
 		catch ( Exception e )
 		{
-			Log.Warning( "Failed to decorate zones: " + e.Message );
+			Log.Warning( "Failed to zone init " + e.Message );
 		}
 	}
+
 	/// <summary>
 	/// Called on Restart and After Map Init to set colors
 	/// </summary>
-	public void ZonesReset()
-	{
-		BeaconsActivated = 0;
+	public void ZonesReset(int? checkpointActivated = null){
+		BeaconsActivatedCount = 0;
+		CheckPointActivated = checkpointActivated;
 		if ( ResetDelegate == null ) return;
 		ResetDelegate( false );
-	}
-	void BeaconsInit()
-	{
-		ResetDelegate = null;
-		foreach ( var b in Beacons )
-		{
-			ResetDelegate += b.Activate;
-			if ( GroupedBeacons.ContainsKey( b.ID ) )
-			{
-				GroupedBeacons[b.ID].Add( b );
-			}
-			else
-			{
-				GroupedBeacons.Add( b.ID, new List<Beacon> { b } );
-			}
-		}
 	}
 	public void BeaconAcitvate( int id )
 	{
 		if ( !GroupedBeacons.ContainsKey( id ) ) return;
 		var group = GroupedBeacons[id];
 		if ( group.Count == 0 ) return;
-		if ( !group.First().IsActivated ) BeaconsActivated++;
-		foreach ( var b in group )
+		if ( !group.First().IsActivated ) BeaconsActivatedCount++;
+		foreach ( var beacon in group )
 		{
-			if ( !b.IsActivated ) b.Activate();
+			if ( !beacon.IsActivated ) beacon.ActivateToggle();
 		}
 	}
-	public int[] GetActiveBeacons(){
-		var list = new int[BeaconsActivated];
+	public int[] GetActiveBeacons()
+	{
+		var list = new int[BeaconsActivatedCount];
 		int i = 0;
-		foreach ( var b in GroupedBeacons ){
-			if (b.Value.Count == 0) continue;
-			if (b.Value.First().IsActivated){
-				list[i] = b.Key;
+		foreach ( var group in GroupedBeacons )
+		{
+			if ( group.Value.Count == 0 ) continue;
+			if ( group.Value.First().IsActivated )
+			{
+				list[i] = group.Key;
 				i++;
 			}
 		}
@@ -125,21 +125,60 @@ public sealed class ZoneControl : Component
 	}
 	bool BeaconsComplete()
 	{
-		if ( BeaconsActivated == GroupedBeacons.Count ) return true;
+		if ( BeaconsActivatedCount == GroupedBeacons.Count ) return true;
 		return false;
+	}
+	public void CheckPointActivate( int id )
+	{
+		if ( !CheckPoints.ContainsKey( id ) ) return;
+		CheckPointActivated = id;
 	}
 	public void EndZoneEnter( GameObject go, Collider cof )
 	{
-		if ( !BeaconsComplete() ) return;
+		if ( !BeaconsComplete() )
+		{
+			ZoneBlockedMessage();
+			return;
+		}
 		if ( TIMER.IsRunning )
 		{
 
 			TIMER.TimerFinish();
 			FC.SetScore();
-			MENUC.ShowEndScreen(TIMER.timerSeconds);
-		} else if (STATE.Enabled && STATE.IsRunning){
-			MENUC.ShowEndScreen(STATE.CurrentTime);
+			MENUC.ShowEndScreen( TIMER.timerSeconds );
 		}
+		else if ( STATE.Enabled && STATE.IsRunning )
+		{
+			MENUC.ShowEndScreen( STATE.CurrentTime );
+		}
+	}
+	public bool TrySoftRestart()
+	{
+		if ( CheckPointActivated is not int i ) return false;
+		TeleportPlayer( CheckPoints[i].Spawn.Transform, true, true, true );
+		return true;
+	}
+	public void ApplySaveState( SaveState state )
+	{
+		ZonesReset( state.CheckPointActivated);
+		foreach ( var beacon in state.ActiveBeacons )
+		{
+			BeaconAcitvate( beacon );
+		}
+	}
+	public void TeleportPlayer( GameTransform trans, bool resetVel, bool resetRotation, bool repairPropeller)
+	{
+		var state = SaveStateControl.GetSaveState(TIMER.timerSeconds);
+		state.Transform = trans.Position;
+		state.Rotation = trans.Rotation;
+		if (resetVel) state.Velocity = Vector3.Zero;
+		if (resetRotation) state.AngularVelocity = Vector3.Zero;
+		if (repairPropeller) state.SpinAttached = true;
+		SaveStateControl.ApplySaveState( state );
+	}
+	public void ZoneBlockedMessage()
+	{
+		MENUC.IngameUI.BeaconPopup();
 	}
 	void TryDecorateBox( GameObject box )
 	{
@@ -147,9 +186,8 @@ public sealed class ZoneControl : Component
 		if ( col == null ) return;
 		var decor = box.Components.Get<AutoDecor>();
 		if ( decor == null ) return;
-		if ( !decor.AutoDecorate ) return;
-		CurrentColor = decor.ColorOfTheLines;
-		CreateBoxEdges( col, decor.LineWidth );
+
+		CreateBoxEdges( col, decor );
 	}
 	/*public void LegacyZoneCreate()
             EndZones.Add( EndZonePrefab.Clone( GameObject, zone.Transform.Position, zone.Transform.Rotation, zone.Transform.Scale ) );
@@ -162,7 +200,7 @@ public sealed class ZoneControl : Component
 			CurrentColor = endZoneColor;
 			CreateBoxEdges( EndZones.Last(), box );
     */
-	void CreateBoxEdges( BoxCollider box, float width )
+	void CreateBoxEdges( BoxCollider box, AutoDecor decor )
 	{
 		Vector3[] c = new Vector3[8];
 
@@ -180,7 +218,7 @@ public sealed class ZoneControl : Component
 
 		for ( int i = 0; i < 8; i++ )
 		{
-			c[i] = box.Transform.Position + box.Center + offsets[i] * (box.Scale * 0.5f) * (box.Transform.Scale);
+			c[i] = box.Transform.Position + box.Center + offsets[i] * (box.Scale * 0.5f) * box.Transform.Scale;
 		}
 
 		int[,] edges = new int[,]
@@ -192,20 +230,42 @@ public sealed class ZoneControl : Component
 
 		for ( int i = 0; i < edges.GetLength( 0 ); i++ )
 		{
-			CreateLine( c[edges[i, 0]], c[edges[i, 1]], width );
+			CreateLine( c[edges[i, 0]], c[edges[i, 1]], decor );
 		}
 	}
-	void CreateLine( Vector3 p1, Vector3 p2, float width )
+	void CreateLine( Vector3 p1, Vector3 p2, AutoDecor decor )
 	{
 		var l = LinePrefab.Clone();
 
 		l.Parent = Scene;
 		l.Enabled = true;
-		var rend = l.Components.Get<LineRenderer>();
-		rend.Color = new Gradient( new Gradient.ColorFrame( 0, CurrentColor ) );
-		rend.VectorPoints[0] = p1;
-		rend.VectorPoints[1] = p2;
-
-		rend.Width = rend.Width.WithFrames( new List<Frame>() { new Frame( 0, width ) } );
+		var line = l.Components.Get<LineRenderer>();
+		line.Color = new Gradient( new Gradient.ColorFrame( 0, decor.ColorOfTheLines ) );
+		line.VectorPoints[0] = p1;
+		line.VectorPoints[1] = p2;
+		var width = decor.LineWidth;
+		if ( decor.WireFrame )
+		{
+			width = 0;
+			line.Wireframe = true;
+		}
+		else line.Wireframe = false;
+		line.Width = line.Width.WithFrames( new List<Frame>() { new Frame( 0, width ) } );
+	}
+	void InsertAtId<Item, Zone>( Dictionary<int, Item> diction, Zone zone )
+	{
+		if ( zone is not IZone z ) return;
+		if ( diction is Dictionary<int, Zone> dictionOfZones )
+		{
+			if ( dictionOfZones.ContainsKey( z.ID ) )
+				dictionOfZones[z.ID] = zone;
+			else dictionOfZones.Add( z.ID, zone );
+		}
+		else if ( diction is Dictionary<int, List<Zone>> dictionoflists )
+		{
+			if ( dictionoflists.ContainsKey( z.ID ) )
+				dictionoflists[z.ID].Add( zone );
+			else dictionoflists.Add( z.ID, new List<Zone> { zone } );
+		}
 	}
 }

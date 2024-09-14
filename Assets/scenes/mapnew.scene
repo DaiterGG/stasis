@@ -95,14 +95,14 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": true
+          "Static": false
         },
         {
           "__type": "Stasis.Zones.AutoDecor",
           "__guid": "516908bc-e9e4-4a96-8b71-8c55f0994005",
-          "AutoDecorate": true,
           "ColorOfTheLines": "1,0,0,1",
-          "LineWidth": 4.5
+          "LineWidth": 3,
+          "WireFrame": false
         },
         {
           "__type": "Stasis.Zones.EndZone",
@@ -114,7 +114,7 @@
       "__guid": "044cd2f6-2a6c-4e0f-836c-b18415615188",
       "Flags": 0,
       "Name": "Beacon",
-      "Position": "-474.7329,693.126,454.4197",
+      "Position": "258.6052,-90.91534,137.9023",
       "Enabled": true,
       "Components": [
         {
@@ -145,6 +145,93 @@
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "RenderType": "On",
           "Tint": "1,0.98333,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "9468d61d-eff0-4dda-94b2-01fdd0099337",
+      "Flags": 0,
+      "Name": "Teleport",
+      "Position": "455.8033,-40.12534,233.5044",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "e2d9de19-81b0-4fcd-8081-9bc57a1ff020",
+          "WhatIsThat": "You can put any collider on it"
+        },
+        {
+          "__type": "Stasis.Zones.Teleport",
+          "__guid": "a7f9c234-5a5e-4a87-ab1c-dd77538003c2",
+          "RepairPropeller": true,
+          "ResetRotation": true,
+          "ResetVelocity": true
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "e3ffed48-b447-4cf6-9e5d-ed4f2278a30c",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "200,200,200",
+          "Static": false
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "b4a8161d-9206-4dd2-8c84-fc8c58384432",
+          "ColorOfTheLines": "0.62326,0.62326,0.62326,1",
+          "LineWidth": 2,
+          "WireFrame": false
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "51850bad-8f15-4e52-9fe1-b01e69d60aa5",
+          "Flags": 0,
+          "Name": "Exit",
+          "Position": "91.06342,0,0",
+          "Enabled": true
+        }
+      ]
+    },
+    {
+      "__guid": "65110e4a-a2ae-402b-8620-90895d1dd244",
+      "Flags": 0,
+      "Name": "Check Point",
+      "Position": "587.5367,0,170.6926",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "64f8a44d-05a7-4ffa-9409-115460437d60",
+          "WhatIsThat": "After player touch it, it will spawn player on \u0027spawn\u0027 child, when reset pressed\nYou can finish map without activating it "
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "8773a832-6455-4542-904b-6fa9e13fc12d",
+          "ColorOfTheLines": "0.05209,0.52093,0,1",
+          "LineWidth": 3,
+          "WireFrame": false
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "bcb254e4-5830-4afb-9657-9cbf11cb5bc0",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": true
+        },
+        {
+          "__type": "Stasis.Zones.CheckPoint",
+          "__guid": "fc1ae2d7-ea94-418b-9342-70f8108b890e"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "1e93dfca-3be3-43ca-a07c-e43b456a3c68",
+          "Flags": 0,
+          "Name": "Spawn",
+          "Position": "0,0,13.926",
+          "Enabled": true
         }
       ]
     }

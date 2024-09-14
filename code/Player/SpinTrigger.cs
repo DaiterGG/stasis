@@ -8,23 +8,22 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
 	SpinControl SPIN;
 	Rigidbody rig;
 
-	protected override void OnStart()
-	{
-		base.OnStart();
+	public void OnAwakeInit(){
 		rig = GameObject.Components.Get<Rigidbody>();
 		SPIN = Sng.Inst.Player.SpinC;
 		ResetPos();
+
 	}
 
 	public void OnCollisionStart( Collision col )
 	{
-		if ( !SPIN.isAttached ) return;
+		if ( !SPIN.IsAttached ) return;
 		if ( col.Other.GameObject.Tags.Contains( "particle" ) ) return; // not secessary since blades have 'player' tag
 		SPIN.SpinCollision();
 	}
 	public void OnFixedGlobal()
 	{
-		if ( !SPIN.isAttached )
+		if ( !SPIN.IsAttached )
 		{
 			rig.ApplyForce( new Vector3( 0, 0, SPIN.BladeGravity * -1 ) );
 			return;
@@ -35,7 +34,7 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
 			ResetPos();
 		}
 	}
-	private void ResetPos()
+	public void ResetPos()
 	{
 		GameObject.Parent = SPIN.PropRig.GameObject;
 		rig.Velocity = 0;

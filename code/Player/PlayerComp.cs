@@ -7,5 +7,6 @@ public sealed class PlayerComp : Component
 	[Property] public readonly EngineComponent Engine;
 	[Property] public readonly CameraControl CameraC;
 	[Property] public readonly SoundControl SoundC;
+	[Property] public readonly JumpComponent JumpC;
 }
 

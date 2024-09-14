@@ -14,7 +14,7 @@ public sealed class FreeCam : Component
 	}
 	protected override void OnEnabled()
 	{
-		base.OnEnabled();
+		Log.Info(TIMER);
 		TIMER.StopTimer();
 		Transform.Position = thirdCam.Transform.Position + new Vector3( 0, 0, 10 );
 		Transform.Rotation = thirdCam.Transform.Rotation;
@@ -55,7 +55,6 @@ public sealed class FreeCam : Component
 		{
 			mult = 1f;
 		}
-
 		var ee = Transform.Rotation.Angles();
 		ee += Input.AnalogLook * Time.Delta * 3f;
 		if ( Math.Abs( ee.pitch ) > 90 ) ee.pitch = 90 * Math.Sign( ee.pitch );

@@ -2,22 +2,22 @@ using System.Numerics;
 
 namespace Stasis.Data;
 
-public struct PointInTime
+public struct Tick
 {
 	public readonly Vector3 Transform;
 	public readonly short Yaw;
 	public readonly short Pitch;
 	public readonly short Roll;
-	public PointInTime(Vector3 tr, short y, short p, short r){
+	public Tick(Vector3 tr, short y, short p, short r){
 		Transform = tr;
 		Yaw = y;
 		Pitch = p;
 		Roll = r;
 	}
 }
- public static class PointInTimeControl
+ /*public static class TickControl
  {
-	static void ApplySaveState( PointInTime point, Transform player ){
+	static void ApplySaveState( Tick point, Transform player ){
 		player.Position = point.Transform;
 		player.Rotation = Rotation.From(
 			point.Yaw / 100f,
@@ -25,12 +25,12 @@ public struct PointInTime
 			point.Roll / 100f
 		);
 	}
-	static PointInTime GetSaveState( Transform player ){
-		return new PointInTime(
+	static Tick GetSaveState( Transform player ){
+		return new Tick(
 			player.Position,
 			(short)(player.Rotation.Yaw() * 100),
 			(short)(player.Rotation.Pitch() * 100),
 			(short)(player.Rotation.Roll() * 100)
 		);
 	}
- }
+ }*/

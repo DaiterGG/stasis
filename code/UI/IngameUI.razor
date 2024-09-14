@@ -3,28 +3,44 @@
 @using Stasis.Player
 @using Sandbox.UI
 @using Stasis.Data
+@using Stasis.Zones
 @using System
 @inherits PanelComponent
 <root>
 	@if (MENUC.GameUIVisible)
 	{
 		<div class="gain">@Gain%</div>
-		if (MENUC.HelpVisible) {
-		//<div class="info @(Time.Now - infotime < 20f ? "active" : "")">
-		<div class="info active">
-			@foreach (var line in Info.Split('\n'))
-			{
-				<div>@line</div>
+		<div class="progress">
+			@if (ZONEC.GroupedBeacons.Count != 0)
+			{	
+				<div class="beacons @(beaconpopup ? "huge" : "")">Beacons - @(ZONEC.BeaconsActivatedCount)/@(ZONEC.GroupedBeacons.Count)</div>
+				beaconpopup = false;
 			}
 		</div>
+		<div class="tooltips">
 
-		}
-		else
-		{
-			<div class="info active showinfo">Press @(Input.GetButtonOrigin( "ShowInfo" ).ToUpper()) to see all keybinds</div>
-		}
+			@if (FREEC.Enabled)
+			{
+
+				<div class="info">Press @(Input.GetButtonOrigin("SelfDestruct").ToUpper()) to spawn helicopter here</div>
+			}
+			@if (MENUC.HelpVisible)
+			{
+				//<div class="info @(Time.Now - infotime < 20f ? "active" : "")">
+				<div class="info">
+					@foreach (var line in Info.Split('\n'))
+					{
+						<div>@line</div>
+					}
+				</div>
+			}
+			else
+			{
+				<div class="info">Press @(Input.GetButtonOrigin("ShowInfo").ToUpper()) to see all keybinds</div>
+			}
+		</div>
 		<div class="timer">@Timer</div>
-		@if(STATE.Enabled)
+		@if (STATE.Enabled)
 		{
 			<div class="faketimer @(STATE.IsRunning ? "" : "hidden")">@SNG.FormatTime(STATE.CurrentTime) - Possible Time</div>
 			<div class="window">
@@ -60,7 +76,7 @@
 								f = 7;
 							}
 							<div class="bar" style="
-								@( $"margin-top: {-of}px;width: {5 + 10 * f};")"></div>
+											@( $"margin-top: {-of}px;width: {5 + 10 * f};")"></div>
 							of = 0;
 						}
 					}
@@ -85,20 +101,31 @@
 
 @code
 {
-
 	public string SpeedMain { get; set; } = "0";
 	public string SpeedHor { get; set; } = "0";
 	public string SpeedVert { get; set; } = "0";
 	public string Gain { get; set; } = "";
 	public string Timer { get; set; } = "";
-	private string Info = "";
+	string Info = "";
+	bool beaconpopup = false;	
+	const int COOLDOWN_TICKS = 100;
+	int popupcooldown = COOLDOWN_TICKS;	
 	//public float infotime { get; set; }
 	EngineComponent ENGINE;
 	FileControl FC;
+	GameObject FREEC;
 	MenuController MENUC;
 	Sng SNG;
 	SaveStateControl STATE;
+	ZoneControl ZONEC;
+	//todo abstarction if needed
+	public void BeaconPopup(){
 
+		if (popupcooldown > COOLDOWN_TICKS){
+			beaconpopup = true;
+			popupcooldown = 0;
+		}
+	}
 	public void ShowInfo(string info)
 	{
 		//infotime = Time.Now;
@@ -112,9 +139,14 @@
 		FC = SNG.FileC;
 		MENUC = SNG.MenuC;
 		STATE = SNG.StateC;
+		FREEC = SNG.Player.CameraC.FreeCam.GameObject;
+		ZONEC = SNG.ZoneC;
 	}
-	/// <summary>
+	protected override void OnFixedUpdate(){
+		popupcooldown++;
+	}
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
-	protected override int BuildHash() => System.HashCode.Combine(STATE.SaveStates.Count,STATE.SelectedId,STATE.Enabled, SpeedMain, Timer, Gain, MENUC.GameUIVisible, MENUC.HelpVisible);
+	protected override int BuildHash() => System.HashCode.Combine(FREEC.Enabled, STATE.SaveStates.Count, STATE.Enabled,
+	SpeedMain, Timer, Gain, MENUC.GameUIVisible, MENUC.HelpVisible);
 }

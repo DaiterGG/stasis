@@ -11,12 +11,12 @@
 	@{
 		if (scores != null && scores.Count != 0)
 		{
-			for (int i = 0; i < scores.Count; i++)
+			for (int i = scores.Count - 1; i >= 0; i--)
 			{
 				var time = Sng.Inst.FormatTime(scores[i].Time);
 				if (time == "4.499") time = "5.839";
 				<div class="list-item @(( i) % 2 == 0 ? "dark":"")">
-					<div class="count">@(i + 1).</div>
+					<div class="count">@(scores.Count - i).</div>
 					<div class="name">@(scores[i].DisplayName)</div>
 					<div class="time">@(time)</div>
 				</div>
@@ -38,6 +38,9 @@
 	async void SetScores()
 	{
 		scores = await LBControl.GetScores(parent.map.Indent, 20, parent.centerOnMe, parent.yourCountry);
+		if (scores.First().Time < scores.Last().Time){
+			scores.Sort((x, y) => x.Time.CompareTo(y.Time));
+		}
 		/*
 		long id = 12923012312;
 		var s = new Score(99999.99f, DateTime.Now, "Daiter", id);

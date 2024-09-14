@@ -1,38 +1,28 @@
 using System.Numerics;
 using System;
 using Stasis.UI;
+using Stasis.Player;
 namespace Stasis.Data;
 
 public struct SaveState
 {
-	public readonly Vector3 Transform;
-	public readonly Rotation Rotation;
-	public readonly Vector3 Velocity;
-	public readonly Vector3 AngularVelocity;
-	public readonly float Time;
-	public readonly bool SpinAttached;
-	public readonly bool EngineRunning;
-	public readonly float Gain;
-	public readonly int Progress;
-	public readonly int[] ActiveBeacons;
+	public Vector3 Transform;
+	public Rotation Rotation;
+	public Vector3 Velocity;
+	public Vector3 AngularVelocity;
+	public float Time;
+	public bool SpinAttached;
+	public bool EngineRunning;
+	public float Gain;
+	public int Progress;
+	public int[] ActiveBeacons;
+	public int? CheckPointActivated;
 	
-	public SaveState(Vector3 tr, Rotation rt, Vector3 v, Vector3 av, float t, bool sb, bool er, float g, int p, int[] ab){
-		Transform = tr;
-		Rotation = rt;
-		Velocity = v;
-		AngularVelocity = av;
-		Time = t;
-		SpinAttached = sb;
-		EngineRunning = er;
-		Gain = g;
-		Progress = p;
-		ActiveBeacons = ab;
-	}
 }
  public class SaveStateControl
  {
 	Timer TIMER;
-	GameObject BODY;
+	EngineComponent ENGINE;
 	MenuController MENUC;
 	public bool Enabled {get; set;}
 	public int SelectedId {get; private set;}
@@ -44,7 +34,7 @@ public struct SaveState
 	/// </summary>
 	public void OnAwakeInit(){
 		TIMER = Sng.Inst.Timer;
-		BODY = Sng.Inst.Player.Body;
+		ENGINE = Sng.Inst.Player.Engine;
 		MENUC = Sng.Inst.MenuC;
 		InitSaveStates();
 	}
@@ -100,7 +90,6 @@ public struct SaveState
 	}
 
 	public void Add(){
-		var r = BODY.Components.Get<Rigidbody>();
 		float time;
 		if ( IsRunning ) time = CurrentTime;
 		else time = TIMER.timerSeconds;
@@ -141,7 +130,7 @@ public struct SaveState
 		SelectedId = toStart ? SaveStates.Count - 1 : 0;
 	}
 
-	static void ApplySaveState( SaveState state ){
+	public static void ApplySaveState( SaveState state ){
 		var eng = Sng.Inst.Player.Engine;
 		eng.ApplySaveState(state);
 		var spin = Sng.Inst.Player.SpinC;
@@ -149,22 +138,23 @@ public struct SaveState
 		var zone = Sng.Inst.ZoneC;
 		zone.ApplySaveState(state);
 	}
-	static SaveState GetSaveState( float time ){
+	public static SaveState GetSaveState( float time ){
 		var eng = Sng.Inst.Player.Engine;
 		var spin = Sng.Inst.Player.SpinC;
 		var zone = Sng.Inst.ZoneC;
-		return new SaveState(
-			eng.Transform.Position,
-			eng.Transform.Rotation,
-			eng.rigid.Velocity,
-			eng.rigid.AngularVelocity,
-			time,
-			spin.isAttached,
-			eng.isRunning,
-			eng.gain,
-  			eng.progress,
-			zone.GetActiveBeacons()
-		);
+		return new SaveState(){
+			Transform = eng.Transform.Position,
+			Rotation = eng.Transform.Rotation,
+			Velocity = eng.rigid.Velocity,
+			AngularVelocity = eng.rigid.AngularVelocity,
+			Time = time,
+			SpinAttached = spin.IsAttached,
+			EngineRunning = eng.isRunning,
+			Gain = eng.gain,
+			Progress = eng.progress,
+			ActiveBeacons = zone.GetActiveBeacons(),
+			CheckPointActivated = zone.CheckPointActivated
+		};
 	}
 
  }
