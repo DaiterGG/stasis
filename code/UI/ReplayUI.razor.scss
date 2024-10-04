@@ -1,0 +1,80 @@
+ReplayUI {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #fff;
+    font-weight: 700;
+    font-family: Uni Sans Heavy CAPS;
+    pointer-events: all;
+
+    .panel {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.4);
+        width: 100%;
+        height: 8%;
+        bottom: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+        >.control-wrap {
+            width: 100%;
+            flex-direction: column;
+
+            margin-bottom: 6px;
+            >.control {
+                width: 100%;
+
+                .thumb {
+                    display: none;
+                }
+
+                .track {
+                    height: 15px;
+                }
+            }
+        }
+
+        >.up {
+
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-between;
+
+            >.controls {
+                width: 100%;
+                flex-direction: row;
+
+
+                > .speed {
+
+                width: 20%;
+                } 
+                >img {
+                    margin-left: 10px;
+                    font-size: 40px;
+                    width: 50px;
+                    height: 50px;
+                    justify-content: center;
+                    align-items: flex-end;
+                }
+
+                >.play {}
+
+                >.resume {}
+
+            }
+
+            >.label {
+                font-size: 20px;
+                margin-right: 10px;
+            }
+        }
+    }
+}

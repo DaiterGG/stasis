@@ -1,5 +1,5 @@
 {
-  "__guid": "9f832399-4887-46b0-8f21-2ee284f538e2",
+  "__guid": "57481932-e58a-4548-894a-7198389fd6bf",
   "GameObjects": [
     {
       "__guid": "cbcdc3c0-ef60-4a63-a8aa-8c19debe3004",
@@ -135,7 +135,8 @@
         },
         {
           "__type": "Sandbox.LogTransform",
-          "__guid": "bcd0d601-ea65-49ac-8cf2-0d72ef560b9f"
+          "__guid": "bcd0d601-ea65-49ac-8cf2-0d72ef560b9f",
+          "__enabled": false
         }
       ]
     }

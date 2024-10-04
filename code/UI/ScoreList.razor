@@ -8,56 +8,67 @@
 @inherits Panel
 
 <root>
-	@{
-		if (scores != null && scores.Count != 0)
-		{
-			for (int i = scores.Count - 1; i >= 0; i--)
-			{
-				var time = Sng.Inst.FormatTime(scores[i].Time);
-				if (time == "4.499") time = "5.839";
-				<div class="list-item @(( i) % 2 == 0 ? "dark":"")">
-					<div class="count">@(scores.Count - i).</div>
-					<div class="name">@(scores[i].DisplayName)</div>
-					<div class="time">@(time)</div>
-				</div>
-			}
-		}
-	}
+    @{
+        if (scores != null && scores.Count != 0)
+        {
+            for (int i = scores.Count - 1; i >= 0; i--)
+            {
+                var sc = scores[i];
+                var time = Sng.Inst.FormatTime(sc.Time);
+                if (time == "4.499") time = "5.839";
+                <div class="list-item @(( i) % 2 == 0 ? "dark":"")">
+                    <div class="count">@(scores.Count - i).</div>
+                    <div class="name">@(sc.DisplayName)</div>
+                    <img class="watch @(sc.Replay == null ? "hide":"")" onclick="@(x => { if(sc.Replay is Replay r)Watch(r);})" src="img/play.png"/>
+                    <div class="time">@(time)</div>
+                </div>
+            }
+        }
+    }
 </root>
 
 @code
 {
-	LB parent { get; set; }
-	MenuController MENUC { get; set; }
-	List<Score> scores { get; set; }
-	protected override int BuildHash() => System.HashCode.Combine(scores);
-	public void Update()
-	{
-		SetScores();
-	}
-	async void SetScores()
-	{
-		scores = await LBControl.GetScores(parent.map.Indent, 20, parent.centerOnMe, parent.yourCountry);
-		if (scores.First().Time < scores.Last().Time){
-			scores.Sort((x, y) => x.Time.CompareTo(y.Time));
-		}
-		/*
-		long id = 12923012312;
-		var s = new Score(99999.99f, DateTime.Now, "Daiter", id);
-		scores.Add(s);
-		scores.Add(s);
-		scores.Add(s);
-		scores.Add(s);
-		scores.Add(s);
-		scores.Add(s);
-		scores.Add(s);
-		*/
-	}
-	public ScoreList()
-	{
-		MENUC = Sng.Inst.MenuC;
-		parent = MENUC.ChooseUI.leaderboard;
-		parent.list = this;
-		Update();
-	}
+    LB parent { get; set; }
+    MenuController MENUC { get; set; }
+    List<Score> scores { get; set; }
+    ViewReplay VIEWR;
+    
+    public void Update()
+    {
+        SetScores();
+    }
+
+    public void Watch(Replay rep){
+        VIEWR.Watch(rep);
+    }
+
+    async void SetScores()
+    {
+        scores = await LBControl.GetScores(parent.map.Indent, 20, parent.centerOnMe, parent.yourCountry);
+        if (scores.Count == 0) return;
+        if (scores.First().Time < scores.Last().Time){
+            scores.Sort((x, y) => x.Time.CompareTo(y.Time));
+        }
+        /*
+        long id = 12923012312;
+        var s = new Score(99999.99f, DateTime.Now, "Daiter", id);
+        scores.Add(s);
+        scores.Add(s);
+        scores.Add(s);
+        scores.Add(s);
+        scores.Add(s);
+        scores.Add(s);
+        scores.Add(s);
+        */
+    }
+    public ScoreList()
+    {
+        VIEWR = Sng.Inst.ViewC;
+        MENUC = Sng.Inst.MenuC;
+        parent = MENUC.ChooseUI.leaderboard;
+        parent.list = this;
+        Update();
+    }
+    protected override int BuildHash() => System.HashCode.Combine(scores);
 }

@@ -8,63 +8,63 @@
 
 <root>
 
-	@for (int i = 0; i < maps.Count; i++)
-	{
-		if (maps[i].Name != null)
-		{
-			var _i = i;
-			<div class="list-item @(i == 0?"first":"")"
-				onclick="@(x => {parent.ShowInfo(_i);})">
-				<div class="bg" style="@("background-image: url(" + maps[i].Img + ")")"></div>
-				<div class="gradi"></div>
-				<div class="name">@(maps[i].Name.ToUpper())</div>
-			</div>
-		}
-	}
-	@if (type == "featured" || type == "official" || type == "community")
-	{
-		<div class="join" onclick="@parent.Copy">
-			@if (parent.copied)
-			{
-				<p>
-					Link copied to clipboard
-				</p>
-			}
-			else
-			{
-				<p>
-					Join the Discord server
-				</p>
-				<p>
-					to create maps (clickable)
-				</p>
-			}
-		</div>
-	}
-	@if (type == "community")
-	{
-		<div class="add" onclick="@MENUC.MapSelect">Find</div>
-	}
+    @for (int i = 0; i < maps.Count; i++)
+    {
+        if (maps[i].Name != null)
+        {
+            var _i = i;
+            <div class="list-item @(i == 0?"first":"")"
+                onclick="@(x => {parent.ShowInfo(_i);})">
+                <div class="bg" style="@("background-image: url(" + maps[i].Img + ")")"></div>
+                <div class="gradi"></div>
+                <div class="name">@(maps[i].Name.ToUpper())</div>
+            </div>
+        }
+    }
+    @if (type == "featured" || type == "official" || type == "community")
+    {
+        <div class="join" onclick="@parent.Copy">
+            @if (parent.copied)
+            {
+                <p>
+                    Link copied to clipboard
+                </p>
+            }
+            else
+            {
+                <p>
+                    Join the Discord server
+                </p>
+                <p>
+                    to create maps (clickable)
+                </p>
+            }
+        </div>
+    }
+    @if (type == "community")
+    {
+        <div class="add" onclick="@MENUC.MapSelect">Find</div>
+    }
 
 </root>
 
 @code
 {
-	ChooseMenu parent { get; set; }
-	public MenuController MENUC { get; set; }
-	public string type { get; set; }
-	public List<MapData> maps { get; set; }
-	protected override int BuildHash() => System.HashCode.Combine(type);
-	public void Update()
-	{
-		type = parent.selectedType;
-		maps = parent.GetList(type);
-	}
-	public MapsList()
-	{
-		MENUC = Sng.Inst.MenuC;
-		parent = MENUC.ChooseUI;
-		parent.list = this;
-		Update();
-	}
+    ChooseMenu parent { get; set; }
+    public MenuController MENUC { get; set; }
+    public string type { get; set; }
+    public List<MapData> maps { get; set; }
+    protected override int BuildHash() => System.HashCode.Combine(type);
+    public void Update()
+    {
+        type = parent.selectedType;
+        maps = parent.GetList(type);
+    }
+    public MapsList()
+    {
+        MENUC = Sng.Inst.MenuC;
+        parent = MENUC.ChooseUI;
+        parent.list = this;
+        Update();
+    }
 }

@@ -37,7 +37,6 @@ public sealed class SoundControl : Component
 			else
 			{
 				SPC.Volume = prog;
-
 			}
 		}
 		if ( !SPINC.IsAttached ) SPC.Volume = 0;

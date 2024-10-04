@@ -6,7 +6,7 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
 {
 	[Property, Range( 0, 360f )] public float rotationOffset;
 	SpinControl SPIN;
-	Rigidbody rig;
+	public Rigidbody rig;
 
 	public void OnAwakeInit(){
 		rig = GameObject.Components.Get<Rigidbody>();
@@ -23,13 +23,15 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
 	}
 	public void OnFixedGlobal()
 	{
+
 		if ( !SPIN.IsAttached )
 		{
 			rig.ApplyForce( new Vector3( 0, 0, SPIN.BladeGravity * -1 ) );
 			return;
 		} else if ( Math.Abs( Transform.LocalPosition.y ) > 4f
 			|| Math.Abs( Transform.LocalRotation.Pitch() ) > 1f
-			|| Math.Abs( Transform.LocalRotation.Roll() ) > 1f )
+			|| Math.Abs( Transform.LocalRotation.Roll() ) > 1f 
+			|| Transform.LocalPosition.z != 0)
 		{
 			ResetPos();
 		}
@@ -37,13 +39,13 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
 	public void ResetPos()
 	{
 		GameObject.Parent = SPIN.PropRig.GameObject;
-		rig.Velocity = 0;
-		rig.AngularVelocity = 0;
 
 		Transform.Position = SPIN.PropRig.Transform.Position;
 		Transform.Rotation = SPIN.PropRig.Transform.Rotation
 			* Rotation.From( 0, rotationOffset, 0 );
 		Transform.Position += new Vector3( 0, -1f, 0 ) * Transform.Rotation;
 		Transform.ClearInterpolation();
+		rig.Velocity = 0;
+		rig.AngularVelocity = 0;
 	}
 }

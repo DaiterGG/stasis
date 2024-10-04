@@ -26,7 +26,6 @@
                             <img src=@("img/medal" + @medal + ".png")>
                         } else if(medal == -1)
                         {
-                            
                             <img src=@("img/medal3.png")>
                         }
                     </div>
@@ -38,23 +37,23 @@
             <div class="up">
                 <div class="author">By: @Author</div>
                 <div class="exit" onclick="@(x => { GameObject.Enabled = false;} )">
-                    <p>X</p>
+                    <p>x</p>
                 </div>
 
             </div>
             <div class="down">
                 @for (int i = 0; i < Scores.Count; i++)
                 {
-                    var time = Sng.Inst.FormatTime(Scores[i].Time);
+                    var sc = Scores[i];
+                    var time = Sng.Inst.FormatTime(sc.Time);
                     <div class="list-item @((Scores.Count - i) % 2 == 0 ? "dark":"")">
                         <div class="count">@(i + 1).</div>
                         <div class="time">@(time)</div>
+                        <img class="watch @(sc.Replay == null ? "hide":"")" onclick="@(x => { if(sc.Replay is Replay r)Watch(r);})" src="img/play.png"/>
                     </div>
                 }
             </div>
         </div>
-
-
     </div>
 </root>
 
@@ -71,9 +70,18 @@
     public string TimeDif { get; set; }
     public string TimeMil { get; set; }
     public List<Score> Scores { get; set; } = new List<Score>();
-   /*
+    
+    ViewReplay VIEWR;
+
+    public void Watch(Replay rep){
+        VIEWR.Watch(rep);
+    }
     protected override void OnAwake()
     {
+        base.OnAwake();
+        VIEWR = Sng.Inst.ViewC;
+    }
+   /*
         base.OnAwake();
         medal = 2;
         Time = "11:00:00";
@@ -108,7 +116,6 @@
     }
     */ 
 
-     
     /// <summary>
     /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
     /// </summary>

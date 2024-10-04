@@ -21,7 +21,7 @@ public sealed class JumpComponent : Component, Component.ICollisionListener
 	{
 		if ( active && !Sng.Inst.Player.SpinC.IsAttached ){
 			if (!Sng.Inst.Player.Engine.isRunning){
-				Sng.Inst.Player.Engine.EngStartInstantly();
+				Sng.Inst.Player.Engine.EngOn( true );
 
 			}			
 			Sng.Inst.Player.Engine.rigid.ApplyImpulse( Sng.Inst.Player.Body.Transform.Rotation

@@ -27,11 +27,12 @@ public sealed class EngineComponent : Component
 	float maxGainGravityScale = 1.15f;
 	public float maxGain { get { return gravity * maxGainGravityScale; } }
 	int invertVert = -1;
-	public bool inputActive
+	public bool IsGaming;
+	public bool InputActive
 	{
 		get
 		{
-			return !(FREECAM.GameObject.Enabled || !SPINC.IsAttached || !MENUC.IsGaming);
+			return !FREECAM.GameObject.Enabled && SPINC.IsAttached && IsGaming;
 		}
 		set { }
 	}
@@ -56,13 +57,14 @@ public sealed class EngineComponent : Component
 	}
 	public void OnFixedGlobal()
 	{
+		if (!IsGaming) return;
 		//Log.Info( FREECAM.Enabled + " " + !SPINC.IsAttached + " " + !MENUC.IsGaming );
 		//gravity
 		if ( !isRunning ) rigid.ApplyImpulse( new Vector3( 0, 0, gravity * -1 * .05f ) );
 		else rigid.ApplyImpulse( new Vector3( 0, 0, gravity * -1 ) );
 		//Sng.LogOnce( "InputActive == " + inputActive );
 		//input
-		if ( inputActive )
+		if ( InputActive )
 		{
 
 			var dx = (float)Math.Min( 10000f, Math.Abs( Mouse.Delta.x ) * Math.Pow( FC.Set.Sensitivity, 2 ) ) * 1.7f * Math.Sign( Mouse.Delta.x );
@@ -163,7 +165,7 @@ public sealed class EngineComponent : Component
 			EngOn( false );
 		else if ( isRunning ) gain = gravity;
 	}
-	void EngOn( bool on )
+	public void EngOn( bool on )
 	{
 		progress = on ? 100 : 0;
 		isRunning = on;

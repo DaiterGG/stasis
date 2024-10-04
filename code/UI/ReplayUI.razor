@@ -1,0 +1,59 @@
+@using Sandbox;
+@using Stasis.Data
+@using Sandbox.UI
+@using Stasis.UI
+@using Sandbox.Razor
+@inherits PanelComponent
+
+<root>
+    <div class="panel">
+        <div class="up">
+
+            <div class="controls">
+                <img class="prev" onclick="@((x)=>{TickRelay--;})" src="img/skip_previous.png" />
+                @if (VIEW.IsPlaying)
+                {
+                    <img class="resume" onclick="@((x) => {VIEW.PauseView(true);})" src="img/pause.png" />
+                }
+                else
+                {
+                    <img class="play" onclick="@((x)=>{VIEW.PauseView(false);})" src="img/play.png" />
+                }
+                <img class="next" onclick="@((x)=>{TickRelay++;})" src="img/skip_next.png" />
+                <div class="speed">
+                    <SliderControl Min=@(-3f) Max=@(10f) Step=@(0.01f) Value:bind=@VIEW.ReplaySpeed />
+                </div>
+            </div>
+            <div class="label">Tick: @(tickRelay)</div>
+        </div>
+        <div class="control-wrap">
+            <div class="control">
+                <SliderControl Min=@(0) Max=@VIEW.Replay.Ticks.Count Step=@(1) Value:bind=@TickRelay />
+            </div>
+        </div>
+    </div>
+</root>
+
+@code
+{
+    ViewReplay VIEW;
+    int tickRelay;
+    public int TickRelay
+    {
+        get { return tickRelay; }
+        set
+        {
+            if (VIEW != null && value != (int)VIEW.CurrentTick)
+            {
+                VIEW.JumpToTick(value);
+                VIEW.PauseView();
+            }
+            tickRelay = value;
+        }
+    }
+    protected override void OnAwake()
+    {
+        VIEW = Sng.Inst.ViewC;
+    }
+    protected override int BuildHash() => System.HashCode.Combine(VIEW.OldestTick, tickRelay, VIEW.CurrentTick);
+}

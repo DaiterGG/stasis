@@ -1,4 +1,5 @@
 MapsList {
+
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -11,6 +12,7 @@ MapsList {
     align-items: center;
 
     >.list-item {
+        box-shadow: 0px 0px 30px #111;
         width: 100%;
         min-height: 90px;
         display: flex;
@@ -35,7 +37,7 @@ MapsList {
             background-position-y: center;
             background-size: cover;
             background-repeat: no-repeat;
-            filter: blur(3px);
+            filter: blur(5px);
         }
 
         >.gradi {
@@ -43,7 +45,8 @@ MapsList {
             background-color: rgba(0, 0, 0, 0.3);
             width: 100%;
             height: 90px;
-            box-shadow: 0px 0px 30px #111;
+            border-radius: 15px;
+            border-radius: 0px;
         }
     }
 

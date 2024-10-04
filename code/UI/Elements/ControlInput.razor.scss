@@ -1,0 +1,14 @@
+﻿ControlInput {
+    flex-direction: column;
+    flex-shrink: 0;
+
+    .control {
+        width: 100%;
+    }
+
+
+    >.label {
+        width: 100%;
+    }
+
+}

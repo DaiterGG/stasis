@@ -5,14 +5,16 @@ namespace Stasis.Data;
 public struct Tick
 {
 	public readonly Vector3 Transform;
-	public readonly short Yaw;
 	public readonly short Pitch;
+	public readonly short Yaw;
 	public readonly short Roll;
-	public Tick(Vector3 tr, short y, short p, short r){
+	public readonly byte Spin;
+	public Tick(Vector3 tr, short p, short y, short r, byte s){
 		Transform = tr;
-		Yaw = y;
 		Pitch = p;
+		Yaw = y;
 		Roll = r;
+		Spin = s;
 	}
 }
  /*public static class TickControl

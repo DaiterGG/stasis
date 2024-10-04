@@ -93,6 +93,12 @@
               "go": "c2b2e3f1-e13b-4bc4-88d9-ee970a9f89aa",
               "component_type": "MainMenu"
             },
+            "ReplayUI": {
+              "_type": "component",
+              "component_id": "f05bf02c-d923-431e-b0d4-27401594090c",
+              "go": "119d0006-848e-45f0-8d81-e2b733fde0cb",
+              "component_type": "ReplayUI"
+            },
             "SetUI": {
               "_type": "component",
               "component_id": "ec761ac3-aeb4-44c7-98bf-5773f9ae98a7",
@@ -225,6 +231,26 @@
                 "__guid": "44102842-1319-48cf-ad93-450cd28d8cbf"
               }
             ]
+          },
+          {
+            "__guid": "119d0006-848e-45f0-8d81-e2b733fde0cb",
+            "Flags": 0,
+            "Name": "Replay",
+            "Components": [
+              {
+                "__type": "Sandbox.ScreenPanel",
+                "__guid": "01a3a146-8562-4e35-966c-27c16b60eee9",
+                "AutoScreenScale": true,
+                "Opacity": 1,
+                "Scale": 1,
+                "ScaleStrategy": "ConsistentHeight",
+                "ZIndex": 100
+              },
+              {
+                "__type": "ReplayUI",
+                "__guid": "f05bf02c-d923-431e-b0d4-27401594090c"
+              }
+            ]
           }
         ]
       },
@@ -336,6 +362,12 @@
                 "__guid": "a1c9c764-1bf2-4487-bda7-3967701d72ab",
                 "BodyGroups": 18446744073709551615,
                 "Model": "models/heli_final.vmdl",
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
                 "RenderType": "On",
                 "Tint": "1,1,1,1"
               },
@@ -467,6 +499,12 @@
                         "BodyGroups": 18446744073709551615,
                         "MaterialOverride": "materials/black_marble.vmat",
                         "Model": "models/tail_final.vmdl",
+                        "RenderOptions": {
+                          "GameLayer": true,
+                          "OverlayLayer": false,
+                          "BloomLayer": false,
+                          "AfterUILayer": false
+                        },
                         "RenderType": "On",
                         "Tint": "1,1,1,1"
                       },
@@ -512,6 +550,12 @@
                         "BodyGroups": 18446744073709551615,
                         "MaterialOverride": "materials/black_marble.vmat",
                         "Model": "models/tail_final.vmdl",
+                        "RenderOptions": {
+                          "GameLayer": true,
+                          "OverlayLayer": false,
+                          "BloomLayer": false,
+                          "AfterUILayer": false
+                        },
                         "RenderType": "On",
                         "Tint": "1,1,1,1"
                       },
@@ -557,6 +601,12 @@
                         "BodyGroups": 18446744073709551615,
                         "MaterialOverride": "materials/black_marble.vmat",
                         "Model": "models/tail_final.vmdl",
+                        "RenderOptions": {
+                          "GameLayer": true,
+                          "OverlayLayer": false,
+                          "BloomLayer": false,
+                          "AfterUILayer": false
+                        },
                         "RenderType": "On",
                         "Tint": "1,1,1,1"
                       },
@@ -650,7 +700,6 @@
             "__guid": "b85abaea-5c3e-427c-953a-7d73b892723a",
             "Flags": 0,
             "Name": "Camera control",
-            "Position": "0,0,0",
             "Enabled": true,
             "Components": [
               {
@@ -803,11 +852,18 @@
                   "alpha": []
                 },
                 "EndCap": "Rounded",
+                "Face": "Camera",
                 "Opaque": false,
                 "Points": [
                   null,
                   null
                 ],
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
                 "SplineBias": 0,
                 "SplineContinuity": 0,
                 "SplineInterpolation": 1,
@@ -835,9 +891,9 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
-  "__references": [
-    "move.black_marble1"
-  ],
+  "__references": [],
+  "IsValid": true,
   "__version": 1
 }

@@ -11,13 +11,14 @@
       "Resources": null,
       "PackageReferences": [],
       "EditorReferences": [
-        "polyhaven.rustig_koppie_puresky#30194",
         "move.black_marble1#67235",
-        "move.white_plastic1#67236"
+        "move.white_plastic1#67236",
+        "polyhaven.rustig_koppie_puresky#30194"
       ],
       "IsWhitelistDisabled": false,
       "Metadata": {
-        "SingleAssetSource": "maps/st_playground2.vmap"
+        "SingleAssetSource": "maps/st_playground2.vmap",
+        "ParentPackage": "move.stasis"
       }
     }
   }

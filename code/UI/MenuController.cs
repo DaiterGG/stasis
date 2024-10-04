@@ -13,15 +13,15 @@ public sealed class MenuController : Component
 	[Property] public SettingsUI SetUI { get; set; }
 	[Property] public ChooseMenu ChooseUI { get; set; }
 	[Property] public ScreenPanel BlackUI { get; set; }
+	[Property] public ReplayUI ReplayUI { get; set; }
 	[Property] public GameObject Camera { get; set; }
-
 	public float pitchOffset = -11.3f;
 	public float yawOffset = 13.111f;
 	public Vector3 CameraPos;
 
 
 	public float speed = 0;
-	public bool IsGaming = false;
+	public bool IsOpen = false;
 	GameObject BODY;
 	SpinControl SPINC;
 	Timer TIMER;
@@ -41,6 +41,7 @@ public sealed class MenuController : Component
 		SetCameraOffset();
 		Camera.Enabled = true;
 		ApplySettings();
+		ShowInfo();
 	}
 	protected override void OnUpdate()
 	{
@@ -78,31 +79,59 @@ public sealed class MenuController : Component
 		Camera.Transform.Rotation = Rotation.LookAt( rad * new Vector3( -1, -1, 0 ) ) * Rotation.FromYaw( yawOffset ) * Rotation.FromPitch( pitchOffset );
 
 	}
-	public void Play()
+	public void PlayPressed(){
+		SNG.ChangeGameState( GameState.Play);
+	}
+	public void CloseMenu()
 	{
 		Camera.Enabled = false;
 		IngameUI.GameObject.Enabled = true;
 		MenuUI.GameObject.Enabled = false;
-		IsGaming = true;
-		ShowInfo();
-		GameUIVisible = true;
-		SNG.Play();
+		IsOpen = false;
 	}
 	public void OpenMenu()
 	{
-		SNG.Spawn();
+		Camera.Enabled = true;
 		IngameUI.GameObject.Enabled = false;
+		GameUIVisible = false;
+		IsOpen = true;
 		ChooseUI.GameObject.Enabled = false;
 		MenuUI.GameObject.Enabled = true;
-		IsGaming = false;
 		HelpVisible = false;
 		CameraInit();
-		Camera.Enabled = true;
 	}
 	public void Controls()
 	{
 		Game.Overlay.ShowBinds();
 	}
+	public void ChooseMenuPressed()
+	{
+		UpdateMapsList();
+		ChooseUI.GameObject.Enabled = true;
+		MenuUI.GameObject.Enabled = false;
+
+	}
+	public void CloseChooseMenu()
+	{
+		ChooseUI.GameObject.Enabled = false;
+		MenuUI.GameObject.Enabled = true;
+	}
+	public void SettingsPressed()
+	{
+		SetUI.GameObject.Enabled = true;
+		MenuUI.GameObject.Enabled = false;
+
+	}
+	public void CloseSettings()
+	{
+		SetUI.GameObject.Enabled = false;
+		MenuUI.GameObject.Enabled = true;
+		FileControl.SaveSettings();
+	}
+	public void ViewReplayPressed(){
+		SNG.ChangeGameState( GameState.ViewReplay);
+	}
+
 	public void MapSelect()
 	{
 		try
@@ -130,30 +159,6 @@ public sealed class MenuController : Component
 		}
 		catch ( Exception e ) { Log.Warning( e ); }
 	}
-	public void OpenChooseMenu()
-	{
-		UpdateMapsList();
-		ChooseUI.GameObject.Enabled = true;
-		MenuUI.GameObject.Enabled = false;
-
-	}
-	public void CloseChooseMenu()
-	{
-		ChooseUI.GameObject.Enabled = false;
-		MenuUI.GameObject.Enabled = true;
-	}
-	public void OpenSettings()
-	{
-		SetUI.GameObject.Enabled = true;
-		MenuUI.GameObject.Enabled = false;
-
-	}
-	public void CloseSettings()
-	{
-		SetUI.GameObject.Enabled = false;
-		MenuUI.GameObject.Enabled = true;
-	}
-
 	public void UpdateMapsList()
 	{
 		ChooseUI.Official.Clear();
@@ -285,12 +290,10 @@ public bool HelpVisible {get; set;} = false;
 		Clipboard.SetText( "https://discord.gg/JNrNHxDE2D" );
 
 	}
-	bool infoOnce = true;
 	public void ShowInfo()
 	{
 		//if ( infoOnce && SNG.firstTime ) IngameUI.ShowInfo( ControlsInfo() );
 		IngameUI.ShowInfo( ControlsInfo() );
-		infoOnce = false; 
 	}
 	private string ControlsInfo()
 	{

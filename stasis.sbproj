@@ -195,6 +195,12 @@
           "KeyboardCode": "Q",
           "GamepadCode": "None",
           "GroupName": "Other"
+        },
+        {
+          "Name": "Test1",
+          "KeyboardCode": "L",
+          "GamepadCode": "None",
+          "GroupName": "Other"
         }
       ],
       "__guid": "a9e66315-10cc-4419-9044-753cd6ddd758"

@@ -8,15 +8,15 @@
 		@{
 			if (menus == 0)
 			{
-				<div class="play" onclick=@controller.Play>
+				<div class="play" onclick=@(() => Sng.Inst.ChangeGameState(GameState.Play))>
 					<div class="bg"></div>
 					<div class="text">Play</div>
 				</div>
-				<div class="change" onclick=@controller.OpenChooseMenu>
+				<div class="change" onclick=@controller.ChooseMenuPressed>
 					<div class="bg"></div>
 					<div class="text">Change Map</div>
 				</div>
-				<div class="options" onclick="@controller.OpenSettings">
+				<div class="options" onclick="@controller.SettingsPressed">
 					<div class="bg"></div>
 					<div class="text">Options</div>
 				</div>
