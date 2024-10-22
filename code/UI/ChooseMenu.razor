@@ -10,15 +10,21 @@
             <div class="left">
                 <div class="up">
                     <div class="tabrow">
-                        <div class="tab @(!scoreTabSelected?"active":"")"
-                            onclick="@(() => {scoreTabSelected = !scoreTabSelected;})">Info</div>
-                        <div class="tab @(scoreTabSelected?"active":"")"
-                            onclick="@(() => {scoreTabSelected = !scoreTabSelected;})">Scores</div>
+                        <div class="tab infotab @(Info_LB_Local == 1?"active":"")"
+                            onclick="@(() => {Info_LB_Local = 1;})">Info</div>
+                        <div class="tab infotab @(Info_LB_Local == 2?"active":"")"
+                            onclick="@(() => {
+                                Info_LB_Local = 2;
+                                UpdateLeaderboard();})">Leaderboard</div>
+                        <div class="tab infotab @(Info_LB_Local == 3?"active":"")"
+                            onclick="@(() => {
+                                Info_LB_Local = 3;
+                                UpdateLeaderboard();})">Local</div>
                     </div>
                 </div>
                 <div class="down">
-                    <LB style="@($"display:" + (!scoreTabSelected ? "none" : "flex") + ";")" />
-                    <InfoCard style="@($"display:" + (scoreTabSelected ? "none" : "flex") + ";")" />
+                    <LB style="@($"display:" + (Info_LB_Local == 1 ? "none" : "flex") + ";")" />
+                    <InfoCard style="@($"display:" + (Info_LB_Local != 1 ? "none" : "flex") + ";")" />
                 </div>
             </div>
             <div class="right">
@@ -55,7 +61,7 @@
     public List<MapData> Official { get; set; } = new List<MapData>();
     public List<MapData> Featured { get; set; } = new List<MapData>();
     public List<MapData> Community { get; set; } = new List<MapData>();
-    public bool scoreTabSelected { get; set; } = false;
+    public int Info_LB_Local{ get; set; } = 1;
     public int selectedMapId { get; set; } = 0;
     public string selectedType { get; set; } = "official";
     public bool copied = false;
@@ -64,11 +70,15 @@
         selectedType = type;
         list.Update();
     }
-    public void ShowInfo(int i)
+    public void UpdateLeaderboard()
     {
-        selectedMapId = i;
-        infCard.Update();
         leaderboard.Update();
+    }
+    public void ChangeDisplayedMap(int i)
+    {
+        infCard.Update();
+        selectedMapId = i;
+        UpdateLeaderboard();
     }
     public List<MapData> GetList(string type)
     {
@@ -95,5 +105,5 @@
     }
 
     protected override int BuildHash() => System.HashCode.Combine(Official, Featured, Community
-    , selectedType, selectedMapId, scoreTabSelected);
+    , selectedType, selectedMapId, Info_LB_Local);
 }

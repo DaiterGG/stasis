@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{07FFDDC2-A1B9-428D-B811-1ABA9AF18824}|stasis.csproj|c:\\users\\user1\\documents\\s\u0026box projects\\stasis\\code\\zones\\endzone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07FFDDC2-A1B9-428D-B811-1ABA9AF18824}|stasis.csproj|solutionrelative:zones\\endzone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EndZone.cs",
+              "DocumentMoniker": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Zones\\EndZone.cs",
+              "RelativeDocumentMoniker": "Zones\\EndZone.cs",
+              "ToolTip": "C:\\Users\\User1\\Documents\\s\u0026box projects\\stasis\\code\\Zones\\EndZone.cs",
+              "RelativeToolTip": "Zones\\EndZone.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T08:07:00.54Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

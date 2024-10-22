@@ -61,7 +61,7 @@ public class ReplaySerialize
     }
     public static Replay JsonToReplay(Dictionary<string, object> d)
     {
-        Log.Info(d["Actions"]);
+        //Log.Info(d["Actions"]);
         Dictionary<int, List<Action>> acts;
         try
         {
@@ -79,6 +79,5 @@ public class ReplaySerialize
                 JsonSerializer.Deserialize<int>((JsonElement)d["StartTime"]),
                 JsonSerializer.Deserialize<int>((JsonElement)d["EndTime"])
                 );
-        return null;
     }
 }

@@ -2,9 +2,9 @@ namespace Sandbox;
 
 public sealed class LogTransform : Component
 {
-	protected override void OnUpdate()
-	{
+    protected override void OnUpdate()
+    {
 
-		Log.Info(Transform.Rotation.Pitch() + " " + Transform.Rotation.Yaw() + " " + Transform.Rotation.Roll());
-	}
+        Log.Info(WorldRotation.Pitch() + " " + WorldRotation.Yaw() + " " + WorldRotation.Roll());
+    }
 }

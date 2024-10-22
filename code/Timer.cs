@@ -1,5 +1,4 @@
-﻿using System;
-using Stasis.Data;
+﻿using Stasis.Data;
 using Stasis.Player;
 using Stasis.UI;
 using Stasis.Zones;
@@ -75,7 +74,6 @@ namespace Stasis
 
         public void TimerStart()
         {
-            Sng.ELog("timer reStarted");
             IsRunning = true;
             RECORD.Start();
         }

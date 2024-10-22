@@ -12,9 +12,10 @@
     {
         if (maps[i].Name != null)
         {
+            //so _i don't change in lambda expressions
             var _i = i;
             <div class="list-item @(i == 0?"first":"")"
-                onclick="@(x => {parent.ShowInfo(_i);})">
+                onclick="@(x => {parent.ChangeDisplayedMap(_i);})">
                 <div class="bg" style="@("background-image: url(" + maps[i].Img + ")")"></div>
                 <div class="gradi"></div>
                 <div class="name">@(maps[i].Name.ToUpper())</div>

@@ -9,6 +9,7 @@ public class ViewReplay
     ReplayUI UI;
     Sng SNG;
     SpinControl SPIN;
+    public GameObject CallbackUI;
     public Replay Replay { get; private set; }
     public float CurrentTick { get; set; }
     public int OldestTick { get; private set; }
@@ -30,7 +31,7 @@ public class ViewReplay
         IsPlaying = !pause;
     }
 
-    public void Watch(Replay rep)
+    public void Watch(Replay rep, GameObject UIThatCalled)
     {
         Sng.ELog(rep.Ticks.Count);
         if (rep.Ticks.Count == 0) rep.Ticks = ReplaySerialize.FromStrToTicks(rep.TicksUTF);
@@ -40,6 +41,7 @@ public class ViewReplay
         SNG.ChangeGameState(GameState.ViewReplay);
         PauseView();
         JumpToTick(0);
+        CallbackUI = UIThatCalled;
     }
 
     public void OnUpdateGlobal()

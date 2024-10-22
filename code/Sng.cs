@@ -22,7 +22,7 @@ public sealed class Sng : Component
     public bool blurOn { get; set; }
     protected override void OnAwake()
     {
-        if (Game.IsEditor && Scene.Name != "Scene" && GameObject.Parent.Name == "Menu")
+        if (Game.IsEditor && Scene.Name != "Scene" && GameObject.Parent.Name == "Game")
         {
             _sng = this;
             ELog("testing main menu scene in editor mode");
@@ -34,7 +34,7 @@ public sealed class Sng : Component
         }
         else
         {
-            ELog("Second geme instance is found, deleting");
+            ELog("Second game instance is found, deleting");
             GameObject.Parent.Enabled = false;
             GameObject.Parent.DestroyImmediate();
             return;
@@ -88,11 +88,11 @@ public sealed class Sng : Component
         {
             if (obj.Name.ToLower().Contains("spawn") && obj.Name.ToLower().Contains("player"))
             {
-                ZoneC.SpawnPoint = obj.Transform;
+                ZoneC.SpawnPoint = obj.WorldTransform;
             }
             else if (obj.Name.ToLower().Contains("start") && obj.Name.ToLower().Contains("player"))
             {
-                ZoneC.StartPoint = obj.Transform;
+                ZoneC.StartPoint = obj.WorldTransform;
             }
             else if (obj.Name == "Map Info")
             {
@@ -127,7 +127,7 @@ public sealed class Sng : Component
         try
         {
             MenuC.BlackUI.Opacity -= 0.005f;
-            if (!MenuC.IsOpen)
+            if (!MenuC.MainMenuIsOpen)
             {
                 if (Input.Pressed("SoftRestart"))
                 {
@@ -163,7 +163,7 @@ public sealed class Sng : Component
                     MenuC.InGameHelpToggle();
                 }
             }
-            else if (MenuC.IsOpen)
+            else if (MenuC.MainMenuIsOpen)
             {
                 if (Input.Pressed("SelfDestruct"))
                 {
@@ -179,7 +179,7 @@ public sealed class Sng : Component
             Player.SoundC.OnFixedGlobal();
             Player.SpinC.OnFixedGlobal();
             Player.Engine.OnFixedGlobal();
-            if (!MenuC.IsOpen) Timer.OnFixedGlobal();
+            if (!MenuC.MainMenuIsOpen) Timer.OnFixedGlobal();
             Player.CameraC.OnFixedGlobal();
             RecordC.OnFixedGlobal();
         }
@@ -218,7 +218,10 @@ public sealed class Sng : Component
         ViewC.PauseView();
         RecordC.Pause();
         ZoneC.ZonesReset();
+
         MenuC.ReplayUI.GameObject.Enabled = false;
+        MenuC.ReplayUI.InUse = false;
+
         MenuC.GameUIVisible = false;
         Player.Engine.IsGaming = false;
         StateC.Enabled = false;
@@ -235,11 +238,10 @@ public sealed class Sng : Component
                 if (ZoneC.SpawnPoint == null)
                 {
                     Log.Warning("No spawn and no start point");
-                    ZoneC.SpawnPoint = Player.Transform;
-                    ZoneC.StartPoint = Player.Transform;
+                    ZoneC.SpawnPoint = Player.WorldTransform;
+                    ZoneC.StartPoint = Player.WorldTransform;
                 }
-                Player.Transform.Position = ZoneC.SpawnPoint.Position;
-                Player.Transform.Rotation = ZoneC.SpawnPoint.Rotation;
+                TeleportPlayer(ZoneC.SpawnPoint);
                 Player.Transform.ClearInterpolation();
                 Player.Engine.ResetPos(true);
                 MenuC.OpenMenu();
@@ -248,26 +250,30 @@ public sealed class Sng : Component
             case GameState.ViewReplay:
                 MenuC.CloseMenu();
                 MenuC.ReplayUI.GameObject.Enabled = true;
+                MenuC.ReplayUI.InUse = true;
                 break;
         }
     }
-    public void TeleportPlayer(GameTransform pos)
+    public void TeleportPlayer(Transform? pos)
     {
-        if (ZoneC.SpawnPoint == null)
+        if (pos is Transform truePos)
         {
-            Log.Warning("No spawn and no start point");
-            ZoneC.SpawnPoint = Player.Transform;
-            ZoneC.StartPoint = Player.Transform;
-        }
-        if (pos == null)
-        {
-            Player.Transform.Position = ZoneC.SpawnPoint.Position;
-            Player.Transform.Rotation = ZoneC.SpawnPoint.Rotation;
+            Player.WorldPosition = truePos.Position;
+            Player.WorldRotation = truePos.Rotation;
         }
         else
         {
-            Player.Transform.Position = pos.Position;
-            Player.Transform.Rotation = pos.Rotation;
+            if (ZoneC.SpawnPoint is not Transform foo)
+            {
+                Log.Warning("No spawn and no start point");
+                ZoneC.SpawnPoint = Player.WorldTransform;
+                ZoneC.StartPoint = Player.WorldTransform;
+            }
+            if (ZoneC.SpawnPoint is Transform t)
+            {
+                Player.WorldPosition = t.Position;
+                Player.WorldRotation = t.Rotation;
+            }
         }
         Player.Transform.ClearInterpolation();
         Player.Engine.ResetPos(false);

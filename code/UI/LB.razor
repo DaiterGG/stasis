@@ -7,56 +7,58 @@
 @inherits Panel
 
 <root>
-	<div class="cbox">
-		<div class="box" onclick="@(() => {
-		centerOnMe = !centerOnMe;
-		Update();
-		})">
-			@if(centerOnMe){
-				<div>X</div>
-			}
-		</div>
-		<div class="label">Center On You</div>
-	</div>
-
-	<div class="cbox">
-		<div class="box" onclick="@(() => {
-		yourCountry = !yourCountry;
-		Update();		
-		})">
-			@if(yourCountry){
-				<div>X</div>
-			}
-		</div>
-		<div class="label">Your Country</div>
-	</div>
-	<div class="list">
-		<ScoreList />	
-	</div>
+    @if( parent.Info_LB_Local == 2 )
+    {
+       <div class="cbox">
+           <div class="box" onclick="@(() => {
+           centerOnMe = !centerOnMe;
+           Update();
+           })">
+               @if(centerOnMe){
+                   <div>X</div>
+               }
+           </div>
+           <div class="label">Center On You</div>
+       </div>
+       <div class="cbox">
+           <div class="box" onclick="@(() => {
+           yourCountry = !yourCountry;
+           Update();
+           })">
+               @if(yourCountry){
+                   <div>X</div>
+               }
+           </div>
+           <div class="label">Your Country</div>
+       </div>
+    }
+    <div class="list">
+        <ScoreList />
+    </div>
 </root>
 
 @code
 {
-	ChooseMenu parent { get; set; }
-	public MenuController MENUC { get; set; }
-	public MapData map { get; set; }
-	public ScoreList list {get; set; }
-	public bool centerOnMe {get; set;}
-	public bool yourCountry {get; set;}
-	protected override int BuildHash() => System.HashCode.Combine(map, centerOnMe, yourCountry);
-	public void Update()
-	{
-		map = parent.GetSelectedMap();
-		if(list != null)
-			list.Update();
-	}
-	public LB()
-	{
-		MENUC = Sng.Inst.MenuC;
-		parent = MENUC.ChooseUI; 
-		parent.leaderboard = this;
-		centerOnMe = false;
-		yourCountry = false;
-		Update();
-	}
+    ChooseMenu parent { get; set; }
+    public MenuController MENUC { get; set; }
+    public MapData map { get; set; }
+    public ScoreList list {get; set; }
+    public bool centerOnMe {get; set;}
+    public bool yourCountry {get; set;}
+    protected override int BuildHash() => System.HashCode.Combine(parent.Info_LB_Local, map, centerOnMe, yourCountry);
+    public void Update()
+    {
+        map = parent.GetSelectedMap();
+        if(list != null)
+            list.Update(parent.Info_LB_Local == 2);
+    }
+    public LB()
+    {
+        MENUC = Sng.Inst.MenuC;
+        parent = MENUC.ChooseUI;
+        parent.leaderboard = this;
+        centerOnMe = false;
+        yourCountry = false;
+        Update();
+    }
 }

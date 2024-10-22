@@ -29,10 +29,10 @@ public class RecordReplay
         */
         if (!IsRecording) return;
         Replay.Ticks.Add(new Tick(
-            ENGINE.Transform.Position,
-            (short)(ENGINE.Transform.Rotation.Pitch() * 100),
-            (short)(ENGINE.Transform.Rotation.Yaw() * 100),
-            (short)(ENGINE.Transform.Rotation.Roll() * 100),
+            ENGINE.WorldPosition,
+            (short)(ENGINE.WorldRotation.Pitch() * 100),
+            (short)(ENGINE.WorldRotation.Yaw() * 100),
+            (short)(ENGINE.WorldRotation.Roll() * 100),
             ENGINE.progress == 100 ? (byte)(ENGINE.gain / ENGINE.maxGain * 100) : (byte)ENGINE.progress
         ));
 
@@ -44,7 +44,6 @@ public class RecordReplay
     }
     public void Start()
     {
-        Sng.ELog("replay reStarted");
         Replay = new Replay();
         CurrentActions = new List<Action>();
         IsRecording = true;

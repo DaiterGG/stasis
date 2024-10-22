@@ -74,7 +74,8 @@
     ViewReplay VIEWR;
 
     public void Watch(Replay rep){
-        VIEWR.Watch(rep);
+        VIEWR.Watch(rep, GameObject);
+        GameObject.Enabled = false;
     }
     protected override void OnAwake()
     {

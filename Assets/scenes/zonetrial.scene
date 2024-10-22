@@ -102,7 +102,7 @@
       "__guid": "b2a7c630-7740-47a9-95c3-6f783a2c9930",
       "Flags": 0,
       "Name": "End Zone",
-      "Position": "-98.89951,0,0",
+      "Position": "7136.057,7396.797,-945.8347",
       "Enabled": true,
       "Components": [
         {
@@ -115,7 +115,7 @@
           "__guid": "6112d98f-97ec-426d-b4e5-a201e5185a57",
           "Center": "0,0,0",
           "IsTrigger": true,
-          "Scale": "50,50,50",
+          "Scale": "836.3999,157.9001,279.2002",
           "Static": false
         },
         {
@@ -173,6 +173,12 @@
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/roadsign_triangle.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "Off",
           "Tint": "1,0.78333,0,1"
         }
@@ -220,6 +226,12 @@
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/roadsign_triangle.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "Off",
           "Tint": "1,0.98333,0,1"
         }
@@ -266,6 +278,12 @@
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "Off",
           "Tint": "1,0.78431,0,1"
         }
@@ -312,6 +330,12 @@
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "Off",
           "Tint": "1,0.78431,0,1"
         }
@@ -359,6 +383,12 @@
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "Off",
           "Tint": "1,0.78431,0,1"
         }
@@ -406,6 +436,12 @@
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "Off",
           "Tint": "1,0.78431,0,1"
         }
@@ -453,6 +489,12 @@
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "Off",
           "Tint": "1,0.78431,0,1"
         }
@@ -500,6 +542,12 @@
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "Off",
           "Tint": "1,0.78431,0,1"
         }
@@ -546,6 +594,12 @@
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "Off",
           "Tint": "1,0.78431,0,1"
         }
@@ -589,6 +643,12 @@
           "__guid": "179af59d-0d7e-48b2-b747-125a2007c749",
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "On",
           "Tint": "1,0.98333,0,1"
         }
@@ -741,8 +801,8 @@
           "__guid": "c57b1400-d9db-470c-a4bf-cf1aafea6d58",
           "Flags": 0,
           "Name": "Exit",
-          "Position": "1154.779,-707.4349,522.5276",
-          "Rotation": "0,0,0.7071068,0.7071068",
+          "Position": "-64.81829,24411.45,-524.2653",
+          "Rotation": "0,-0,-0.7071068,0.7071068",
           "Enabled": true
         }
       ]
@@ -934,6 +994,7 @@
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 30,
     "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,

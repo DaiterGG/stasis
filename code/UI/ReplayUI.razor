@@ -5,7 +5,16 @@
 @using Sandbox.Razor
 @inherits PanelComponent
 
-<root>
+<root class="root" >
+    <div class="display" onmousedown="@((x) => {
+    if (FREECAM.Enabled) {
+        GameObject.Enabled = false;
+    }})">
+        @if (FREECAM.Enabled)
+        {
+            <div class="info">Click to move camera</div>
+        }
+    </div>
     <div class="panel">
         <div class="up">
 
@@ -21,10 +30,13 @@
                 }
                 <img class="next" onclick="@((x)=>{TickRelay++;})" src="img/skip_next.png" />
                 <div class="speed">
-                    <SliderControl Min=@(-3f) Max=@(10f) Step=@(0.01f) Value:bind=@VIEW.ReplaySpeed />
+                    <SliderControl Min=@(-3f) Max=@(10f) Step=@(0.1f) Value:bind=@VIEW.ReplaySpeed />
                 </div>
             </div>
+            <img class="copy" onclick="@((x) => {GoBack();})" src="img/copy.png" />
+            <img class="upload" onclick="@((x) => {GoBack();})" src="img/upload.png" />
             <div class="label">Tick: @(tickRelay)</div>
+            <img class="goback" onclick="@((x) => {GoBack();})" src="img/back.png" />
         </div>
         <div class="control-wrap">
             <div class="control">
@@ -37,7 +49,11 @@
 @code
 {
     ViewReplay VIEW;
+    MenuController MENUC;
+    Sng SNG;
+    GameObject FREECAM;
     int tickRelay;
+    public bool InUse = false;
     public int TickRelay
     {
         get { return tickRelay; }
@@ -51,9 +67,24 @@
             tickRelay = value;
         }
     }
+    public void GoBack()
+    {
+        InUse = false;
+        if( VIEW.CallbackUI.Name == "Choose menu" )
+        {
+            SNG.ChangeGameState(GameState.MainMenu);
+            MENUC.MenuUI.GameObject.Enabled = false;
+            MENUC.ChooseUI.GameObject.Enabled = true;
+        }
+        VIEW.CallbackUI.Enabled = true;
+    }
     protected override void OnAwake()
     {
-        VIEW = Sng.Inst.ViewC;
+        SNG = Sng.Inst;
+        MENUC = SNG.MenuC;
+        VIEW = SNG.ViewC;
+        FREECAM = SNG.Player.CameraC.FreeCam.GameObject;
     }
-    protected override int BuildHash() => System.HashCode.Combine(VIEW.OldestTick, tickRelay, VIEW.CurrentTick);
+
+    protected override int BuildHash() => System.HashCode.Combine( VIEW.OldestTick, tickRelay, VIEW.CurrentTick, FREECAM.Enabled);
 }

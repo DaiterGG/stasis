@@ -8,146 +8,146 @@
 @namespace Stasis.UI
 @inherits PanelComponent
 <root>
-	@if (MENUC.GameUIVisible)
-	{
-		<div class="gain">@Gain%</div>
-		<div class="progress">
-			@if (ZONEC.GroupedBeacons.Count != 0)
-			{	
-				<div class="beacons @(beaconpopup ? "huge" : "")">Beacons - @(ZONEC.BeaconsActivatedCount)/@(ZONEC.GroupedBeacons.Count)</div>
-				beaconpopup = false;
-			}
-		</div>
-		<div class="tooltips">
+    @if (MENUC.GameUIVisible)
+    {
+        <div class="gain">@Gain%</div>
+        <div class="progress">
+            @if (ZONEC.GroupedBeacons.Count != 0)
+            {   
+                <div class="beacons @(beaconpopup ? "huge" : "")">Beacons - @(ZONEC.BeaconsActivatedCount)/@(ZONEC.GroupedBeacons.Count)</div>
+                beaconpopup = false;
+            }
+        </div>
+        <div class="tooltips">
 
-			@if (FREEC.Enabled)
-			{
+            @if (FREEC.Enabled)
+            {
 
-				<div class="info">Press @(Input.GetButtonOrigin("SelfDestruct").ToUpper()) to spawn helicopter here</div>
-			}
-			@if (MENUC.HelpVisible)
-			{
-				//<div class="info @(Time.Now - infotime < 20f ? "active" : "")">
-				<div class="info">
-					@foreach (var line in Info.Split('\n'))
-					{
-						<div>@line</div>
-					}
-				</div>
-			}
-			else
-			{
-				<div class="info">Press @(Input.GetButtonOrigin("ShowInfo").ToUpper()) to see all keybinds</div>
-			}
-		</div>
-		<div class="timer">@Timer</div>
-		@if (STATE.Enabled)
-		{
-			<div class="faketimer @(STATE.IsRunning ? "" : "hidden")">@SNG.FormatTime(STATE.CurrentTime) - Possible Time</div>
-			<div class="window">
-				<div class="count">@((STATE.SelectedId + 1) + "/" + STATE.SaveStates.Count) - Current State</div>
-				<div class="info">1 - Load State</div>
-				<div class="info">2 - Save State</div>
-				<div class="info">3 - Next State</div>
-				<div class="info">4 - Previous State</div>
-				<div class="info">5 - First State</div>
-				<div class="info">6 - Last State</div>
-				<div class="info">7 - Remove State</div>
-				<div class="info">8 - Remove All States</div>
-				<div class="info">@(Input.GetButtonOrigin("Toggle").ToUpper()) - Close</div>
-			</div>
-		}
-		<div class="speedVert">@SpeedVert</div>
-		@if (FC.Set.PitchAndRoll)
-		{
-			<div class="pitch">
+                <div class="info">Press @(Input.GetButtonOrigin("SelfDestruct").ToUpper()) to spawn helicopter here</div>
+            }
+            @if (MENUC.HelpVisible)
+            {
+                //<div class="info @(Time.Now - infotime < 20f ? "active" : "")">
+                <div class="info">
+                    @foreach (var line in Info.Split('\n'))
+                    {
+                        <div>@line</div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="info">Press @(Input.GetButtonOrigin("ShowInfo").ToUpper()) to see all keybinds</div>
+            }
+        </div>
+        <div class="timer">@Timer</div>
+        @if (STATE.Enabled)
+        {
+            <div class="faketimer @(STATE.IsRunning ? "" : "hidden")">@SNG.FormatTime(STATE.CurrentTime) - Possible Time</div>
+            <div class="window">
+                <div class="count">@((STATE.SelectedId + 1) + "/" + STATE.SaveStates.Count) - Current State</div>
+                <div class="info">1 - Load State</div>
+                <div class="info">2 - Save State</div>
+                <div class="info">3 - Next State</div>
+                <div class="info">4 - Previous State</div>
+                <div class="info">5 - First State</div>
+                <div class="info">6 - Last State</div>
+                <div class="info">7 - Remove State</div>
+                <div class="info">8 - Remove All States</div>
+                <div class="info">@(Input.GetButtonOrigin("Toggle").ToUpper()) - Close</div>
+            </div>
+        }
+        <div class="speedVert">@SpeedVert</div>
+        @if (FC.Set.PitchAndRoll)
+        {
+            <div class="pitch">
 
-				<div class="bars">
-					@{
-						var r = ENGINE.Transform.Rotation.Pitch() + 90f;
-						var s = (int)(r / 4f);
-						var of = (r % 4f) / 4f * 124f;
-						for (int i = -6; i < 5; i++)
-						{
-							var t = i + s;
-							var p = (t + 6) % 11;
-							var f = (((p % 2) + 2) * p % 4);
-							if (t == 10 || t == 32 || (t + 1) % 22 == 0)
-							{
-								f = 7;
-							}
-							<div class="bar" style="
-											@( $"margin-top: {-of}px;width: {5 + 10 * f};")"></div>
-							of = 0;
-						}
-					}
-				</div>
-				<div class="roll">
-					<div class="point">
-					</div>
-					@{
-						<div class="line"
-							style="@($"transform: rotate({(Math.Abs(ENGINE.Transform.Rotation.Roll() + 90)  * -1) % 180 + 90 }deg)")">
-						</div>
-					}
-				</div>
-			</div>
-		}
-		<div class="speed">@SpeedMain</div>
-		<div class="bot">
-			<div class="speedHor">@SpeedHor</div>
-		</div>
-	}
+                <div class="bars">
+                    @{
+                        var r = ENGINE.WorldRotation.Pitch() + 90f;
+                        var s = (int)(r / 4f);
+                        var of = (r % 4f) / 4f * 124f;
+                        for (int i = -6; i < 5; i++)
+                        {
+                            var t = i + s;
+                            var p = (t + 6) % 11;
+                            var f = (((p % 2) + 2) * p % 4);
+                            if (t == 10 || t == 32 || (t + 1) % 22 == 0)
+                            {
+                                f = 7;
+                            }
+                            <div class="bar" style="
+                                            @( $"margin-top: {-of}px;width: {5 + 10 * f};")"></div>
+                            of = 0;
+                        }
+                    }
+                </div>
+                <div class="roll">
+                    <div class="point">
+                    </div>
+                    @{
+                        <div class="line"
+                            style="@($"transform: rotate({(Math.Abs(ENGINE.WorldRotation.Roll() + 90)  * -1) % 180 + 90 }deg)")">
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        <div class="speed">@SpeedMain</div>
+        <div class="bot">
+            <div class="speedHor">@SpeedHor</div>
+        </div>
+    }
 </root>
 
 @code
 {
-	public string SpeedMain { get; set; } = "0";
-	public string SpeedHor { get; set; } = "0";
-	public string SpeedVert { get; set; } = "0";
-	public string Gain { get; set; } = "";
-	public string Timer { get; set; } = "";
-	string Info = "";
-	bool beaconpopup = false;	
-	const int COOLDOWN_TICKS = 100;
-	int popupcooldown = COOLDOWN_TICKS;	
-	//public float infotime { get; set; }
-	EngineComponent ENGINE;
-	FileControl FC;
-	GameObject FREEC;
-	MenuController MENUC;
-	Sng SNG;
-	SaveStateControl STATE;
-	ZoneControl ZONEC;
-	//todo abstarction if needed
-	public void BeaconPopup(){
+    public string SpeedMain { get; set; } = "0";
+    public string SpeedHor { get; set; } = "0";
+    public string SpeedVert { get; set; } = "0";
+    public string Gain { get; set; } = "";
+    public string Timer { get; set; } = "";
+    string Info = "";
+    bool beaconpopup = false;   
+    const int COOLDOWN_TICKS = 100;
+    int popupcooldown = COOLDOWN_TICKS; 
+    //public float infotime { get; set; }
+    EngineComponent ENGINE;
+    FileControl FC;
+    GameObject FREEC;
+    MenuController MENUC;
+    Sng SNG;
+    SaveStateControl STATE;
+    ZoneControl ZONEC;
+    //todo abstarction if needed
+    public void BeaconPopup(){
 
-		if (popupcooldown > COOLDOWN_TICKS){
-			beaconpopup = true;
-			popupcooldown = 0;
-		}
-	}
-	public void ShowInfo(string info)
-	{
-		//infotime = Time.Now;
-		Info = info;
-	}
-	protected override void OnEnabled()
-	{
-		base.OnEnabled();
-		SNG = Sng.Inst;
-		ENGINE = SNG.Player.Engine;
-		FC = SNG.FileC;
-		MENUC = SNG.MenuC;
-		STATE = SNG.StateC;
-		FREEC = SNG.Player.CameraC.FreeCam.GameObject;
-		ZONEC = SNG.ZoneC;
-	}
-	protected override void OnFixedUpdate(){
-		popupcooldown++;
-	}
-	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
-	/// </summary>
-	protected override int BuildHash() => System.HashCode.Combine(FREEC.Enabled, STATE.SaveStates.Count, STATE.Enabled,
-	SpeedMain, Timer, Gain, MENUC.GameUIVisible, MENUC.HelpVisible);
+        if (popupcooldown > COOLDOWN_TICKS){
+            beaconpopup = true;
+            popupcooldown = 0;
+        }
+    }
+    public void ShowInfo(string info)
+    {
+        //infotime = Time.Now;
+        Info = info;
+    }
+    protected override void OnEnabled()
+    {
+        base.OnEnabled();
+        SNG = Sng.Inst;
+        ENGINE = SNG.Player.Engine;
+        FC = SNG.FileC;
+        MENUC = SNG.MenuC;
+        STATE = SNG.StateC;
+        FREEC = SNG.Player.CameraC.FreeCam.GameObject;
+        ZONEC = SNG.ZoneC;
+    }
+    protected override void OnFixedUpdate(){
+        popupcooldown++;
+    }
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine(FREEC.Enabled, STATE.SaveStates.Count, STATE.Enabled,
+    SpeedMain, Timer, Gain, MENUC.GameUIVisible, MENUC.HelpVisible);
 }

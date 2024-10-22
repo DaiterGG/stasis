@@ -5,54 +5,54 @@
 @inherits Panel
 
 <root class="mapinfo" style="@("background-image: url("+map.Img+");")">
-	<div class="header ">
-		<div class="text">
-			<div class="name">@map.Name</div>
-			@if (map.Scores.Count != 0)
-			{
-				<div class="btime">Best Time: @Sng.Inst.FormatTime(map.Scores[0].Time)</div>
-			}
-			else
-			{
-				<div class="btime">Not Played</div>
-			}
-			@if (map.Author != null && map.Author != "")
-			{
-				<div class="author">By: @map.Author</div>
-			}
-			@if (map.DifficultyTier != 0)
-			{
-				<div class="difficulty">Tier: @map.DifficultyTier</div>
-			}
-		</div>
-		<img class="medal" src="@("img/medal"+(Sng.Inst.MenuC.GetMedal(map)).ToString()+".png")" />
-	</div>
-	<div class="gradi"></div>
-	<div class="bot">
-		<div class="play" onclick="@(x => Sng.Inst.FileC.DownloadAndLoad(map.Indent))">
-			<p>
-				PLAY
-			</p>
-		</div>
-	</div>
+    <div class="header ">
+        <div class="text">
+            <div class="name">@map.Name</div>
+            @if (map.Scores.Count != 0)
+            {
+                <div class="btime">Best Time: @Sng.Inst.FormatTime(map.Scores[0].Time)</div>
+            }
+            else
+            {
+                <div class="btime">Not Played</div>
+            }
+            @if (map.Author != null && map.Author != "")
+            {
+                <div class="author">By: @map.Author</div>
+            }
+            @if (map.DifficultyTier != 0)
+            {
+                <div class="difficulty">Tier: @map.DifficultyTier</div>
+            }
+        </div>
+        <img class="medal" src="@("img/medal"+(Sng.Inst.MenuC.GetMedal(map)).ToString()+".png")" />
+    </div>
+    <div class="gradi"></div>
+    <div class="bot">
+        <div class="play" onclick="@(x => Sng.Inst.FileC.DownloadAndLoad(map.Indent))">
+            <p>
+                PLAY
+            </p>
+        </div>
+    </div>
 
 </root>
 
 @code
 {
 
-	protected override int BuildHash() => System.HashCode.Combine(map);
-	MapData map {get; set;}
-	ChooseMenu parent { get; set; }
-	public MenuController MENUC { get; set; }
-	public void Update(){
-		map = parent.GetSelectedMap();
-	}
-	public InfoCard()
-	{
-		MENUC = Sng.Inst.MenuC;
-		parent = MENUC.ChooseUI;
-		parent.infCard = this;
-		Update();
-	}
+    protected override int BuildHash() => System.HashCode.Combine(map);
+    MapData map {get; set;}
+    ChooseMenu parent { get; set; }
+    public MenuController MENUC { get; set; }
+    public void Update(){
+        map = parent.GetSelectedMap();
+    }
+    public InfoCard()
+    {
+        MENUC = Sng.Inst.MenuC;
+        parent = MENUC.ChooseUI;
+        parent.infCard = this;
+        Update();
+    }
 }

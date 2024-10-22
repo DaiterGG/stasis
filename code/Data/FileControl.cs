@@ -214,4 +214,15 @@ public sealed class FileControl
         currentMap.Scores.Sort((x, y) => x.Time.CompareTo(y.Time));
         SaveMaps();
     }
+    public List<Score>? GetScores(string indent)
+    {
+        foreach (var map in Maps)
+        {
+            if (map.Indent == indent)
+            {
+                return map.Scores;
+            }
+        }
+        return null;
+    }
 }
