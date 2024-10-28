@@ -1,0 +1,21 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "Sharp",
+      "Type": "map",
+      "Org": "move",
+      "Ident": "sharpv2",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": [],
+      "EditorReferences": null,
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "scenes/sharpv2.scene",
+        "ParentPackage": "move.stasis"
+      }
+    }
+  }
+}

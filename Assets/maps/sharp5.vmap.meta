@@ -1,0 +1,23 @@
+{
+  "publish": {
+    "Enabled": false,
+    "ProjectConfig": {
+      "Title": "sharp5",
+      "Type": "map",
+      "Org": "local",
+      "Ident": "sharp5",
+      "Schema": 0,
+      "IncludeSourceFiles": false,
+      "Resources": null,
+      "PackageReferences": [],
+      "EditorReferences": [
+        "polyhaven.rustig_koppie_puresky#30194"
+      ],
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "maps/sharp5.vmap",
+        "ParentPackage": "move.stasis"
+      }
+    }
+  }
+}

@@ -2,6 +2,21 @@
   "__guid": "be405f75-9c99-4c14-9666-8fdfc86bc928",
   "GameObjects": [
     {
+      "__guid": "d8a1c592-372f-494e-8208-ba5f6763d806",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "5c2aea26-fed0-48c7-b3b5-e6e8069271cc",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "map"
+        }
+      ]
+    },
+    {
       "__guid": "33663781-5e88-404d-81c8-8b4b47dce10c",
       "Flags": 0,
       "Name": "Game",
@@ -116,7 +131,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "836.3999,157.9001,279.2002",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.AutoDecor",
@@ -135,9 +151,9 @@
       "__guid": "24508041-e502-4e0c-ae67-22a01f469e0e",
       "Flags": 0,
       "Name": "beacon triangle 1",
-      "Position": "-83.96317,3207.827,-296.0893",
+      "Position": "-89.50915,3207.827,-296.0893",
       "Rotation": "0,0,0.7071068,0.7071068",
-      "Scale": "1,11.6,10.9",
+      "Scale": "1,11.3,10.9",
       "Enabled": true,
       "Components": [
         {
@@ -164,8 +180,9 @@
           "__guid": "364dc7cd-6257-4c96-a00f-501be4b8fc3a",
           "Center": "0,0,-5.699999",
           "IsTrigger": true,
-          "Scale": "1,14.29999,18.80002",
-          "Static": false
+          "Scale": "1,14.39999,18.80002",
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.ModelRenderer",
@@ -218,7 +235,8 @@
           "Center": "0,0,-5.699999",
           "IsTrigger": true,
           "Scale": "1,14.29999,18.80002",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.ModelRenderer",
@@ -270,7 +288,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.ModelRenderer",
@@ -322,7 +341,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.ModelRenderer",
@@ -375,7 +395,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.ModelRenderer",
@@ -428,7 +449,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.ModelRenderer",
@@ -481,7 +503,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.ModelRenderer",
@@ -534,7 +557,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.ModelRenderer",
@@ -586,7 +610,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.ModelRenderer",
@@ -636,7 +661,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.ModelRenderer",
@@ -684,7 +710,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "221.6001,27.99998,200",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.AutoDecor",
@@ -735,7 +762,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "200,200,200",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.AutoDecor",
@@ -786,7 +814,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "200,200,200",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.AutoDecor",
@@ -801,7 +830,7 @@
           "__guid": "c57b1400-d9db-470c-a4bf-cf1aafea6d58",
           "Flags": 0,
           "Name": "Exit",
-          "Position": "-64.81829,24411.45,-524.2653",
+          "Position": "-64.81689,24484.1,-524.8702",
           "Rotation": "0,-0,-0.7071068,0.7071068",
           "Enabled": true
         }
@@ -831,7 +860,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "221.6001,27.99998,200",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.AutoDecor",
@@ -880,7 +910,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.CheckPoint",
@@ -927,7 +958,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.CheckPoint",
@@ -941,6 +973,54 @@
       "Children": [
         {
           "__guid": "b77e73d3-16a6-4bac-b41f-df363688ac26",
+          "Flags": 0,
+          "Name": "Spawn",
+          "Position": "0,0,13.926"
+        }
+      ]
+    },
+    {
+      "__guid": "1d42d3b7-4e0b-4a38-96e8-7943a0a8e1da",
+      "Flags": 0,
+      "Name": "Check Point 3",
+      "Position": "7160.995,7808.484,-978.3829",
+      "Scale": "12.89999,11.6,4.099999",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "2b79a851-fa7b-4138-ace3-f75772bafd1d",
+          "WhatIsThat": "After player touch it, it will spawn player on \u0027spawn\u0027 child, when reset pressed\nYou can finish map without activating it "
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "4b82315e-a18d-4872-98cb-e25b7ad3636c",
+          "__enabled": false,
+          "ColorOfTheLines": "0.05209,0.52093,0,1",
+          "LineWidth": 3,
+          "WireFrame": false
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "8bd0e631-cb69-444a-aa53-587d425eaaf4",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
+        },
+        {
+          "__type": "Stasis.Zones.CheckPoint",
+          "__guid": "e21cd3bb-27e7-439d-8204-b46572d2cfdb",
+          "Spawn": {
+            "_type": "gameobject",
+            "go": "c57b1400-d9db-470c-a4bf-cf1aafea6d58"
+          }
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "3b0e641e-51e1-45c4-ac33-96f4a9e4b4f4",
           "Flags": 0,
           "Name": "Spawn",
           "Position": "0,0,13.926"
@@ -971,7 +1051,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.CheckPoint",
@@ -998,6 +1079,9 @@
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "map"
+    },
     "NavMesh": {
       "Enabled": false,
       "IncludeStaticBodies": true,
@@ -1011,11 +1095,11 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "map",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [
     "baik.roadsigntriangle#19441"
   ],
-  "__version": 1
+  "__version": 2
 }

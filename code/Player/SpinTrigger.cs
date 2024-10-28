@@ -39,7 +39,11 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
     }
     public void ResetPos()
     {
-        GameObject.SetParent(SPIN.PropRig.GameObject, false);
+        try
+        {
+            GameObject.SetParent(SPIN.PropRig.GameObject, false);
+        }
+        catch { }
 
         WorldPosition = SPIN.PropRig.WorldPosition;
         WorldRotation = SPIN.PropRig.WorldRotation

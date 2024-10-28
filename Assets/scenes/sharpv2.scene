@@ -1,0 +1,161 @@
+{
+  "__guid": "be405f75-9c99-4c14-9666-8fdfc86bc928",
+  "GameObjects": [
+    {
+      "__guid": "c4b672e2-7b33-48fb-9d43-b599771d6722",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "002b1fed-23d4-4114-a638-d98e8caaf2e5",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "mapnew"
+        }
+      ]
+    },
+    {
+      "__guid": "5269f6de-c780-4dcb-8404-57678e8107c1",
+      "Flags": 0,
+      "Name": "Game",
+      "Enabled": true,
+      "__Prefab": "prefabs/game.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "7f36b1d7-f001-4c59-befc-531076219a15",
+      "Flags": 0,
+      "Name": "Map Info",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Stasis.Info",
+          "__guid": "ae61cdb4-daed-4352-a1b0-3ca5428d5f53",
+          "Author": "Daiter",
+          "BronzeTime": 22,
+          "DifficultyTier": 1,
+          "GoldTime": 15.5,
+          "SilverTime": 17,
+          "SpeerunMap": true,
+          "Version": "1.0"
+        }
+      ]
+    },
+    {
+      "__guid": "c40b0c5d-16e2-4bfd-a7dd-52852758c463",
+      "Flags": 0,
+      "Name": "Map",
+      "Position": "0,224.5872,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
+          "__version": 1,
+          "EnableCollision": true,
+          "MapName": "maps/sharp5.vmap",
+          "NoOrigin": false,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": false
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "bddf0c53-f7e6-4afe-86f2-3f9dade8a1e6",
+      "Flags": 0,
+      "Name": "info_player_start",
+      "Position": "72.49091,314.3699,119.6535",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "ab108671-09bc-4197-aa38-fad1b06b5de7",
+          "WhatIsThat": "Player will respawn here to play the map"
+        }
+      ]
+    },
+    {
+      "__guid": "0784ce75-4b08-4265-8876-f1c83d30c647",
+      "Flags": 0,
+      "Name": "info_player_spawn",
+      "Position": "-1069.062,-978.6201,704.2569",
+      "Rotation": "0,0,0.9741734,0.2258014",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "bb14eb28-7ee5-4830-84c6-c7b2f15547a1",
+          "WhatIsThat": "Player will spawn here to pose for the menu\nIt is optional"
+        }
+      ]
+    },
+    {
+      "__guid": "b2a7c630-7740-47a9-95c3-6f783a2c9930",
+      "Flags": 0,
+      "Name": "end_zone",
+      "Position": "-416.3633,-1534.937,-1279.539",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "008b1737-9f28-4086-b7b8-2c7aa18852ac",
+          "WhatIsThat": "This is finish trigger\nThere could be multiple of them,\ndifferent shapes and sizes\nJust name it \u0027end_zone\u0027, put trigger collider and End Zone component on it\nIf it is Box Collider, you can put Auto Decor for the classic color line appeal"
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "6112d98f-97ec-426d-b4e5-a201e5185a57",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "826.7001,445.7001,505.8998",
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
+        },
+        {
+          "__type": "Stasis.Zones.AutoDecor",
+          "__guid": "56df3de0-ab8f-45a4-af74-1c322fa0d1d3",
+          "ColorOfTheLines": "1,0,0,1",
+          "LineWidth": 3,
+          "WireFrame": false
+        },
+        {
+          "__type": "Stasis.Zones.EndZone",
+          "__guid": "5a4904d8-0b68-4a9b-a97a-7f40bce63ce6"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "mapnew"
+    },
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "ResourceVersion": 2,
+  "Title": "mapnew",
+  "Description": null,
+  "__references": [],
+  "__version": 2
+}

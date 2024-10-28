@@ -20,11 +20,10 @@ public sealed class SpinControl : Component
         PLAYEROBJ = Sng.Inst.Player.GameObject;
         TIMER = Sng.Inst.Timer;
         PropRig = GameObject.Components.Get<Rigidbody>();
-        var l = GameObject.Children.ToList();
-        for (var i = 0; i < l.Count; i++)
+        foreach (var l in GameObject.Children.ToList())
         {
-            var t = l[i].Components.Get<SpinTrigger>();
-            if (l[i].Enabled && t != null)
+            var t = l.Components.Get<SpinTrigger>();
+            if (l.Enabled && t != null)
             {
                 blades.Add(t);
                 RestartAllBlades += t.ResetPos;
@@ -35,14 +34,10 @@ public sealed class SpinControl : Component
     }
     public void OnFixedGlobal()
     {
-        for (int i = 0; i < blades.Count; i++)
+        foreach (var blade in blades)
         {
-            blades[i].OnFixedGlobal();
+            blade.OnFixedGlobal();
         }
-        /*foreach (var blade in blades)*/
-        /*{*/
-        /*    blade.OnFixedGlobal();*/
-        /*}*/
         if (!IsAttached) return;
         ApplySpinSpeed(ENGINE.progress == 100 ? (int)(ENGINE.gain / ENGINE.maxGain * 100f) : ENGINE.progress);
     }
@@ -61,9 +56,9 @@ public sealed class SpinControl : Component
     public void BreakSpin(bool bladesExplode, int brakeForce = 0)
     {
         if (IsAttached) RecordReplay.ActionHappened(Data.Action.PropellerBreak);
-        for (int i = 0; i < blades.Count; i++)
+        IsAttached = false;
+        foreach (var x in blades)
         {
-            var x = blades[i];
             if (bladesExplode)
             {
                 x.WorldPosition = WorldPosition;
@@ -75,11 +70,11 @@ public sealed class SpinControl : Component
             {
                 x.WorldPosition = new Vector3(9999999, 9999999, 9999999);
             }
+            // NOTE: Triggers the second collision
             x.Transform.ClearInterpolation();
 
-            x.GameObject.Parent = PLAYEROBJ;
+            x.GameObject.SetParent(PLAYEROBJ, false);
         }
-        IsAttached = false;
         BigBodyBox.Scale = new Vector3(0);
         TIMER.Update();
     }
