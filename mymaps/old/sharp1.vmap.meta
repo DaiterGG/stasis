@@ -1,0 +1,24 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "sharp1",
+      "Type": "map",
+      "Org": "move",
+      "Ident": "sharp1",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": [],
+      "EditorReferences": [
+        "polyhaven.rustig_koppie_puresky#30194",
+        "move.white_plastic1#67236",
+        "move.black_marble1#67235"
+      ],
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "maps/sharp1.vmap"
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "st_hexagon1",
+      "Type": "map",
+      "Org": "move",
+      "Ident": "st_hexagon1",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": [],
+      "EditorReferences": [
+        "move.white_plastic1#67236",
+        "polyhaven.rustig_koppie_puresky#30194",
+        "move.black_marble1#67235",
+        "fpopium.op_clip_glass#55214",
+        "polyhaven.evening_road_01_puresky#29756"
+      ],
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "maps/st_hexagon1.vmap"
+      }
+    }
+  }
+}

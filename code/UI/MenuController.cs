@@ -141,7 +141,7 @@ public sealed class MenuController : Component
     {
         try
         {
-            Game.Overlay.ShowPackageSelector("type:asset ext:scene ", delegate (Package p)
+            Game.Overlay.ShowPackageSelector(/* "type:asset ext:scene " */"", delegate (Package p)
             {
                 foreach (var m in FC.OfficialMaps)
                 {
@@ -275,9 +275,7 @@ public sealed class MenuController : Component
             else if (map.BronzeTime > time)
             {
                 return 1;
-
             }
-
         }
         else
         {

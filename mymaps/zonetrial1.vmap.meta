@@ -1,0 +1,23 @@
+{
+  "publish": {
+    "Enabled": false,
+    "ProjectConfig": {
+      "Title": "zonetrial1",
+      "Type": "map",
+      "Org": "local",
+      "Ident": "zonetrial1",
+      "Schema": 0,
+      "IncludeSourceFiles": false,
+      "Resources": null,
+      "PackageReferences": [],
+      "EditorReferences": [
+        "polyhaven.rustig_koppie_puresky#30194"
+      ],
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "maps/zonetrial1.vmap",
+        "ParentPackage": "move.stasis"
+      }
+    }
+  }
+}
