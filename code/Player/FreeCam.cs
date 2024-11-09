@@ -5,7 +5,7 @@ namespace Stasis.Player;
 public sealed class FreeCam : Component
 {
     [Property] public readonly GameObject thirdCam;
-    readonly float force = 20f;
+    readonly float force = 10f;
     float mult = 1f;
     Timer TIMER;
     MenuController MENUC;
@@ -51,7 +51,7 @@ public sealed class FreeCam : Component
         }
         if (Input.Down("Sprint"))
         {
-            mult = 3f;
+            mult = 5f;
         }
         else
         {

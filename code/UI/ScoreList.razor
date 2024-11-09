@@ -31,7 +31,7 @@
                             You
                         </div>
                     }
-                    <img class="watch @(sc.Replay == null ? "hide":"")" onclick="@(x => { if(sc.Replay is Replay r)Watch(r);})" src="img/play.png"/>
+                    <img class="watch @(sc.Replay == null ? "hide":"")" onclick="@(x => { Watch(sc);})" src="img/play.png"/>
                     <div class="time">@(time)</div>
                 </div>
                 }
@@ -62,8 +62,16 @@
         }
     }
 
-    public void Watch(Replay rep){
-        VIEWR.Watch(rep,MENUC.ChooseUI.GameObject);
+    public void Watch(Score sc){
+        if(parent.map.Indent != FILEC.currentMap.Indent)
+        {
+            FILEC.DownloadAndLoad(parent.map.Indent);
+        }
+
+        if(sc.Replay is Replay r)
+        {
+            VIEWR.Watch(r,MENUC.ChooseUI.GameObject);
+        }
     }
 
     async void SetGlobal()

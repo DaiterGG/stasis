@@ -49,8 +49,8 @@ public sealed class SpinTrigger : Component, Component.ICollisionListener
         WorldRotation = SPIN.PropRig.WorldRotation
             * Rotation.From(0, rotationOffset, 0);
         WorldPosition += new Vector3(0, -1f, 0) * WorldRotation;
-        Transform.ClearInterpolation();
         rig.Velocity = 0;
         rig.AngularVelocity = 0;
+        Transform.ClearInterpolation();
     }
 }

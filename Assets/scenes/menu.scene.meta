@@ -3,7 +3,7 @@
     "Enabled": false,
     "ProjectConfig": {
       "Title": "minimal",
-      "Type": "asset",
+      "Type": "map",
       "Org": "local",
       "Ident": "minimal",
       "Schema": 0,
@@ -11,8 +11,10 @@
       "Resources": null,
       "PackageReferences": null,
       "EditorReferences": null,
+      "IsWhitelistDisabled": false,
       "Metadata": {
-        "SingleAssetSource": "scenes/minimal.scene"
+        "SingleAssetSource": "scenes/menu.scene",
+        "ParentPackage": "move.stasis_beta"
       }
     }
   }

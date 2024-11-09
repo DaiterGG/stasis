@@ -33,7 +33,7 @@
         {
           "__type": "Stasis.Info",
           "__guid": "4b98eade-e9d0-49ff-a58b-3a51f422207a",
-          "Author": "Author Name",
+          "Author": "Daiter",
           "BronzeTime": 25,
           "DifficultyTier": 1,
           "GoldTime": 12.3,
@@ -60,7 +60,7 @@
           "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "maps/zonetrial1.vmap",
+          "MapName": "move.zonetrial1",
           "NoOrigin": false,
           "OnMapLoaded": null,
           "OnMapUnloaded": null,

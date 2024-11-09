@@ -59,7 +59,8 @@ public sealed class EngineComponent : Component
         if (!IsGaming) return;
 
         //gravity
-        if (!isRunning) rigid.ApplyImpulse(new Vector3(0, 0, gravity * -1 * .05f));
+        // if (!isRunning) rigid.ApplyImpulse(new Vector3(0, 0, gravity * -1 * .05f));
+        if (!isRunning) rigid.ApplyImpulse(new Vector3(0, 0, 0));
         else rigid.ApplyImpulse(new Vector3(0, 0, gravity * -1));
 
         //input

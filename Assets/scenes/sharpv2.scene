@@ -11,8 +11,8 @@
           "__type": "Sandbox.SceneInformation",
           "__guid": "002b1fed-23d4-4114-a638-d98e8caaf2e5",
           "Description": "",
-          "SceneTags": "",
-          "Title": "mapnew"
+          "SceneTags": "stasis",
+          "Title": "sharpv2"
         }
       ]
     },
@@ -34,9 +34,9 @@
           "__type": "Stasis.Info",
           "__guid": "ae61cdb4-daed-4352-a1b0-3ca5428d5f53",
           "Author": "Daiter",
-          "BronzeTime": 22,
+          "BronzeTime": 30,
           "DifficultyTier": 1,
-          "GoldTime": 15.5,
+          "GoldTime": 14,
           "SilverTime": 17,
           "SpeerunMap": true,
           "Version": "1.0"
@@ -55,7 +55,7 @@
           "__guid": "864ecf38-1cbd-42a3-9bd7-75bd89044408",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "maps/sharp5.vmap",
+          "MapName": "move.sharp5",
           "NoOrigin": false,
           "OnMapLoaded": null,
           "OnMapUnloaded": null,
@@ -68,7 +68,7 @@
       "__guid": "bddf0c53-f7e6-4afe-86f2-3f9dade8a1e6",
       "Flags": 0,
       "Name": "info_player_start",
-      "Position": "72.49091,314.3699,119.6535",
+      "Position": "72.49091,314.3699,64.14206",
       "Enabled": true,
       "Components": [
         {
@@ -82,8 +82,8 @@
       "__guid": "0784ce75-4b08-4265-8876-f1c83d30c647",
       "Flags": 0,
       "Name": "info_player_spawn",
-      "Position": "-1069.062,-978.6201,704.2569",
-      "Rotation": "0,0,0.9741734,0.2258014",
+      "Position": "10.83867,314.3699,64.14206",
+      "Rotation": "0,0,0.9937679,0.1114689",
       "Enabled": true,
       "Components": [
         {
@@ -97,7 +97,7 @@
       "__guid": "b2a7c630-7740-47a9-95c3-6f783a2c9930",
       "Flags": 0,
       "Name": "end_zone",
-      "Position": "-416.3633,-1534.937,-1279.539",
+      "Position": "-908.3925,-173.0793,-2959.061",
       "Enabled": true,
       "Components": [
         {
@@ -110,7 +110,7 @@
           "__guid": "6112d98f-97ec-426d-b4e5-a201e5185a57",
           "Center": "0,0,0",
           "IsTrigger": true,
-          "Scale": "826.7001,445.7001,505.8998",
+          "Scale": "344.5002,730.9992,596.6004",
           "Static": true,
           "SurfaceVelocity": "0,0,0"
         },
@@ -138,7 +138,7 @@
     "TimeScale": 1,
     "UseFixedUpdate": true,
     "Metadata": {
-      "Title": "mapnew"
+      "Title": "sharpv2"
     },
     "NavMesh": {
       "Enabled": false,
@@ -154,7 +154,7 @@
     }
   },
   "ResourceVersion": 2,
-  "Title": "mapnew",
+  "Title": "sharpv2",
   "Description": null,
   "__references": [],
   "__version": 2

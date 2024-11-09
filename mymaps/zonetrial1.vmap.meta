@@ -1,10 +1,10 @@
 {
   "publish": {
-    "Enabled": false,
+    "Enabled": true,
     "ProjectConfig": {
       "Title": "zonetrial1",
       "Type": "map",
-      "Org": "local",
+      "Org": "move",
       "Ident": "zonetrial1",
       "Schema": 0,
       "IncludeSourceFiles": false,
@@ -16,7 +16,7 @@
       "IsWhitelistDisabled": false,
       "Metadata": {
         "SingleAssetSource": "maps/zonetrial1.vmap",
-        "ParentPackage": "move.stasis"
+        "ParentPackage": "move.stasis_beta"
       }
     }
   }

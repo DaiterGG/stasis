@@ -2,6 +2,21 @@
   "__guid": "1dea2565-655d-4e32-8258-008ecaa61f80",
   "GameObjects": [
     {
+      "__guid": "d47b5b65-3808-4fe8-a130-d78d708a5954",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "7ad03faf-2cfc-469d-abae-c9ac0e80f49e",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "test"
+        }
+      ]
+    },
+    {
       "__guid": "e3f95f32-a439-4045-81e2-8b89d22a05f5",
       "Flags": 0,
       "Name": "Object",
@@ -12,8 +27,15 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "6972ea15-54b2-4440-8575-2820e5569062",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
           "RenderType": "On",
           "Tint": "1,1,1,1"
         }
@@ -80,9 +102,12 @@
           "EnableCollision": true,
           "MapName": "move.st_hexagon3",
           "NoOrigin": false,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
-      ]
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {
@@ -90,9 +115,13 @@
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 30,
     "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "test"
+    },
     "NavMesh": {
       "Enabled": false,
       "IncludeStaticBodies": true,
@@ -106,9 +135,9 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "test",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

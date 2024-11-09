@@ -2,6 +2,21 @@
   "__guid": "57481932-e58a-4548-894a-7198389fd6bf",
   "GameObjects": [
     {
+      "__guid": "b2acb4a5-3087-407a-89c9-73c0a8a87fec",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "748d76ab-d77d-4bbb-8277-70b9581a59a6",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "menu"
+        }
+      ]
+    },
+    {
       "__guid": "cbcdc3c0-ef60-4a63-a8aa-8c19debe3004",
       "Flags": 0,
       "Name": "Menu",
@@ -14,7 +29,7 @@
       "__guid": "2e1874c0-6ca1-4070-b69c-7a6bc16ffabd",
       "Flags": 0,
       "Name": "info_player_spawn",
-      "Position": "-1352.889,717.2156,192.3996",
+      "Position": "-1352.89,717.2169,191.9185",
       "Rotation": "0,0,0.9893994,0.14522",
       "Enabled": true,
       "Components": [
@@ -43,7 +58,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "525.1001,985.8994,408.7997",
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.AutoDecor",
@@ -62,7 +78,7 @@
       "__guid": "5fe5341c-4b11-480b-9e17-657b28d8e542",
       "Flags": 0,
       "Name": "info_player_start",
-      "Position": "-1274.911,705.0283,192.2418",
+      "Position": "-1274.911,705.0283,191.8785",
       "Enabled": true,
       "Components": [
         {
@@ -123,6 +139,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "9fa42905-9fdc-42de-96a7-a0869c4c3805",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "Model": "models/dev/box.vmdl",
           "RenderOptions": {
             "GameLayer": true,
@@ -146,9 +163,13 @@
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 60,
     "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "menu"
+    },
     "NavMesh": {
       "Enabled": false,
       "IncludeStaticBodies": true,
@@ -162,9 +183,9 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "menu",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

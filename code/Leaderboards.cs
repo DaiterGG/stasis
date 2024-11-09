@@ -8,10 +8,9 @@ namespace Stasis;
 
 public class LBControl
 {
-    public static readonly string ind = "move.stasis";
-
     static async Task<Leaderboards.Board2> GetMapLB(string mapInd, int amount, bool centerOnMe = false, bool yourCountry = false)
     {
+        var ind = Game.Ident;
         var lb = Leaderboards.GetFromStat(ind, mapInd);
         if (yourCountry)
             lb.SetCountryCode("auto");

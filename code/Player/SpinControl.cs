@@ -20,16 +20,19 @@ public sealed class SpinControl : Component
         PLAYEROBJ = Sng.Inst.Player.GameObject;
         TIMER = Sng.Inst.Timer;
         PropRig = GameObject.Components.Get<Rigidbody>();
-        foreach (var l in GameObject.Children.ToList())
+        // Sng.ELog("list: " + GameObject.Name);
+        foreach (var blade in GameObject.Children.ToList())
         {
-            var t = l.Components.Get<SpinTrigger>();
-            if (l.Enabled && t != null)
+            // Sng.ELog("blade: " + blade);
+            var trigger = blade.Components.Get<SpinTrigger>();
+            if (blade.Enabled && trigger != null)
             {
-                blades.Add(t);
-                RestartAllBlades += t.ResetPos;
-                t.OnAwakeInit();
+                blades.Add(trigger);
+                RestartAllBlades += trigger.ResetPos;
+                trigger.OnAwakeInit();
             }
         }
+        // Sng.ELog(RestartAllBlades);
         RestartSpin();
     }
     public void OnFixedGlobal()
@@ -70,7 +73,6 @@ public sealed class SpinControl : Component
             {
                 x.WorldPosition = new Vector3(9999999, 9999999, 9999999);
             }
-            // NOTE: Triggers the second collision
             x.Transform.ClearInterpolation();
 
             x.GameObject.SetParent(PLAYEROBJ, false);

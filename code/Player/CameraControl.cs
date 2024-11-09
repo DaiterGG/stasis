@@ -88,6 +88,7 @@ public sealed class CameraControl : Component
     {
         FreeCam.GameObject.Enabled = enable;
         UpdateCam();
+        if (!enable && MENUC.ReplayUI.InUse) MENUC.ReplayUI.GameObject.Enabled = true;
     }
     public void FreeCamToggle()
     {

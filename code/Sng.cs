@@ -22,15 +22,11 @@ public sealed class Sng : Component
     public bool blurOn { get; set; }
     protected override void OnAwake()
     {
-        if (Game.IsEditor && Scene.Name != "Scene" && GameObject.Parent.Name == "Game")
+        // Game.IsPaused = true;
+        // Log.Info(_sng.ToString());
+        if (_sng == null || "Sng on (null)" == _sng.ToString())
         {
             _sng = this;
-            ELog("testing main menu scene in editor mode");
-        }
-        else if (GameObject.Parent.Name == "Menu")
-        {
-            _sng = this;
-            ELog("Main game instance is loaded");
         }
         else
         {
@@ -39,6 +35,8 @@ public sealed class Sng : Component
             GameObject.Parent.DestroyImmediate();
             return;
         }
+
+
         blurOn = !Game.IsEditor;
         OnAwakeInit();
     }
@@ -59,19 +57,20 @@ public sealed class Sng : Component
 
     protected override void OnStart()
     {
-        FileC.AddOfficialMaps();
+        FileC.OnStartInit();
         //File.FetchNewMap( "move.stasis_playgr", "official" );
         //File.FetchNewMap( "dicta.base", "community" );
         //File.DownloadAndLoad( "move.stasis_playground", true );
 
         if (Game.IsEditor && Scene.Name != "Scene")
         {
-            FileC.SetCurrentMap("move.plground");
+            ELog("Testing local map");
+            FileC.SetCurrentMap(FileC.OfficialMaps.First());
             MapInit();
         }
         else
         {
-            FileC.DownloadAndLoad("move.plground");
+            FileC.DownloadAndLoad(FileC.OfficialMaps.First());
         }
         base.OnStart();
     }

@@ -69,6 +69,7 @@
     }
     public void GoBack()
     {
+        tickRelay = 0;
         InUse = false;
         if( VIEW.CallbackUI.Name == "Choose menu" )
         {
@@ -77,6 +78,7 @@
             MENUC.ChooseUI.GameObject.Enabled = true;
         }
         VIEW.CallbackUI.Enabled = true;
+        GameObject.Enabled = false;
     }
     protected override void OnAwake()
     {
@@ -86,5 +88,5 @@
         FREECAM = SNG.Player.CameraC.FreeCam.GameObject;
     }
 
-    protected override int BuildHash() => System.HashCode.Combine( VIEW.OldestTick, tickRelay, VIEW.CurrentTick, FREECAM.Enabled);
+    protected override int BuildHash() => System.HashCode.Combine(GameObject.Enabled, VIEW.OldestTick, tickRelay, VIEW.CurrentTick, FREECAM.Enabled);
 }

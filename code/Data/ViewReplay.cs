@@ -33,9 +33,7 @@ public class ViewReplay
 
     public void Watch(Replay rep, GameObject UIThatCalled)
     {
-        Sng.ELog(rep.Ticks.Count);
         if (rep.Ticks.Count == 0) rep.Ticks = ReplaySerialize.FromStrToTicks(rep.TicksUTF);
-        Sng.ELog(rep.Ticks.Count);
         Replay = rep;
         SNG.ChangeGameState(GameState.MainMenu);
         SNG.ChangeGameState(GameState.ViewReplay);
@@ -76,7 +74,7 @@ public class ViewReplay
         int nextTick = ReplaySpeed >= 0 ? (int)Math.Ceiling(newTick) : (int)newTick;
         float factor = (newTick - previousTick) / (nextTick - previousTick);
 
-        Log.Info(newTick + " " + previousTick + " " + nextTick + " " + CurrentTick);
+        //Log.Info(newTick + " " + previousTick + " " + nextTick + " " + CurrentTick);
 
         var prevRotation = Rotation.From(
             Replay.Ticks[previousTick].Pitch / 100f,

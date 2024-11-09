@@ -3,17 +3,18 @@
     "Enabled": true,
     "ProjectConfig": {
       "Title": "Hexagon",
-      "Type": "asset",
+      "Type": "map",
       "Org": "move",
-      "Ident": "hexagon2",
+      "Ident": "hexagon3",
       "Schema": 0,
       "IncludeSourceFiles": true,
       "Resources": null,
-      "PackageReferences": null,
+      "PackageReferences": [],
       "EditorReferences": null,
       "IsWhitelistDisabled": false,
       "Metadata": {
-        "SingleAssetSource": "scenes/hexagon.scene"
+        "SingleAssetSource": "scenes/hexagon.scene",
+        "ParentPackage": "move.stasis_beta"
       }
     }
   }

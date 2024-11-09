@@ -5,7 +5,7 @@
       "Title": "Sharp",
       "Type": "map",
       "Org": "move",
-      "Ident": "sharpv2",
+      "Ident": "sharpv3",
       "Schema": 0,
       "IncludeSourceFiles": true,
       "Resources": null,
@@ -14,7 +14,7 @@
       "IsWhitelistDisabled": false,
       "Metadata": {
         "SingleAssetSource": "scenes/sharpv2.scene",
-        "ParentPackage": "move.stasis"
+        "ParentPackage": "move.stasis_beta"
       }
     }
   }

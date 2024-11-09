@@ -3,17 +3,18 @@
     "Enabled": true,
     "ProjectConfig": {
       "Title": "Playground",
-      "Type": "asset",
+      "Type": "map",
       "Org": "move",
-      "Ident": "plground",
+      "Ident": "plground2",
       "Schema": 0,
       "IncludeSourceFiles": true,
       "Resources": null,
-      "PackageReferences": null,
+      "PackageReferences": [],
       "EditorReferences": null,
       "IsWhitelistDisabled": false,
       "Metadata": {
-        "SingleAssetSource": "scenes/plground.scene"
+        "SingleAssetSource": "scenes/plground.scene",
+        "ParentPackage": "move.stasis_beta"
       }
     }
   }

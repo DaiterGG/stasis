@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Text.RegularExpressions;
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Sandbox.Utility;
@@ -23,12 +24,17 @@ public sealed class FileControl
         FeaturedMaps = new string[] { };
         OfficialMaps = new string[]
         {
-        "move.plground",
-        "move.hexagon2",
-        "move.sharp2",
+        "move.plground2",
+        "move.hexagon3",
+        "move.sharpv3",
+        "move.zonetrial",
         };
 
         FilesInit();
+    }
+    public void OnStartInit()
+    {
+        AddOfficialMaps();
     }
 
     public void FilesInit()
@@ -68,6 +74,52 @@ public sealed class FileControl
     }
     public void AddOfficialMaps()
     {
+        //demote updated maps
+        foreach (var i in Maps)
+        {
+            if (i.Type == "official")
+            {
+                if (!OfficialMaps.Contains(i.Indent))
+                {
+                    i.Type = "community";
+                    SaveMaps();
+                }
+                else if (FeaturedMaps.Contains(i.Indent))
+                {
+                    i.Type = "featured";
+                    SaveMaps();
+                }
+            }
+            else
+            if (i.Type == "featured")
+            {
+                if (!FeaturedMaps.Contains(i.Indent))
+                {
+                    i.Type = "community";
+                    SaveMaps();
+                }
+                else if (OfficialMaps.Contains(i.Indent))
+                {
+                    i.Type = "official";
+                    SaveMaps();
+                }
+
+            }
+            else if (i.Type == "community")
+            {
+                if (FeaturedMaps.Contains(i.Indent))
+                {
+                    i.Type = "featured";
+                    SaveMaps();
+                }
+                else if (OfficialMaps.Contains(i.Indent))
+                {
+                    i.Type = "official";
+                    SaveMaps();
+                }
+            }
+
+        }
         foreach (var i in FeaturedMaps)
         {
             FetchNewMap(i, "featured");
@@ -77,9 +129,15 @@ public sealed class FileControl
             FetchNewMap(i, "official");
         }
     }
+    static string CaseInsenstiveReplace(string originalString, string oldValue, string newValue)
+    {
+        Regex regEx = new Regex(oldValue,
+        RegexOptions.IgnoreCase | RegexOptions.Multiline);
+        return regEx.Replace(originalString, newValue);
+    }
     public static void SaveMaps()
     {
-        FileSystem.Data.WriteAllText(m, ObjToJson(Sng.Inst.FileC.Maps));
+        FileSystem.Data.WriteAllText(m, ObjToJson(Sng.Inst.FileC.Maps).Replace(@"\u002B", "+"));
 
         Sng.Inst.MenuC.UpdateMapsList();
     }
@@ -166,7 +224,6 @@ public sealed class FileControl
             Log.Warning("Fetched data Don't have that map");
             return;
         }
-
     }
 
     public void InfoSerialize(Info info)

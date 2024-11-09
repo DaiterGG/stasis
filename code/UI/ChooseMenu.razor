@@ -91,7 +91,14 @@
     }
     public MapData GetSelectedMap()
     {
+        var log = "selectedMapId: " + selectedMapId + " " + "selectedType: " + selectedType;
+        try
+        {
         return GetList(selectedType)[selectedMapId];
+        } catch {
+            Log.Error("Selected error:\n" + log);
+            return Official[0];
+        }
     }
     void CloseMenu()
     {

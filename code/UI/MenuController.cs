@@ -141,7 +141,7 @@ public sealed class MenuController : Component
     {
         try
         {
-            Game.Overlay.ShowPackageSelector(/* "type:asset ext:scene " */"", delegate (Package p)
+            Game.Overlay.ShowPackageSelector(/* "type:asset ext:scene " */"type:map stasis", delegate (Package p)
             {
                 foreach (var m in FC.OfficialMaps)
                 {
@@ -193,7 +193,7 @@ public sealed class MenuController : Component
     }
     public void ShowEndScreen(float Time)
     {
-        Log.Info("showing end screen");
+        // Log.Info("showing end screen");
         if (FC.currentMap == null)
         {
             Log.Warning("no map info loaded?, why there is end_zone?");
@@ -308,7 +308,7 @@ public sealed class MenuController : Component
         var a = Input.GetButtonOrigin("Left").ToUpper();
         var d = Input.GetButtonOrigin("Right").ToUpper();
         var space = Input.GetButtonOrigin("SelfDestruct").ToUpper();
-        var g = Input.GetButtonOrigin("Back").ToUpper();
+        var b = Input.GetButtonOrigin("Back").ToUpper();
         var f = Input.GetButtonOrigin("SoftRestart").ToUpper();
         var r = Input.GetButtonOrigin("Restart").ToUpper();
         var t = Input.GetButtonOrigin("CameraCycle").ToUpper();
@@ -317,16 +317,16 @@ public sealed class MenuController : Component
         var h = Input.GetButtonOrigin("ShowInfo").ToUpper();
         var o = Input.GetButtonOrigin("Toggle").ToUpper();
         var m = Input.GetButtonOrigin("Attack2").ToUpper();
-        return $"{g} - Back to menu\n" +
+        return $"{b} - Back to menu\n" +
             $"{w} {a} {s} {d} - To move\n" +
             $"{f} - Reset to checkpoint\n" +
             $"{r} - Reset to start\n" +
             $"{space} - Self destruct/jump\n" +
-            $"{m} - Adjust camera Angle\n" +
+            $"{m} - Adjust camera angle\n" +
             $"{t} - Change view\n" +
             $"{c} - Free camera\n" +
-            $"{o} - Save State Menu\n" +
+            $"{o} - Save state menu\n" +
             $"{u} - Hide UI\n" +
-            $"{h} - Hide Info\n";
+            $"{h} - Hide info\n";
     }
 }
