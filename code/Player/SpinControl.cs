@@ -11,14 +11,16 @@ public sealed class SpinControl : Component
     EngineComponent ENGINE;
     GameObject PLAYEROBJ;
     Timer TIMER;
+    Sng SNG;
     float speedMult = 0.2f;
     public bool IsAttached { get; private set; }
     List<SpinTrigger> blades = new List<SpinTrigger>();
     public void OnAwakeInit()
     {
-        ENGINE = Sng.Inst.Player.Engine;
-        PLAYEROBJ = Sng.Inst.Player.GameObject;
-        TIMER = Sng.Inst.Timer;
+        SNG = Sng.Inst;
+        ENGINE = SNG.Player.Engine;
+        PLAYEROBJ = SNG.Player.GameObject;
+        TIMER = SNG.Timer;
         PropRig = GameObject.Components.Get<Rigidbody>();
         // Sng.ELog("list: " + GameObject.Name);
         foreach (var blade in GameObject.Children.ToList())
@@ -49,7 +51,7 @@ public sealed class SpinControl : Component
     /// </summary>
     public void SpinCollision()
     {
-        if (!IsAttached || !ENGINE.IsGaming) return;
+        if (!IsAttached || SNG.GameState != GameState.Play) return;
 
         BreakSpin(true, ENGINE.progress == 100 ? (int)(ENGINE.gain / ENGINE.maxGain * 100f) : ENGINE.progress);
     }

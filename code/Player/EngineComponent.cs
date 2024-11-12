@@ -8,6 +8,7 @@ public sealed class EngineComponent : Component
     IngameUI GAMEUI;
     MenuController MENUC;
     Timer TIMER;
+    Sng SNG;
     FreeCam FREECAM;
     FileControl FC;
     SpinControl SPINC;
@@ -26,12 +27,11 @@ public sealed class EngineComponent : Component
     public float gain { get; private set; } = 0f;
     float maxGainGravityScale = 1.15f;
     public float maxGain { get { return gravity * maxGainGravityScale; } }
-    public bool IsGaming;
     public bool InputActive
     {
         get
         {
-            return !FREECAM.GameObject.Enabled && SPINC.IsAttached && IsGaming;
+            return !FREECAM.GameObject.Enabled && SPINC.IsAttached && SNG.GameState == GameState.Play;
         }
         set { }
     }
@@ -44,19 +44,19 @@ public sealed class EngineComponent : Component
 
     public void OnAwakeInit()
     {
-
-        FREECAM = Sng.Inst.Player.CameraC.FreeCam;
-        SPINC = Sng.Inst.Player.SpinC;
-        MENUC = Sng.Inst.MenuC;
+        SNG = Sng.Inst;
+        FREECAM = SNG.Player.CameraC.FreeCam;
+        SPINC = SNG.Player.SpinC;
+        MENUC = SNG.MenuC;
         GAMEUI = MENUC.IngameUI;
-        FC = Sng.Inst.FileC;
-        TIMER = Sng.Inst.Timer;
+        FC = SNG.FileC;
+        TIMER = SNG.Timer;
         rigid = GameObject.Components.Get<Rigidbody>();
         ResetPos(true);
     }
     public void OnFixedGlobal()
     {
-        if (!IsGaming) return;
+        if (SNG.GameState != GameState.Play) return;
 
         //gravity
         // if (!isRunning) rigid.ApplyImpulse(new Vector3(0, 0, gravity * -1 * .05f));

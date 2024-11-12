@@ -6,44 +6,47 @@
 @inherits PanelComponent
 
 <root class="root" >
-    <div class="display" onmousedown="@((x) => {
-    if (FREECAM.Enabled) {
-        GameObject.Enabled = false;
-    }})">
-        @if (FREECAM.Enabled)
-        {
-            <div class="info">Click to move camera</div>
-        }
-    </div>
-    <div class="panel">
-        <div class="up">
+    @if(MENUC.ReplayUIVisible)
+    {
+        <div class="display" onmousedown="@((x) => {
+        if (FREECAM.Enabled) {
+            GameObject.Enabled = false;
+        }})">
+            @if (FREECAM.Enabled)
+            {
+                <div class="info">Click to move camera</div>
+            }
+        </div>
+        <div class="panel">
+            <div class="up">
 
-            <div class="controls">
-                <img class="prev" onclick="@((x)=>{TickRelay--;})" src="img/skip_previous.png" />
-                @if (VIEW.IsPlaying)
-                {
-                    <img class="resume" onclick="@((x) => {VIEW.PauseView(true);})" src="img/pause.png" />
-                }
-                else
-                {
-                    <img class="play" onclick="@((x)=>{VIEW.PauseView(false);})" src="img/play.png" />
-                }
-                <img class="next" onclick="@((x)=>{TickRelay++;})" src="img/skip_next.png" />
-                <div class="speed">
-                    <SliderControl Min=@(-3f) Max=@(10f) Step=@(0.1f) Value:bind=@VIEW.ReplaySpeed />
+                <div class="controls">
+                    <img class="prev" onclick="@((x)=>{TickRelay--;})" src="img/skip_previous.png" />
+                    @if (VIEW.IsPlaying)
+                    {
+                        <img class="resume" onclick="@((x) => {VIEW.PauseView(true);})" src="img/pause.png" />
+                    }
+                    else
+                    {
+                        <img class="play" onclick="@((x)=>{VIEW.PauseView(false);})" src="img/play.png" />
+                    }
+                    <img class="next" onclick="@((x)=>{TickRelay++;})" src="img/skip_next.png" />
+                    <div class="speed">
+                        <SliderControl Min=@(-3f) Max=@(10f) Step=@(0.1f) Value:bind=@VIEW.ReplaySpeed />
+                    </div>
+                </div>
+                <img class="copy" onclick="@((x) => {GoBack();})" src="img/copy.png" />
+                <img class="upload" onclick="@((x) => {GoBack();})" src="img/upload.png" />
+                <div class="label">Tick: @(tickRelay)</div>
+                <img class="goback" onclick="@((x) => {GoBack();})" src="img/back.png" />
+            </div>
+            <div class="control-wrap">
+                <div class="control">
+                    <SliderControl Min=@(0) Max=@VIEW.Replay.Ticks.Count Step=@(1) Value:bind=@TickRelay />
                 </div>
             </div>
-            <img class="copy" onclick="@((x) => {GoBack();})" src="img/copy.png" />
-            <img class="upload" onclick="@((x) => {GoBack();})" src="img/upload.png" />
-            <div class="label">Tick: @(tickRelay)</div>
-            <img class="goback" onclick="@((x) => {GoBack();})" src="img/back.png" />
         </div>
-        <div class="control-wrap">
-            <div class="control">
-                <SliderControl Min=@(0) Max=@VIEW.Replay.Ticks.Count Step=@(1) Value:bind=@TickRelay />
-            </div>
-        </div>
-    </div>
+    }
 </root>
 
 @code
@@ -53,7 +56,6 @@
     Sng SNG;
     GameObject FREECAM;
     int tickRelay;
-    public bool InUse = false;
     public int TickRelay
     {
         get { return tickRelay; }
@@ -70,13 +72,14 @@
     public void GoBack()
     {
         tickRelay = 0;
-        InUse = false;
         if( VIEW.CallbackUI.Name == "Choose menu" )
         {
             SNG.ChangeGameState(GameState.MainMenu);
             MENUC.MenuUI.GameObject.Enabled = false;
             MENUC.ChooseUI.GameObject.Enabled = true;
         }
+
+        SNG.ChangeGameState(GameState.Play);
         VIEW.CallbackUI.Enabled = true;
         GameObject.Enabled = false;
     }

@@ -51,8 +51,6 @@ public class ViewReplay
             else
                 Sng.Inst.ChangeGameState(GameState.ViewReplay);
         }
-        //
-
 
         if (!IsPlaying || Replay == null) return;
         NextTick();
@@ -90,7 +88,7 @@ public class ViewReplay
             Vector3.Lerp(Replay.Ticks[previousTick].Transform, Replay.Ticks[nextTick].Transform, factor),
             Rotation.Lerp(prevRotation, nextRotation, factor));
         // Log.Info(" CurrentTick " + CurrentTick + " NewTick " + newTick +" PreviousTick " + previousTick +" NextTick " + nextTick +" Factor " + factor);
-        //Log.Info( " Pitch " + Replay.Ticks[nextTick].Pitch + " Yaw " + Replay.Ticks[nextTick].Yaw + " Roll " + Replay.Ticks[nextTick].Roll );
+        // Log.Info( " Pitch " + Replay.Ticks[nextTick].Pitch + " Yaw " + Replay.Ticks[nextTick].Yaw + " Roll " + Replay.Ticks[nextTick].Roll );
         CurrentTick = newTick;
 
         var ticksPassed = OldestTick - CurrentTick;

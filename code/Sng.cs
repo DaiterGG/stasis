@@ -9,6 +9,8 @@ public sealed class Sng : Component
     private static Sng _sng;
     public static Sng Inst { get { return _sng; } }
 
+    public GameState GameState { get; set; }
+
     [Property] public MenuController MenuC;
     [Property] public PlayerComp Player;
     [Property] public ZoneControl ZoneC;
@@ -126,7 +128,7 @@ public sealed class Sng : Component
         try
         {
             MenuC.BlackUI.Opacity -= 0.005f;
-            if (!MenuC.MainMenuIsOpen)
+            if (GameState == GameState.Play)
             {
                 if (Input.Pressed("SoftRestart"))
                 {
@@ -162,7 +164,7 @@ public sealed class Sng : Component
                     MenuC.InGameHelpToggle();
                 }
             }
-            else if (MenuC.MainMenuIsOpen)
+            else if (GameState == GameState.MainMenu)
             {
                 if (Input.Pressed("SelfDestruct"))
                 {
@@ -173,12 +175,23 @@ public sealed class Sng : Component
                     MenuC.Quit();
                 }
             }
+            else if (GameState == GameState.ViewReplay)
+            {
+                if (Input.Pressed("HideUI"))
+                {
+                    MenuC.ReplayUIToggle();
+                }
+                if (Input.Pressed("Back"))
+                {
+                    MenuC.ReplayUI.GoBack();
+                }
+            }
 
             StateC.OnFixedGlobal();
             Player.SoundC.OnFixedGlobal();
             Player.SpinC.OnFixedGlobal();
             Player.Engine.OnFixedGlobal();
-            if (!MenuC.MainMenuIsOpen) Timer.OnFixedGlobal();
+            if (GameState == GameState.Play || GameState == GameState.ViewReplay) Timer.OnFixedGlobal();
             Player.CameraC.OnFixedGlobal();
             RecordC.OnFixedGlobal();
         }
@@ -212,6 +225,8 @@ public sealed class Sng : Component
     }
     public void ChangeGameState(GameState state)
     {
+        GameState = state;
+
         Player.CameraC.FreeCamEnable(false);
         Player.SpinC.RestartSpin();
         ViewC.PauseView();
@@ -219,17 +234,14 @@ public sealed class Sng : Component
         ZoneC.ZonesReset();
 
         MenuC.ReplayUI.GameObject.Enabled = false;
-        MenuC.ReplayUI.InUse = false;
 
         MenuC.GameUIVisible = false;
-        Player.Engine.IsGaming = false;
         StateC.Enabled = false;
         switch (state)
         {
             case GameState.Play:
                 Timer.Reset();
                 MenuC.GameUIVisible = true;
-                Player.Engine.IsGaming = true;
                 MenuC.CloseMenu();
                 TeleportPlayer(ZoneC.StartPoint);
                 break;
@@ -249,7 +261,6 @@ public sealed class Sng : Component
             case GameState.ViewReplay:
                 MenuC.CloseMenu();
                 MenuC.ReplayUI.GameObject.Enabled = true;
-                MenuC.ReplayUI.InUse = true;
                 break;
         }
     }

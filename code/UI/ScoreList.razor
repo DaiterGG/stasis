@@ -59,6 +59,10 @@
         else
         {
             if (FILEC.GetScores(parent.map.Indent) is List<Score> l) local = l;
+            if (local.Count == 0) return;
+            if (local.First().Time < local.Last().Time){
+                local.Sort((x, y) => x.Time.CompareTo(y.Time));
+            }
         }
     }
 

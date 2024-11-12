@@ -7,6 +7,7 @@ public sealed class CameraControl : Component
     EngineComponent ENGINE;
     FileControl FC;
     MenuController MENUC;
+    Sng SNG;
     [Property] public FreeCam FreeCam;
     [Property] public List<GameObject> cameras;
     int iEnabled = 0;
@@ -17,6 +18,7 @@ public sealed class CameraControl : Component
         ENGINE = Sng.Inst.Player.Engine;
         FC = Sng.Inst.FileC;
         MENUC = Sng.Inst.MenuC;
+        SNG = Sng.Inst;
         FreeCam.OnAwakeInit();
         cameraAdjust = false;
         cameraAngle = FC.Set.CameraAngle;
@@ -51,7 +53,7 @@ public sealed class CameraControl : Component
                 FileControl.SaveSettings();
             }
         }
-        if (MENUC.ReplayUI.InUse && (Input.Pressed("Attack2") || Input.Pressed("Attack1")))
+        if (SNG.GameState == GameState.ViewReplay && (Input.Pressed("Attack2") || Input.Pressed("Attack1")))
         {
             MENUC.ReplayUI.GameObject.Enabled = true;
         }
@@ -88,7 +90,7 @@ public sealed class CameraControl : Component
     {
         FreeCam.GameObject.Enabled = enable;
         UpdateCam();
-        if (!enable && MENUC.ReplayUI.InUse) MENUC.ReplayUI.GameObject.Enabled = true;
+        if (!enable && SNG.GameState == GameState.ViewReplay) MENUC.ReplayUI.GameObject.Enabled = true;
     }
     public void FreeCamToggle()
     {

@@ -21,7 +21,6 @@ public sealed class MenuController : Component
 
 
     public float speed = 0;
-    public bool MainMenuIsOpen = false;
     GameObject BODY;
     SpinControl SPINC;
     Timer TIMER;
@@ -45,7 +44,7 @@ public sealed class MenuController : Component
     }
     protected override void OnUpdate()
     {
-        if (!MainMenuIsOpen)
+        if (SNG.GameState != GameState.MainMenu)
         {
             return;
         }
@@ -92,14 +91,12 @@ public sealed class MenuController : Component
         Camera.Enabled = false;
         IngameUI.GameObject.Enabled = true;
         MenuUI.GameObject.Enabled = false;
-        MainMenuIsOpen = false;
     }
     public void OpenMenu()
     {
         Camera.Enabled = true;
         IngameUI.GameObject.Enabled = false;
         GameUIVisible = false;
-        MainMenuIsOpen = true;
         ChooseUI.GameObject.Enabled = false;
         MenuUI.GameObject.Enabled = true;
         HelpVisible = false;
@@ -251,12 +248,17 @@ public sealed class MenuController : Component
     public void InGameUIToggle()
     {
         GameUIVisible = !GameUIVisible;
-        Sng.ELog(GameUIVisible);
     }
     public bool HelpVisible { get; set; } = false;
     public void InGameHelpToggle()
     {
         HelpVisible = !HelpVisible;
+    }
+
+    public bool ReplayUIVisible { get; set; } = true;
+    public void ReplayUIToggle()
+    {
+        ReplayUIVisible = !ReplayUIVisible;
     }
     public int GetMedal(MapData map)
     {
