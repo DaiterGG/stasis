@@ -1,4 +1,3 @@
-using System;
 using Sandbox.Audio;
 using Stasis.Data;
 using Stasis.Player;
@@ -8,6 +7,7 @@ namespace Stasis.UI;
 public sealed class MenuController : Component
 {
     [Property] public MainMenu MenuUI { get; set; }
+    [Property] public ImportReplay ImportUI { get; set; }
     [Property] public IngameUI IngameUI { get; set; }
     [Property] public EndScreen EndUI { get; set; }
     [Property] public SettingsUI SetUI { get; set; }
@@ -44,22 +44,22 @@ public sealed class MenuController : Component
     }
     protected override void OnUpdate()
     {
-        if (SNG.GameState != GameState.MainMenu)
+        if ( SNG.GameState != GameState.MainMenu )
         {
             return;
         }
-        if (Input.Down("attack1") || Input.Down("attack2"))
+        if ( Input.Down( "attack1" ) || Input.Down( "attack2" ) )
         {
             speed += Mouse.Delta.x / 2000f;
         }
 
         var rad = Camera.WorldPosition - BODY.WorldPosition;
-        var sin = (float)Math.Sin(speed);
-        var cos = (float)Math.Cos(speed);
+        var sin = (float)Math.Sin( speed );
+        var cos = (float)Math.Cos( speed );
         var x = rad.x * cos - rad.y * sin;
         var y = rad.x * sin + rad.y * cos;
 
-        Camera.WorldPosition = new Vector3(x, y, Camera.WorldPosition.z) + BODY.WorldPosition * new Vector3(1, 1, 0);
+        Camera.WorldPosition = new Vector3( x, y, Camera.WorldPosition.z ) + BODY.WorldPosition * new Vector3( 1, 1, 0 );
         //Camera.WorldRotation = Rotation.FromYaw(Mouse.Delta.x / 100) + Camera.WorldRotation;
         SetCameraLook();
         speed *= 0.93f;
@@ -79,12 +79,12 @@ public sealed class MenuController : Component
     public void SetCameraLook()
     {
         var rad = Camera.WorldPosition - BODY.WorldPosition;
-        Camera.WorldRotation = Rotation.LookAt(rad * new Vector3(-1, -1, 0)) * Rotation.FromYaw(yawOffset) * Rotation.FromPitch(pitchOffset);
+        Camera.WorldRotation = Rotation.LookAt( rad * new Vector3( -1, -1, 0 ) ) * Rotation.FromYaw( yawOffset ) * Rotation.FromPitch( pitchOffset );
 
     }
     public void PlayPressed()
     {
-        SNG.ChangeGameState(GameState.Play);
+        SNG.ChangeGameState( GameState.Play );
     }
     public void CloseMenu()
     {
@@ -131,54 +131,54 @@ public sealed class MenuController : Component
     }
     public void ViewReplayPressed()
     {
-        SNG.ChangeGameState(GameState.ViewReplay);
+        SNG.ChangeGameState( GameState.ViewReplay );
     }
 
     public void MapSelect()
     {
         try
         {
-            Game.Overlay.ShowPackageSelector(/* "type:asset ext:scene " */"type:map stasis", delegate (Package p)
+            Game.Overlay.ShowPackageSelector(/* "type:asset ext:scene " */"type:map stasis", delegate ( Package p )
             {
-                foreach (var m in FC.OfficialMaps)
+                foreach ( var m in FC.OfficialMaps )
                 {
-                    if (m == p.FullIdent)
+                    if ( m == p.FullIdent )
                     {
-                        FC.FetchNewMap(m, "official");
+                        FC.FetchNewMap( m, "official" );
                         return;
                     }
                 }
-                foreach (var m in FC.FeaturedMaps)
+                foreach ( var m in FC.FeaturedMaps )
                 {
-                    if (m == p.FullIdent)
+                    if ( m == p.FullIdent )
                     {
-                        FC.FetchNewMap(m, "featured");
+                        FC.FetchNewMap( m, "featured" );
                         return;
                     }
                 }
-                FC.FetchNewMap(p.FullIdent, "community");
-            });
+                FC.FetchNewMap( p.FullIdent, "community" );
+            } );
         }
-        catch (Exception e) { Log.Warning(e); }
+        catch ( Exception e ) { Log.Warning( e ); }
     }
     public void UpdateMapsList()
     {
         ChooseUI.Official.Clear();
         ChooseUI.Featured.Clear();
         ChooseUI.Community.Clear();
-        foreach (var m in FC.Maps)
+        foreach ( var m in FC.Maps )
         {
-            if (m.Type == "official")
+            if ( m.Type == "official" )
             {
-                ChooseUI.Official.Add(m);
+                ChooseUI.Official.Add( m );
             }
-            else if (m.Type == "featured")
+            else if ( m.Type == "featured" )
             {
-                ChooseUI.Featured.Add(m);
+                ChooseUI.Featured.Add( m );
             }
             else
             {
-                ChooseUI.Community.Add(m);
+                ChooseUI.Community.Add( m );
             }
             //ChooseUI.Official.Add( m );
             //ChooseUI.Community.Add( m );
@@ -188,27 +188,27 @@ public sealed class MenuController : Component
     {
         Game.Close();
     }
-    public void ShowEndScreen(float Time)
+    public void ShowEndScreen( float Time )
     {
         // Log.Info("showing end screen");
-        if (FC.currentMap == null)
+        if ( FC.currentMap == null )
         {
-            Log.Warning("no map info loaded?, why there is end_zone?");
+            Log.Warning( "no map info loaded?, why there is end_zone?" );
             return;
         }
-        if (Time == 0)
+        if ( Time == 0 )
         {
-            Log.Warning("Time = 0");
+            Log.Warning( "Time = 0" );
             return;
         }
         var time = FC.currentMap.Scores[0].Time;
-        if (FC.currentMap.SpeedRun)
+        if ( FC.currentMap.SpeedRun )
         {
-            EndUI.Gold = SNG.FormatTime(FC.currentMap.GoldTime);
-            EndUI.Silver = SNG.FormatTime(FC.currentMap.SilverTime);
-            EndUI.Bronze = SNG.FormatTime(FC.currentMap.BronzeTime);
+            EndUI.Gold = SNG.FormatTime( FC.currentMap.GoldTime );
+            EndUI.Silver = SNG.FormatTime( FC.currentMap.SilverTime );
+            EndUI.Bronze = SNG.FormatTime( FC.currentMap.BronzeTime );
 
-            EndUI.medal = GetMedal(FC.currentMap);
+            EndUI.medal = GetMedal( FC.currentMap );
         }
         else
         {
@@ -217,15 +217,15 @@ public sealed class MenuController : Component
             EndUI.Bronze = "";
             EndUI.medal = -1;
         }
-        var strtime = SNG.FormatTime(Time);
-        EndUI.Time = strtime.Split('.')[0];
-        EndUI.TimeMil = "." + strtime.Split('.')[1];
+        var strtime = SNG.FormatTime( Time );
+        EndUI.Time = strtime.Split( '.' )[0];
+        EndUI.TimeMil = "." + strtime.Split( '.' )[1];
         EndUI.Scores = FC.currentMap.Scores;
-        if (FC.currentMap.Scores.Count > 0)
+        if ( FC.currentMap.Scores.Count > 0 )
         {
-            if (FC.currentMap.Scores[0].Time == Time && FC.currentMap.Scores.Count > 1)
+            if ( FC.currentMap.Scores[0].Time == Time && FC.currentMap.Scores.Count > 1 )
             {
-                EndUI.TimeDif = ("-" + SNG.FormatTime(FC.currentMap.Scores[1].Time - Time));
+                EndUI.TimeDif = ("-" + SNG.FormatTime( FC.currentMap.Scores[1].Time - Time ));
                 EndUI.timesave = true;
 
             }
@@ -233,7 +233,7 @@ public sealed class MenuController : Component
             {
 
                 EndUI.timesave = false;
-                EndUI.TimeDif = ("+" + SNG.FormatTime(Time - FC.currentMap.Scores[0].Time));
+                EndUI.TimeDif = ("+" + SNG.FormatTime( Time - FC.currentMap.Scores[0].Time ));
             }
 
         }
@@ -260,21 +260,21 @@ public sealed class MenuController : Component
     {
         ReplayUIVisible = !ReplayUIVisible;
     }
-    public int GetMedal(MapData map)
+    public int GetMedal( MapData map )
     {
-        if (map == null || map.Scores == null || map.Scores.Count == 0 || map.GoldTime == 0) return 0;
+        if ( map == null || map.Scores == null || map.Scores.Count == 0 || map.GoldTime == 0 ) return 0;
         var time = map.Scores[0].Time;
-        if (map.SpeedRun)
+        if ( map.SpeedRun )
         {
-            if (map.GoldTime > time)
+            if ( map.GoldTime > time )
             {
                 return 3;
             }
-            else if (map.SilverTime > time)
+            else if ( map.SilverTime > time )
             {
                 return 2;
             }
-            else if (map.BronzeTime > time)
+            else if ( map.BronzeTime > time )
             {
                 return 1;
             }
@@ -289,36 +289,36 @@ public sealed class MenuController : Component
 
     public void ApplySettings()
     {
-        if (FC.Set.Volume > 10) FC.Set.Volume = 10;
+        if ( FC.Set.Volume > 10 ) FC.Set.Volume = 10;
         Mixer.Master.Volume = FC.Set.Volume / 10f;
 
     }
     public void Copy()
     {
-        Clipboard.SetText("https://discord.gg/JNrNHxDE2D");
+        Clipboard.SetText( "https://discord.gg/JNrNHxDE2D" );
 
     }
     public void ShowInfo()
     {
-        //if ( infoOnce && SNG.firstTime ) IngameUI.ShowInfo( ControlsInfo() );
-        IngameUI.ShowInfo(ControlsInfo());
+        //if ( infoOnce && SNG.FirstTime ) IngameUI.ShowInfo( ControlsInfo() );
+        IngameUI.ShowInfo( ControlsInfo() );
     }
     private string ControlsInfo()
     {
-        var w = Input.GetButtonOrigin("Up").ToUpper();
-        var s = Input.GetButtonOrigin("Down").ToUpper();
-        var a = Input.GetButtonOrigin("Left").ToUpper();
-        var d = Input.GetButtonOrigin("Right").ToUpper();
-        var space = Input.GetButtonOrigin("SelfDestruct").ToUpper();
-        var b = Input.GetButtonOrigin("Back").ToUpper();
-        var f = Input.GetButtonOrigin("SoftRestart").ToUpper();
-        var r = Input.GetButtonOrigin("Restart").ToUpper();
-        var t = Input.GetButtonOrigin("CameraCycle").ToUpper();
-        var c = Input.GetButtonOrigin("FreeCamera").ToUpper();
-        var u = Input.GetButtonOrigin("HideUI").ToUpper();
-        var h = Input.GetButtonOrigin("ShowInfo").ToUpper();
-        var o = Input.GetButtonOrigin("Toggle").ToUpper();
-        var m = Input.GetButtonOrigin("Attack2").ToUpper();
+        var w = Input.GetButtonOrigin( "Up" ).ToUpper();
+        var s = Input.GetButtonOrigin( "Down" ).ToUpper();
+        var a = Input.GetButtonOrigin( "Left" ).ToUpper();
+        var d = Input.GetButtonOrigin( "Right" ).ToUpper();
+        var space = Input.GetButtonOrigin( "SelfDestruct" ).ToUpper();
+        var b = Input.GetButtonOrigin( "Back" ).ToUpper();
+        var f = Input.GetButtonOrigin( "SoftRestart" ).ToUpper();
+        var r = Input.GetButtonOrigin( "Restart" ).ToUpper();
+        var t = Input.GetButtonOrigin( "CameraCycle" ).ToUpper();
+        var c = Input.GetButtonOrigin( "FreeCamera" ).ToUpper();
+        var u = Input.GetButtonOrigin( "HideUI" ).ToUpper();
+        var h = Input.GetButtonOrigin( "ShowInfo" ).ToUpper();
+        var o = Input.GetButtonOrigin( "Toggle" ).ToUpper();
+        var m = Input.GetButtonOrigin( "Attack2" ).ToUpper();
         return $"{b} - Back to menu\n" +
             $"{w} {a} {s} {d} - To move\n" +
             $"{f} - Reset to checkpoint\n" +

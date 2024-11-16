@@ -4,6 +4,7 @@ using Stasis.UI;
 namespace Stasis.Player;
 public sealed class CameraControl : Component
 {
+
     EngineComponent ENGINE;
     FileControl FC;
     MenuController MENUC;
@@ -30,30 +31,30 @@ public sealed class CameraControl : Component
     /// </summary>
     public void OnFixedGlobal()
     {
-        if (Input.Pressed("CameraCycle"))
+        if ( Input.Pressed( "CameraCycle" ) )
         {
             iEnabled += 1;
-            if (iEnabled >= cameras.Count) iEnabled = 0;
+            if ( iEnabled >= cameras.Count ) iEnabled = 0;
             UpdateCam();
         }
-        if (Input.Pressed("FreeCamera"))
+        if ( Input.Pressed( "FreeCamera" ) )
         {
             FreeCamToggle();
         }
-        if (Input.Pressed("attack2") && !FreeCam.GameObject.Enabled && iEnabled == 0)
+        if ( Input.Pressed( "attack2" ) && !FreeCam.GameObject.Enabled && iEnabled == 0 )
         {
             cameraAdjust = true;
         }
-        if (Input.Released("attack2"))
+        if ( Input.Released( "attack2" ) )
         {
             cameraAdjust = false;
-            if (cameraAngle != FC.Set.CameraAngle)
+            if ( cameraAngle != FC.Set.CameraAngle )
             {
                 FC.Set.CameraAngle = cameraAngle;
                 FileControl.SaveSettings();
             }
         }
-        if (SNG.GameState == GameState.ViewReplay && (Input.Pressed("Attack2") || Input.Pressed("Attack1")))
+        if ( SNG.GameState == GameState.ViewReplay && Input.Pressed( "Attack1" ) )
         {
             MENUC.ReplayUI.GameObject.Enabled = true;
         }
@@ -61,50 +62,60 @@ public sealed class CameraControl : Component
     }
     protected override void OnUpdate()
     {
-        if (cameraAdjust)
+        if ( cameraAdjust )
         {
             cameraAngle = cameras[0].LocalRotation.Pitch();
             UpdateAngle();
         }
     }
+    public void UpdatePosition( Vector3 pos, Rotation r )
+    {
+        //TODO: Define third camera separately
+        cameras[0].WorldPosition = pos;
+        cameras[0].WorldRotation = r;
+
+        FreeCamToggle();
+    }
     void UpdateAngle()
     {
         cameraAngle += Input.AnalogLook.pitch * Time.Delta * 3f;
-        if (Math.Abs(cameraAngle) > 89) cameraAngle = 89 * Math.Sign(cameraAngle);
-        cameras[0].LocalRotation = Rotation.From(cameraAngle, cameras[0].LocalRotation.Yaw(), 0);
+        if ( Math.Abs( cameraAngle ) > 89 ) cameraAngle = 89 * Math.Sign( cameraAngle );
+
+        //TODO: Define third camera separately
+        cameras[0].LocalRotation = Rotation.From( cameraAngle, cameras[0].LocalRotation.Yaw(), 0 );
     }
     public void UpdateCam()
     {
         var active = iEnabled;
-        if (FreeCam.GameObject.Enabled)
+        if ( FreeCam.GameObject.Enabled )
         {
             active = -1;
         }
-        for (int i = 0; i < cameras.Count; i++)
+        for ( int i = 0; i < cameras.Count; i++ )
         {
-            if (i == active) cameras[i].Enabled = true;
+            if ( i == active ) cameras[i].Enabled = true;
             else cameras[i].Enabled = false;
         }
     }
-    public void FreeCamEnable(bool enable = true)
+    public void FreeCamEnable( bool enable = true )
     {
         FreeCam.GameObject.Enabled = enable;
         UpdateCam();
-        if (!enable && SNG.GameState == GameState.ViewReplay) MENUC.ReplayUI.GameObject.Enabled = true;
+        if ( !enable && SNG.GameState == GameState.ViewReplay ) MENUC.ReplayUI.GameObject.Enabled = true;
     }
     public void FreeCamToggle()
     {
-        FreeCamEnable(!FreeCam.GameObject.Enabled);
+        FreeCamEnable( !FreeCam.GameObject.Enabled );
     }
     public void TeleportToFreecam()
     {
         var zone = Sng.Inst.ZoneC;
-        SaveStateControl.ApplySaveState(new SaveState()
+        SaveStateControl.ApplySaveState( new SaveState()
         {
             Transform = FreeCam.WorldPosition,
             Rotation = FreeCam.WorldRotation,
-            Velocity = new Vector3(0),
-            AngularVelocity = new Vector3(0),
+            Velocity = new Vector3( 0 ),
+            AngularVelocity = new Vector3( 0 ),
             Time = 0,
             SpinAttached = true,
             EngineRunning = true,
@@ -112,9 +123,9 @@ public sealed class CameraControl : Component
             Progress = 100,
             ActiveBeacons = zone.GetActiveBeacons(),
             CheckPointActivated = zone.CheckPointActivated
-        });
+        } );
 
-        FreeCamEnable(false);
+        FreeCamEnable( false );
 
     }
 }

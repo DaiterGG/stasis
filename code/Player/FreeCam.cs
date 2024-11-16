@@ -1,65 +1,82 @@
 using Stasis.UI;
-using System;
 
 namespace Stasis.Player;
 public sealed class FreeCam : Component
 {
-    [Property] public readonly GameObject thirdCam;
-    readonly float force = 10f;
-    float mult = 1f;
+    readonly float FORCE = 10f;
+    static readonly float BASE_SPEED_MULT = 1f;
+    static readonly float SHIFT_SPEED_MULT = 5f;
+    static readonly float MOUSE_SENSITIVITY = 3f;
+    float mult = BASE_SPEED_MULT;
     Timer TIMER;
+    PlayerComp PLAYER;
     MenuController MENUC;
-
+    CameraControl CAMERAC;
+    GameObject THIRD;
+    Vector3 baseThirdPos;
     public void OnAwakeInit()
     {
+        PLAYER = Sng.Inst.Player;
         MENUC = Sng.Inst.MenuC;
         TIMER = Sng.Inst.Timer;
+        CAMERAC = PLAYER.CameraC;
+
+        // NOTE: this is bad stuff
+        // TODO: fix this
+        THIRD = CAMERAC.cameras[0];
+
+        baseThirdPos = THIRD.LocalPosition * new Vector3( 0.5f, 0.5f, 0.5f );
     }
     protected override void OnEnabled()
     {
         TIMER.StopTimer();
-        WorldPosition = thirdCam.WorldPosition + new Vector3(0, 0, 10);
-        WorldRotation = thirdCam.WorldRotation;
+        WorldPosition = (baseThirdPos * PLAYER.Body.WorldRotation) + PLAYER.Body.WorldPosition;
+        WorldRotation = THIRD.WorldRotation;
         Transform.ClearInterpolation();
     }
     protected override void OnUpdate()
     {
-        if (!GameObject.Enabled) return;
-        if (Input.Down("Up"))
+        if ( !GameObject.Enabled ) return;
+        if ( Input.Down( "Up" ) )
         { //W or forward        
-            WorldPosition += new Vector3(force * mult, 0, 0) * WorldRotation;
+            WorldPosition += new Vector3( FORCE * mult, 0, 0 ) * WorldRotation;
         }
-        if (Input.Down("Down"))
+        if ( Input.Down( "Down" ) )
         {
-            WorldPosition += new Vector3(force * mult * -1, 0, 0) * WorldRotation;
+            WorldPosition += new Vector3( FORCE * mult * -1, 0, 0 ) * WorldRotation;
         }
-        if (Input.Down("Left"))
+        if ( Input.Down( "Left" ) )
         {
-            WorldPosition += new Vector3(0, force * mult, 0) * WorldRotation;
+            WorldPosition += new Vector3( 0, FORCE * mult, 0 ) * WorldRotation;
         }
-        if (Input.Down("Right"))
+        if ( Input.Down( "Right" ) )
         {
-            WorldPosition += new Vector3(0, force * mult * -1, 0) * WorldRotation;
+            WorldPosition += new Vector3( 0, FORCE * mult * -1, 0 ) * WorldRotation;
         }
-        if (Input.Down("SelfDestruct"))
+        if ( Input.Down( "SelfDestruct" ) )
         {
-            WorldPosition += new Vector3(0, 0, force * mult);
+            WorldPosition += new Vector3( 0, 0, FORCE * mult );
         }
-        if (Input.Down("Crouch"))
+        if ( Input.Down( "Crouch" ) )
         {
-            WorldPosition += new Vector3(0, 0, force * mult * -1);
+            WorldPosition += new Vector3( 0, 0, FORCE * mult * -1 );
         }
-        if (Input.Down("Sprint"))
+        if ( Input.Down( "Attack2" ) )
         {
-            mult = 5f;
+            CAMERAC.UpdatePosition( WorldPosition, WorldRotation );
+
+        }
+        if ( Input.Down( "Sprint" ) )
+        {
+            mult = SHIFT_SPEED_MULT;
         }
         else
         {
-            mult = 1f;
+            mult = BASE_SPEED_MULT;
         }
         var ee = WorldRotation.Angles();
-        ee += Input.AnalogLook * Time.Delta * 3f;
-        if (Math.Abs(ee.pitch) > 90) ee.pitch = 90 * Math.Sign(ee.pitch);
+        ee += Input.AnalogLook * Time.Delta * MOUSE_SENSITIVITY;
+        if ( Math.Abs( ee.pitch ) > 90 ) ee.pitch = 90 * Math.Sign( ee.pitch );
         ee.roll = 0;
 
         WorldRotation = ee.ToRotation();

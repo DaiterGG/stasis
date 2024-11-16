@@ -573,11 +573,7 @@
                   },
                   {
                     "__type": "Stasis.Player.FreeCam",
-                    "__guid": "735e3b9c-7cc8-4419-8396-9a9dc20ebc0f",
-                    "thirdCam": {
-                      "_type": "gameobject",
-                      "go": "f56d823c-8db7-4b36-8dc1-60d568faa367"
-                    }
+                    "__guid": "735e3b9c-7cc8-4419-8396-9a9dc20ebc0f"
                   }
                 ]
               }
@@ -740,6 +736,12 @@
               "go": "4211c887-7c0e-413a-9543-5cd4d30d29a1",
               "component_type": "EndScreen"
             },
+            "ImportUI": {
+              "_type": "component",
+              "component_id": "7eefe877-388f-4dc3-b40b-4905184af948",
+              "go": "c3e0924b-4817-4555-9ae9-93864df7e41f",
+              "component_type": "ImportReplay"
+            },
             "IngameUI": {
               "_type": "component",
               "component_id": "eff26266-07bc-42fa-9ec1-28bd9c1b8322",
@@ -805,6 +807,27 @@
               {
                 "__type": "Stasis.UI.ChooseMenu",
                 "__guid": "784efb82-57f3-4eef-926d-3751e922a5cc"
+              }
+            ]
+          },
+          {
+            "__guid": "c3e0924b-4817-4555-9ae9-93864df7e41f",
+            "Flags": 0,
+            "Name": "Import replay",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.ScreenPanel",
+                "__guid": "8a4eb9bb-0240-4bf6-bcbf-80b8a1dbcffd",
+                "AutoScreenScale": true,
+                "Opacity": 1,
+                "Scale": 1,
+                "ScaleStrategy": "ConsistentHeight",
+                "ZIndex": 100
+              },
+              {
+                "__type": "Stasis.UI.ImportReplay",
+                "__guid": "7eefe877-388f-4dc3-b40b-4905184af948"
               }
             ]
           },
@@ -944,6 +967,9 @@
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
-  "__references": [],
+  "__references": [
+    "move.black_marble1#67235"
+  ],
+  "HasUnsavedChanges": false,
   "__version": 1
 }

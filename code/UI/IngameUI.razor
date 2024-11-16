@@ -22,8 +22,8 @@
 
             @if (FREEC.Enabled)
             {
-
                 <div class="info">Press @(Input.GetButtonOrigin("SelfDestruct").ToUpper()) to spawn helicopter here</div>
+                <div class="info">Press @(Input.GetButtonOrigin("Attack2").ToUpper()) to place camera here</div>
             }
             @if (MENUC.HelpVisible)
             {
@@ -108,9 +108,9 @@
     public string Gain { get; set; } = "";
     public string Timer { get; set; } = "";
     string Info = "";
-    bool beaconpopup = false;   
+    bool beaconpopup = false;
     const int COOLDOWN_TICKS = 100;
-    int popupcooldown = COOLDOWN_TICKS; 
+    int popupcooldown = COOLDOWN_TICKS;
     //public float infotime { get; set; }
     EngineComponent ENGINE;
     FileControl FC;

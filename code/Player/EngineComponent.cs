@@ -1,4 +1,3 @@
-using System;
 using Stasis.Data;
 using Stasis.UI;
 
@@ -16,13 +15,13 @@ public sealed class EngineComponent : Component
     public bool isRunning { get; private set; }
     public int progress { get; private set; }
     public Rigidbody rigid;
-    [Property, Range(0.9f, 1f, 0.001f)] public float horizontalDumping { get; private set; } = 0.978f;
-    [Property, Range(0.9f, 1f, 0.001f)] public float verticalDumping { get; private set; } = 0.968f;
-    [Property, Range(0, 500f)] public float bodyOffsetZ { get; private set; } = 0f;
-    [Property, Range(0, 20000f)] public float turnSpeed { get; private set; } = 16000f;
-    [Property, Range(0, 20000f)] public float gravity { get; private set; } = 40f;
-    [Property, Range(0, 2000f)] public float gainStep { get; private set; } = 100f;
-    [Property, Range(0, 500f)] public float settleStep { get; private set; } = 100f;
+    [Property, Range( 0.9f, 1f, 0.001f )] public float horizontalDumping { get; private set; } = 0.978f;
+    [Property, Range( 0.9f, 1f, 0.001f )] public float verticalDumping { get; private set; } = 0.968f;
+    [Property, Range( 0, 500f )] public float bodyOffsetZ { get; private set; } = 0f;
+    [Property, Range( 0, 20000f )] public float turnSpeed { get; private set; } = 16000f;
+    [Property, Range( 0, 20000f )] public float gravity { get; private set; } = 40f;
+    [Property, Range( 0, 2000f )] public float gainStep { get; private set; } = 100f;
+    [Property, Range( 0, 500f )] public float settleStep { get; private set; } = 100f;
     //[Property, Range( 0, 50000f ), DefaultValue( 1000f )] readonly float maxSpeed;
     public float gain { get; private set; } = 0f;
     float maxGainGravityScale = 1.15f;
@@ -52,62 +51,62 @@ public sealed class EngineComponent : Component
         FC = SNG.FileC;
         TIMER = SNG.Timer;
         rigid = GameObject.Components.Get<Rigidbody>();
-        ResetPos(true);
+        ResetPos( true );
     }
     public void OnFixedGlobal()
     {
-        if (SNG.GameState != GameState.Play) return;
+        if ( SNG.GameState != GameState.Play ) return;
 
         //gravity
         // if (!isRunning) rigid.ApplyImpulse(new Vector3(0, 0, gravity * -1 * .05f));
-        if (!isRunning) rigid.ApplyImpulse(new Vector3(0, 0, 0));
-        else rigid.ApplyImpulse(new Vector3(0, 0, gravity * -1));
+        if ( !isRunning ) rigid.ApplyImpulse( new Vector3( 0, 0, 0 ) );
+        else rigid.ApplyImpulse( new Vector3( 0, 0, gravity * -1 ) );
 
         //input
-        if (InputActive)
+        if ( InputActive )
         {
-            var dx = (float)Math.Min(10000f, Math.Abs(Mouse.Delta.x / 1) * Math.Pow(FC.Set.Sensitivity, 2)) * 1.7f * Math.Sign(Mouse.Delta.x / 1);
-            var dy = (float)Math.Min(10000f, Math.Abs(Mouse.Delta.y / 1) * Math.Pow(FC.Set.Sensitivity, 2)) * 1.7f * Math.Sign(Mouse.Delta.y / 1);
+            var dx = (float)Math.Min( 10000f, Math.Abs( Mouse.Delta.x / 1 ) * Math.Pow( FC.Set.Sensitivity, 2 ) ) * 1.7f * Math.Sign( Mouse.Delta.x / 1 );
+            var dy = (float)Math.Min( 10000f, Math.Abs( Mouse.Delta.y / 1 ) * Math.Pow( FC.Set.Sensitivity, 2 ) ) * 1.7f * Math.Sign( Mouse.Delta.y / 1 );
             //dy = dy / 30f;
             //dx = dx / 30f;
 
-            if (FC.Set.MouseInvertX) dx *= -1f;
-            if (FC.Set.MouseInvertY) dy *= -1f;
+            if ( FC.Set.MouseInvertX ) dx *= -1f;
+            if ( FC.Set.MouseInvertY ) dy *= -1f;
 
             var dz = 0f;
 
-            if (Input.Down("Left"))
+            if ( Input.Down( "Left" ) )
             {
                 dz += turnSpeed;
             }
-            if (Input.Down("Right"))
+            if ( Input.Down( "Right" ) )
             {
                 dz -= turnSpeed;
             }
-            if (Input.Down("Down"))
+            if ( Input.Down( "Down" ) )
             {
                 gain -= gravity / gainStep;
             }
-            if (Input.Down("Up"))
+            if ( Input.Down( "Up" ) )
             {
-                if (!isRunning) EngStartProcess();
+                if ( !isRunning ) EngStartProcess();
                 else gain += gravity / gainStep;
             }
-            else if (!isRunning) EngStartProcess(false);
+            else if ( !isRunning ) EngStartProcess( false );
 
-            if (!Input.Down("Up") && !Input.Down("Down"))
+            if ( !Input.Down( "Up" ) && !Input.Down( "Down" ) )
             {
                 //gain -= (gain - gravity) / settleStep;
             }
-            if (!isRunning)
+            if ( !isRunning )
             {
                 dx = 0f; dy = 0f; dz = 0f; gain = 0;
             }
-            if (gain > maxGain) gain = maxGain;
-            if (gain < maxGain * -1) gain = maxGain * -1;
+            if ( gain > maxGain ) gain = maxGain;
+            if ( gain < maxGain * -1 ) gain = maxGain * -1;
 
-            Vector3 gainAng = new Vector3(0, 0, gain) * WorldRotation;
-            rigid.ApplyImpulse(gainAng);
+            Vector3 gainAng = new Vector3( 0, 0, gain ) * WorldRotation;
+            rigid.ApplyImpulse( gainAng );
             //if horizontal velocity is too high
             //if (new Vector3(rigid.Velocity.x,rigid.Velocity.y, 0).Length > maxSpeed)
             //{
@@ -117,11 +116,11 @@ public sealed class EngineComponent : Component
             //}
 
             //There is a giant trigger collider box that fix force applied to model 
-            rigid.ApplyTorque(new Vector3(dx, dy * -1, dz) * WorldRotation);
+            rigid.ApplyTorque( new Vector3( dx, dy * -1, dz ) * WorldRotation );
             //experimental
             //rigid.ApplyForce( new Vector3(rigid.Velocity.x * boost, rigid.Velocity.y * boost, 0 ) * WorldRotation);
         }
-        rigid.Velocity *= new Vector3(horizontalDumping, horizontalDumping, verticalDumping);
+        rigid.Velocity *= new Vector3( horizontalDumping, horizontalDumping, verticalDumping );
 
         /*
         deltaZ -= WorldPosition.z;
@@ -133,7 +132,7 @@ public sealed class EngineComponent : Component
             , 0 ) * WorldRotation );
         deltaZ = WorldPosition.z;
         */
-        if (!isRunning)
+        if ( !isRunning )
         {
             GAMEUI.Gain = ((int)(progress / maxGainGravityScale)).ToString();
         }
@@ -150,34 +149,34 @@ public sealed class EngineComponent : Component
     }
 
 
-    public void ResetPos(bool engineRestart)
+    public void ResetPos( bool engineRestart )
     {
-        GameObject.WorldPosition = GameObject.Parent.WorldPosition + new Vector3(0, 0, bodyOffsetZ);
+        GameObject.WorldPosition = GameObject.Parent.WorldPosition + new Vector3( 0, 0, bodyOffsetZ );
         GameObject.WorldRotation = GameObject.Parent.WorldRotation;
-        rigid.Velocity = new Vector3(0);
-        rigid.AngularVelocity = new Vector3(0);
+        rigid.Velocity = new Vector3( 0 );
+        rigid.AngularVelocity = new Vector3( 0 );
         GameObject.Transform.ClearInterpolation();
-        if (engineRestart)
-            EngOn(false);
-        else if (isRunning) gain = gravity;
+        if ( engineRestart )
+            EngOn( false );
+        else if ( isRunning ) gain = gravity;
     }
-    public void EngOn(bool on)
+    public void EngOn( bool on )
     {
         progress = on ? 100 : 0;
         isRunning = on;
         TIMER.Update();
         gain = on ? gravity : 0f;
     }
-    void EngStartProcess(bool increaseProgress = true)
+    void EngStartProcess( bool increaseProgress = true )
     {
         progress += increaseProgress ? 1 : -1;
-        if (progress < 0) progress = 0;
-        if (progress >= 100)
+        if ( progress < 0 ) progress = 0;
+        if ( progress >= 100 )
         {
-            EngOn(true);
+            EngOn( true );
         }
     }
-    public void ApplySaveState(SaveState state)
+    public void ApplySaveState( SaveState state )
     {
         WorldPosition = state.Transform;
         WorldRotation = Rotation.From(
@@ -193,7 +192,7 @@ public sealed class EngineComponent : Component
         isRunning = state.EngineRunning;
         Transform.ClearInterpolation();
     }
-    public void ApplyTick(Vector3 transform, Rotation rotation)
+    public void ApplyTick( Vector3 transform, Rotation rotation )
     {
         WorldPosition = transform;
         WorldRotation = rotation;

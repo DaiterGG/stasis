@@ -257,13 +257,7 @@ public sealed class FileControl
     public void SetScore()
     {
         if (currentMap == null) return;
-        var scr = new Score()
-        {
-            Time = TIMER.timerSeconds,
-            Date = DateTime.Now,
-            DisplayName = Steam.PersonaName,
-            Replay = RECORD.TryToGet(),
-        };
+        var scr = new Score(TIMER.timerSeconds, DateTime.Now, Steam.PersonaName, (long)Steam.SteamId, RECORD.TryToGet(), currentMap.Indent);
         //if (!Game.IsEditor)
         LBControl.SetScore(scr, currentMap.Indent);
 

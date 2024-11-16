@@ -7,70 +7,67 @@
 @inherits PanelComponent
 
 <root>
-	<div class="sub">
-		<div class="panel">
-			<div class="right">
-				<style>
-						
-				</style>
-				<ControlInput class="control-wrap label" Label="Sensitivity: @(FC.Set.Sensitivity)%">
-					<Control>
-						<SliderControl Min=@(0) Max=@(100) Step=@(1) Value:bind=@FC.Set.Sensitivity />
-					</Control>
-				</ControlInput>
-				<ControlInput class="control-wrap label" Label="Volume: @(FC.Set.Volume)%">
-					<Control>
-						<SliderControl Min=@(0) Max=@(100) Step=@(1) Value:bind=@FC.Set.Volume />
-					</Control>
-				</ControlInput>
+    <div class="sub">
+        <div class="panel">
+            <div class="right">
+                <ControlInput class="control-wrap label" Label="Sensitivity: @(FC.Set.Sensitivity)%">
+                    <Control>
+                        <SliderControl Min=@(0) Max=@(100) Step=@(1) Value:bind=@FC.Set.Sensitivity />
+                    </Control>
+                </ControlInput>
+                <ControlInput class="control-wrap label" Label="Volume: @(FC.Set.Volume)%">
+                    <Control>
+                        <SliderControl Min=@(0) Max=@(100) Step=@(1) Value:bind=@FC.Set.Volume />
+                    </Control>
+                </ControlInput>
 
-				<div class="invx label">Invert Mouse X</div>
-				<div class="checkbox" onclick="@(x => {
-				FC.Set.MouseInvertX = !FC.Set.MouseInvertX;
-				} )">
-					@if (FC.Set.MouseInvertX)
-					{
-						<p>X</p>
-					}
-				</div>
-				<div class="invy label">Invert Mouse Y</div>
-				<div class="checkbox" onclick="@(x => {
-				FC.Set.MouseInvertY = !FC.Set.MouseInvertY;
-				})">
-					@if (FC.Set.MouseInvertY)
-					{
-						<p>X</p>
-					}
-				</div>
-				<div class="pitch label">Rotation Overlay</div>
-				<div class="checkbox" onclick="@(x => {
-				FC.Set.PitchAndRoll = !FC.Set.PitchAndRoll;
-				})">
-					@if (FC.Set.PitchAndRoll)
-					{
-						<p>X</p>
-					}
-				</div>
-			</div>
-		</div>
-		<div class="bk">
-			<div class="back" onclick="@MenuC.CloseSettings">
-				<div class="text">Back</div>
-				<div class="bg" onclick="@MenuC.CloseSettings"></div>
-			</div>
-		</div>
-	</div>
+                <div class="invx label">Invert Mouse X</div>
+                <div class="checkbox" onclick="@(x => {
+                FC.Set.MouseInvertX = !FC.Set.MouseInvertX;
+                } )">
+                    @if (FC.Set.MouseInvertX)
+                    {
+                        <p>X</p>
+                    }
+                </div>
+                <div class="invy label">Invert Mouse Y</div>
+                <div class="checkbox" onclick="@(x => {
+                FC.Set.MouseInvertY = !FC.Set.MouseInvertY;
+                })">
+                    @if (FC.Set.MouseInvertY)
+                    {
+                        <p>X</p>
+                    }
+                </div>
+                <div class="pitch label">Rotation Overlay</div>
+                <div class="checkbox" onclick="@(x => {
+                FC.Set.PitchAndRoll = !FC.Set.PitchAndRoll;
+                })">
+                    @if (FC.Set.PitchAndRoll)
+                    {
+                        <p>X</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="bk">
+            <div class="back" onclick="@MenuC.CloseSettings">
+                <div class="text">Back</div>
+                <div class="bg" onclick="@MenuC.CloseSettings"></div>
+            </div>
+        </div>
+    </div>
 </root>
 
 @code
 {
-	MenuController MenuC { get; set; }
-	FileControl FC { get; set; }
-	protected override void OnAwake()
-	{
-		base.OnAwake();
-		MenuC = GameObject.Parent.Components.Get<MenuController>();
-		FC = Sng.Inst.FileC;
-	}
-	protected override int BuildHash() => System.HashCode.Combine(FC.Set.Sensitivity, FC.Set.Volume);
+    MenuController MenuC { get; set; }
+    FileControl FC { get; set; }
+    protected override void OnAwake()
+    {
+        base.OnAwake();
+        MenuC = GameObject.Parent.Components.Get<MenuController>();
+        FC = Sng.Inst.FileC;
+    }
+    protected override int BuildHash() => System.HashCode.Combine(FC.Set.Sensitivity, FC.Set.Volume);
 }

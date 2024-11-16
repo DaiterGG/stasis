@@ -35,8 +35,7 @@
                         <SliderControl Min=@(-3f) Max=@(10f) Step=@(0.1f) Value:bind=@VIEW.ReplaySpeed />
                     </div>
                 </div>
-                <img class="copy" onclick="@((x) => {GoBack();})" src="img/copy.png" />
-                <img class="upload" onclick="@((x) => {GoBack();})" src="img/upload.png" />
+                <img class="upload" onclick="@((x) => { EnableImport();})" src="img/upload.png" />
                 <div class="label">Tick: @(tickRelay)</div>
                 <img class="goback" onclick="@((x) => {GoBack();})" src="img/back.png" />
             </div>
@@ -55,7 +54,13 @@
     MenuController MENUC;
     Sng SNG;
     GameObject FREECAM;
+    ImportReplay IMPORT;
     int tickRelay;
+
+    public void EnableImport(){
+        IMPORT.GameObject.Enabled = !IMPORT.GameObject.Enabled;
+    }
+
     public int TickRelay
     {
         get { return tickRelay; }
@@ -76,10 +81,13 @@
         {
             SNG.ChangeGameState(GameState.MainMenu);
             MENUC.MenuUI.GameObject.Enabled = false;
-            MENUC.ChooseUI.GameObject.Enabled = true;
+            //MENUC.ChooseUI.GameObject.Enabled = true;
+        }
+        else
+        {
+            SNG.ChangeGameState(GameState.Play);
         }
 
-        SNG.ChangeGameState(GameState.Play);
         VIEW.CallbackUI.Enabled = true;
         GameObject.Enabled = false;
     }
@@ -89,7 +97,8 @@
         MENUC = SNG.MenuC;
         VIEW = SNG.ViewC;
         FREECAM = SNG.Player.CameraC.FreeCam.GameObject;
+        IMPORT = MENUC.ImportUI;
     }
 
-    protected override int BuildHash() => System.HashCode.Combine(GameObject.Enabled, VIEW.OldestTick, tickRelay, VIEW.CurrentTick, FREECAM.Enabled);
+    protected override int BuildHash() => System.HashCode.Combine(MENUC.ReplayUIVisible,GameObject.Enabled, VIEW.OldestTick, tickRelay, VIEW.CurrentTick, FREECAM.Enabled);
 }

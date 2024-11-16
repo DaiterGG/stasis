@@ -172,7 +172,7 @@
           ],
           "ChangeColor": true,
           "ColorAfter": "0,0.61961,0.01961,0",
-          "ColorBefore": "1,0.78431,0,1",
+          "ColorBefore": "0.95,1,0,0.4",
           "ID": 1
         },
         {
@@ -188,6 +188,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "1cbb1018-ed45-4f12-b40f-5676c79aae8c",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/roadsign_triangle.vmdl",
           "RenderOptions": {
@@ -205,7 +206,7 @@
       "__guid": "e2b8fb30-f6d7-4430-9028-1c0afdbe0494",
       "Flags": 0,
       "Name": "beacon triangle 2",
-      "Position": "776.8583,4676.88,-755.7676",
+      "Position": "776.8577,4676.878,-755.7676",
       "Rotation": "0.06682002,-0.248299,-0.9322884,0.2544034",
       "Scale": "1,11.3,11.3",
       "Enabled": true,
@@ -226,7 +227,7 @@
           ],
           "ChangeColor": true,
           "ColorAfter": "0,0.62,0.02067,0",
-          "ColorBefore": "1,0.78431,0,1",
+          "ColorBefore": "0.95294,1,0,0.4",
           "ID": 2
         },
         {
@@ -242,6 +243,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "2bd8e172-308a-485b-852d-f48ecfd35125",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/roadsign_triangle.vmdl",
           "RenderOptions": {
@@ -252,6 +254,60 @@
           },
           "RenderType": "Off",
           "Tint": "1,0.98333,0,1"
+        }
+      ]
+    },
+    {
+      "__guid": "12c745ee-b3f6-4cb7-807f-208e3215a92a",
+      "Flags": 0,
+      "Name": "Beacon Bar",
+      "Position": "2245.106,4564.654,-1249.178",
+      "Scale": "2.800001,41.39999,2.799999",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Description",
+          "__guid": "377be386-63d4-4bff-923e-acd31553e092",
+          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
+        },
+        {
+          "__type": "Stasis.Zones.Beacon",
+          "__guid": "06d2c8f5-862d-43e8-8fa7-e7b8b6eee82e",
+          "BlockUntillActivated": [
+            {
+              "_type": "gameobject",
+              "go": "6e416080-82db-47f5-8125-4b1c9c58d880"
+            }
+          ],
+          "ChangeColor": true,
+          "ColorAfter": "0,0.62,0.02067,0",
+          "ColorBefore": "0.95294,1,0,0.4",
+          "ID": 3
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "9c95141d-52d4-4038-a306-0b90036f2060",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50,50,50",
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "df83a6df-3d93-4a90-8303-b920650c23fb",
+          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "MaterialOverride": "materials/tranparent_tint1.vmat",
+          "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "Off",
+          "Tint": "1,0.78431,0,1"
         }
       ]
     },
@@ -279,7 +335,7 @@
           ],
           "ChangeColor": true,
           "ColorAfter": "0,0.62,0.02067,0",
-          "ColorBefore": "1,0.78431,0,1",
+          "ColorBefore": "0.95294,1,0,0.4",
           "ID": 9
         },
         {
@@ -295,6 +351,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "6d6d3bef-1af5-4cd7-8592-8b29780157be",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
           "RenderOptions": {
@@ -332,7 +389,7 @@
           ],
           "ChangeColor": true,
           "ColorAfter": "0,0.62,0.02067,0",
-          "ColorBefore": "1,0.78431,0,1",
+          "ColorBefore": "0.95294,1,0,0.4",
           "ID": 8
         },
         {
@@ -348,6 +405,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "03a8e6c7-95c9-4a42-9258-af7daf7d1963",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
           "RenderOptions": {
@@ -386,7 +444,7 @@
           ],
           "ChangeColor": true,
           "ColorAfter": "0,0.62,0.02067,0",
-          "ColorBefore": "1,0.78431,0,1",
+          "ColorBefore": "0.95294,1,0,0.4",
           "ID": 4
         },
         {
@@ -402,6 +460,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "a9236beb-b536-4ff3-a5ac-02a0840a3d27",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
           "RenderOptions": {
@@ -440,7 +499,7 @@
           ],
           "ChangeColor": true,
           "ColorAfter": "0,0.62,0.02067,0",
-          "ColorBefore": "1,0.78431,0,1",
+          "ColorBefore": "0.95294,1,0,0.4",
           "ID": 5
         },
         {
@@ -456,6 +515,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "d0467074-930c-4413-88bd-81ebf341a623",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
           "RenderOptions": {
@@ -494,7 +554,7 @@
           ],
           "ChangeColor": true,
           "ColorAfter": "0,0.62,0.02067,0",
-          "ColorBefore": "1,0.78431,0,1",
+          "ColorBefore": "0.95294,1,0,0.4",
           "ID": 7
         },
         {
@@ -510,6 +570,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "0ee5c150-4517-475f-a5bc-b11f1802dae7",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
           "RenderOptions": {
@@ -548,7 +609,7 @@
           ],
           "ChangeColor": true,
           "ColorAfter": "0,0.62,0.02067,0",
-          "ColorBefore": "1,0.78431,0,1",
+          "ColorBefore": "0.95294,1,0,0.4",
           "ID": 6
         },
         {
@@ -564,59 +625,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "60d63d62-e4c9-4977-8e58-db52c3b2d45c",
           "BodyGroups": 18446744073709551615,
-          "MaterialOverride": "materials/tranparent_tint1.vmat",
-          "Model": "models/dev/box.vmdl",
-          "RenderOptions": {
-            "GameLayer": true,
-            "OverlayLayer": false,
-            "BloomLayer": false,
-            "AfterUILayer": false
-          },
-          "RenderType": "Off",
-          "Tint": "1,0.78431,0,1"
-        }
-      ]
-    },
-    {
-      "__guid": "12c745ee-b3f6-4cb7-807f-208e3215a92a",
-      "Flags": 0,
-      "Name": "Beacon Bar",
-      "Position": "2245.106,4564.654,-1249.178",
-      "Scale": "2.800001,41.39999,2.799999",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.Description",
-          "__guid": "377be386-63d4-4bff-923e-acd31553e092",
-          "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
-        },
-        {
-          "__type": "Stasis.Zones.Beacon",
-          "__guid": "06d2c8f5-862d-43e8-8fa7-e7b8b6eee82e",
-          "BlockUntillActivated": [
-            {
-              "_type": "gameobject",
-              "go": "6e416080-82db-47f5-8125-4b1c9c58d880"
-            }
-          ],
-          "ChangeColor": true,
-          "ColorAfter": "0,0.62,0.02067,0",
-          "ColorBefore": "1,0.78431,0,1",
-          "ID": 3
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "9c95141d-52d4-4038-a306-0b90036f2060",
-          "Center": "0,0,0",
-          "IsTrigger": true,
-          "Scale": "50,50,50",
-          "Static": false,
-          "SurfaceVelocity": "0,0,0"
-        },
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "df83a6df-3d93-4a90-8303-b920650c23fb",
-          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "Model": "models/dev/box.vmdl",
           "RenderOptions": {
@@ -668,6 +677,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "179af59d-0d7e-48b2-b747-125a2007c749",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
           "RenderOptions": {
             "GameLayer": true,
