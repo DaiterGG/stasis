@@ -40,79 +40,79 @@ public sealed class FileControl
     public void FilesInit()
     {
         Set = new Settings();
-        if (FileSystem.Data.FileExists(s))
+        if ( FileSystem.Data.FileExists( s ) )
         {
             try
             {
-                Set = FileSystem.Data.ReadJson<Settings>(s);
+                Set = FileSystem.Data.ReadJson<Settings>( s );
             }
-            catch (Exception err) { Log.Error(err.Message); }
+            catch ( Exception err ) { Log.Error( err.Message ); }
         }
         else
         {
             Set = new Settings();
-            FileSystem.Data.WriteAllText(s, ObjToJson(Set));
+            FileSystem.Data.WriteAllText( s, ObjToJson( Set ) );
         }
-        if (FileSystem.Data.FileExists(m))
+        if ( FileSystem.Data.FileExists( m ) )
         {
             try
             {
-                Maps = JsonSerializer.Deserialize<List<MapData>>(FileSystem.Data.ReadAllText(m), new JsonSerializerOptions { IncludeFields = true });
+                Maps = JsonSerializer.Deserialize<List<MapData>>( FileSystem.Data.ReadAllText( m ), new JsonSerializerOptions { IncludeFields = true } );
             }
-            catch (Exception err) { Log.Error(err.Message); }
+            catch ( Exception err ) { Log.Error( err.Message ); }
         }
         else
         {
             try
             {
                 Maps = new List<MapData>();
-                FileSystem.Data.WriteAllText(m, ObjToJson(Maps));
+                FileSystem.Data.WriteAllText( m, ObjToJson( Maps ) );
 
             }
-            catch (Exception err) { Log.Warning("Move/Stasis folder does not exist?" + err.Message); }
+            catch ( Exception err ) { Log.Warning( "Move/Stasis folder does not exist?" + err.Message ); }
         }
     }
     public void AddOfficialMaps()
     {
         //demote updated maps
-        foreach (var i in Maps)
+        foreach ( var i in Maps )
         {
-            if (i.Type == "official")
+            if ( i.Type == "official" )
             {
-                if (!OfficialMaps.Contains(i.Indent))
+                if ( !OfficialMaps.Contains( i.Indent ) )
                 {
                     i.Type = "community";
                     SaveMaps();
                 }
-                else if (FeaturedMaps.Contains(i.Indent))
+                else if ( FeaturedMaps.Contains( i.Indent ) )
                 {
                     i.Type = "featured";
                     SaveMaps();
                 }
             }
             else
-            if (i.Type == "featured")
+            if ( i.Type == "featured" )
             {
-                if (!FeaturedMaps.Contains(i.Indent))
+                if ( !FeaturedMaps.Contains( i.Indent ) )
                 {
                     i.Type = "community";
                     SaveMaps();
                 }
-                else if (OfficialMaps.Contains(i.Indent))
+                else if ( OfficialMaps.Contains( i.Indent ) )
                 {
                     i.Type = "official";
                     SaveMaps();
                 }
 
             }
-            else if (i.Type == "community")
+            else if ( i.Type == "community" )
             {
-                if (FeaturedMaps.Contains(i.Indent))
+                if ( FeaturedMaps.Contains( i.Indent ) )
                 {
                     i.Type = "featured";
                     SaveMaps();
                 }
-                else if (OfficialMaps.Contains(i.Indent))
+                else if ( OfficialMaps.Contains( i.Indent ) )
                 {
                     i.Type = "official";
                     SaveMaps();
@@ -120,122 +120,127 @@ public sealed class FileControl
             }
 
         }
-        foreach (var i in FeaturedMaps)
+        foreach ( var i in FeaturedMaps )
         {
-            FetchNewMap(i, "featured");
+            FetchNewMap( i, "featured" );
         }
-        foreach (var i in OfficialMaps)
+        foreach ( var i in OfficialMaps )
         {
-            FetchNewMap(i, "official");
+            FetchNewMap( i, "official" );
         }
     }
-    static string CaseInsenstiveReplace(string originalString, string oldValue, string newValue)
+    static string CaseInsenstiveReplace( string originalString, string oldValue, string newValue )
     {
-        Regex regEx = new Regex(oldValue,
-        RegexOptions.IgnoreCase | RegexOptions.Multiline);
-        return regEx.Replace(originalString, newValue);
+        Regex regEx = new Regex( oldValue,
+        RegexOptions.IgnoreCase | RegexOptions.Multiline );
+        return regEx.Replace( originalString, newValue );
+    }
+    public static string ReplacePlus( string s )
+    {
+        return s.Replace( @"\u002B", "+" );
     }
     public static void SaveMaps()
     {
-        FileSystem.Data.WriteAllText(m, ObjToJson(Sng.Inst.FileC.Maps).Replace(@"\u002B", "+"));
+        FileSystem.Data.WriteAllText( m, ReplacePlus( ObjToJson( Sng.Inst.FileC.Maps ) ) );
 
         Sng.Inst.MenuC.UpdateMapsList();
     }
     public static void SaveSettings()
     {
-        FileSystem.Data.WriteAllText(s, ObjToJson(Sng.Inst.FileC.Set));
+        FileSystem.Data.WriteAllText( s, ObjToJson( Sng.Inst.FileC.Set ) );
     }
-    private static string ObjToJson(object o)
+    private static string ObjToJson( object o )
     {
-        return JsonSerializer.Serialize(o, new JsonSerializerOptions
+        return JsonSerializer.Serialize( o, new JsonSerializerOptions
         {
             WriteIndented = true
-        });
+        } );
     }
-    public void FetchNewMap(string indent, string type)
+    public void FetchNewMap( string indent, string type )
     {
-        var found = Maps.FirstOrDefault(x =>
+        var found = Maps.FirstOrDefault( x =>
         {
             return x.Indent == indent;
-        });
-        if (found != default(MapData) && found != null && (found.Img == null || found.Name == null || found.Description == null))
+        } );
+        if ( found != default( MapData ) && found != null && (found.Img == null || found.Name == null || found.Description == null) )
         {
             found = default;
         }
         var _new = false;
-        if (found == default(MapData) || found == null)
+        if ( found == default( MapData ) || found == null )
         {
             found = new MapData { Type = type };
             _new = true;
         }
         try
         {
-            FetchMap(indent, found).Wait();
+            FetchMap( indent, found ).Wait();
         }
-        catch (Exception e) { Log.Info("Fetching map failed, are you offline? " + e.Message); }
+        catch ( Exception e ) { Log.Info( "Fetching map failed, are you offline? " + e.Message ); }
 
-        if (_new) Maps.Add(found);
+        if ( _new ) Maps.Add( found );
 
 
         SaveMaps();
     }
-    static public async Task FetchMap(string packageIndent, MapData mapData)
+    static public async Task FetchMap( string packageIndent, MapData mapData )
     {
-        var package = await Package.Fetch(packageIndent, true);
-        if (package == null) throw new Exception("Fetching failled");
+        var package = await Package.Fetch( packageIndent, true );
+        if ( package == null ) throw new Exception( "Fetching failled" );
         mapData.Name = package.Title;
         mapData.Description = package.Summary;
         mapData.Indent = package.FullIdent;
         mapData.Img = package.Thumb;
     }
-    public void DownloadAndLoad(string packageIndent)
+    public void DownloadAndLoad( string packageIndent )
     {
-        SetCurrentMap(packageIndent);
+        if ( packageIndent == "move.errormap" ) return;
+        SetCurrentMap( packageIndent );
         try
         {
-            DownloadScene(packageIndent).Wait();
+            DownloadScene( packageIndent ).Wait();
         }
-        catch (Exception e) { Log.Info("Download failed, try again" + e); }
-        if (tempFile.ResourceName == null)
-            Log.Info("Map Name not found");
-        SNG.LoadNewMap(tempFile);
+        catch ( Exception e ) { Log.Info( "Download failed, try again" + e ); }
+        if ( tempFile.ResourceName == null )
+            Log.Info( "Map Name not found" );
+        SNG.LoadNewMap( tempFile );
     }
     static SceneFile tempFile { get; set; } = new SceneFile();
-    public async Task DownloadScene(string sceneIndent)
+    public async Task DownloadScene( string sceneIndent )
     {
-        var package = await Package.Fetch(sceneIndent, false);
+        var package = await Package.Fetch( sceneIndent, false );
 
-        var meta = package.GetMeta("PrimaryAsset", "ERROR");
+        var meta = package.GetMeta( "PrimaryAsset", "ERROR" );
         var g = await package.MountAsync();
 
         //tempFile = package.GetMeta<SceneFile>( "PrimaryAsset" );
 
-        tempFile.LoadFromJson(g.ReadAllText(meta));
+        tempFile.LoadFromJson( g.ReadAllText( meta ) );
         //Sng.Inst.Scene.Load( scene );
     }
-    public void SetCurrentMap(string ind)
+    public void SetCurrentMap( string ind )
     {
-        currentMap = Maps.FirstOrDefault(map =>
+        currentMap = Maps.FirstOrDefault( map =>
         {
             return map.Indent == ind;
-        });
-        if (currentMap == default(MapData) || currentMap == null)
+        } );
+        if ( currentMap == default( MapData ) || currentMap == null )
         {
-            Log.Warning("Fetched data Don't have that map");
+            Log.Warning( "Fetched data Don't have that map" );
             return;
         }
     }
 
-    public void InfoSerialize(Info info)
+    public void InfoSerialize( Info info )
     {
-        if (info == null)
+        if ( info == null )
         {
             currentMap = null;
             return;
         }
-        if (currentMap == null)
+        if ( currentMap == null )
         {
-            Log.Warning("Map data was not fetched correctly");
+            Log.Warning( "Map data was not fetched correctly" );
             return;
         }
         try
@@ -250,26 +255,26 @@ public sealed class FileControl
             currentMap.BronzeTime = info.SpeerunMap ? info.BronzeTime : 0;
 
         }
-        catch (Exception err) { Log.Warning("Map serialize error: " + err.Message); }
+        catch ( Exception err ) { Log.Warning( "Map serialize error: " + err.Message ); }
 
         SaveMaps();
     }
     public void SetScore()
     {
-        if (currentMap == null) return;
-        var scr = new Score(TIMER.timerSeconds, DateTime.Now, Steam.PersonaName, (long)Steam.SteamId, RECORD.TryToGet(), currentMap.Indent);
+        if ( currentMap == null ) return;
+        var scr = new Score( TIMER.timerSeconds, DateTime.Now, Steam.PersonaName, (long)Steam.SteamId, RECORD.TryToGet(), currentMap.Indent );
         //if (!Game.IsEditor)
-        LBControl.SetScore(scr, currentMap.Indent);
+        LBControl.SetScore( scr, currentMap.Indent );
 
-        currentMap.Scores.Add(scr);
-        currentMap.Scores.Sort((x, y) => x.Time.CompareTo(y.Time));
+        currentMap.Scores.Add( scr );
+        currentMap.Scores.Sort( ( x, y ) => x.Time.CompareTo( y.Time ) );
         SaveMaps();
     }
-    public List<Score>? GetScores(string indent)
+    public List<Score>? GetScores( string indent )
     {
-        foreach (var map in Maps)
+        foreach ( var map in Maps )
         {
-            if (map.Indent == indent)
+            if ( map.Indent == indent )
             {
                 return map.Scores;
             }

@@ -27,16 +27,16 @@ public class RecordReplay
                 Start();
         }
         */
-        if (!IsRecording) return;
-        Replay.Ticks.Add(new Tick(
+        if ( !IsRecording ) return;
+        Replay.Ticks.Add( new Tick(
             ENGINE.WorldPosition,
             (short)(ENGINE.WorldRotation.Pitch() * 100),
             (short)(ENGINE.WorldRotation.Yaw() * 100),
             (short)(ENGINE.WorldRotation.Roll() * 100),
             ENGINE.progress == 100 ? (byte)(ENGINE.gain / ENGINE.maxGain * 100) : (byte)ENGINE.progress
-        ));
+        ) );
 
-        if (CurrentActions.Count > 0)
+        if ( CurrentActions.Count > 0 )
         {
             Replay.Actions[Replay.Ticks.Count - 1] = CurrentActions;
             CurrentActions = new List<Action>();
@@ -44,25 +44,26 @@ public class RecordReplay
     }
     public void Start()
     {
-        Replay = new Replay();
+        Replay = new();
+        Replay.Indent = Sng.Inst.FileC.currentMap.Indent;
         CurrentActions = new List<Action>();
         IsRecording = true;
-        collectInitialState();
+        CollectInitialState();
 
         // NOTE: subject to change
         TimerStart();
     }
-    public void collectInitialState()
+    public void CollectInitialState()
     {
         // TODO: if timer running calc start time from it
-        ActionHappened(SPIN.IsAttached ? Action.PropellerRepair : Action.PropellerBreak);
+        ActionHappened( SPIN.IsAttached ? Action.PropellerRepair : Action.PropellerBreak );
     }
     public Replay? TryToGet()
     {
-        if (IsRecording)
+        if ( IsRecording )
         {
             Pause();
-            Replay.TicksUTF = ReplaySerialize.TicksToStr(Replay.Ticks);
+            Replay.TicksUTF = ReplaySerialize.TicksToStr( Replay.Ticks );
             return Replay;
         }
         else
@@ -87,22 +88,22 @@ public class RecordReplay
         */
     }
 
-    public static void ActionHappened(Action action)
+    public static void ActionHappened( Action action )
     {
         var self = Sng.Inst.RecordC;
-        if (!self.IsRecording) return;
-        self.CurrentActions.Add(action);
+        if ( !self.IsRecording ) return;
+        self.CurrentActions.Add( action );
     }
     public static void TimerStart()
     {
         var self = Sng.Inst.RecordC;
-        if (!self.IsRecording) return;
+        if ( !self.IsRecording ) return;
         self.Replay.StartTime = self.Replay.Ticks.Count;
     }
     public static void TimerStop()
     {
         var self = Sng.Inst.RecordC;
-        if (!self.IsRecording) return;
+        if ( !self.IsRecording ) return;
         self.Replay.EndTime = self.Replay.Ticks.Count;
     }
 }

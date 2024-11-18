@@ -32,8 +32,10 @@ public class ViewReplay
 
     public void Watch( Replay rep, GameObject UIThatCalled )
     {
+        // Sng.ELog( SNG.FileC.currentMap );
         if ( rep.Ticks.Count == 0 ) rep.Ticks = ReplaySerialize.FromStrToTicks( rep.TicksUTF );
         Replay = rep;
+        // TODO: redo so that is not needed
         SNG.ChangeGameState( GameState.MainMenu );
         SNG.ChangeGameState( GameState.ViewReplay );
         PauseView();

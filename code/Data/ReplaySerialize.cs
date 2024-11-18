@@ -95,6 +95,6 @@ public class ReplaySerialize
     }
     public static string ReplayToJson( Replay r )
     {
-        return JsonSerializer.Serialize( RemoveTicksArray( r ) );
+        return FileControl.ReplacePlus( JsonSerializer.Serialize( RemoveTicksArray( r ) ) );
     }
 }

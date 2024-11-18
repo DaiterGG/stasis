@@ -738,8 +738,8 @@
             },
             "ImportUI": {
               "_type": "component",
-              "component_id": "7eefe877-388f-4dc3-b40b-4905184af948",
-              "go": "c3e0924b-4817-4555-9ae9-93864df7e41f",
+              "component_id": "0967c735-3b22-4d89-9dc6-6a8def4b4671",
+              "go": "9b89f304-2955-45c3-916f-bfe3e76f6214",
               "component_type": "ImportReplay"
             },
             "IngameUI": {
@@ -811,14 +811,13 @@
             ]
           },
           {
-            "__guid": "c3e0924b-4817-4555-9ae9-93864df7e41f",
+            "__guid": "9b89f304-2955-45c3-916f-bfe3e76f6214",
             "Flags": 0,
             "Name": "Import replay",
-            "Enabled": true,
             "Components": [
               {
                 "__type": "Sandbox.ScreenPanel",
-                "__guid": "8a4eb9bb-0240-4bf6-bcbf-80b8a1dbcffd",
+                "__guid": "88311859-7231-43e4-9ac9-553856117cfa",
                 "AutoScreenScale": true,
                 "Opacity": 1,
                 "Scale": 1,
@@ -827,7 +826,7 @@
               },
               {
                 "__type": "Stasis.UI.ImportReplay",
-                "__guid": "7eefe877-388f-4dc3-b40b-4905184af948"
+                "__guid": "0967c735-3b22-4d89-9dc6-6a8def4b4671"
               }
             ]
           },

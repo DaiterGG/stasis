@@ -61,7 +61,7 @@
             if (FILEC.GetScores(parent.map.Indent) is List<Score> l) local = l;
             if (local.Count == 0) return;
             if (local.First().Time < local.Last().Time){
-                local.Sort((x, y) => x.Time.CompareTo(y.Time));
+                local.Sort((x, y) => y.Time.CompareTo(x.Time));
             }
         }
     }
@@ -83,7 +83,7 @@
         global = await LBControl.GetScores(parent.map.Indent, 20, parent.centerOnMe, parent.yourCountry);
         if (global.Count == 0) return;
         if (global.First().Time < global.Last().Time){
-            global.Sort((x, y) => x.Time.CompareTo(y.Time));
+            global.Sort((x, y) => y.Time.CompareTo(x.Time));
         }
         /*
         long id = 12923012312;
