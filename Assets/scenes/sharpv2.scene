@@ -21,7 +21,7 @@
       "Flags": 0,
       "Name": "Game",
       "Enabled": true,
-      "__Prefab": "prefabs/game.prefab",
+      "__Prefab": "prefabs/thegame.prefab",
       "__PrefabVariables": {}
     },
     {
@@ -157,5 +157,6 @@
   "Title": "sharpv2",
   "Description": null,
   "__references": [],
+  "HasUnsavedChanges": false,
   "__version": 2
 }

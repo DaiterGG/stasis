@@ -25,6 +25,10 @@ public class ViewReplay
         SPIN = SNG.Player.SpinC;
         PauseView();
     }
+    public void PauseViewToggle()
+    {
+        IsPlaying = !IsPlaying;
+    }
     public void PauseView( bool pause = true )
     {
         IsPlaying = !pause;
@@ -35,8 +39,6 @@ public class ViewReplay
         // Sng.ELog( SNG.FileC.currentMap );
         if ( rep.Ticks.Count == 0 ) rep.Ticks = ReplaySerialize.FromStrToTicks( rep.TicksUTF );
         Replay = rep;
-        // TODO: redo so that is not needed
-        SNG.ChangeGameState( GameState.MainMenu );
         SNG.ChangeGameState( GameState.ViewReplay );
         PauseView();
         JumpToTick( 0 );
@@ -45,13 +47,13 @@ public class ViewReplay
 
     public void OnUpdateGlobal()
     {
-        if ( Input.Pressed( "Test1" ) )
-        {
-            if ( UI.GameObject.Enabled == true )
-                Sng.Inst.ChangeGameState( GameState.MainMenu );
-            else
-                Sng.Inst.ChangeGameState( GameState.ViewReplay );
-        }
+        // if ( Input.Pressed( "Test1" ) )
+        // {
+        //     if ( UI.GameObject.Enabled == true )
+        //         Sng.Inst.ChangeGameState( GameState.MainMenu );
+        //     else
+        //         Sng.Inst.ChangeGameState( GameState.ViewReplay );
+        // }
 
         if ( !IsPlaying || Replay == null ) return;
         NextTick();
@@ -140,6 +142,7 @@ public class ViewReplay
 
     public void JumpToTick( int tick )
     {
+        tick = Math.Clamp( tick, 0, Replay.Ticks.Count - 1 );
         CurrentTick = tick;
         OldestTick = tick;
         ENGINE.ApplyTick( Replay.Ticks[tick].Transform,

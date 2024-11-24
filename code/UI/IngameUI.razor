@@ -8,12 +8,12 @@
 @namespace Stasis.UI
 @inherits PanelComponent
 <root>
-    @if (MENUC.GameUIVisible)
+    @if (GameUIVisible)
     {
         <div class="gain">@Gain%</div>
         <div class="progress">
             @if (ZONEC.GroupedBeacons.Count != 0)
-            {   
+            {
                 <div class="beacons @(beaconpopup ? "huge" : "")">Beacons - @(ZONEC.BeaconsActivatedCount)/@(ZONEC.GroupedBeacons.Count)</div>
                 beaconpopup = false;
             }
@@ -24,8 +24,9 @@
             {
                 <div class="info">Press @(Input.GetButtonOrigin("SelfDestruct").ToUpper()) to spawn helicopter here</div>
                 <div class="info">Press @(Input.GetButtonOrigin("Attack2").ToUpper()) to place camera here</div>
+                <div class="info">Press @(Input.GetButtonOrigin("Crouch").ToUpper() + " / " + Input.GetButtonOrigin("Sprint").ToUpper()) to change speed</div>
             }
-            @if (MENUC.HelpVisible)
+            @if (HelpVisible)
             {
                 //<div class="info @(Time.Now - infotime < 20f ? "active" : "")">
                 <div class="info">
@@ -111,7 +112,6 @@
     bool beaconpopup = false;
     const int COOLDOWN_TICKS = 100;
     int popupcooldown = COOLDOWN_TICKS;
-    //public float infotime { get; set; }
     EngineComponent ENGINE;
     FileControl FC;
     GameObject FREEC;
@@ -119,6 +119,19 @@
     Sng SNG;
     SaveStateControl STATE;
     ZoneControl ZONEC;
+
+    public bool GameUIVisible { get; set; } = true;
+    public void InGameUIToggle()
+    {
+        GameUIVisible = !GameUIVisible;
+    }
+
+    public bool HelpVisible { get; set; } = false;
+    public void InGameHelpToggle()
+    {
+        HelpVisible = !HelpVisible;
+    }
+
     //todo abstarction if needed
     public void BeaconPopup(){
 
@@ -127,6 +140,10 @@
             popupcooldown = 0;
         }
     }
+    protected override void OnFixedUpdate(){
+        popupcooldown++;
+    }
+
     public void ShowInfo(string info)
     {
         //infotime = Time.Now;
@@ -143,11 +160,8 @@
         FREEC = SNG.Player.CameraC.FreeCam.GameObject;
         ZONEC = SNG.ZoneC;
     }
-    protected override void OnFixedUpdate(){
-        popupcooldown++;
-    }
     /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
     /// </summary>
     protected override int BuildHash() => System.HashCode.Combine(FREEC.Enabled, STATE.SaveStates.Count, STATE.Enabled,
-    SpeedMain, Timer, Gain, MENUC.GameUIVisible, MENUC.HelpVisible);
+    SpeedMain, Timer, Gain, GameUIVisible, HelpVisible);
 }

@@ -2,11 +2,26 @@
   "__guid": "be405f75-9c99-4c14-9666-8fdfc86bc928",
   "GameObjects": [
     {
+      "__guid": "2a861f3f-3c51-4bb0-92fb-6e9b05c694e7",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "8095e7ec-5563-466c-8bf9-9dfa24ec0992",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "mapnew"
+        }
+      ]
+    },
+    {
       "__guid": "7ab59d54-1cbf-4ba2-9b5b-e3b67db6abe3",
       "Flags": 0,
       "Name": "Game",
       "Enabled": true,
-      "__Prefab": "prefabs/game.prefab",
+      "__Prefab": "prefabs/thegame.prefab",
       "__PrefabVariables": {}
     },
     {
@@ -42,6 +57,8 @@
           "EnableCollision": true,
           "MapName": "move.st_hexagon3",
           "NoOrigin": false,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
       ],
@@ -94,13 +111,15 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "1017.4,1747.4,1601.9",
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.AutoDecor",
           "__guid": "b4057cd7-c6ff-4d46-a54d-ebb58d3efd58",
-          "AutoDecorate": true,
-          "ColorOfTheLines": "1,0,0,1"
+          "ColorOfTheLines": "1,0,0,1",
+          "LineWidth": 3,
+          "WireFrame": false
         },
         {
           "__type": "Stasis.Zones.EndZone",
@@ -114,9 +133,13 @@
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 30,
     "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "mapnew"
+    },
     "NavMesh": {
       "Enabled": false,
       "IncludeStaticBodies": true,
@@ -130,9 +153,10 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "mapnew",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [],
-  "__version": 1
+  "HasUnsavedChanges": false,
+  "__version": 2
 }

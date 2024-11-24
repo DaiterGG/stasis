@@ -5,7 +5,8 @@ public sealed class FreeCam : Component
 {
     readonly float FORCE = 10f;
     static readonly float BASE_SPEED_MULT = 1f;
-    static readonly float SHIFT_SPEED_MULT = 5f;
+    static readonly float FAST_SPEED_MULT = 5f;
+    static readonly float SLOW_SPEED_MULT = 0.1f;
     static readonly float MOUSE_SENSITIVITY = 3f;
     float mult = BASE_SPEED_MULT;
     Timer TIMER;
@@ -53,22 +54,17 @@ public sealed class FreeCam : Component
         {
             WorldPosition += new Vector3( 0, FORCE * mult * -1, 0 ) * WorldRotation;
         }
-        if ( Input.Down( "SelfDestruct" ) )
-        {
-            WorldPosition += new Vector3( 0, 0, FORCE * mult );
-        }
-        if ( Input.Down( "Crouch" ) )
-        {
-            WorldPosition += new Vector3( 0, 0, FORCE * mult * -1 );
-        }
         if ( Input.Down( "Attack2" ) )
         {
             CAMERAC.UpdatePosition( WorldPosition, WorldRotation );
-
         }
         if ( Input.Down( "Sprint" ) )
         {
-            mult = SHIFT_SPEED_MULT;
+            mult = FAST_SPEED_MULT;
+        }
+        else if ( Input.Down( "Crouch" ) )
+        {
+            mult = SLOW_SPEED_MULT;
         }
         else
         {

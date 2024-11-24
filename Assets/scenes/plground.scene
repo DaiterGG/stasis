@@ -2,11 +2,26 @@
   "__guid": "be405f75-9c99-4c14-9666-8fdfc86bc928",
   "GameObjects": [
     {
+      "__guid": "48430117-862e-49c2-a287-6c57ac65af9a",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "a05c5097-fd43-48c9-835f-03fffc7e76a5",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "map"
+        }
+      ]
+    },
+    {
       "__guid": "a5afc9ee-40ed-4205-94ff-f35d0546128a",
       "Flags": 0,
       "Name": "Game",
       "Enabled": true,
-      "__Prefab": "prefabs/game.prefab",
+      "__Prefab": "prefabs/thegame.prefab",
       "__PrefabVariables": {}
     },
     {
@@ -96,7 +111,8 @@
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "525.1001,985.8994,408.7997",
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Stasis.Zones.AutoDecor",
@@ -117,9 +133,13 @@
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 30,
     "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "map"
+    },
     "NavMesh": {
       "Enabled": false,
       "IncludeStaticBodies": true,
@@ -133,9 +153,10 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "map",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [],
-  "__version": 1
+  "HasUnsavedChanges": false,
+  "__version": 2
 }

@@ -154,29 +154,33 @@ public sealed class Sng : Component
                 }
                 if ( Input.Pressed( "HideUI" ) )
                 {
-                    MenuC.InGameUIToggle();
+                    MenuC.IngameUI.InGameUIToggle();
                 }
                 if ( Input.Pressed( "ShowInfo" ) )
                 {
-                    MenuC.InGameHelpToggle();
+                    MenuC.IngameUI.InGameHelpToggle();
                 }
             }
             else if ( GameState == GameState.MainMenu )
             {
                 if ( Input.Pressed( "SelfDestruct" ) )
                 {
-                    MenuC.PlayPressed();
+                    ChangeGameState( GameState.Play );
                 }
                 if ( Input.Pressed( "Quit" ) )
                 {
                     MenuC.Quit();
+                }
+                if ( Input.Pressed( "SoftRestart" ) )
+                {
+                    ChangeGameState( GameState.ViewReplay );
                 }
             }
             else if ( GameState == GameState.ViewReplay )
             {
                 if ( Input.Pressed( "HideUI" ) )
                 {
-                    MenuC.ReplayUIToggle();
+                    MenuC.ReplayUI.ReplayUIToggle();
                 }
                 if ( Input.Pressed( "Back" ) )
                 {
@@ -232,14 +236,23 @@ public sealed class Sng : Component
 
         MenuC.ReplayUI.GameObject.Enabled = false;
 
-        MenuC.GameUIVisible = false;
+        MenuC.IngameUI.GameUIVisible = false;
         StateC.Enabled = false;
+
+        MenuC.Camera.Enabled = false;
+        MenuC.IngameUI.GameObject.Enabled = false;
+        MenuC.MenuUI.GameObject.Enabled = false;
+        MenuC.IngameUI.GameUIVisible = false;
+        MenuC.IngameUI.HelpVisible = false;
+        MenuC.ChooseUI.GameObject.Enabled = false;
+
         switch ( state )
         {
             case GameState.Play:
                 Timer.Reset();
-                MenuC.GameUIVisible = true;
-                MenuC.CloseMenu();
+                MenuC.IngameUI.GameUIVisible = true;
+
+                MenuC.IngameUI.GameObject.Enabled = true;
                 TeleportPlayer( ZoneC.StartPoint );
                 break;
             case GameState.MainMenu:
@@ -252,12 +265,13 @@ public sealed class Sng : Component
                 TeleportPlayer( ZoneC.SpawnPoint );
                 Player.Transform.ClearInterpolation();
                 Player.Engine.ResetPos( true );
-                MenuC.OpenMenu();
-                MenuC.SetCameraLook();
+                MenuC.Camera.Enabled = true;
+                MenuC.MenuUI.GameObject.Enabled = true;
+                MenuC.CameraInit();
                 break;
             case GameState.ViewReplay:
-                MenuC.CloseMenu();
                 MenuC.ReplayUI.GameObject.Enabled = true;
+                MenuC.ReplayUI.ReplayUIVisible = true;
                 break;
         }
     }

@@ -82,30 +82,7 @@ public sealed class MenuController : Component
         Camera.WorldRotation = Rotation.LookAt( rad * new Vector3( -1, -1, 0 ) ) * Rotation.FromYaw( yawOffset ) * Rotation.FromPitch( pitchOffset );
 
     }
-    public void PlayPressed()
-    {
-        SNG.ChangeGameState( GameState.Play );
-    }
-    public void CloseMenu()
-    {
-        Camera.Enabled = false;
-        IngameUI.GameObject.Enabled = true;
-        MenuUI.GameObject.Enabled = false;
-    }
-    public void OpenMenu()
-    {
-        Camera.Enabled = true;
-        IngameUI.GameObject.Enabled = false;
-        GameUIVisible = false;
-        ChooseUI.GameObject.Enabled = false;
-        MenuUI.GameObject.Enabled = true;
-        HelpVisible = false;
-        CameraInit();
-    }
-    public void Controls()
-    {
-        Game.Overlay.ShowBinds();
-    }
+
     public void ChooseMenuPressed()
     {
         UpdateMapsList();
@@ -128,10 +105,6 @@ public sealed class MenuController : Component
         SetUI.GameObject.Enabled = false;
         MenuUI.GameObject.Enabled = true;
         FileControl.SaveSettings();
-    }
-    public void ViewReplayPressed()
-    {
-        SNG.ChangeGameState( GameState.ViewReplay );
     }
 
     public void MapSelect()
@@ -225,7 +198,7 @@ public sealed class MenuController : Component
         {
             if ( FC.currentMap.Scores[0].Time == Time && FC.currentMap.Scores.Count > 1 )
             {
-                EndUI.TimeDif = ("-" + SNG.FormatTime( FC.currentMap.Scores[1].Time - Time ));
+                EndUI.TimeDif = "-" + SNG.FormatTime( FC.currentMap.Scores[1].Time - Time );
                 EndUI.timesave = true;
 
             }
@@ -233,7 +206,7 @@ public sealed class MenuController : Component
             {
 
                 EndUI.timesave = false;
-                EndUI.TimeDif = ("+" + SNG.FormatTime( Time - FC.currentMap.Scores[0].Time ));
+                EndUI.TimeDif = "+" + SNG.FormatTime( Time - FC.currentMap.Scores[0].Time );
             }
 
         }
@@ -244,22 +217,7 @@ public sealed class MenuController : Component
 
         EndUI.GameObject.Enabled = true;
     }
-    public bool GameUIVisible { get; set; } = true;
-    public void InGameUIToggle()
-    {
-        GameUIVisible = !GameUIVisible;
-    }
-    public bool HelpVisible { get; set; } = false;
-    public void InGameHelpToggle()
-    {
-        HelpVisible = !HelpVisible;
-    }
 
-    public bool ReplayUIVisible { get; set; } = true;
-    public void ReplayUIToggle()
-    {
-        ReplayUIVisible = !ReplayUIVisible;
-    }
     public int GetMedal( MapData map )
     {
         if ( map == null || map.Scores == null || map.Scores.Count == 0 || map.GoldTime == 0 ) return 0;

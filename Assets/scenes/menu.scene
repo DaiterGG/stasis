@@ -17,15 +17,6 @@
       ]
     },
     {
-      "__guid": "cbcdc3c0-ef60-4a63-a8aa-8c19debe3004",
-      "Flags": 0,
-      "Name": "Menu",
-      "Position": "-8.33812,110.1619,-78.75687",
-      "Enabled": true,
-      "__Prefab": "prefabs/game.prefab",
-      "__PrefabVariables": {}
-    },
-    {
       "__guid": "2e1874c0-6ca1-4070-b69c-7a6bc16ffabd",
       "Flags": 0,
       "Name": "info_player_spawn",
@@ -156,6 +147,20 @@
           "__enabled": false
         }
       ]
+    },
+    {
+      "__guid": "b2d52c09-e1cd-43fd-8761-d826c6374e07",
+      "Flags": 0,
+      "Name": "GameObject",
+      "Enabled": true
+    },
+    {
+      "__guid": "841710f5-3fd7-4c59-a047-ddafc7319ebf",
+      "Flags": 0,
+      "Name": "The Game",
+      "Enabled": true,
+      "__Prefab": "prefabs/thegame.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {
@@ -187,5 +192,6 @@
   "Title": "menu",
   "Description": null,
   "__references": [],
+  "HasUnsavedChanges": false,
   "__version": 2
 }

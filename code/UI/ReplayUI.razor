@@ -6,17 +6,17 @@
 @inherits PanelComponent
 
 <root class="root" >
-    @if(MENUC.ReplayUIVisible)
+    <div class="display" onmousedown="@((x) => {
+    if (FREECAM.Enabled) {
+        GameObject.Enabled = false;
+    }})">
+        @if (FREECAM.Enabled && ReplayUIVisible)
+        {
+            <div class="info">LeftClick to move camera</div>
+        }
+    </div>
+    @if(ReplayUIVisible)
     {
-        <div class="display" onmousedown="@((x) => {
-        if (FREECAM.Enabled) {
-            GameObject.Enabled = false;
-        }})">
-            @if (FREECAM.Enabled)
-            {
-                <div class="info">Click to move camera</div>
-            }
-        </div>
         <div class="panel">
             <div class="up">
 
@@ -36,12 +36,27 @@
                     </div>
                 </div>
                 <img class="upload" onclick="@((x) => { EnableImport();})" src="img/upload.png" />
-                <div class="label">Tick: @(tickRelay)</div>
+
+                    @if(VIEW.Replay == null)
+                    {
+                        <div class="label">Replay is not selected</div>
+                    }
+                   else
+                    {
+                        <div class="label">Tick: @(tickRelay)</div>
+                    }
                 <img class="goback" onclick="@((x) => {GoBack();})" src="img/back.png" />
             </div>
             <div class="control-wrap">
                 <div class="control">
-                    <SliderControl Min=@(0) Max=@VIEW.Replay.Ticks.Count Step=@(1) Value:bind=@TickRelay />
+                    @if(VIEW.Replay == null)
+                    {
+                        <SliderControl Min=@(0) Step=@(1) Value:bind=@TickRelay />
+                    }
+                    else
+                    {
+                        <SliderControl Min=@(0) Max=@VIEW.Replay.Ticks.Count Step=@(1) Value:bind=@TickRelay />
+                    }
                 </div>
             </div>
         </div>
@@ -56,12 +71,6 @@
     GameObject FREECAM;
     ImportReplay IMPORT;
     int tickRelay;
-
-    public void EnableImport(){
-        IMPORT.GameObject.Enabled = true;
-        GameObject.Enabled = false;
-    }
-
     public int TickRelay
     {
         get { return tickRelay; }
@@ -72,9 +81,39 @@
                 VIEW.JumpToTick(value);
                 VIEW.PauseView();
             }
-            tickRelay = value;
+            tickRelay = (int)Math.Round(VIEW.CurrentTick);
         }
     }
+
+    public bool ReplayUIVisible { get; set; } = true;
+    public void ReplayUIToggle()
+    {
+        ReplayUIVisible = !ReplayUIVisible;
+    }
+
+    protected override void OnFixedUpdate()
+    {
+        if (!FREECAM.Enabled) {
+            if (Input.Pressed("Left"))
+            {
+                TickRelay = TickRelay - 250;
+            }
+            if (Input.Pressed("Right"))
+            {
+                TickRelay = TickRelay + 250;
+            }
+            if ( Input.Pressed( "SelfDestruct" ) )
+            {
+                VIEW.PauseViewToggle();
+            }
+        }
+    }
+
+    public void EnableImport(){
+        IMPORT.GameObject.Enabled = true;
+        GameObject.Enabled = false;
+    }
+
     public void GoBack()
     {
         tickRelay = 0;
@@ -101,5 +140,5 @@
         IMPORT = MENUC.ImportUI;
     }
 
-    protected override int BuildHash() => System.HashCode.Combine(MENUC.ReplayUIVisible,GameObject.Enabled, VIEW.OldestTick, tickRelay, VIEW.CurrentTick, FREECAM.Enabled);
+    protected override int BuildHash() => System.HashCode.Combine(ReplayUIVisible,GameObject.Enabled, VIEW.OldestTick, tickRelay, VIEW.CurrentTick, FREECAM.Enabled, VIEW.IsPlaying);
 }
