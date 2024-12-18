@@ -1,0 +1,123 @@
+@using System
+@using Stasis.Data
+@using Sandbox.UI
+@namespace Stasis.UI
+@inherits PanelComponent
+
+<root>
+    <div class="panel">
+        <div class="up">
+            <img class="upload" onclick="@((x) => {CopyReplay();})" src="img/copy.png" />
+            <div class="copytext">
+                @if (CopiedC)
+                {
+                    <p>Copied</p>
+                }
+                else if (FailedC)
+                {
+                    <p>Failed to copy</p>
+                }
+                else
+                {
+                    <p>Copy current replay to clipboard</p>
+                }
+            </div>
+                <div class="exit" onclick="@(x => { Exit();} )">
+                    <p>x</p>
+                </div>
+
+        </div>
+        <div class="up">
+            <img class="upload" onclick="@((x) => { LoadReplay();})" src="img/upload.png" />
+            @if (CopiedL)
+            {
+                <div class="copytext">Loading...</div>
+            }
+            else if (FailedL)
+            {
+                <div class="copytext">Failed to load replay</div>
+            }
+            else
+            {
+                <div class="copytext">Load pasted replay</div>
+            }
+        </div>
+        <div class="down">
+            <TextEntry @ref="t" Value:bind=@TxtReplay class="textarea" placeholder="Paste replay here" />
+        </div>
+    </div>
+</root>
+
+@code
+{
+    TextEntry t {get; set;}
+    public string TxtReplay { get; set; } = "";
+    public bool CopiedC { get; set; } = false;
+    public bool FailedC { get; set; } = false;
+    public bool CopiedL { get; set; } = false;
+    public bool FailedL { get; set; } = false;
+    ViewReplay VIEWR;
+    FileControl FILEC;
+    ChooseMenu CHOOSEUI;
+    ReplayUI REPLAYUI;
+
+    void Exit()
+    {
+        GameObject.Enabled = false;
+        REPLAYUI.GameObject.Enabled = true;
+    }
+
+    public void LoadReplay()
+    {
+        try
+        {
+            var r = ReplaySerialize.JsonToReplay(TxtReplay);
+            CopiedL = true;
+            if(r.Indent != FILEC.currentMap.Indent)
+            {
+                FILEC.DownloadAndLoad(r.Indent);
+            }
+            VIEWR.Watch(r, CHOOSEUI.GameObject);
+            GameObject.Enabled = false;
+        }
+        catch (Exception e)
+        {
+            FailedL = true;
+        }
+    }
+
+    public void CopyReplay()
+    {
+        if( VIEWR.Replay == null )
+        {
+            FailedC = true;
+        }
+        else
+        {
+            Clipboard.SetText( ReplaySerialize.ReplayToJson(VIEWR.Replay) );
+            CopiedC = true;
+        }
+    }
+    protected override void OnEnabled()
+    {
+        base.OnEnabled();
+        TxtReplay = "";
+        CopiedC = false;
+        FailedC = false;
+        CopiedL = false;
+        FailedL = false;
+    }
+    protected override void OnStart()
+    {
+        base.OnAwake();
+        VIEWR = Sng.Inst.ViewC;
+        FILEC = Sng.Inst.FileC;
+        CHOOSEUI = Sng.Inst.MenuC.ChooseUI;
+        REPLAYUI = Sng.Inst.MenuC.ReplayUI;
+    }
+
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine( GameObject.Enabled , CopiedC, CopiedL, FailedC, FailedL, TxtReplay);
+}

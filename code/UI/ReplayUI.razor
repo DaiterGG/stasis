@@ -117,6 +117,7 @@
     public void GoBack()
     {
         tickRelay = 0;
+        VIEW.ReplaySpeed = 1;
         if( VIEW.CallbackUI.Name == "Choose menu" )
         {
             SNG.ChangeGameState(GameState.MainMenu);
