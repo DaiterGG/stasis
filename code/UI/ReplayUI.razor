@@ -126,11 +126,11 @@
         }
         else
         {
+            SNG.ChangeGameState(GameState.MainMenu);
             SNG.ChangeGameState(GameState.Play);
         }
 
         VIEW.CallbackUI.Enabled = true;
-        GameObject.Enabled = false;
     }
     protected override void OnAwake()
     {
