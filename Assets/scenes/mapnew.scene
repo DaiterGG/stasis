@@ -10,6 +10,7 @@
         {
           "__type": "Sandbox.SceneInformation",
           "__guid": "1d58f32f-2565-433f-a0b2-8911cee31684",
+          "Changes": "",
           "Description": "",
           "SceneTags": "",
           "Title": "map"
@@ -53,7 +54,7 @@
         {
           "__type": "Sandbox.Description",
           "__guid": "2f372fd6-59f2-4044-91bc-e7eac2e8c43d",
-          "WhatIsThat": "Important!\nYou have to publish your map first\nThen attach \u0027Cloud Asset\u0027 to Map instance below"
+          "WhatIsThat": "Important!\nYou have to publish your map first\nThen attach \u0027Cloud Asset\u0027 to Map instance bellow"
         },
         {
           "__type": "Sandbox.MapInstance",
@@ -61,8 +62,6 @@
           "__version": 1,
           "EnableCollision": true,
           "NoOrigin": false,
-          "OnMapLoaded": null,
-          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
       ]
@@ -137,12 +136,12 @@
       "Components": [
         {
           "__type": "Sandbox.Description",
-          "__guid": "2cf2992d-129b-4ae1-8a40-1ca3c53d1dd3",
+          "__guid": "89b35b7e-f37c-4da4-bec4-7a8a12b6f148",
           "WhatIsThat": "Player has to touch all beacons to \u0027unlock\u0027 end zone. If beacons have same Id, they count and act as one.\nYou can put \u0027auto decor\u0027 component for box collider\nOr use Model Rendered with tint material for the touch animation (color change)"
         },
         {
           "__type": "Stasis.Zones.Beacon",
-          "__guid": "8a21a100-ef42-4a00-a751-8e5e15227663",
+          "__guid": "9989cf22-3080-4b19-a34a-e15face94683",
           "BlockUntillActivated": [],
           "ChangeColor": true,
           "ColorAfter": "0,0.62,0.024,1",
@@ -151,7 +150,7 @@
         },
         {
           "__type": "Sandbox.BoxCollider",
-          "__guid": "91201f7b-e42a-4ec3-9bb7-02a6ef72721a",
+          "__guid": "4d445668-3a4b-4395-bd7e-44566eb4c447",
           "Center": "0,0,0",
           "IsTrigger": true,
           "Scale": "50,50,50",
@@ -160,7 +159,7 @@
         },
         {
           "__type": "Sandbox.ModelRenderer",
-          "__guid": "179af59d-0d7e-48b2-b747-125a2007c749",
+          "__guid": "46d48c80-e3de-4070-8b0b-372b9dd63c29",
           "BodyGroups": 18446744073709551615,
           "CreateAttachments": false,
           "MaterialOverride": "materials/tranparent_tint1.vmat",
@@ -190,6 +189,10 @@
         {
           "__type": "Stasis.Zones.Teleport",
           "__guid": "a7f9c234-5a5e-4a87-ab1c-dd77538003c2",
+          "Exit": {
+            "_type": "gameobject",
+            "go": "51850bad-8f15-4e52-9fe1-b01e69d60aa5"
+          },
           "RepairPropeller": true,
           "ResetRotation": true,
           "ResetVelocity": true
@@ -234,6 +237,14 @@
           "WhatIsThat": "After player touch it, it will spawn player on \u0027spawn\u0027 child, when reset pressed\nYou can finish map without activating it "
         },
         {
+          "__type": "Stasis.Zones.CheckPoint",
+          "__guid": "fc1ae2d7-ea94-418b-9342-70f8108b890e",
+          "Spawn": {
+            "_type": "gameobject",
+            "go": "1e93dfca-3be3-43ca-a07c-e43b456a3c68"
+          }
+        },
+        {
           "__type": "Stasis.Zones.AutoDecor",
           "__guid": "8773a832-6455-4542-904b-6fa9e13fc12d",
           "ColorOfTheLines": "0.05209,0.52093,0,1",
@@ -248,10 +259,6 @@
           "Scale": "50,50,50",
           "Static": true,
           "SurfaceVelocity": "0,0,0"
-        },
-        {
-          "__type": "Stasis.Zones.CheckPoint",
-          "__guid": "fc1ae2d7-ea94-418b-9342-70f8108b890e"
         }
       ],
       "Children": [
@@ -294,6 +301,5 @@
   "Title": "map",
   "Description": null,
   "__references": [],
-  "HasUnsavedChanges": false,
   "__version": 2
 }

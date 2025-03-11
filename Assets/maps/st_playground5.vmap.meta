@@ -1,0 +1,25 @@
+{
+  "publish": {
+    "Enabled": false,
+    "ProjectConfig": {
+      "Title": "St Playground 5",
+      "Type": "map",
+      "Org": "local",
+      "Ident": "stplayground5",
+      "Schema": 0,
+      "IncludeSourceFiles": false,
+      "Resources": null,
+      "PackageReferences": [],
+      "EditorReferences": [
+        "move.black_marble1#67235",
+        "move.white_plastic1#67236",
+        "polyhaven.rustig_koppie_puresky#30194"
+      ],
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "maps/st_playground5.vmap",
+        "ParentPackage": "move.stasis_beta"
+      }
+    }
+  }
+}

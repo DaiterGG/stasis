@@ -1,0 +1,21 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "Origen",
+      "Type": "map",
+      "Org": "move",
+      "Ident": "zonetrial",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": [],
+      "EditorReferences": null,
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "scenes/zonetrial.scene",
+        "ParentPackage": "move.stasis_beta"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "publish": {
+    "Enabled": false,
+    "ProjectConfig": {
+      "Title": "Test",
+      "Type": "map",
+      "Org": "move",
+      "Ident": "test",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": [],
+      "EditorReferences": null,
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "scenes/test.scene",
+        "ParentPackage": "move.stasis_beta"
+      }
+    }
+  }
+}

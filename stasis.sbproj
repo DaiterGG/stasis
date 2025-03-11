@@ -1,8 +1,8 @@
 {
-  "Title": "Stasis beta",
+  "Title": "Stasis",
   "Type": "game",
   "Org": "move",
-  "Ident": "stasis_beta",
+  "Ident": "stasis",
   "Schema": 1,
   "IncludeSourceFiles": true,
   "Resources": "fonts/*\n/img/*\n/models/\n/sounds/*",

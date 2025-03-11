@@ -10,34 +10,10 @@
         {
           "__type": "Sandbox.SceneInformation",
           "__guid": "7ad03faf-2cfc-469d-abae-c9ac0e80f49e",
+          "Changes": "",
           "Description": "",
           "SceneTags": "",
           "Title": "test"
-        }
-      ]
-    },
-    {
-      "__guid": "e3f95f32-a439-4045-81e2-8b89d22a05f5",
-      "Flags": 0,
-      "Name": "Object",
-      "Position": "-18.2515,-14.35106,140.5618",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "6972ea15-54b2-4440-8575-2820e5569062",
-          "BodyGroups": 18446744073709551615,
-          "CreateAttachments": false,
-          "MaterialOverride": "materials/tranparent_tint1.vmat",
-          "Model": "models/dev/box.vmdl",
-          "RenderOptions": {
-            "GameLayer": true,
-            "OverlayLayer": false,
-            "BloomLayer": false,
-            "AfterUILayer": false
-          },
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
         }
       ]
     },
@@ -69,26 +45,6 @@
       ]
     },
     {
-      "__guid": "146efd47-5e2c-4caf-88c8-7c2523871dcd",
-      "Flags": 0,
-      "Name": "Point Light",
-      "Position": "-134.8876,-4.726578,135.4429",
-      "Tags": "light_point,light",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.PointLight",
-          "__guid": "f300eeb6-0198-4278-90fa-f81b81d82264",
-          "Attenuation": 1,
-          "FogMode": "Enabled",
-          "FogStrength": 1,
-          "LightColor": "0.91373,0.98039,1,1",
-          "Radius": 400,
-          "Shadows": true
-        }
-      ]
-    },
-    {
       "__guid": "6bcfc9bb-66b6-4f98-95d6-349c40189d95",
       "Flags": 0,
       "Name": "mp",
@@ -100,10 +56,8 @@
           "__guid": "af639934-6f75-4052-8c51-2c0b8c1a7946",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "move.st_hexagon3",
+          "MapName": "maps/newmap.vmap",
           "NoOrigin": false,
-          "OnMapLoaded": null,
-          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
       ],
